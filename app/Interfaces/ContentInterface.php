@@ -1,0 +1,15 @@
+<?php 
+
+namespace App\Interfaces;
+
+interface ContentInterface {
+    public function index();
+    public function indexApi();
+    public function create();
+    public function objectivesByCategory($id);
+    public function store($request); 
+    public function show($content); 
+    public function update($request , $id);
+    public function destroy($request ,$id);
+}
+

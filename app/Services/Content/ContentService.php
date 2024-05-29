@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Services\Content;
+
+use App\Interfaces\ContentInterface;
+use Illuminate\Support\Facades\Crypt;
+use App\Services\Content\ContentQuery;
+
+
+class ContentService extends ContentQuery implements ContentInterface {
+
+    public function index()
+    {
+        $contents = $this->allContent();
+        return view('content.index')->with(['contents' => $contents['contents'] ,
+        'Quicklys' => $contents['contentQuicly'] ]);
+    }
+
+    public function indexApi(){
+        $contents = $this->allContentApi();
+        return response()->json($contents);
+    }
+
+    public function show($content){
+        $content = $this->getContentById($content);
+        $moderatorUsers = $this->allModerators();
+        $animatorUsers = $this->allAnimators();
+        $formateurUsers = $this->allFormateur();
+        $invertersUsers = $this->allInvites();
+        $categories = $this->allCategories();
+        $objectives = $this->allObjectives();
+        $subCategories = $this->allSubCategories();
+        return view('content.show')->with(['content' => $content , 'moderatorUsers' => $moderatorUsers , 
+        'animatorUsers' => $animatorUsers , 'formateurUsers' => $formateurUsers , 'invertersUsers' => $invertersUsers ,
+        'categories' => $categories , 'objectives' => $objectives , 'subCategories' => $subCategories
+    ]);
+    }
+
+    public function create()
+    {
+        $categories = $this->allCategories();
+        $moderatorUsers = $this->allModerators();
+        $animatorUsers = $this->allAnimators();
+        $formateurUsers = $this->allFormateur();
+        $programs = $this->allPrograms();
+        $subCategories = $this->allSubCategories();
+        return view('content.create')->with(['categories' => $categories , 
+        'moderatorUsers' => $moderatorUsers , 'animatorUsers' => $animatorUsers , 
+        'formateurUsers' => $formateurUsers , 'programs' => $programs , 'subCategories' => $subCategories]);
+    }
+
+    public function objectivesByCategory($id)
+    {
+        $objectives = $this->chercheObejectiveByCategory($id);
+        return response()->json($objectives);
+    }
+
+    public function store($request){
+        $content = $this->storeContent($request);
+        return redirect()->route('video.show', Crypt::encrypt($content->id));
+    }
+
+    public function update($request , $id){
+        $content = $this->updateContent($request , $id);
+
+        return redirect()->back()->with('status' , 'You updated the Content');
+    }
+
+    public function destroy($request , $id){
+        $distroyedContent = $this->destroyContent($request , $id);
+
+        return redirect()->route('content.index')->with('status', 'You have deleted content');
+    }
+
+}
