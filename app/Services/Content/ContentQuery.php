@@ -32,6 +32,9 @@ class ContentQuery extends GlobaleService {
         return $content;
     }
 
+    
+   
+
     public function storeContent(ContentRequest $request){
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
@@ -44,10 +47,12 @@ class ContentQuery extends GlobaleService {
         $contentImageFlex = $this->storeConteImageFlex($request);
         $document = $this->storeConteDocument($request);
 
+        $program = $request->programId == 0 ? null : $request->programId;
+
         $content = Content::create([
             'categoryId' => $request->cotegoryId,
             'hostId' => $request->contentHost,
-            'programId' => $request->programId,
+            'programId' => $program,
             'image' => $contentImage,
             'imageFlex' => $contentImageFlex,
             'video' => $request->videoUrl,
@@ -129,12 +134,14 @@ class ContentQuery extends GlobaleService {
 
       
 
-        if ($request->has('tags')) {
-
+        if ($request->has('tags') && !empty($request->tags[0])) {
             $StringTag = $request->tags[0];
             $tags = explode(',', $StringTag);
             $arrTags = array_map('trim', $tags);
             $content->syncTags($arrTags, 'content');
+        } else {
+
+            $content->syncTags([], 'content');
         }
 
         if($request->has('objectivesId')){

@@ -8,7 +8,6 @@ use App\Interfaces\ContentInterface;
 
 class ContentController extends Controller
 {
-
     private $contentInterface;
 
     public function __construct(ContentInterface $contentInterface) {
@@ -19,40 +18,12 @@ class ContentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function allContent()
     {
-        return $this->contentInterface->indexApi(); 
+        return $this->contentInterface->allContent(); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function comingSoonContent(){
+        return $this->contentInterface->comingSoonContent();
     }
 }

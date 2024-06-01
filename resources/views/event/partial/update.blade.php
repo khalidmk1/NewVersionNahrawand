@@ -17,7 +17,7 @@
         <select class="select2" name="speakerID[]" multiple="multiple" data-placeholder="Select a State"
             style="width: 100%;">
             @foreach ($speakers as $speaker)
-                <option {{ $event->eventUser->contains('userId', $speaker->id ? 'selected' : '') }}
+                <option {{ $event->eventUser->contains('userId', $speaker->id ) ? 'selected' : '' }}
                     value="{{ $speaker->id }}">
                     {{ $speaker->lastName . ' ' . $speaker->firstName }}</option>
             @endforeach

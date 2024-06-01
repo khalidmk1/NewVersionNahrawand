@@ -38,7 +38,7 @@
 
     <div class="form-group">
         <label>Formateur</label>
-        <select class="form-control select2 " name="contentHost" style="width: 100%;">
+        <select  class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($formateurUsers as $formateurUser)
                 <option value="{{ $formateurUser->id }}">
                     {{ $formateurUser->email }}</option>
@@ -51,7 +51,7 @@
 
     <div class="form-group">
         <label>Program</label>
-        <select class="form-control select2 " name="programId" style="width: 100%;">
+        <select  class=" selectize" name="programId" style="width: 100%;">
             <option value="0">Choose Program</option>
             @foreach ($programs as $program)
                 <option value="{{ $program->id }}">
@@ -72,9 +72,4 @@
             <label class="custom-file-label" for="DocumentFomation">Choose Documents</label>
         </div>
     </div>
-
-
-
-
-
 </section>

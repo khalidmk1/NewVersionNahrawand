@@ -4,7 +4,7 @@
 
     <div class="form-group">
         <label>Formateur</label>
-        <select class="form-control select2 " name="contentHost" style="width: 100%;">
+        <select  class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($formateurUsers as $formateurUser)
                 <option value="{{ $formateurUser->id }}">
                     {{ $formateurUser->email }}</option>

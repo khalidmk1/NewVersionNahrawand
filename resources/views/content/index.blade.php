@@ -105,13 +105,13 @@
                             </li>
                         @endif
                     </ul>
-                </nav>
+                    </nav>
 
 
 
 
+                </div>
             </div>
-
 
         </div>
         <!-- /.tab-content -->

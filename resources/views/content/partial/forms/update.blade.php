@@ -75,9 +75,7 @@
                     <select class="select3" name="objectivesId[]" multiple="multiple" id="objective_option"
                         data-placeholder="Select Objectives" style="width: 100%;">
                        {{--  @foreach ($objectives as $objective)
-                            <option
-                                {{ $content->contentObjectives->contains('objectivelId', $objective->id) ? 'selected' : '' }}
-                                value="{{ $objective->id }}">
+                            <option value="{{ $objective->id }}">
                                 {{ $objective->name }}
                             </option>
                         @endforeach --}}

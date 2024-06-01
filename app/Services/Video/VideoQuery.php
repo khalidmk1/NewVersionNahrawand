@@ -65,7 +65,8 @@ class VideoQuery extends GlobaleService{
     public function updateVideo(VideoUpdateRequest $request , String $id){
         $video = ContentVideo::findOrFail(Crypt::decrypt($id));
         $isComing = $request->isComing == 'on';
-        $fileNameImage  = $this->updateVideoImage($request , $id);
+        $imageName =  $video->image ?? '' ;
+        $fileNameImage  = $this->updateVideoImage($request ,$imageName);
 
 
         $video->update([

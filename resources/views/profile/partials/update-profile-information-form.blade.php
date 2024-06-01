@@ -65,7 +65,7 @@
 
 
 <!-- form start -->
-<form  action="{{ route('profile.update', Crypt::encrypt($user->id)) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('profile.update', Crypt::encrypt($user->id)) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('patch')
     <div class="card-body">
@@ -79,26 +79,29 @@
                 <label class="custom-file-label" for="avatar">Choisez image</label>
             </div>
         </div>
-        <div class="form-group">
-            <label for="cover">Cover Image</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" name="cover" id="cover">
-                <label class="custom-file-label" for="cover">Upload</label>
+        @if ($user->hasAnyRole(['Animateur', 'Formateur', 'Invité', 'Modérateur', 'Conférencier']))
+            <div class="form-group">
+                <label for="cover">Cover Image</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="cover" id="cover">
+                    <label class="custom-file-label" for="cover">Upload</label>
+                </div>
             </div>
-        </div>
+        @endif
 
-        {{--  @if ($user->userRole->role_id == 3)
+
+        @if ($user->hasAnyRole(['Animateur', 'Formateur', 'Invité', 'Modérateur', 'Conférencier']))
             <div class="form-group clearfix text-center col-4">
                 <div class="icheck-primary d-inline">
                     <input type="checkbox" name="isPopulaire" id="isPopulaire"
-                        {{ $user->is_popular == 1 ? 'checked' : '' }}>
+                        {{ $user->isPopular == 1 ? 'checked' : '' }}>
                     <label for="isPopulaire">
                         Popular
                     </label>
                 </div>
 
             </div>
-        @endif --}}
+        @endif
 
         <div class="form-group">
             <label for="firstName"> Last name</label>
@@ -111,29 +114,59 @@
             <input type="text" class="form-control" id="lastName" name="lastName"
                 value="{{ old('lastName', $user->lastName) }}">
         </div>
+
+        @if (
+            !$user->hasAnyRole([
+                'Super Admin',
+                'Admin',
+                'Formateur',
+                'Invité',
+                'Modérateur',
+                'Conférencier',
+                'Animateur',
+                'Client',
+            ]))
+
+            <div class="form-group">
+                <label>Type of Speaker</label>
+                <select name="role" class="custom-select">
+                    @foreach ($rolesMangers as $rolesManger)
+                        <option value="{{ $rolesManger->name }}"
+                            {{ $user->roles->contains('id', $rolesManger->id) ? 'selected' : '' }}>
+                            {{ $rolesManger->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+        @endif
+
+
+
         <div class="form-group">
             <label for="exampleInputEmail1">Email</label>
             <input type="email" class="form-control" id="exampleInputEmail1" name="email"
                 value="{{ old('email', $user->email) }}">
         </div>
 
-        {{--  @if ($user->userRole->role_id == 3)
+
+
+        @if ($user->hasAnyRole(['Animateur', 'Formateur', 'Invité', 'Modérateur', 'Conférencier']))
             <!-- textarea -->
             <div class="form-group">
                 <label for="biographie">Biography</label>
-                <textarea class="form-control" id="biographie" rows="3" name="biographie" placeholder="Enter ...">{{ $user->userspeaker->biographie }}</textarea>
+                <textarea class="form-control" id="biographie" rows="3" name="biographie" placeholder="Enter ...">{{ $user->biographie }}</textarea>
             </div>
+
 
             <div class="form-group">
                 <label>Type of Speaker</label>
-                <select name="type_speaker" class="custom-select">
-                    <option selected disabled value="{{ $user->userspeaker->type_speaker }}">
-                        {{ $user->userspeaker->type_speaker }}</option>
-                    <option value="Animateur">Animateur</option>
-                    <option value="Formateur">Formateur</option>
-                    <option value="Invité">Invité</option>
-                    <option value="Modérateur">Modérateur</option>
-                    <option value="Conférencier">Conférencier</option>
+                <select name="role" class="custom-select">
+                    @foreach ($rolesSpeakers as $rolesSpeaker)
+                        <option value="{{ $rolesSpeaker->name }}"
+                            {{ $user->roles->contains('id', $rolesSpeaker->id) ? 'selected' : '' }}>
+                            {{ $rolesSpeaker->name }}</option>
+                    @endforeach
+
                 </select>
             </div>
 
@@ -141,20 +174,20 @@
 
             <div class="form-group">
                 <label for="facebook">facebook</label>
-                <input type="url" value="{{ old('facebook', $user->userspeaker->faceboock) }}" class="form-control"
+                <input type="url" value="{{ old('facebook', $user->faceboock) }}" class="form-control"
                     name="facebook" id="facebook" placeholder="Entrez url reseau social ...">
             </div>
             <div class="form-group">
                 <label for="linkedin">linkedin</label>
-                <input type="url" value="{{ old('linkedin', $user->userspeaker->linkdin) }}" class="form-control"
+                <input type="url" value="{{ old('linkedin', $user->linkdin) }}" class="form-control"
                     name="linkedin" id="linkedin" placeholder="Entrez url reseau social ...">
             </div>
             <div class="form-group">
                 <label for="instagram">instagram</label>
-                <input type="url" value="{{ old('instagram', $user->userspeaker->instagram) }}"
-                    class="form-control" name="instagram" id="instagram" placeholder="Entrez url reseau social ...">
+                <input type="url" value="{{ old('instagram', $user->instagram) }}" class="form-control"
+                    name="instagram" id="instagram" placeholder="Entrez url reseau social ...">
             </div>
-        @endif --}}
+        @endif
 
     </div>
     <!-- /.card-body -->

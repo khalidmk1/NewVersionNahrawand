@@ -132,12 +132,53 @@
                 </div>
                 <!-- /.card-body -->
 
-                {{-- <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item">{{ $goals['goals']->links() }}</li>
+                <div class="card-footer">
 
-                    </ul>
-                </div> --}}
+
+                    <div aria-label="Page navigation example d-flex" class=" d-flex "
+                        style="flex-direction: column !important ; text-align: left">
+                        <ul class="pagination">
+                            {{-- Previous Page Link --}}
+                            @if ($objectives->onFirstPage())
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $objectives->previousPageUrl() }}"
+                                        tabindex="-1">Previous</a>
+                                </li>
+                            @endif
+
+                            {{-- Pagination Elements --}}
+                            @for ($page = 1; $page <= $objectives->lastPage(); $page++)
+                                @if ($page == $objectives->currentPage())
+                                    <li class="page-item active"><a class="page-link" href="#">{{ $page }}
+                                            <span class="sr-only">(current)</span></a></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $objectives->url($page) }}">{{ $page }}</a></li>
+                                @endif
+                            @endfor
+
+                            {{-- Next Page Link --}}
+                            @if ($objectives->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $objectives->nextPageUrl() }}">Next</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            @endif
+                        </ul>
+                        </nav>
+
+
+
+
+                    </div>
+                </div>
             </div>
             <!-- /.card -->
 
@@ -145,4 +186,27 @@
         <!-- /.col -->
 
     </div>
+
+    @include('components.jQuery')
+
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 @endsection

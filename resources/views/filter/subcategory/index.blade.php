@@ -130,12 +130,55 @@
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item">{{ $subCategories->links() }}</li>
+                <div class="card-footer">
 
-                    </ul>
+
+                    <div aria-label="Page navigation example d-flex" class=" d-flex "
+                        style="flex-direction: column !important ; text-align: left">
+                        <ul class="pagination">
+                            {{-- Previous Page Link --}}
+                            @if ($subCategories->onFirstPage())
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $subCategories->previousPageUrl() }}"
+                                        tabindex="-1">Previous</a>
+                                </li>
+                            @endif
+
+                            {{-- Pagination Elements --}}
+                            @for ($page = 1; $page <= $subCategories->lastPage(); $page++)
+                                @if ($page == $subCategories->currentPage())
+                                    <li class="page-item active"><a class="page-link" href="#">{{ $page }}
+                                            <span class="sr-only">(current)</span></a></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $subCategories->url($page) }}">{{ $page }}</a></li>
+                                @endif
+                            @endfor
+
+                            {{-- Next Page Link --}}
+                            @if ($subCategories->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $subCategories->nextPageUrl() }}">Next</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            @endif
+                        </ul>
+                        </nav>
+
+
+
+
+                    </div>
                 </div>
+
+
             </div>
             <!-- /.card -->
 
@@ -143,4 +186,6 @@
         <!-- /.col -->
 
     </div>
+
+    @include('components.jQuery')
 @endsection

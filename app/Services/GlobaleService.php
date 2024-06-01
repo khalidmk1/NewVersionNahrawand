@@ -238,6 +238,8 @@ class GlobaleService  {
         return $conferencerUsers;
     }
 
+    
+
     public function allSpeakers(){
         $speakersRole = ['Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
         $role = Role::whereIn('name' , $speakersRole)->get();
@@ -248,8 +250,20 @@ class GlobaleService  {
         return $speakers;
     }
 
+    //all api cotent Query
+
+    public function allComingContentApi()
+    {
+        $contents = Content::where('isComing', 1)
+        ->with('category', 'tags')
+        ->get(['id', 'title', 'smallDescription', 'image', 'created_at', 'duration']);
+
+        return $contents;
+    }
+
+
     public function allContentApi(){
-        $contents = Content::all(['image' , 'title']);
+        $contents = Content::all(['id' , 'image' , 'title']);
         return $contents;
     }
 

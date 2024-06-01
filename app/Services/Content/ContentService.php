@@ -16,8 +16,13 @@ class ContentService extends ContentQuery implements ContentInterface {
         'Quicklys' => $contents['contentQuicly'] ]);
     }
 
-    public function indexApi(){
+    /* public function allContent(){
         $contents = $this->allContentApi();
+        return response()->json($contents);
+    } */
+
+    public function comingSoonContent(){
+        $contents = $this->allComingContentApi();
         return response()->json($contents);
     }
 
@@ -27,12 +32,14 @@ class ContentService extends ContentQuery implements ContentInterface {
         $animatorUsers = $this->allAnimators();
         $formateurUsers = $this->allFormateur();
         $invertersUsers = $this->allInvites();
+        $conferencerUsers = $this->allConferencers();
         $categories = $this->allCategories();
         $objectives = $this->allObjectives();
         $subCategories = $this->allSubCategories();
         return view('content.show')->with(['content' => $content , 'moderatorUsers' => $moderatorUsers , 
-        'animatorUsers' => $animatorUsers , 'formateurUsers' => $formateurUsers , 'invertersUsers' => $invertersUsers ,
-        'categories' => $categories , 'objectives' => $objectives , 'subCategories' => $subCategories
+        'conferencerUsers' => $conferencerUsers ,'animatorUsers' => $animatorUsers , 
+        'formateurUsers' => $formateurUsers , 'invertersUsers' => $invertersUsers ,'categories' => $categories , 
+        'objectives' => $objectives , 'subCategories' => $subCategories
     ]);
     }
 

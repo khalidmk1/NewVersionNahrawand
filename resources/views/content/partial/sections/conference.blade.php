@@ -4,13 +4,15 @@
 
     <div class="form-group">
         <label>Modirateur</label>
-        <select class="form-control select2 " name="contentHost" style="width: 100%;">
+        <select data-placeholder="Choose a Modirateur..." name="contentHost" style="width: 100%;"
+            class=" selectize">
             @foreach ($moderatorUsers as $moderatorUser)
                 <option value="{{ $moderatorUser->id }}">
                     {{ $moderatorUser->email }}</option>
             @endforeach
 
         </select>
+
     </div>
     <!-- /.form-group -->
 

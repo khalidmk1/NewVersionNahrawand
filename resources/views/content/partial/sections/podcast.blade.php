@@ -8,7 +8,7 @@
 
     <div class="form-group">
         <label>Animateur</label>
-        <select class="form-control select2 " name="contentHost" style="width: 100%;">
+        <select  class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($animatorUsers as $animatorUser)
                 <option value="{{ $animatorUser->id }}">
                     {{ $animatorUser->email }}</option>

@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+   
     <div class="row">
         <div class="card card-default col-12">
             <div class="card-header row">
@@ -156,24 +157,8 @@
 
     @include('components.jQuery')
 
-
-
     <script>
         $(document).ready(function() {
-
-          /*   $('#condition').hide();
-
-            $('#certifier_formation').on('change', function() {
-                var certifier = $(this).val()
-                if ($(this).is(':checked')) {
-                    $('#condition').slideDown();
-                    console.log(certifier);
-                } else {
-                    $('#condition').slideUp();
-                }
-
-            }) */
-
 
             var tagInputEle = $('#tags-input');
             tagInputEle.tagsinput();

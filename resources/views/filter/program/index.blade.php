@@ -1,8 +1,23 @@
 @extends('Layouts.master')
 
+@section('header')
+    Manage Programs Page
+@endsection
 
+@section('page')
+    View Profile
+@endsection
+
+@section('link')
+    {{ route('report.index') }}
+@endsection
 
 @section('content')
+    <style>
+        .pagination {
+            display: flex;
+        }
+    </style>
     <x-create-filter-modal :titleModel="'Create Program'" :modelRouteCreate="route('program.store')">
 
         <div class="form-group">
@@ -160,7 +175,27 @@
 
 
     @include('components.jQuery')
+    @include('components.spicific-script')
 
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 
 
     <script>

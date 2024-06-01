@@ -58,7 +58,7 @@ class EventQuery extends GlobaleService {
 
     public function updateEvent(EventUpdateRequest $request , String $id){
         $event = Event::findOrFail(Crypt::decrypt($id));
-        $nameImage = $content->image ?? '' ;
+        $nameImage = $event->image;
 
         $formattedDateStart = $request->has('dateStart') ? Carbon::parse($request->dateStart)
         ->formatLocalized('%a, %d %b %Y %I:%M %p') : $event->dateStart;

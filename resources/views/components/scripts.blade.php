@@ -1,4 +1,8 @@
 <!-- REQUIRED SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -21,7 +25,6 @@
 <script src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-
 
 
 
@@ -64,6 +67,10 @@
 
 
 
+
+
+
+
 <!-- Include the necessary library/plugin for "tags input" functionality -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
@@ -78,6 +85,9 @@
         $('.select2').select2();
         $('.select3').select2();
 
+       
+
+        $('input[name="tags[]"]').tagsinput();
 
         //Initialize Select2 Elements
         $('.select2bs4').select2({
@@ -94,22 +104,6 @@
             icons: {
                 time: 'far fa-clock'
             }
-        });
-
-
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
         });
 
     })
@@ -157,6 +151,18 @@
 
 <script>
     $(document).ready(function() {
+        $('#condition').hide();
+
+        $('#certifier_formation').on('change', function() {
+            var certifier = $(this).val()
+            console.log(certifier);
+            if ($(this).is(':checked')) {
+                $('#condition').slideDown();
+            } else {
+                $('#condition').slideUp();
+            }
+        });
+
         // Store the HTML content of the sections
         var conferenceHTML = $('#conference').html();
         var podcastHTML = $('#podcast').html();
@@ -190,9 +196,12 @@
             }
 
             // Hide all the sections
-            $('#conference, #podcast, #formation , #quickly').slideUp('slow', function() {
-                $(this).remove();
-            });
+            $('#conference, #podcast, #formation , #quickly').slideUp('slow');
+
+
+
+            // Remove the existing sections to avoid duplication
+            $('#conference, #podcast, #formation , #quickly').remove();
 
             // Append the corresponding section back to the DOM
             if (typeCours === 'conference') {
@@ -205,6 +214,9 @@
             } else if (typeCours === 'quickly') {
                 $('.appendedSection').append('<section id="quickly">' + quicklyHTML + '</section>');
             }
+
+            // Re-initialize the select2 instances
+            $('.selectize').selectize();
 
             // Show the selected section
             $('#' + typeCours).hide().slideDown();

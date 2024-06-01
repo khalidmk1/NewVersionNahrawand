@@ -235,8 +235,8 @@
                                                     <label for="image2">Image</label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" name="image"
-                                                            id="image2">
-                                                        <label class="custom-file-label" for="image2">Upload</label>
+                                                            id="image_{{$video->id}}">
+                                                        <label class="custom-file-label" for="image_{{$video->id}}">Upload</label>
                                                     </div>
                                                 </div>
 
@@ -244,11 +244,11 @@
                                                     <div class="form-group">
                                                         <label for="guestInvite">Invité(s)</label>
                                                         <select class="select3" name="guestIds[]" multiple="multiple"
-                                                            id="guestInvite" data-placeholder="Select a State"
+                                                            id="guestInvite_{{$video->id}}" data-placeholder="Select a State"
                                                             style="width: 100%;">
                                                             @foreach ($invertersUsers as $invertersUser)
                                                                 <option
-                                                                    {{ $video->videoguest->contains('userId', $invertersUser->id ? 'selected' : '') }}
+                                                                    {{ $video->videoguest->contains('userId', $invertersUser->id) ? 'selected' : '' }}
                                                                     value="{{ $invertersUser->id }}">
                                                                     {{ $invertersUser->email }}</option>
                                                             @endforeach
@@ -257,19 +257,18 @@
                                                     </div>
                                                     <!-- /.form-group -->
                                                 @elseif($content->contentType == 'conference')
-                                                    {{-- <div class="form-group">
+                                                    <div class="form-group">
                                                         <label for="guestConference">Conférencies</label>
                                                         <select class="select3" name="guestIds[]" multiple="multiple"
-                                                            id="guestConference" data-placeholder="Select a State"
-                                                            style="width: 100%;">
+                                                            id="guestConference_{{ $video->id }}"
+                                                            data-placeholder="Select a State" style="width: 100%;">
                                                             @foreach ($conferencerUsers as $conferencerUser)
-                                                                <option value="{{ $conferencerUser->id }}">
+                                                                <option value="{{ $conferencerUser->id }}"
+                                                                    {{ $video->videoguest->contains('userId', $conferencerUser->id) ? 'selected' : '' }}>
                                                                     {{ $conferencerUser->email }}</option>
                                                             @endforeach
-
                                                         </select>
                                                     </div>
-                                                    <!-- /.form-group --> --}}
                                                 @else
                                                 @endif
 
@@ -281,7 +280,7 @@
                                                     <input type="text" class="form-control"
                                                         value="@foreach ($video->tags as $tag){{ $tag->name }}@if (!$loop->last),@endif @endforeach"
                                                         name="tags[]" data-id="{{ $video->id }}"
-                                                        id="tags-input-{{ $video->id }}" class="videoTags" />
+                                                        class="videoTags" />
                                                 </div>
 
 
@@ -349,15 +348,4 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-    <script>
-        $(document).ready(function() {
-            $('.videoTags').each(function() {
-                var videoId = $(this).data('id');
-
-                var tagInputEle = $('#tags-input-' + videoId);
-                tagInputEle.tagsinput();
-            });
-
-        })
-    </script>
 @endsection

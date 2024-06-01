@@ -20,6 +20,16 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return view('guestProfile.speaker.index')->with('speakers' , $speakers);
     }
 
+    public function speakersAllRole(){
+        $roles = $this->allRoleSpeaker();
+        return $roles;
+    }
+
+    public function mangerAllRole(){
+        $roles = $this->allRoleManagers();
+        return $roles;
+    }
+
 
     public function createAdmin(){
         return view('guestProfile.admin.create');

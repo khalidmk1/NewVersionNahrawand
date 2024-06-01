@@ -20,4 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-/* Route::apiResource('content', ContentController::class); */
+
+Route::get('content', [ContentController::class, 'allContent'])->name('content');
+Route::get('content/coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
+
+

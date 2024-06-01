@@ -32,7 +32,7 @@ use App\Http\Controllers\RolePermissionController;
 }); */
 
 
-Route::middleware(['auth'])->prefix('/dashboard')->group(function () {
+Route::middleware(['auth'  , 'verified'])->prefix('/dashboard')->group(function () {
     Route::get('objectives/{id}', [GlobaleController::class, 'objectivesByCategory'])->name('objective.category');
     Route::get('admin', [GlobaleController::class, 'indexAdmin'])->name('index.admin');
     Route::get('manager', [GlobaleController::class, 'indexManager'])->name('index.manager');
@@ -44,7 +44,7 @@ Route::middleware(['auth'])->prefix('/dashboard')->group(function () {
 });
 
 
-Route::middleware(['auth'])->prefix('/dashboard')->group(function () {
+Route::middleware(['auth' , 'verified'])->prefix('/dashboard')->group(function () {
     Route::get('/', [ReportController::class, 'index'])->name('report.index');
     Route::resource('role', RolePermissionController::class);
     Route::post('role/{roleId}/{permissionId}', [RolePermissionController::class, 'storeRolePermission'])->name('store.role.permission');
