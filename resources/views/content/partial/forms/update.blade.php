@@ -71,40 +71,36 @@
             <div class="col-6">
 
                 <div class="form-group">
-                    <label for="goals_option">Objectives</label>
-                    <select class="select3" name="objectivesId[]" multiple="multiple" id="objective_option"
-                        data-placeholder="Select Objectives" style="width: 100%;">
-                       {{--  @foreach ($objectives as $objective)
-                            <option value="{{ $objective->id }}">
-                                {{ $objective->name }}
-                            </option>
-                        @endforeach --}}
+                    <label for="subCategory">SubCategories</label>
+                    <select class="select3" name="subCategoryId[]" multiple="multiple" id="subCategory"
+                        data-placeholder="Select a State" style="width: 100%;">
+                        @foreach ($subCategories as $subCategory)
+                            <option
+                                {{ $content->contentSubCategories->contains('subCategoryId', $subCategory->id) ? 'selected' : '' }}
+                                value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                        @endforeach
+
                     </select>
                 </div>
 
+                {{-- <div class="form-group">
+                    <label for="goals_option">Objectives</label>
+                    <select class="select3" name="objectivesId[]" multiple="multiple" id="objective_option"
+                        data-placeholder="Select Objectives" style="width: 100%;">
+                        @foreach ($objectives as $objective)
+                            <option value="{{ $objective->id }}">
+                                {{ $objective->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div> --}}
+
 
             </div>
 
 
         </div>
 
-
-
-        <div class="col-12">
-            <div class="form-group">
-                <label for="subCategory">SubCategories</label>
-                <select class="select3" name="subCategoryId[]" multiple="multiple" id="subCategory"
-                    data-placeholder="Select a State" style="width: 100%;">
-                    @foreach ($subCategories as $subCategory)
-                        <option
-                            {{ $content->contentSubCategories->contains('subCategoryId', $subCategory->id) ? 'selected' : '' }}
-                            value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
-                    @endforeach
-
-                </select>
-            </div>
-            <!-- /.form-group -->
-        </div>
 
         <div class="form-group">
             <label for="tagContent">Tags</label>
@@ -113,7 +109,7 @@
         </div>
 
 
-        @if ($content->contentType == 'conference' || $content->contentType == 'podcast')
+        @if ($content->contentType == 'conference')
             <div class="form-group">
                 <label>Modirateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">
@@ -125,7 +121,9 @@
                     @endforeach
                 </select>
             </div>
-        @elseif($content->contentType == 'formation')
+        @endif
+
+        @if ($content->contentType == 'formation')
             <div class="form-group">
                 <label>Formateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">
@@ -133,6 +131,19 @@
                         <option {{ $formateurUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $formateurUser->id }}">
                             {{ $formateurUser->email }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
+        @if ($content->contentType == 'podcast')
+            <div class="form-group">
+                <label>Animateur</label>
+                <select class="form-control select2" name="contentHost" style="width: 100%;">
+                    @foreach ($animatorUsers as $animatorUser)
+                        <option {{ $animatorUser->id == $content->hostId ? 'selected' : '' }}
+                            value="{{ $animatorUser->id }}">
+                            {{ $animatorUser->email }}
                         </option>
                     @endforeach
                 </select>
