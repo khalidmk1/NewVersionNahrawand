@@ -71,4 +71,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
+});
+
 require __DIR__.'/auth.php';
