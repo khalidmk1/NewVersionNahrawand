@@ -87,7 +87,7 @@
                                     @endif
 
                                     <!-- /.col -->
-                                    <div class="{{$content->contentType != 'formation' ? 'col-sm-12' : 'col-sm-6'}}">
+                                    <div class="{{$content->contentType == 'formation' ? 'col-sm-12' : 'col-sm-6'}}">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <img class="img-fluid"
