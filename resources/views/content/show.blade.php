@@ -81,7 +81,7 @@
                                     {{--  @if ($content->t)
                                         
                                     @endif --}}
-                                    @if (!$content->contentType == 'foramtion')
+                                    @if (!$content->contentType != 'foramtion')
                                         <div class="col-sm-6">
                                             <iframe class="embed-responsive-item w-100 h-100 rounded border-dark"
                                                 src="{{ $content->video }}" allowfullscreen></iframe>
@@ -90,7 +90,7 @@
                                     @endif
 
                                     <!-- /.col -->
-                                    <div class="{{!!$content->contentType == 'foramtion' ? 'col-sm-12' : 'col-sm-6'}}">
+                                    <div class="{{$content->contentType != 'foramtion' ? 'col-sm-12' : 'col-sm-6'}}">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <img class="img-fluid"
