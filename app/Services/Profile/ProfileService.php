@@ -3,7 +3,7 @@
 namespace App\Services\profile;
 
 use App\Interfaces\ProfileInterface;
-use App\Services\profile\ProfileQeury;
+use App\Services\Profile\ProfileQeury;
 
 class ProfileService extends ProfileQeury implements ProfileInterface {
 

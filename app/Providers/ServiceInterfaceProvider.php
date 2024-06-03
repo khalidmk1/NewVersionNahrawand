@@ -19,7 +19,7 @@ use App\Interfaces\ObjectiveInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\SubCategoryInterface;
 use App\Services\Content\ContentService;
-use App\Services\profile\ProfileService;
+use App\Services\Profile\ProfileService;
 use App\Services\Program\ProgramService;
 use App\Services\Category\CategoryService;
 use App\Interfaces\RolePermissionInterface;
