@@ -90,7 +90,7 @@
                                     @endif
 
                                     <!-- /.col -->
-                                    <div class="col-sm-6">
+                                    <div class="{{!!$content->contentType == 'foramtion' ? 'col-sm-12' : 'col-sm-6'}}">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <img class="img-fluid"
