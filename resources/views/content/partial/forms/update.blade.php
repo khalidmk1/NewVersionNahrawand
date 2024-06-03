@@ -154,10 +154,13 @@
 
         <!-- /.form-group -->
         <!-- textarea -->
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="bigDescription" rows="6" placeholder="Enter ...">{{ $content->bigDescription }}</textarea>
-        </div>
+        @if (!$content->contentType == 'formation')
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" name="bigDescription" rows="6" placeholder="Enter ...">{{ $content->bigDescription }}</textarea>
+            </div>
+        @endif
+
 
         <div class="form-group">
             <label for="coursImage">Image</label>
@@ -173,26 +176,31 @@
                 <label class="custom-file-label" for="flexImagePodcast">Choose image</label>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8">
 
-                <div class="form-group">
-                    <label for="videoconference">Video</label>
-                    <input type="url" value="{{ old('video', $content->video) }}" class="form-control"
-                        name="videoUrl" id="videoconference" placeholder="Entrez url video ...">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="duration">Duration</label>
-                    <input type="time" class="form-control" id="duration" data-id="{{ $content->id }}"
-                        name="duration" value="{{ old('duration', $content->duration) }}" step="1">
+        @if (!$content->contentType == 'formation')
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="form-group">
+                        <label for="videoconference">Video</label>
+                        <input type="url" value="{{ old('video', $content->video) }}" class="form-control"
+                            name="videoUrl" id="videoconference" placeholder="Entrez url video ...">
+                    </div>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <input type="time" class="form-control" id="duration" data-id="{{ $content->id }}"
+                            name="duration" value="{{ old('duration', $content->duration) }}" step="1">
+                    </div>
+
+                </div>
+
+
+
             </div>
-
-        </div>
-
+        @endif
 
     </div>
 

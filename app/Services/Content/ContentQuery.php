@@ -39,8 +39,8 @@ class ContentQuery extends GlobaleService {
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
-
-        $objectives = array_map('intval', $request->objectivesId); 
+         
+        /*  $objectives = array_map('intval', $request->objectivesId);  */
         $subCategories = array_map('intval', $request->subCategoryId); 
 
         $contentImage = $this->storeConteImage($request);
@@ -69,7 +69,7 @@ class ContentQuery extends GlobaleService {
         ]);
 
 
-        if ($request->has('tags')) {
+        if ($request->has('tags') && $request->tags[0] !== null) {
             $StringTag = $request->tags[0];
             $tags = explode(',', $StringTag);
             $arrTags = array_map('trim', $tags);
@@ -78,12 +78,12 @@ class ContentQuery extends GlobaleService {
 
         
 
-        foreach ($objectives as $key => $objective) {
+      /*   foreach ($objectives as $key => $objective) {
             $objectiveContent = ContentObjective::create([
                 'contentId' => $content->id,
                 'objectivelId' => $objective
             ]);
-        }
+        } */
 
         foreach ($subCategories as $key => $subCategorie) {
             $subCategorieContent = ContentSubCategory::create([

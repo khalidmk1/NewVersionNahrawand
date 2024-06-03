@@ -23,12 +23,12 @@ class ContentRequest extends FormRequest
     {
         $rules = [
             'title' => ['required' , 'string' , 'max:255'],
-            'smallDescription' => ['required' , 'string' , 'max:300'],
+           
             'tags' => ['array'],
             'cotegoryId' => ['required'],
             'objectivesId' => ['nullable' , 'array'],
             'subCategoryId' => ['nullable' , 'array'],
-            'contentType' => ['required', 'in:conference,podcast,formation'],
+            'contentType' => ['required', 'in:conference,podcast,formation,quickly'],
             'contentHost' => ['required'],
             'contentImage' => ['required' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
             'contentImageFlex' => ['required' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
@@ -39,6 +39,7 @@ class ContentRequest extends FormRequest
         ];
 
         if ($this->contentType === 'conference' || $this->contentType === 'podcast') {
+            $rules['smallDescription'] = ['required' , 'string' , 'max:300'];
             $rules['bigDescription'] = ['required', 'string', 'max:600'];
             $rules['videoUrl'] = ['required' , 'url'];
             $rules['duration'] = ['required'];

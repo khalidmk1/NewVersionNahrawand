@@ -64,7 +64,13 @@ class ContentService extends ContentQuery implements ContentInterface {
 
     public function store($request){
         $content = $this->storeContent($request);
-        return redirect()->route('video.show', Crypt::encrypt($content->id));
+
+        if($content->contentType == 'podcast' || $content->contentType == 'formation' || $content->contentType == 'conference'){
+            return redirect()->route('video.show', Crypt::encrypt($content->id));
+        }else{
+            return redirect()->back()->with('status' , 'You have Created Quickly');
+        }
+       
     }
 
     public function update($request , $id){

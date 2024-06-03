@@ -13,7 +13,6 @@
 @endsection
 
 @section('content')
-   
     <div class="row">
         <div class="card card-default col-12">
             <div class="card-header row">
@@ -89,10 +88,21 @@
                         </div>
                         <div class="col-6">
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="objective_option">Objectives</label>
                                 <select class="select3" name="objectivesId[]" multiple="multiple" id="objective_option"
                                     data-placeholder="Select a State" style="width: 100%;">
+
+                                </select>
+                            </div> --}}
+
+                            <div class="form-group">
+                                <label for="subCategory">SubCategories</label>
+                                <select class="select3" name="subCategoryId[]" multiple="multiple" id="subCategory"
+                                    data-placeholder="Select a State" style="width: 100%;">
+                                    @foreach ($subCategories as $subCategory)
+                                        <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                    @endforeach
 
                                 </select>
                             </div>
@@ -103,22 +113,12 @@
 
                     </div>
 
-                    <div class="col-12">
+                    {{-- <div class="col-12">
 
-                        <div class="form-group">
-                            <label for="subCategory">SubCategories</label>
-                            <select class="select3" name="subCategoryId[]" multiple="multiple" id="subCategory"
-                                data-placeholder="Select a State" style="width: 100%;">
-                                @foreach ($subCategories as $subCategory)
-                                    <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
-                                @endforeach
 
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
 
                     </div>
-
+ --}}
 
                     <!-- select -->
                     <div class="form-group">

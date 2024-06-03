@@ -78,11 +78,17 @@
                                 <!-- /.user-block -->
 
                                 <div class="row mb-3">
-                                    <div class="col-sm-6">
-                                        <iframe class="embed-responsive-item w-100 h-100 rounded border-dark"
-                                            src="{{ $content->video }}" allowfullscreen></iframe>
+                                    {{--  @if ($content->t)
+                                        
+                                    @endif --}}
+                                    @if (!$content->contentType == 'foramtion')
+                                        <div class="col-sm-6">
+                                            <iframe class="embed-responsive-item w-100 h-100 rounded border-dark"
+                                                src="{{ $content->video }}" allowfullscreen></iframe>
 
-                                    </div>
+                                        </div>
+                                    @endif
+
                                     <!-- /.col -->
                                     <div class="col-sm-6">
                                         <div class="row">
@@ -235,8 +241,9 @@
                                                     <label for="image2">Image</label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" name="image"
-                                                            id="image_{{$video->id}}">
-                                                        <label class="custom-file-label" for="image_{{$video->id}}">Upload</label>
+                                                            id="image_{{ $video->id }}">
+                                                        <label class="custom-file-label"
+                                                            for="image_{{ $video->id }}">Upload</label>
                                                     </div>
                                                 </div>
 
@@ -244,8 +251,8 @@
                                                     <div class="form-group">
                                                         <label for="guestInvite">Invité(s)</label>
                                                         <select class="select3" name="guestIds[]" multiple="multiple"
-                                                            id="guestInvite_{{$video->id}}" data-placeholder="Select a State"
-                                                            style="width: 100%;">
+                                                            id="guestInvite_{{ $video->id }}"
+                                                            data-placeholder="Select a State" style="width: 100%;">
                                                             @foreach ($invertersUsers as $invertersUser)
                                                                 <option
                                                                     {{ $video->videoguest->contains('userId', $invertersUser->id) ? 'selected' : '' }}
