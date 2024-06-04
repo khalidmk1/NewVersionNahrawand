@@ -283,6 +283,7 @@ class GlobaleService  {
                     'avatar' => $content->user->avatar,
                     'cover' => $content->user->cover,
                     'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                    'roles' => $content->user->roles->pluck('name')->toArray(),
                     'biographie' => $content->user->biographie,
                     'faceboock' => $content->user->faceboock,
                     'linkdin' => $content->user->linkdin,
