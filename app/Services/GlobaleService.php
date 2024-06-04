@@ -264,10 +264,11 @@ class GlobaleService  {
     public function formationContentApi()
     {
         $contents = Content::where('contentType', 'formation')
-            ->with('category')
+            ->with(['category' , 'user'])
             ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId']);
 
         $formattedContents = $contents->map(function ($content) {
+            $user = $content->user;
             return [
                 'id' => $content->id,
                 'image' => $content->image,
@@ -275,8 +276,19 @@ class GlobaleService  {
                 'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
                 'categoryName' => $content->category->name,
+                'user' => $user ? [
+                    'id' => $user->id,
+                    'avatar' => $user->avatar,
+                    'cover' => $user->cover,
+                    'fullName' => $user->firstName . ' ' . $user->lastName,
+                    'biographie' => $user->biographie,
+                    'faceboock' => $user->faceboock,
+                    'linkdin' => $user->linkdin,
+                    'instagram' => $user->instagram,
+                ] : null,
             ];
         });
+
 
         return $formattedContents;
     }
