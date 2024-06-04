@@ -25,10 +25,7 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     } */
 
-    public function comingSoonContent(){
-        $contents = $this->allComingContentApi();
-        return response()->json($contents);
-    }
+    
 
     public function show($content){
         $content = $this->getContentById($content);
@@ -87,6 +84,12 @@ class ContentService extends ContentQuery implements ContentInterface {
         $distroyedContent = $this->destroyContent($request , $id);
 
         return redirect()->route('content.index')->with('status', 'You have deleted content');
+    }
+
+    //Api React Native
+    public function comingSoonContent(){
+        $contents = $this->allComingContentApi();
+        return response()->json($contents);
     }
 
 }

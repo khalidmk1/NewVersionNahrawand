@@ -177,7 +177,7 @@
             </div>
         </div>
 
-        @if (!$content->contentType == 'formation')
+        @if ($content->contentType != 'formation')
             <div class="row">
                 <div class="col-md-8">
 
