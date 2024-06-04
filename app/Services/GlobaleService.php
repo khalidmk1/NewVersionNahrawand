@@ -264,11 +264,10 @@ class GlobaleService  {
     public function formationContentApi()
     {
         $contents = Content::where('contentType', 'formation')
-            ->with(['category' , 'user'])
-            ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId']);
+            ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
 
+        $contents->load('user', 'category');
         $formattedContents = $contents->map(function ($content) {
-            $user = $content->user;
             return [
                 'id' => $content->id,
                 'image' => $content->image,
@@ -276,19 +275,18 @@ class GlobaleService  {
                 'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
                 'categoryName' => $content->category->name,
-                'user' => $user ? [
-                    'id' => $user->id,
-                    'avatar' => $user->avatar,
-                    'cover' => $user->cover,
-                    'fullName' => $user->firstName . ' ' . $user->lastName,
-                    'biographie' => $user->biographie,
-                    'faceboock' => $user->faceboock,
-                    'linkdin' => $user->linkdin,
-                    'instagram' => $user->instagram,
-                ] : null,
+                'user' => [
+                    'id' => $content->user->id,
+                    'avatar' => $content->user->avatar,
+                    'cover' => $content->user->cover,
+                    'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                    'biographie' => $content->user->biographie,
+                    'faceboock' => $content->user->faceboock,
+                    'linkdin' => $content->user->linkdin,
+                    'instagram' => $content->user->instagram,
+                ],
             ];
         });
-
 
         return $formattedContents;
     }
