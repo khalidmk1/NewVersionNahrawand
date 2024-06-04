@@ -24,6 +24,7 @@ class Content extends Model
         'bigDescription',
         'smallDescription',
         'contentType',
+        'quizType',
         'isActive',
         'isComing',
         'isCertify',

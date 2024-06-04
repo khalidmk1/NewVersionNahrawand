@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('bigDescription')->nullable();
             $table->text('smallDescription')->nullable();
             $table->string('contentType')->nullable();
+            $table->string('quizType')->nullable(); 
             $table->boolean('isActive')->nullable()->default(true);
             $table->boolean('isComing')->nullable()->default(false);
             $table->boolean('isCertify')->nullable()->default(false);
