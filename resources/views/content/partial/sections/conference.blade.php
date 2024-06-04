@@ -4,8 +4,7 @@
 
     <div class="form-group">
         <label>Modirateur</label>
-        <select data-placeholder="Choose a Modirateur..." name="contentHost" style="width: 100%;"
-            class=" selectize">
+        <select data-placeholder="Choose a Modirateur..." name="contentHost" style="width: 100%;" class=" selectize">
             @foreach ($moderatorUsers as $moderatorUser)
                 <option value="{{ $moderatorUser->id }}">
                     {{ $moderatorUser->email }}</option>
@@ -16,15 +15,19 @@
     </div>
     <!-- /.form-group -->
 
-
     <!-- textarea -->
     <div class="form-group">
-        <label>Description Conférence</label>
+        <label>Small Description</label>
+        <textarea class="form-control" name="smallDescription" rows="3" placeholder="Enter ...">{{ old('description') }}</textarea>
+    </div>
+    <!-- textarea -->
+    <div class="form-group">
+        <label>Big Description</label>
         <textarea class="form-control" name="bigDescription" rows="3" placeholder="Enter ..."></textarea>
     </div>
 
     <div class="form-group">
-        <label for="coursImage">Image Conférence</label>
+        <label for="coursImage">Image</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" name="contentImage" id="coursImage">
             <label class="custom-file-label" for="customFile">Choose image</label>
@@ -32,7 +35,7 @@
     </div>
 
     <div class="form-group">
-        <label for="flexImageConference">Flex Image Conférence</label>
+        <label for="flexImageConference">Flex Image</label>
         <div class="custom-file">
             <input type="file" class="custom-file-input" name="contentImageFlex" id="flexImageConference">
             <label class="custom-file-label" for="flexImageConference">Choose image</label>
@@ -46,7 +49,7 @@
                 {{-- <input type="file" class="filepond" name="introVideoConfrence"
                 id="coursVideo"> --}}
 
-                <label for="videoconference">Video Conférence</label>
+                <label for="videoconference">Video</label>
                 <input type="url" value="{{ old('videoUrl') }}" class="form-control" name="videoUrl"
                     id="videoconference" placeholder="Entrez url video ...">
             </div>
@@ -56,7 +59,7 @@
 
             <!-- time Picker -->
             <div class="form-group">
-                <label for="coursDuration">Duration Conférence</label>
+                <label for="coursDuration">Duration</label>
                 <input type="time" class="form-control" id="coursDuration" name="duration" value="00:00:00"
                     step="1">
             </div>

@@ -38,7 +38,7 @@
 
         <!-- textarea -->
         <div class="form-group">
-            <label>Description</label>
+            <label>Small Description</label>
             <textarea class="form-control" name="smallDescription" rows="3" placeholder="Enter ...">{{ old('smallDescription', $content->smallDescription) }}</textarea>
         </div>
 
@@ -154,9 +154,9 @@
 
         <!-- /.form-group -->
         <!-- textarea -->
-        @if (!$content->contentType == 'formation')
+        @if ($content->contentType != 'formation')
             <div class="form-group">
-                <label>Description</label>
+                <label>Big Description</label>
                 <textarea class="form-control" name="bigDescription" rows="6" placeholder="Enter ...">{{ $content->bigDescription }}</textarea>
             </div>
         @endif

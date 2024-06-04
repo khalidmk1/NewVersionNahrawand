@@ -49,6 +49,10 @@ class GlobaleController extends Controller
         return $this->ProfileInterface->createSpeaker();
     }
 
+    public function quicklyIndex(){
+        return $this->ContentInterface->quicklyIndex();
+    }
+
 
     public function deletevideo(DestroyRequest $request , String $id){
         return $this->videoInterface->delete($request , $id);

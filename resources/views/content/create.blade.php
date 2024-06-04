@@ -57,11 +57,7 @@
                     </div>
 
 
-                    <!-- textarea -->
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="smallDescription" rows="3" placeholder="Enter ...">{{ old('description') }}</textarea>
-                    </div>
+                   
 
 
                     <div class="form-group">
