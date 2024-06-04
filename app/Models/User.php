@@ -91,4 +91,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(EventUser::class, 'userId');
     }
+
+    /**
+     * Get all of the contentFavoris for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contentFavoris(): HasMany
+    {
+        return $this->hasMany(ContentFavoris::class, 'userId');
+    }
 }

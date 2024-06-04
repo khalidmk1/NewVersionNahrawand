@@ -5,6 +5,7 @@ namespace App\Services\Content;
 use Spatie\Tags\Tag;
 use App\Models\Content;
 use App\Models\Category;
+use App\Models\ContentFavoris;
 use App\Models\ContentObjective;
 use App\Services\GlobaleService;
 use App\Models\ContentSubCategory;
@@ -185,6 +186,28 @@ class ContentQuery extends GlobaleService {
         }
         return $content;
 
+    }
+
+    public function contentFavoris(String $content){
+        $content = Content::findOrFail($content);
+        
+        $favorisExists = ContentFavoris::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->exists();
+        
+        $getFavoris = ContentFavoris::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->get();
+    
+        if($favorisExists){
+            $getFavoris->delete();
+        }else{
+            $favoris = ContentFavoris::create([
+                'contentId' => $content->id,
+                'userId' => Auth::user()->id,
+            ]);
+            return $favoris;
+        }
     }
 
 

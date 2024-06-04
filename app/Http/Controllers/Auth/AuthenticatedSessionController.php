@@ -32,6 +32,31 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+    public function storeApi(Request $request){
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+       
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+
+            $user = Auth::user();
+            $user->update([
+                'is_login' => 1
+            ]);
+            $token = $user->createToken($user->email)->plainTextToken;
+
+            
+            return response()->json(['user' => $user, 'token' => $token]);
+        }
+    
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
     /**
      * Destroy an authenticated session.
      */

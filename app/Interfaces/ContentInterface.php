@@ -17,5 +17,6 @@ interface ContentInterface {
     public function comingSoonContent();
     public function allContent();
     public function contentFormation();
+    public function createFavoris($content);
 }
 

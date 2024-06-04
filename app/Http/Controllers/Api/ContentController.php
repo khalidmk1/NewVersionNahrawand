@@ -30,4 +30,8 @@ class ContentController extends Controller
     public function contentFormation(){
         return $this->contentInterface->contentFormation();
     }
+
+    public function createFavoris(String $content){
+        return $this->contentInterface->createFavoris($content);
+    }
 }

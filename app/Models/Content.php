@@ -97,5 +97,15 @@ class Content extends Model
         return $this->hasMany(ContentObjective::class, 'contentId');
     }
 
+    /**
+     * Get all of the favoris for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favoris(): HasMany
+    {
+        return $this->hasMany(ContentFavoris::class, 'contentId');
+    }
+
 }
  
