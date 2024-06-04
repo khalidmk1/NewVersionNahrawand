@@ -128,4 +128,11 @@ class VideoQuery extends GlobaleService{
         return $video;
     }
 
+    //api video
+
+    public function getVideoByContent(String $content){
+        $videos = ContentVideo::where('contentId' , $content)->get();
+        return $videos;
+    }
+
 }

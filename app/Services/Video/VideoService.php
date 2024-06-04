@@ -42,4 +42,11 @@ class VideoService extends VideoQuery implements VideoInterface {
 
     }
 
+    //api videos
+    public function showVideo($content){
+        $videos = $this->getVideoByContent($content);
+
+        return response()->json($videos);
+    }
+
 }

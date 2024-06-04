@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -32,6 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('content', [ContentController::class, 'allContent'])->name('content');
 Route::get('content/coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
 Route::get('content/formation', [ContentController::class, 'contentFormation'])->name('content.formation');
+Route::get('video/{content}', [VideoController::class, 'showVideo'])->name('video.index');
 
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
 Route::post('login', [AuthenticatedSessionController::class, 'storeApi'])->name('user.login');
