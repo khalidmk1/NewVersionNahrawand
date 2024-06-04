@@ -83,9 +83,6 @@ class ProfileQeury extends GlobaleService {
         $validatedData = $request->validate($rules);
         $avatarName =  $this->storeAvatar($request);
         $coverName = $this->storeCover($request);
-
-        $role = Role::where('name', 'Admin')->firstOrFail(); 
-        $roleGuest = Role::where('name' , $request->role)->firstOrFail();
         
         if (empty($request->password)) {
             $password = Str::random(8);
@@ -108,9 +105,11 @@ class ProfileQeury extends GlobaleService {
             'password' => $hashedPassword
         ]);
 
-        if($request->has('role')){
-            $user->assignRole($roleGuest);
-        }else{
+        if ($request->has('role')) {
+            $roles = Role::whereIn('name', $request->role)->get();
+            $user->syncRoles($roles);
+        } else {
+            $role = Role::where('name', 'Admin')->firstOrFail();
             $user->assignRole($role);
         }
 

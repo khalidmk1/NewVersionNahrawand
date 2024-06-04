@@ -66,7 +66,7 @@
 
                     </div>
 
-                   
+
                     <div class="form-group">
                         <label for="firstName">First name</label>
                         <input type="text" value="{{ old('firstName') }}" class="form-control" name="firstName"
@@ -83,14 +83,19 @@
                         <textarea class="form-control" name="biographie" rows="3" placeholder="Enter biographie ..."></textarea>
                     </div>
 
+
+
                     <div class="form-group">
-                        <label>Type of Speaker</label>
-                        <select name="role" class="custom-select">
+                        <label>Speaker Type</label>
+                        <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                            style="width: 100%;">
                             @foreach ($roleSpeakers as $roleSpeaker)
                                 <option value="{{ $roleSpeaker->name }}">{{ $roleSpeaker->name }}</option>
                             @endforeach
+
                         </select>
                     </div>
+                    <!-- /.form-group -->
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>

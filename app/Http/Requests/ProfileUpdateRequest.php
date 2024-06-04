@@ -31,7 +31,7 @@ class ProfileUpdateRequest extends FormRequest
             'status_matrimonial' => [ 'string', 'max:255'],
             'numChild' => ['integer'],
             'profission' => [ 'string', 'max:255'],
-
+            'role' => ['required' , 'array']
         ];
     }
 
