@@ -194,13 +194,11 @@ class ContentQuery extends GlobaleService {
         $favorisExists = ContentFavoris::where('contentId', $content->id)
         ->where('userId', Auth::user()->id)
         ->exists();
-        
-        $getFavoris = ContentFavoris::where('contentId', $content->id)
-        ->where('userId', Auth::user()->id)
-        ->get();
     
         if($favorisExists){
-            $getFavoris->delete();
+            ContentFavoris::where('contentId', $content->id)
+            ->where('userId', Auth::user()->id)
+            ->delete();
         }else{
             $favoris = ContentFavoris::create([
                 'contentId' => $content->id,
@@ -208,6 +206,20 @@ class ContentQuery extends GlobaleService {
             ]);
             return $favoris;
         }
+    }
+
+    public function checkFavoris(String $content){
+        $content = Content::findOrFail($content);
+
+        $Checkfolow = ContentFavoris::where('userId', Auth::user()->id)
+        ->where('contentId', $content->id)
+        ->exists();
+
+        if($Checkfolow){
+            return response()->json(true);
+        }
+
+        return response()->json(false);
     }
 
 

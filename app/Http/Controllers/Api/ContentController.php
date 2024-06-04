@@ -34,4 +34,7 @@ class ContentController extends Controller
     public function createFavoris(String $content){
         return $this->contentInterface->createFavoris($content);
     }
+    public function favorisExists(String $content){
+        return $this->contentInterface->favorisExists($content);
+    }
 }

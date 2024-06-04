@@ -72,7 +72,6 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        /* dd($request); */
         $role = Role::where('name', 'Client')->firstOrFail();
 
         $user = User::create([
