@@ -23,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('content', [ContentController::class, 'allContent'])->name('content');
 Route::get('content/coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
+Route::get('content/formation', [ContentController::class, 'contentFormation'])->name('content.formation');
 
 

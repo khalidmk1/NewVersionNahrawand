@@ -26,4 +26,8 @@ class ContentController extends Controller
     public function comingSoonContent(){
         return $this->contentInterface->comingSoonContent();
     }
+
+    public function contentFormation(){
+        return $this->contentInterface->contentFormation();
+    }
 }

@@ -28,7 +28,6 @@ class ContentQuery extends GlobaleService {
 
     public function getContentById(String $content){
         $content = Content::findOrFail(Crypt::decrypt($content));
-
         return $content;
     }
 

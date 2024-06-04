@@ -261,6 +261,26 @@ class GlobaleService  {
         return $contents;
     }
 
+    public function formationContentApi()
+    {
+        $contents = Content::where('contentType', 'formation')
+            ->with('category')
+            ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId']);
+
+        $formattedContents = $contents->map(function ($content) {
+            return [
+                'id' => $content->id,
+                'image' => $content->image,
+                'imageFlex' => $content->imageFlex,
+                'title' => $content->title,
+                'smallDescription' => $content->smallDescription,
+                'categoryName' => $content->category->name,
+            ];
+        });
+
+        return $formattedContents;
+    }
+
 
     public function allContentApi(){
         $contents = Content::all(['id' , 'image' , 'title']);
