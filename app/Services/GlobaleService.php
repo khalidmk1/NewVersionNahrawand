@@ -275,6 +275,8 @@ class GlobaleService  {
                 'title' => $content->title,
                 'quizType' => $content->quizType,
                 'smallDescription' => $content->smallDescription,
+                'condition' => $content->condition,
+                'document' => $content->document,
                 'categoryName' => $content->category->name,
                 'user' => [
                     'id' => $content->user->id,
