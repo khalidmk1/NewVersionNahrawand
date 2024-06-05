@@ -7,6 +7,7 @@ use App\Models\Content;
 use App\Models\Category;
 use App\Models\ContentView;
 use App\Models\ContentFavoris;
+use App\Models\ContentFinished;
 use App\Models\ContentObjective;
 use App\Services\GlobaleService;
 use App\Models\ContentSubCategory;
