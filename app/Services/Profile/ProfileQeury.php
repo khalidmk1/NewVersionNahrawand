@@ -135,6 +135,7 @@ class ProfileQeury extends GlobaleService {
         'faceboock' , 'linkdin' , 'instagram']);
 
         $filtterdUsers =  $users->map(function($user){
+            $roleNames = $user->roles->pluck('name')->toArray();
             return [
                 'avatar' => $user->avatar,
                 'cover' => $user->cover,
@@ -143,7 +144,7 @@ class ProfileQeury extends GlobaleService {
                 'faceboock' => $user->faceboock,
                 'linkdin' => $user->linkdin,
                 'instagram' => $user->instagram,
-                'roles' => $roles,
+                'roles' => $roleNames,
             ];
         });
 
