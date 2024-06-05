@@ -35,12 +35,15 @@
 
         </div>
 
+        @if ($content->contentType != 'quickly')
+            <!-- textarea -->
+            <div class="form-group">
+                <label>Small Description</label>
+                <textarea class="form-control" name="smallDescription" rows="3" placeholder="Enter ...">{{ old('smallDescription', $content->smallDescription) }}</textarea>
+            </div>
+        @endif
 
-        <!-- textarea -->
-        <div class="form-group">
-            <label>Small Description</label>
-            <textarea class="form-control" name="smallDescription" rows="3" placeholder="Enter ...">{{ old('smallDescription', $content->smallDescription) }}</textarea>
-        </div>
+
 
 
         {{--  <div class="form-group">
@@ -123,7 +126,7 @@
             </div>
         @endif
 
-        @if ($content->contentType == 'formation' || $content->contentType == 'quickly')
+        @if ($content->contentType == 'formation')
             <div class="form-group">
                 <label>Formateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">
@@ -154,7 +157,7 @@
 
         <!-- /.form-group -->
         <!-- textarea -->
-        @if ($content->contentType != 'formation')
+        @if ($content->contentType == 'podcast' || $content->contentType == 'conference')
             <div class="form-group">
                 <label>Big Description</label>
                 <textarea class="form-control" name="bigDescription" rows="6" placeholder="Enter ...">{{ $content->bigDescription }}</textarea>
