@@ -35,4 +35,10 @@ class EventService extends EventQuery implements EventInterface   {
         return redirect()->back()->with('status' , 'You Have updated event');
     }
 
+    //api event
+    public function eventIndex(){
+        $events = $this->getEventIndex();
+        return response()->json($events);
+    }
+
 }

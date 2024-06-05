@@ -92,5 +92,24 @@ class EventQuery extends GlobaleService {
         return $event;
     }
 
+    //api event
+
+    public function getEventIndex(){
+        $events = Event::all();
+        $event->load('eventUser');
+        $filtredEvents =  $events->map(function($event){
+            return [
+                'image' => $event->image,
+                'title' => $event->title,
+                'description' => $event->description,
+                'dateStart' => $event->dateStart,
+                'dateEnd' => $event->dateEnd,
+                'user' => [
+                    'image' => $event->eventUser->avatar
+                ]
+            ];
+        });
+    }
+
    
 }
