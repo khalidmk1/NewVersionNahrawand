@@ -110,7 +110,8 @@ class EventQuery extends GlobaleService {
                 'description' => $event->description,
                 'dateStart' => $event->dateStart,
                 'dateEnd' => $event->dateEnd,
-                'users' => $users, // Correctly include the users array
+                'url' => $event->url,
+                'users' => $users, 
             ];
         });
 
