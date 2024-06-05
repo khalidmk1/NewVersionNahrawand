@@ -26,13 +26,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
+    
+    Route::post('create/content/view/{content}', [ContentController::class, 'createView'])->name('contentView.create');
+    Route::post('create/video/view/{video}', [VideoController::class, 'createView'])->name('videoView.create');
 });
 
 
 Route::get('content', [ContentController::class, 'allContent'])->name('content');
 Route::get('content/coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
 Route::get('content/formation', [ContentController::class, 'contentFormation'])->name('content.formation');
-Route::get('video/{content}', [VideoController::class, 'showVideo'])->name('video.index');
+
+
+
+Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index');
 
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
 Route::post('login', [AuthenticatedSessionController::class, 'storeApi'])->name('user.login');

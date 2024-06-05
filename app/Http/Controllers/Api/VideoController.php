@@ -14,8 +14,12 @@ class VideoController extends Controller
         $this->videoInterface = $videoInterface;
     }
 
-    public function showVideo(String $content){
-        return $this->videoInterface->showVideo($content);
+    public function showVideo(String $video){
+        return $this->videoInterface->showVideo($video);
+    }
+
+    public function createView(String $video){
+        return $this->videoInterface->createView($video);
     }
 
 }

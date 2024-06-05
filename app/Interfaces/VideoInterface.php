@@ -10,5 +10,6 @@ interface VideoInterface {
     public function delete($request , $id);
 
     //api videos
-    public function showVideo($content);
+    public function showVideo($video);
+    public function createView($video);
 }

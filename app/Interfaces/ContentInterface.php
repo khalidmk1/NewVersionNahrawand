@@ -19,5 +19,6 @@ interface ContentInterface {
     public function contentFormation();
     public function createFavoris($content);
     public function favorisExists($content);
+    public function createView($content);
 }
 

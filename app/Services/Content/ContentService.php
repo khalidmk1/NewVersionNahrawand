@@ -108,4 +108,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return $favoris;
     }
 
+    public function createView($content){
+        $view = $this->createContentView($content);
+        return response()->json($view);
+    }
+
 }

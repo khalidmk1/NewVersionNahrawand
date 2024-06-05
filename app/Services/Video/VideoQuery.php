@@ -130,9 +130,28 @@ class VideoQuery extends GlobaleService{
 
     //api video
 
-    public function getVideoByContent(String $content){
-        $videos = ContentVideo::where('contentId' , $content)->get(['title' , 'video' , 'description']);
+    public function getVideoByContent(String $video){
+        $videos = ContentVideo::where('contentId' , $video)->get(['title' , 'video' , 'description']);
         return $videos;
+    }
+
+    public function createVideoView(String $video){
+        $video = ContentVideo::findOrFail($video);
+
+        $viewExists = VideoView::where('videoId', $video->id)
+        ->where('userId', Auth::user()->id)
+        ->exists();
+
+        if($viewExists){
+            $view = ContentView::create([
+                'videoId' => $video->id,
+                'userId' => Auth::user()->id,
+            ]);
+    
+            return $view;
+        }
+        
+        return $viewExists;
     }
 
 }

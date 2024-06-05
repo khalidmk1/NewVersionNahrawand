@@ -107,5 +107,15 @@ class Content extends Model
         return $this->hasMany(ContentFavoris::class, 'contentId');
     }
 
+    /**
+     * Get all of the views for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(ContentView::class, 'contentId');
+    }
+
 }
  

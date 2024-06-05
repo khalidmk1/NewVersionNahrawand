@@ -188,6 +188,8 @@ class ContentQuery extends GlobaleService {
 
     }
 
+    //api content
+
     public function contentFavoris(String $content){
         $content = Content::findOrFail($content);
         
@@ -220,6 +222,27 @@ class ContentQuery extends GlobaleService {
         }
 
         return response()->json(false);
+    }
+
+    public function createContentView(String $content){
+
+        $content = Content::findOrFail($content);
+
+        $viewExists = ContentView::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->exists();
+
+        if($viewExists){
+            $view = ContentView::create([
+                'contentId' => $content->id,
+                'userId' => Auth::user()->id,
+            ]);
+    
+            return $view;
+        }
+        
+        return $viewExists;
+
     }
 
 

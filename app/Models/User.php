@@ -101,4 +101,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(ContentFavoris::class, 'userId');
     }
+
+    /**
+     * Get all of the contentViews for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contentViews(): HasMany
+    {
+        return $this->hasMany(ContentView::class, 'userId');
+    }
+
+    /**
+     * Get all of the videoViews for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function videoViews(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'userId');
+    }
 }

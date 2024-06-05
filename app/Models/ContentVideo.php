@@ -46,4 +46,14 @@ class ContentVideo extends Model
         return $this->hasMany(VideoGuest::class, 'VideoId');
     }
 
+    /**
+     * Get all of the views for the ContentVideo
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(VideoView::class, 'videoId');
+    }
+
 }
