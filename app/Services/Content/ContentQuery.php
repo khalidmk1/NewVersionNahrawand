@@ -6,6 +6,7 @@ use Spatie\Tags\Tag;
 use App\Models\Content;
 use App\Models\Category;
 use App\Models\ContentView;
+use Illuminate\Http\Request;
 use App\Models\ContentFavoris;
 use App\Models\ContentFinished;
 use App\Models\ContentObjective;
@@ -283,7 +284,7 @@ class ContentQuery extends GlobaleService {
             $comment = ContentComment::create([
                 'contentId' => $content->id,
                 'userId' => Auth::user()->id,
-                'comment' => $request->commnet
+                'comment' => $request->comment
             ]);
             return $comment;
         }

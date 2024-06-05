@@ -123,7 +123,7 @@ class ContentService extends ContentQuery implements ContentInterface {
     }
 
     public function createComment($request , $content){
-        $commentContent = $this->createContentComment($request,$content);
+        $commentContent = $this->createContentComment($request , $content);
         return response()->json($commentContent);
     }
 
