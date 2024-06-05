@@ -278,6 +278,7 @@ class GlobaleService  {
                 'condition' => $content->condition,
                 'document' => $content->document,
                 'categoryName' => $content->category->name,
+                'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
                     'id' => $content->user->id,
                     'avatar' => $content->user->avatar,
@@ -306,7 +307,39 @@ class GlobaleService  {
                 'image' => $content->image,
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
-                'quizType' => $content->quizType,
+                'smallDescription' => $content->smallDescription,
+                'categoryName' => $content->category->name,
+                'tags' => $content->tags->pluck('name')->toArray(),
+                'user' => [
+                    'id' => $content->user->id,
+                    'avatar' => $content->user->avatar,
+                    'cover' => $content->user->cover,
+                    'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                    'roles' => $content->user->roles->pluck('name')->toArray(),
+                    'biographie' => $content->user->biographie,
+                    'faceboock' => $content->user->faceboock,
+                    'linkdin' => $content->user->linkdin,
+                    'instagram' => $content->user->instagram,
+                ],
+            ];
+        });
+
+        return $formattedContents;
+
+    }
+
+
+    public function quicklyContentApi(){
+        $contents = Content::where('contentType', 'quickly')->where('isComing' , 0)
+        ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
+        $contents->load('user', 'category');
+
+        $formattedContents = $contents->map(function ($content) {
+            return [
+                'id' => $content->id,
+                'image' => $content->image,
+                'imageFlex' => $content->imageFlex,
+                'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
                 'categoryName' => $content->category->name,
                 'user' => [
@@ -326,6 +359,7 @@ class GlobaleService  {
         return $formattedContents;
 
     }
+
 
 
     public function allContentApi(){
