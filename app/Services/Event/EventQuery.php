@@ -104,12 +104,13 @@ class EventQuery extends GlobaleService {
                 'description' => $event->description,
                 'dateStart' => $event->dateStart,
                 'dateEnd' => $event->dateEnd,
+                $users = $event->eventUser->map(function ($eventUser) {
+                    return [
+                        'image' => $eventUser->user->avatar,
+                    ];
+                })
             ];
-            $users = $event->eventUser->map(function ($eventUser) {
-                return [
-                    'image' => $eventUser->user->avatar,
-                ];
-            });
+           
         });
 
         return $filtredEvents;
