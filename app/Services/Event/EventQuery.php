@@ -96,7 +96,7 @@ class EventQuery extends GlobaleService {
 
     public function getEventIndex(){
         $events = Event::all();
-        $event->load('eventUser');
+        $events->load('eventUser');
         $filtredEvents =  $events->map(function($event){
             return [
                 'image' => $event->image,
