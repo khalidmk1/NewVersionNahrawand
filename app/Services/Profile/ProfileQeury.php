@@ -130,11 +130,12 @@ class ProfileQeury extends GlobaleService {
 
     public function populaireUsers(){
         $users = User::where('isPopular' , 1)
-        ->with('roles')
         ->get(['avatar' , 'cover' , 'firstName' , 'lastName' , 'biographie' , 
-        'faceboock' , 'linkdin' , 'instagram']);
+              'faceboock' , 'linkdin' , 'instagram']);
 
-        $filtterdUsers =  $users->map(function($user){
+        $users->load('roles');
+
+        $filteredUsers = $users->map(function($user){
             $roleNames = $user->roles->pluck('name')->toArray();
             return [
                 'avatar' => $user->avatar,
@@ -148,7 +149,7 @@ class ProfileQeury extends GlobaleService {
             ];
         });
 
-        return $filtterdUsers;
+        return $filteredUsers;
     }
 
 }
