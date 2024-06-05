@@ -127,5 +127,15 @@ class Content extends Model
         return $this->hasMany(ContentFinished::class, 'contentId');
     }
 
+    /**
+     * Get all of the comments for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ContentComment::class, 'contentId');
+    }
+
 }
  

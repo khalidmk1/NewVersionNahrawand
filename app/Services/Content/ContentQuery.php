@@ -272,9 +272,11 @@ class ContentQuery extends GlobaleService {
         ->exists();
         if($finishedExists){
             return true;
+        }else{
+            return false;
         }
 
-        return false;
+        
     }
 
 
