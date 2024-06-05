@@ -127,4 +127,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return $commentContent;
     }
 
+    public function contentComment($content){
+        $comment = $this->createContentComment($content);
+        return $comment;
+    }
+
 }

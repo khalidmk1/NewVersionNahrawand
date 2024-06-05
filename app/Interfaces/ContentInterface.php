@@ -23,5 +23,6 @@ interface ContentInterface {
     public function createFinished($content);
     public function checkFinished($content);
     public function createComment($request , $content);
+    public function contentComment($content);
 }
 

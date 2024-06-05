@@ -50,4 +50,7 @@ class ContentController extends Controller
     public function createComment(Request $request ,String $content){
         return $this->contentInterface->createComment($request , $content);
     }
+    public function contentComment(String $content){
+        return $this->contentInterface->contentComment($content);
+    }
 }

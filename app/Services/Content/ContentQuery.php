@@ -291,6 +291,7 @@ class ContentQuery extends GlobaleService {
             $comment->with('user');
 
             return response()->json([
+                'id' => $comment->id,
                 'comment' => $comment->comment,
                 'user' => [
                     'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
@@ -301,13 +302,23 @@ class ContentQuery extends GlobaleService {
         return response()->json(true); ;
     }
 
-    /* public function indexContentComment(String $content){
-        $commentExists = ContentComment::where('contentId', $content->id)
-        ->where('userId', Auth::user()->id)
+    public function indexContentComment(String $content){
+        $content = Content::findOrFail($content);
+        $comments = ContentComment::where('contentId', $content->id)
+        ->with('user')
         ->get();
 
+        return response()->json([
+            'id' => $comments->id,
+            'comment' => $comments->comment,
+            'user' => [
+                'fullName' => $comments->user->firstName . ' '. $comment->user->lastName  ,
+                'avatar' => $comments->user->avatar,
+            ]
+        ]);
 
-    } */
+
+    }
 
 
 }
