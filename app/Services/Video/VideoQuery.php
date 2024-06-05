@@ -4,6 +4,7 @@ namespace  App\Services\Video;
 
 use Spatie\Tags\Tag;
 use App\Models\Content;
+use App\Models\VideoView;
 use App\Models\VideoGuest;
 use App\Models\ContentVideo;
 use App\Services\GlobaleService;

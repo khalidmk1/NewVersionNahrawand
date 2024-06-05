@@ -5,6 +5,7 @@ namespace App\Services\Content;
 use Spatie\Tags\Tag;
 use App\Models\Content;
 use App\Models\Category;
+use App\Models\ContentView;
 use App\Models\ContentFavoris;
 use App\Models\ContentObjective;
 use App\Services\GlobaleService;
