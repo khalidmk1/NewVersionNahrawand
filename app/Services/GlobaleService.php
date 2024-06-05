@@ -334,7 +334,7 @@ class GlobaleService  {
     public function quicklyContentApi(){
         $contents = Content::where('contentType', 'quickly')->where('isComing' , 0)
         ->with('tags')
-        ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
+        ->get();
         $contents->load('user', 'category');
 
         $formattedContents = $contents->map(function ($content) {
