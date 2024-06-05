@@ -133,7 +133,17 @@ class VideoQuery extends GlobaleService{
 
     public function getVideoByContent(String $video){
         $videos = ContentVideo::where('contentId' , $video)->get(['id' ,'title' , 'video' , 'description']);
-        return $videos;
+        $formattedVideos = $videos->map(function ($video) {
+            return [
+                'id' => $video->id,
+                'title' => $video->title,
+                'video' => $video->video,
+                'description' => $video->description,
+                'tags' => $video->tags->pluck('name')->toArray(), 
+            ];
+        });
+
+        return $formattedVideos;
     }
 
     public function createVideoView(String $video){

@@ -308,6 +308,7 @@ class GlobaleService  {
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
+                'bigdescription' => $content->bigDescription,
                 'categoryName' => $content->category->name,
                 'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
