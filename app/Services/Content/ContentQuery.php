@@ -288,10 +288,10 @@ class ContentQuery extends GlobaleService {
                 'userId' => Auth::user()->id,
                 'comment' => $request->comment
             ]);
-            $comment->load('user');
+            $comment->with('user');
 
             return response()->json([
-                'comment' => $comment,
+                'comment' => $comment->comment,
                 'user' => [
                     'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
                     'avatar' => $comment->user->avatar,
