@@ -48,6 +48,7 @@ Route::get('content', [ContentController::class, 'allContent'])->name('content')
 Route::get('content/coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
 Route::get('content/formation', [ContentController::class, 'contentFormation'])->name('content.formation');
 Route::get('content/podcast', [ContentController::class, 'contentPodcast'])->name('content.podcast');
+Route::get('content/quickly', [ContentController::class, 'contentQuicly'])->name('content.quickly');
 
 Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index');
 

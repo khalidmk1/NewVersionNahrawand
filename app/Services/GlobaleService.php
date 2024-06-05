@@ -343,7 +343,7 @@ class GlobaleService  {
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
-                'categoryName' => $content->category->name,
+                'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
                     'id' => $content->user->id,
                     'avatar' => $content->user->avatar,

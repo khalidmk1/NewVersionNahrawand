@@ -35,6 +35,10 @@ class ContentController extends Controller
         return $this->contentInterface->contentPodcast();
     }
 
+    public function contentQuicly(){
+        return $this->contentInterface->contentQuicly();
+    }
+
     public function createFavoris(String $content){
         return $this->contentInterface->createFavoris($content);
     }

@@ -102,6 +102,11 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
+    public function contentQuicly(){
+        $contents = $this->quicklyContentApi();
+        return response()->json($contents);
+    }
+
     public function createFavoris($content){
         $favoris = $this->contentFavoris($content);
 
