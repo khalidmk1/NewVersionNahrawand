@@ -308,16 +308,18 @@ class ContentQuery extends GlobaleService {
         ->with('user')
         ->get();
 
-        return response()->json([
-            'id' => $comments->id,
-            'comment' => $comments->comment,
-            'user' => [
-                'fullName' => $comments->user->firstName . ' '. $comment->user->lastName  ,
-                'avatar' => $comments->user->avatar,
-            ]
-        ]);
+        $response = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'comment' => $comment->comment,
+                'user' => [
+                    'fullName' => $comment->user->firstName . ' ' . $comment->user->lastName,
+                    'avatar' => $comment->user->avatar,
+                ]
+            ];
+        });
 
-
+        return $response;
     }
 
 
