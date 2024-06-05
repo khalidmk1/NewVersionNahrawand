@@ -281,13 +281,22 @@ class ContentQuery extends GlobaleService {
         $commentExists = ContentComment::where('contentId', $content->id)
         ->where('userId', Auth::user()->id)
         ->exists();
+
         if(!$commentExists){
             $comment = ContentComment::create([
                 'contentId' => $content->id,
                 'userId' => Auth::user()->id,
                 'comment' => $request->comment
             ]);
-            return $comment;
+            $comment->load('user');
+
+            return [
+            'comment' => $comment,
+            'user' => [
+                'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
+                'avatar' => $comment->user->avatar,
+            ]
+        ];
         }
         return true;
     }
