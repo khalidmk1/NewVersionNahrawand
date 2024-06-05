@@ -283,10 +283,6 @@ class ContentQuery extends GlobaleService {
         ->where('userId', Auth::user()->id)
         ->exists();
 
-        $commentClient = ContentComment::where('contentId', $content->id)
-        ->where('userId', Auth::user()->id)
-        ->get();
-
         if(!$commentExists){
             $comment = ContentComment::create([
                 'contentId' => $content->id,
@@ -305,8 +301,24 @@ class ContentQuery extends GlobaleService {
                 ]
             ]);
         }else{
-            $commentClient->update([
+
+            $existingComment  = ContentComment::where('contentId', $content->id)
+            ->where('userId', Auth::user()->id)
+            ->with('user')
+            ->first();
+
+            $existingComment ->update([
                 'comment' => $request->comment
+            ]);
+
+            return response()->json([
+                'id' => $existingComment->id,
+                'comment' => $existingComment->comment,
+                'updated' => $existingComment->updated_at,
+                'user' => [
+                    'fullName' => $existingComment->user->firstName . ' '. $existingComment->user->lastName  ,
+                    'avatar' => $existingComment->user->avatar,
+                ]
             ]);
         }
         
