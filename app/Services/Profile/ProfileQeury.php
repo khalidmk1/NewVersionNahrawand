@@ -132,9 +132,6 @@ class ProfileQeury extends GlobaleService {
         $users = User::where('isPopular' , 1)
         ->with('roles')
         ->get();
-
-        
-        dd($users);
         $filteredUsers = $users->map(function($user){
             $roleNames = $user->roles->pluck('name')->toArray();
             return [
