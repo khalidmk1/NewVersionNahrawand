@@ -278,9 +278,14 @@ class ContentQuery extends GlobaleService {
 
     public function createContentComment(Request $request , String $content){
         $content = Content::findOrFail($content);
+
         $commentExists = ContentComment::where('contentId', $content->id)
         ->where('userId', Auth::user()->id)
         ->exists();
+
+        $commentClient = ContentComment::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->get();
 
         if(!$commentExists){
             $comment = ContentComment::create([
@@ -293,13 +298,18 @@ class ContentQuery extends GlobaleService {
             return response()->json([
                 'id' => $comment->id,
                 'comment' => $comment->comment,
+                'updated' => $comment->updated_at,
                 'user' => [
                     'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
                     'avatar' => $comment->user->avatar,
                 ]
             ]);
+        }else{
+            $commentClient->update([
+                'comment' => $request->comment
+            ]);
         }
-        return response()->json(true); ;
+        
     }
 
     public function indexContentComment(String $content){

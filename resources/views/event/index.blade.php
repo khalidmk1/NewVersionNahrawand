@@ -1,21 +1,4 @@
 @extends('layouts.master')
-
-@section('header')
-    Create Event Page
-@endsection
-
-@section('page')
-    View Events
-@endsection
-
-@section('link')
-    {{ route('report.index') }}
-@endsection
-
-@section('content')
-
-    {{-- --}}
-    @extends('layouts.master')
 @section('header')
     Content Page
 @endsection
@@ -27,6 +10,8 @@
 @section('link')
     {{ route('report.index') }}
 @endsection
+
+
 @section('content')
     <div class="card">
         <div class="card-header p-2">
@@ -108,7 +93,4 @@
         </div><!-- /.card-body -->
     </div>
     <!-- /.card -->
-@endsection
-
-
 @endsection

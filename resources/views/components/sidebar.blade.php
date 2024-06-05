@@ -148,7 +148,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+               {{--  <li class="nav-item">
                     <a href="{{route('objective.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-bullseye" aria-hidden="true"></i>
                         <p>
@@ -156,7 +156,7 @@
 
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-header">Content Management</li>
 
