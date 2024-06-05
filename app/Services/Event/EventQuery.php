@@ -114,7 +114,7 @@ class EventQuery extends GlobaleService {
             ];
         });
 
-        return $filtredEvents;
+        return $filteredEvents;
     }
 
    
