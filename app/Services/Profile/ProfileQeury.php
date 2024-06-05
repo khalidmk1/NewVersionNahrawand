@@ -113,9 +113,17 @@ class ProfileQeury extends GlobaleService {
             $user->assignRole($role);
         }
 
-       
-
         return $user;
+    }
+
+
+    //api for profile user
+    public function authClient(){
+        $authClient = Auth::user();
+
+        return response()->json([
+            $authClient
+        ]);
 
     }
 

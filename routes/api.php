@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ContentController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
