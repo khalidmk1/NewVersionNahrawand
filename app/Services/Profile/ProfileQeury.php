@@ -143,7 +143,7 @@ class ProfileQeury extends GlobaleService {
                 'faceboock' => $user->faceboock,
                 'linkdin' => $user->linkdin,
                 'instagram' => $user->instagram,
-                'roles' => $user->roles->pluck('name')->toArray() 
+                'roles' => $roles,
             ];
         });
 
