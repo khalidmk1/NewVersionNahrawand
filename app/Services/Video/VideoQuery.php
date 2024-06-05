@@ -134,6 +134,11 @@ class VideoQuery extends GlobaleService{
     public function getVideoByContent(String $video){
         $videos = ContentVideo::where('contentId' , $video)->get(['id' ,'title' , 'video' , 'image' , 'description']);
         $formattedVideos = $videos->map(function ($video) {
+            $users = $video->videoguest->map(function($guest){
+                return [
+                    'image' => $guest->user->avatar,
+                ];
+            });
             return [
                 'id' => $video->id,
                 'image' =>$video->image,
@@ -141,6 +146,7 @@ class VideoQuery extends GlobaleService{
                 'video' => $video->video,
                 'description' => $video->description,
                 'tags' => $video->tags->pluck('name')->toArray(), 
+                'users' => $users
             ];
         });
 
