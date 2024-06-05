@@ -55,4 +55,9 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return $user;
     }
 
+    public function populaire(){
+        $users = $this->populaireUsers();
+        return response()->json($users);
+    }
+
 }

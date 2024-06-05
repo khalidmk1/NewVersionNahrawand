@@ -18,4 +18,8 @@ class ProfileController extends Controller
     public function authUser(){
         return $this->ProfileInterface->authUser();
     }
+
+    public function populaire(){
+        return $this->ProfileInterface->populaire();
+    }
 }

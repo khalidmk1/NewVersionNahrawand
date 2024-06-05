@@ -19,4 +19,5 @@ interface ProfileInterface {
 
     //api profile user
     public function authUser();
+    public function populaire();
 }

@@ -54,5 +54,7 @@ Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.
 
 Route::get('event', [EventController::class, 'eventIndex'])->name('event.index');
 
+Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
+
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
 Route::post('login', [AuthenticatedSessionController::class, 'storeApi'])->name('user.login');

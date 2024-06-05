@@ -128,5 +128,27 @@ class ProfileQeury extends GlobaleService {
 
     }
 
+    public function populaireUsers(){
+        $users = User::where('isPopular' , 1)
+        ->with('roles')
+        ->get(['avatar' , 'cover' , 'firstName' , 'lastName' , 'biographie' , 
+        'faceboock' , 'linkdin' , 'instagram']);
+
+        $filtterdUsers =  $users->map(function($user){
+            return [
+                'avatar' => $user->avatar,
+                'cover' => $user->cover,
+                'fullName' => $user->firstName . ' ' . $user->lastName,
+                'biographie' => $user->biographie,
+                'faceboock' => $user->faceboock,
+                'linkdin' => $user->linkdin,
+                'instagram' => $user->instagram,
+                'roles' => $user->roles->pluck('name')->toArray() 
+            ];
+        });
+
+        return $filtterdUsers;
+    }
+
 }
 
