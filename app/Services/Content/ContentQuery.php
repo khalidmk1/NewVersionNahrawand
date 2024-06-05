@@ -233,7 +233,7 @@ class ContentQuery extends GlobaleService {
         ->where('userId', Auth::user()->id)
         ->exists();
 
-        if($viewExists){
+        if(!$viewExists){
             $view = ContentView::create([
                 'contentId' => $content->id,
                 'userId' => Auth::user()->id,

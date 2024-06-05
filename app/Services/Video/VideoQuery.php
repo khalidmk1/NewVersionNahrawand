@@ -143,7 +143,7 @@ class VideoQuery extends GlobaleService{
         ->where('userId', Auth::user()->id)
         ->exists();
 
-        if($viewExists){
+        if(!$viewExists){
             $view = ContentView::create([
                 'videoId' => $video->id,
                 'userId' => Auth::user()->id,
