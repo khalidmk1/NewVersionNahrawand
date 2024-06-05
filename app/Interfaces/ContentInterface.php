@@ -22,5 +22,6 @@ interface ContentInterface {
     public function createView($content);
     public function createFinished($content);
     public function checkFinished($content);
+    public function createComment($request , $content);
 }
 

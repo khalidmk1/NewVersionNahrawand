@@ -263,7 +263,7 @@ class GlobaleService  {
 
     public function formationContentApi()
     {
-        $contents = Content::where('contentType', 'formation')
+        $contents = Content::where('contentType', 'formation')->where('isComing' , 0)
             ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
 
         $contents->load('user', 'category');

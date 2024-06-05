@@ -46,4 +46,8 @@ class ContentController extends Controller
     public function checkFinished(String $content){
         return $this->contentInterface->checkFinished($content);
     }
+
+    public function createComment(Request $request ,String $content){
+        return $this->contentInterface->createComment($request , $content);
+    }
 }

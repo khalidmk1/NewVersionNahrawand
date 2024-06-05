@@ -274,5 +274,29 @@ class ContentQuery extends GlobaleService {
         return $finishedExists; 
     }
 
+    public function createContentComment(Request $request , String $content){
+        $content = Content::findOrFail($content);
+        $commentExists = ContentComment::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->exists();
+        if(!$commentExists){
+            $comment = ContentComment::create([
+                'contentId' => $content->id,
+                'userId' => Auth::user()->id,
+                'comment' => $request->commnet
+            ]);
+            return $comment;
+        }
+        return true;
+    }
+
+    /* public function indexContentComment(String $content){
+        $commentExists = ContentComment::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->get();
+
+
+    } */
+
 
 }
