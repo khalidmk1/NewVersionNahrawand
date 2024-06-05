@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('contentId');
-            $table->text('comment')->nullable()->default('text');
+            $table->text('comment')->nullable();
             $table->softDeletes();
             $table->foreign('contentId')->references('id')->on('contents')->onDelete('cascade');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
