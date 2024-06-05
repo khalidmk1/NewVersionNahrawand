@@ -18,34 +18,27 @@ class VideoService extends VideoQuery implements VideoInterface {
 
     public function store($request){
         $video = $this->storeVideo($request);
-
         return redirect()->back()->with('status' , 'You have created video');
     }
 
     public function update($request , $id){
         $video = $this->updateVideo($request , $id);
-
         return redirect()->back()->with('status' , 'You Updated video');
     }
 
     public function destroy($request , $id){
         $video = $this->destroyVideo($request , $id);
-
         return redirect()->back()->with('status' , 'You have Delete Video');
     }
 
     public function delete($request , $id){
-
         $video = $this->deleteVideo($request , $id);
-
         return redirect()->back()->with('status' , 'You have Delete Video');
-
     }
 
     //api videos
     public function showVideo($video){
         $videos = $this->getVideoByContent($video);
-
         return response()->json($videos);
     }
 

@@ -26,8 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
-    
+
     Route::post('create/content/view/{content}', [ContentController::class, 'createView'])->name('contentView.create');
+    Route::post('create/content/finished/{content}', [ContentController::class, 'createFinished'])->name('contentFinishe.create');
     Route::post('create/video/view/{video}', [VideoController::class, 'createView'])->name('videoView.create');
 });
 

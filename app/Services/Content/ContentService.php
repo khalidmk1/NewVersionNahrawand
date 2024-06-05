@@ -113,4 +113,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($view);
     }
 
+    public function createFinished($content){
+        $finishedContent = $this->createContentView($content);
+        return response()->json($finishedContent);
+    }
+
 }

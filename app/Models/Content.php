@@ -117,5 +117,15 @@ class Content extends Model
         return $this->hasMany(ContentView::class, 'contentId');
     }
 
+    /**
+     * Get all of the finished for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function finished(): HasMany
+    {
+        return $this->hasMany(ContentFinished::class, 'contentId');
+    }
+
 }
  

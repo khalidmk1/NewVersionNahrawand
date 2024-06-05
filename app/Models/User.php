@@ -121,4 +121,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'userId');
     }
+
+    /**
+     * Get all of the contentFinished for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contentFinished(): HasMany
+    {
+        return $this->hasMany(ContentFinished::class, 'userId');
+    }
 }

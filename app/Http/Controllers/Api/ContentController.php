@@ -40,4 +40,7 @@ class ContentController extends Controller
     public function createView(String $content){
         return $this->contentInterface->createView($content);
     }
+    public function createFinished(String $content){
+        return $this->contentInterface->createFinished($content);
+    }
 }
