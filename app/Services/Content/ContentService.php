@@ -97,6 +97,11 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
+    public function contentPodcast(){
+        $contents = $this->podcastContentApi();
+        return response()->json($contents);
+    }
+
     public function createFavoris($content){
         $favoris = $this->contentFavoris($content);
 

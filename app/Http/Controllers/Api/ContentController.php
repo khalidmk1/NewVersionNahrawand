@@ -31,6 +31,10 @@ class ContentController extends Controller
         return $this->contentInterface->contentFormation();
     }
 
+    public function contentPodcast(){
+        return $this->contentInterface->contentPodcast();
+    }
+
     public function createFavoris(String $content){
         return $this->contentInterface->createFavoris($content);
     }

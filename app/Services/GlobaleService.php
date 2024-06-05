@@ -295,6 +295,38 @@ class GlobaleService  {
         return $formattedContents;
     }
 
+    public function podcastContentApi(){
+        $contents = Content::where('contentType', 'podcast')->where('isComing' , 0)
+        ->get(['id', 'image', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
+        $contents->load('user', 'category');
+
+        $formattedContents = $contents->map(function ($content) {
+            return [
+                'id' => $content->id,
+                'image' => $content->image,
+                'imageFlex' => $content->imageFlex,
+                'title' => $content->title,
+                'quizType' => $content->quizType,
+                'smallDescription' => $content->smallDescription,
+                'categoryName' => $content->category->name,
+                'user' => [
+                    'id' => $content->user->id,
+                    'avatar' => $content->user->avatar,
+                    'cover' => $content->user->cover,
+                    'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                    'roles' => $content->user->roles->pluck('name')->toArray(),
+                    'biographie' => $content->user->biographie,
+                    'faceboock' => $content->user->faceboock,
+                    'linkdin' => $content->user->linkdin,
+                    'instagram' => $content->user->instagram,
+                ],
+            ];
+        });
+
+        return $formattedContents;
+
+    }
+
 
     public function allContentApi(){
         $contents = Content::all(['id' , 'image' , 'title']);
