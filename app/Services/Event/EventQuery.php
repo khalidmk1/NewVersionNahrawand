@@ -104,10 +104,12 @@ class EventQuery extends GlobaleService {
                 'description' => $event->description,
                 'dateStart' => $event->dateStart,
                 'dateEnd' => $event->dateEnd,
-                'user' => [
-                    'image' => $event->eventUser->user->avatar
-                ]
             ];
+            $users = $event->eventUser->map(function ($eventUser) {
+                return [
+                    'image' => $eventUser->user->avatar,
+                ];
+            });
         });
     }
 
