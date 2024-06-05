@@ -24,7 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     
-   
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
 });

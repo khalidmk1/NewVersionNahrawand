@@ -50,7 +50,7 @@ class VideoQuery extends GlobaleService{
 
        
 
-        if ($request->has('tags')) {
+        if ($request->has('tags') && $request->tags[0] !== null) {
 
             $StringTag = $request->tags[0];
             $tags = explode(',', $StringTag);
@@ -91,7 +91,7 @@ class VideoQuery extends GlobaleService{
         }
 
         
-        if ($request->has('tags')) {
+        if ($request->has('tags') && $request->tags[0] !== null) {
             $StringTag = $request->tags[0];
             $tags = explode(',', $StringTag);
             $arrTags = array_map('trim', $tags);
@@ -131,7 +131,7 @@ class VideoQuery extends GlobaleService{
     //api video
 
     public function getVideoByContent(String $content){
-        $videos = ContentVideo::where('contentId' , $content)->get();
+        $videos = ContentVideo::where('contentId' , $content)->get(['title' , 'video' , 'description']);
         return $videos;
     }
 
