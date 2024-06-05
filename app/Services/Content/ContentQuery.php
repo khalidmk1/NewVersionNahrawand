@@ -270,13 +270,8 @@ class ContentQuery extends GlobaleService {
         $finishedExists = ContentFinished::where('contentId', $content->id)
         ->where('userId', Auth::user()->id)
         ->exists();
-        if($finishedExists){
-            return true;
-        }else{
-            return false;
-        }
 
-        
+        return $finishedExists;
     }
 
 
