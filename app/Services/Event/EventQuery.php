@@ -111,6 +111,8 @@ class EventQuery extends GlobaleService {
                 ];
             });
         });
+
+        return $filtredEvents;
     }
 
    
