@@ -298,7 +298,7 @@ class GlobaleService  {
 
     public function podcastContentApi(){
         $contents = Content::where('contentType', 'podcast')->where('isComing' , 0)
-        ->get(['id', 'video' ,'image', 'imageFlex', 'title', 'smallDescription', 'bigdescription' ,'categoryId', 'hostId']);
+        ->get(['id', 'video' ,'image', 'imageFlex', 'title', 'smallDescription', 'bigDescription' ,'categoryId', 'hostId']);
         $contents->load('user', 'category');
 
         $formattedContents = $contents->map(function ($content) {
@@ -309,7 +309,7 @@ class GlobaleService  {
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
                 'smallDescription' => $content->smallDescription,
-                'bigdescription' => $content->bigDescription,
+                'bigDescription' => $content->bigDescription,
                 'categoryName' => $content->category->name,
                 'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
