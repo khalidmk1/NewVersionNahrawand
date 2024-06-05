@@ -136,6 +136,7 @@ class VideoQuery extends GlobaleService{
         $formattedVideos = $videos->map(function ($video) {
             return [
                 'id' => $video->id,
+                'image' =>$video->image,
                 'title' => $video->title,
                 'video' => $video->video,
                 'description' => $video->description,
