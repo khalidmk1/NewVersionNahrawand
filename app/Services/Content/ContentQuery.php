@@ -322,6 +322,7 @@ class ContentQuery extends GlobaleService {
             return [
                 'id' => $comment->id,
                 'comment' => $comment->comment,
+                'updated' => $comment->updated_at,
                 'user' => [
                     'fullName' => $comment->user->firstName . ' ' . $comment->user->lastName,
                     'avatar' => $comment->user->avatar,
