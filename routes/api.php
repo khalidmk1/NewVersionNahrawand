@@ -29,6 +29,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('create/content/view/{content}', [ContentController::class, 'createView'])->name('contentView.create');
     Route::post('create/content/finished/{content}', [ContentController::class, 'createFinished'])->name('contentFinishe.create');
+    Route::get('check/content/finished/{content}', [ContentController::class, 'checkFinished'])->name('contentFinished.check');
+
     Route::post('create/video/view/{video}', [VideoController::class, 'createView'])->name('videoView.create');
 });
 

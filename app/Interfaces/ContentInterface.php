@@ -21,5 +21,6 @@ interface ContentInterface {
     public function favorisExists($content);
     public function createView($content);
     public function createFinished($content);
+    public function checkFinished($content);
 }
 

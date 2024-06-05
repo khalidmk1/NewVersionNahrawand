@@ -265,5 +265,17 @@ class ContentQuery extends GlobaleService {
         return $finishedExists;
     }
 
+    public function checkContentFinished(String $content){
+        $content = Content::findOrFail($content);
+        $finishedExists = ContentFinished::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->exists();
+        if($finishedExists){
+            return true;
+        }
+
+        return false;
+    }
+
 
 }
