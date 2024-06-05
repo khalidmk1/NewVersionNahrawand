@@ -290,15 +290,15 @@ class ContentQuery extends GlobaleService {
             ]);
             $comment->load('user');
 
-            return [
-            'comment' => $comment,
-            'user' => [
-                'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
-                'avatar' => $comment->user->avatar,
-            ]
-        ];
+            return response()->json([
+                'comment' => $comment,
+                'user' => [
+                    'fullName' => $comment->user->firstName . ' '. $comment->user->lastName  ,
+                    'avatar' => $comment->user->avatar,
+                ]
+            ]);
         }
-        return true;
+        return response()->json(true); ;
     }
 
     /* public function indexContentComment(String $content){
