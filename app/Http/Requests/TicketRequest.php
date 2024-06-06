@@ -24,7 +24,6 @@ class TicketRequest extends FormRequest
 
         $rules = [
             'clientId' => ['required'],
-            'managerId' => ['required'],
             'TypeTicket' => ['required' , 'string' , 'max:255'],
             'status' => ['required' , 'boolean'],
             'detail' => ['required' , 'string' , 'max:600'],

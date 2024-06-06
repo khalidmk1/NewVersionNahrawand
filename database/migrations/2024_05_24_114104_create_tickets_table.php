@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('clientId');
-            $table->unsignedBigInteger('managerId');
+            $table->unsignedBigInteger('managerId')->nullable();
             $table->string('TypeTicket')->nullable();
             $table->boolean('status')->default(false);
             $table->longText('detail')->nullable();

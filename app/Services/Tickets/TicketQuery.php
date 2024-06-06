@@ -13,7 +13,6 @@ class TicketQuery extends GlobaleService {
 
         $ticket = Ticket::create([
             'clientId' => Auth::user()->id,
-            'managerId' => $request->managerId,
             'TypeTicket' => $request->TypeTicket,
             'status' => false,
             'detail' => $request->detail,
