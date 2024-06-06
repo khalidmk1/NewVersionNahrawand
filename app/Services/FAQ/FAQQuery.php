@@ -33,4 +33,10 @@ class FAQQuery extends GlobaleService{
 
         return $FAQ;
     }
+
+    //api FAQ
+    public function indexFAQ(){
+        $FAQs = FAQ::all();
+        return $FAQs;
+    }
 }

@@ -21,4 +21,10 @@ class FAQService extends FAQQuery implements FAQInterface {
         $FAQ = $this->updateFAQ($request , $id);
         return redirect()->back()->with('status' , 'You have Updated FAQ');
     }
+
+    //api FAQ
+    public function FAQIndex(){
+        $FAQs = $this->indexFAQ();
+        return response()->json($FAQs);
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\FAQController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\TicketController;
@@ -49,6 +50,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index');
     Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create');
+
+    
 });
 
 
@@ -63,6 +66,8 @@ Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.
 Route::get('event', [EventController::class, 'eventIndex'])->name('event.index');
 
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
+
+Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index');
 
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
 Route::post('login', [AuthenticatedSessionController::class, 'storeApi'])->name('user.login');
