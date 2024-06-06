@@ -65,4 +65,7 @@ class ContentController extends Controller
     public function favoris(){
         return $this->contentInterface->favoris();
     }
+    public function views(){
+        return $this->contentInterface->views();
+    }
 }

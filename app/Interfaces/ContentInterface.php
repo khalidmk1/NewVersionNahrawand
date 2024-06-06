@@ -27,5 +27,6 @@ interface ContentInterface {
     public function createComment($request , $content);
     public function contentComment($content);
     public function favoris();
+    public function views();
 }
 

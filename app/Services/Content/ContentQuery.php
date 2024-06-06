@@ -355,6 +355,7 @@ class ContentQuery extends GlobaleService {
                 'id' => $content->id,
                 'image' => $content->image,
                 'imageFlex' => $content->imageFlex,
+                'video' => $content->video,
                 'title' => $content->title,
                 'contentType' => $content->contentType,
                 'quizType' => $content->quizType,
@@ -362,6 +363,44 @@ class ContentQuery extends GlobaleService {
                 'bigDescription' => $content->bigDescription,
                 'condition' => $content->condition,
                 'document' => $content->document,
+                'duration' => $content->duration,
+                'categoryName' => $content->category->name,
+                'tags' => $content->tags->pluck('name')->toArray(),
+                'user' => [
+                    'id' => $content->user->id,
+                    'avatar' => $content->user->avatar,
+                    'cover' => $content->user->cover,
+                    'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                    'roles' => $content->user->roles->pluck('name')->toArray(),
+                    'biographie' => $content->user->biographie,
+                    'faceboock' => $content->user->faceboock,
+                    'linkdin' => $content->user->linkdin,
+                    'instagram' => $content->user->instagram,
+                ],
+            ];
+        });
+
+        return $contentfilleted;
+    }
+
+    public function getContentStarted(){
+        $views = ContentView::where('userId' , Auth::user()->id)->get();
+        $contents = Content::whereIn('id' , $views->pluck('contentId'))->get();
+
+        $contentfilleted = $contents->map(function($content){
+            return [
+                'id' => $content->id,
+                'image' => $content->image,
+                'imageFlex' => $content->imageFlex,
+                'video' => $content->video,
+                'title' => $content->title,
+                'contentType' => $content->contentType,
+                'quizType' => $content->quizType,
+                'smallDescription' => $content->smallDescription,
+                'bigDescription' => $content->bigDescription,
+                'condition' => $content->condition,
+                'document' => $content->document,
+                'duration' => $content->duration,
                 'categoryName' => $content->category->name,
                 'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
