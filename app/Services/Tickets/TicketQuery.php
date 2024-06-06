@@ -2,8 +2,10 @@
 
 namespace  App\Services\Tickets;
 
+use App\Models\Ticket;
 use App\Services\GlobaleService;
 use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TicketQuery extends GlobaleService {
 
