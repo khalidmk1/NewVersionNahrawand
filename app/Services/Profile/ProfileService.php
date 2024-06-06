@@ -70,4 +70,9 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return $avatar;
     }
 
+    public function createUserSubCategory($subCategoryId){
+        $userSubCategory = $this->createUserSubCategoryApi($subCategoryId);
+        return response()->json($subCategoryId);
+    }
+
 }

@@ -30,4 +30,8 @@ class ProfileController extends Controller
     public function updateAvatar(Request $request){
         return $this->ProfileInterface->updateAvatar($request);
     }
+
+    public function createUserSubCategory(String $subCategoryId){
+        return $this->ProfileInterface->createUserSubCategory($subCategoryId);
+    }
 }

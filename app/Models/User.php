@@ -161,4 +161,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class, 'clientId');
     }
+
+    /**
+     * Get all of the subCategory for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subCategory(): HasMany
+    {
+        return $this->hasMany(UserSubcategory::class, 'userId');
+    }
 }

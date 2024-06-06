@@ -4,8 +4,10 @@ namespace App\Services\profile;
 
 
 use App\Models\User;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\UserSubcategory;
 use App\Services\GlobaleService;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -186,17 +188,13 @@ class ProfileQeury extends GlobaleService {
             $avatarImage = base64_decode($avatarData);
 
             $fileName = 'avatar_' . Str::uuid() . '.png';
-
-            // Store the new avatar
             Storage::disk('public')->put('avatars/' . $fileName, $avatarImage);
 
-            // Delete the old avatar if it exists
             $user = $request->user();
             if ($user->avatar) {
                 Storage::disk('public')->delete('avatars/' . $user->avatar);
             }
 
-            // Update the user's avatar field
             $user->update([
                 'avatar' => $fileName,
             ]);
@@ -211,6 +209,34 @@ class ProfileQeury extends GlobaleService {
             'message' => 'No avatar provided.',
         ], 400);
     }
+
+    public function createUserSubCategoryApi(String $subCategoryId){
+
+        $subCategory = SubCategory::findOrFail($subCategoryId);
+
+        $userSubCategoryExists = UserSubcategory::where('subCategoryId' , $subCategory->id)
+        ->where('userId' , Auth::user()->id)
+        ->exists();
+
+        if(!$userSubCategoryExists){
+            $userSubCategory = UserSubcategory::create([
+                'userId' => Auth::user()->id,
+                'subCategoryId' => $subCategory->id,
+            ]);
+
+            return $userSubCategory;
+        }else{
+            $userSubCategory = UserSubcategory::where('subCategoryId' , $subCategory->id)
+            ->where('userId' , Auth::user()->id)
+            ->delete();
+
+            return $userSubCategory;
+        }
+
+
+
+
+    } 
 
 }
 

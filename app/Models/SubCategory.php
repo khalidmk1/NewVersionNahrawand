@@ -39,8 +39,6 @@ class SubCategory extends Model
         return $this->hasMany(Objective::class, 'subCategoryId');
     }
 
-    
-
       /**
      * Get all of the contentSubCategories for the SubCategory
      *
@@ -49,5 +47,15 @@ class SubCategory extends Model
     public function contentSubCategories(): HasMany
     {
         return $this->hasMany(ContentSubCategory::class, 'subCategoryId');
+    }
+
+    /**
+     * Get all of the user for the SubCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user(): HasMany
+    {
+        return $this->hasMany(UserSubcategory::class, 'subCategoryId');
     }
 }
