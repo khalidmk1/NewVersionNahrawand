@@ -350,7 +350,7 @@ class ContentQuery extends GlobaleService {
 
         $contents = Content::whereIn('id' , $favoris->pluck('contentId'))->get();
 
-        return $comments;
+        return $contents;
     }
 
 
