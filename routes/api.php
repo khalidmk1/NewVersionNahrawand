@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::post('update/password', [PasswordController::class, 'updateApi'])->name('update.password');
 
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
     
