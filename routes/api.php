@@ -34,8 +34,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     
     Route::post('profile/avatar/update', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
-    Route::post('profile/update', [ProfileController::class, 'updateApi'])->name('user.update');
-    
+    Route::post('update/profile', [ProfileController::class, 'updateApi'])->name('user.update');
+
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
