@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\ContentComment;
 use App\Models\ContentFavoris;
 use App\Models\ContentFinished;
+use App\Models\UserSubcategory;
 use App\Models\ContentObjective;
 use App\Services\GlobaleService;
 use App\Models\ContentSubCategory;
