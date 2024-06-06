@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 
+
 use App\Interfaces\FAQInterface;
 use App\Services\FAQ\FAQService;
 use App\Interfaces\EmailIterface;
 use App\Interfaces\EventInterface;
 use App\Interfaces\VideoInterface;
+use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
 use App\Interfaces\ProfileInterface;
 use App\Interfaces\ProgramInterface;
@@ -16,6 +18,7 @@ use App\Services\Event\EventService;
 use App\Services\Video\VideoService;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ObjectiveInterface;
+use App\Services\Tickets\TicketService;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\SubCategoryInterface;
 use App\Services\Content\ContentService;
@@ -45,6 +48,7 @@ class ServiceInterfaceProvider extends ServiceProvider
         $this->app->bind(EventInterface::class, EventService::class);
         $this->app->bind(FAQInterface::class, FAQService::class);
         $this->app->bind(EmailIterface::class, EmailService::class);
+        $this->app->bind(TicketInterface::class, TicketService::class);
     }
 
     /**

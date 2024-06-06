@@ -252,6 +252,7 @@ class GlobaleService  {
 
     //all api cotent Query
 
+
     public function allComingContentApi()
     {
         $contents = Content::where('isComing', 1)
@@ -369,6 +370,24 @@ class GlobaleService  {
     public function allContentApi(){
         $contents = Content::all(['id' , 'image' , 'title']);
         return $contents;
+    }
+
+    //files api
+
+    public function storeFileTicket(TicketRequest $request){
+        if ($request->has('file')) {
+            $avatarData = $request->file;
+        
+            $avatarData = preg_replace('/^data:image\/(png|jpeg|jpg);base64,/', '', $avatarData);
+        
+            $ticketImage = base64_decode($avatarData);
+        
+            $fileName = 'avatar_' . Str::uuid() . '.png';
+        
+            Storage::disk('public')->put('ticket/' . $fileName, $ticketImage);
+
+           return $fileName;
+        }
     }
 
 }

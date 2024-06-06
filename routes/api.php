@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -45,6 +46,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('favoris', [ContentController::class, 'favoris'])->name('favoris.index');
     Route::get('views', [ContentController::class, 'views'])->name('views.index');
     Route::get('content/finished', [ContentController::class, 'finishedContent'])->name('content.finished');
+
+    Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create');
 });
 
 

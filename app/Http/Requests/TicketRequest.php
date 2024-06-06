@@ -11,7 +11,7 @@ class TicketRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,16 @@ class TicketRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+
+        $rules = [
+            'clientId' => ['required'],
+            'managerId' => ['required'],
+            'TypeTicket' => ['required' , 'string' , 'max:255'],
+            'status' => ['required' , 'boolean'],
+            'detail' => ['required' , 'string' , 'max:600'],
+            'file' => ['required' , 'file' , 'mimes:png,jpeg,jpg' ,'max:2000']
         ];
+
+        return  $rules;
     }
 }

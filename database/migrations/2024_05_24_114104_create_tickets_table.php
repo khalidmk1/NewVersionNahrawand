@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('TypeTicket')->nullable();
             $table->boolean('status')->default(false);
             $table->longText('detail')->nullable();
+            $table->longText('file')->nullable();
             $table->foreign('clientId')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('managerId')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
