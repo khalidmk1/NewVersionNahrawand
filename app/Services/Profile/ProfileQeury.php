@@ -45,6 +45,8 @@ class ProfileQeury extends GlobaleService {
         return $managerUsers;
     }
 
+    /* public function */ 
+
 
     public function allSpeakers(){
         

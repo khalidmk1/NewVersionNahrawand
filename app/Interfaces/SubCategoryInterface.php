@@ -11,4 +11,7 @@ interface SubCategoryInterface {
     public function update($request , $id);
     public function destroy($request , $id);
 
+    //api subCategory
+    public function subCategoryByDomain();
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\SubCategory;
 
+use App\Models\Domain;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -61,5 +62,26 @@ class SubCategoryQuery {
         }
         return $subCategory;
 
+    }
+
+
+    //api subCategory
+    public function subCategoryByDomainApi(){
+        $domains = Domain::with('category.subcategory')->get();
+        $subCategoryData = $domains->map(function($domain) {
+            return [
+                'domain' => $domain->name,
+                'subcategories' => $domain->category->flatMap(function($category) {
+                    return $category->subcategory->map(function($subCategory) {
+                        return [
+                            'id' => $subCategory->id,
+                            'name' => $subCategory->name,
+                        ];
+                    });
+                }),
+            ];
+        });
+
+        return $subCategoryData;
     }
 }

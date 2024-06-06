@@ -35,4 +35,11 @@ class SubCategoryService extends SubCategoryQuery implements SubCategoryInterfac
 
         return redirect()->back()->with('status' , 'You Delete SubCategory');
     }
+
+
+    //api subCategory
+    public function subCategoryByDomain(){
+        $subcategories = $this->subCategoryByDomainApi();
+        return response()->json($subcategories);
+    }
 }

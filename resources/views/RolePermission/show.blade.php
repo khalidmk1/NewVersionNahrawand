@@ -1,7 +1,5 @@
 @extends('layouts.master')
 
-
-
 @include('RolePermission.create')
 
 @section('header')
