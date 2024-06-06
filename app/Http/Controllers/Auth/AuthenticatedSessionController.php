@@ -44,7 +44,7 @@ class AuthenticatedSessionController extends Controller
 
             $user = Auth::user();
             $user->update([
-                'is_login' => 1
+                'isLogin' => 1
             ]);
             $token = $user->createToken($user->email)->plainTextToken;
 
@@ -82,7 +82,7 @@ class AuthenticatedSessionController extends Controller
        $user->tokens()->delete();
         
        $user->update([
-           'is_login' => 0,
+           'isLogin' => 0,
        ]);
 
 
