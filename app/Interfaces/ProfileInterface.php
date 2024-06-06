@@ -6,6 +6,7 @@ interface ProfileInterface {
     public function indexAdmin();
     public function indexManager();
     public function indexSpeaker();
+    public function indexClient();
 
     public function speakersAllRole();
     public function mangerAllRole();

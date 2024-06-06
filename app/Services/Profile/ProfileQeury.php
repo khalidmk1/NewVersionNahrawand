@@ -45,7 +45,10 @@ class ProfileQeury extends GlobaleService {
         return $managerUsers;
     }
 
-    /* public function */ 
+    public function allClient(){
+        $clients = User::role('client')->get();
+        return $clients;
+    } 
 
 
     public function allSpeakers(){

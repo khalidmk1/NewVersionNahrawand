@@ -29,5 +29,6 @@ interface ContentInterface {
     public function favoris();
     public function views();
     public function finishedContent();
+    public function contentPodcastBySubCategory();
 }
 

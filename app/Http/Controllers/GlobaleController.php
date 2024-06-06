@@ -37,6 +37,10 @@ class GlobaleController extends Controller
         return $this->ProfileInterface->indexSpeaker();
     }
 
+    public function indexClient(){
+        return $this->ProfileInterface->indexClient();
+    }
+
     public function createAdmin(){
         return $this->ProfileInterface->createAdmin();
     }

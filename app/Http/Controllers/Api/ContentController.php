@@ -71,4 +71,7 @@ class ContentController extends Controller
     public function finishedContent(){
         return $this->contentInterface->finishedContent();
     }
+    public function contentPodcastBySubCategory(){
+        return $this->contentInterface->contentPodcastBySubCategory();
+    }
 }

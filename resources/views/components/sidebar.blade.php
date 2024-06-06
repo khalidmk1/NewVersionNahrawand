@@ -88,7 +88,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('client.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             Clients
