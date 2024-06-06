@@ -350,7 +350,7 @@ class ContentQuery extends GlobaleService {
 
         $contents = Content::whereIn('id' , $favoris->pluck('contentId'))->get();
 
-        $contentfilleted = $comments->map(function($content){
+        $contentfilleted = $contents->map(function($content){
             return [
                 'id' => $content->id,
                 'image' => $content->image,
