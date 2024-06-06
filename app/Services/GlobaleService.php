@@ -343,6 +343,7 @@ class GlobaleService  {
                 'image' => $content->image,
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
+                'video' => $content->video,
                 'smallDescription' => $content->smallDescription,
                 'tags' => $content->tags->pluck('name')->toArray(),
                 'user' => [
