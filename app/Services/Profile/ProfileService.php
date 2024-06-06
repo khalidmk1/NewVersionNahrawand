@@ -60,4 +60,14 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return response()->json($users);
     }
 
+    public function updateApi($request){
+        $user = $this->updateClientApi($request);
+        return response()->json($user);
+    }
+
+    public function updateAvatar($request){
+        $avatar = $this->updateClientAvatarApi($request);
+        return $avatar;
+    }
+
 }

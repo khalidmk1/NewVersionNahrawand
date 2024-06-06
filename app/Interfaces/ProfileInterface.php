@@ -20,4 +20,6 @@ interface ProfileInterface {
     //api profile user
     public function authUser();
     public function populaire();
+    public function updateApi($request);
+    public function updateAvatar($request);
 }

@@ -22,4 +22,12 @@ class ProfileController extends Controller
     public function populaire(){
         return $this->ProfileInterface->populaire();
     }
+
+    public function updateApi(Request $request){
+        return $this->ProfileInterface->updateApi($request);
+    }
+
+    public function updateAvatar(Request $request){
+        return $this->ProfileInterface->updateAvatar($request);
+    }
 }

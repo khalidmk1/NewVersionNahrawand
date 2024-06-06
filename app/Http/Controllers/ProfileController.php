@@ -75,6 +75,9 @@ class ProfileController extends Controller
         return redirect()->back()->with('status', 'profile-updated');
     }
 
+    
+
+
     private function updateAvatar(ProfileUpdateRequest $request , String $nameAvatar)
     {
         if ($request->hasFile('avatar')) {

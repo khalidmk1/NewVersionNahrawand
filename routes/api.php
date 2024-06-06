@@ -32,6 +32,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroyApi'])->name('logout');
     Route::post('update/password', [PasswordController::class, 'updateApi'])->name('update.password');
 
+    Route::post('profile/update', [ProfileController::class, 'updateApi'])->name('user.update');
+    Route::post('profile/avatar/update', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
+
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');

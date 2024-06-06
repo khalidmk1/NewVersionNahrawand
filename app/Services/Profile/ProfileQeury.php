@@ -5,10 +5,12 @@ namespace App\Services\profile;
 
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Services\GlobaleService;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\ProfileUpdateRequest;
 
@@ -147,6 +149,68 @@ class ProfileQeury extends GlobaleService {
         });
 
         return $filteredUsers;
+    }
+
+    public function updateClientApi(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'firstName' => ['string', 'max:255'],
+            'lastName' => ['string', 'max:255'],
+            'status' => ['string', 'max:255'],
+            'numChild' => ['integer'],
+            'profission' => ['string', 'max:255'],
+            'email' => ['email', 'unique:users,email,' . $user->id],
+        ]);
+
+        $user->update([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'email' => $request->email,
+            'dateBirt' => $request->dateBirt,
+            'status_matrimonial' => $request->status_matrimonial,
+            'numChild' => $request->numChild,
+            'profission' => $request->profission,
+        ]);
+
+        return response()->json($user);
+    }
+
+    public function updateClientAvatarApi(Request $request)
+    {
+        if ($request->has('avatar')) {
+            $avatarData = $request->input('avatar');
+
+            $avatarData = preg_replace('/^data:image\/(png|jpeg|jpg);base64,/', '', $avatarData);
+
+            $avatarImage = base64_decode($avatarData);
+
+            $fileName = 'avatar_' . Str::uuid() . '.png';
+
+            // Store the new avatar
+            Storage::disk('public')->put('avatars/' . $fileName, $avatarImage);
+
+            // Delete the old avatar if it exists
+            $user = $request->user();
+            if ($user->avatar) {
+                Storage::disk('public')->delete('avatars/' . $user->avatar);
+            }
+
+            // Update the user's avatar field
+            $user->update([
+                'avatar' => $fileName,
+            ]);
+
+            return response()->json([
+                'message' => 'Avatar updated successfully.',
+                'avatar' => $fileName,
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'No avatar provided.',
+        ], 400);
     }
 
 }
