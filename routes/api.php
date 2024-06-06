@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('views', [ContentController::class, 'views'])->name('views.index');
     Route::get('content/finished', [ContentController::class, 'finishedContent'])->name('content.finished');
 
-    Route::post('ticket', [TicketController::class, 'index'])->name('ticket.index');
+    Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index');
     Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create');
 });
 
