@@ -348,7 +348,7 @@ class ContentQuery extends GlobaleService {
     public function getFavoris(){
         $favoris = ContentFavoris::where('userId' , Auth::user()->id)->get();
 
-        $contents = Content::where('id' , $favoris->pluck('contentId'))->get();
+        $contents = Content::whereIn('id' , $favoris->pluck('contentId'))->get();
 
         return $comments;
     }
