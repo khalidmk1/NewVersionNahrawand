@@ -30,5 +30,6 @@ interface ContentInterface {
     public function views();
     public function finishedContent();
     public function contentPodcastBySubCategory();
+    public function contentFormationBySubCategory();
 }
 

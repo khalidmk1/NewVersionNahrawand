@@ -162,4 +162,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
+    public function contentFormationBySubCategory(){
+        $contents = $this->contentFormationBySubCategoryApi();
+        return response()->json($contents);
+    }
+
 }
