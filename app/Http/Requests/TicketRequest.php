@@ -23,9 +23,7 @@ class TicketRequest extends FormRequest
     {
 
         $rules = [
-            'clientId' => ['required'],
             'TypeTicket' => ['required' , 'string' , 'max:255'],
-            'status' => ['required' , 'boolean'],
             'detail' => ['required' , 'string' , 'max:600'],
             'file' => ['required' , 'file' , 'mimes:png,jpeg,jpg' ,'max:2000']
         ];
