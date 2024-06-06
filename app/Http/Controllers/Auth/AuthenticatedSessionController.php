@@ -70,4 +70,24 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroyApi(Request $request)
+    {
+       
+       $user = $request->user();
+
+       $user->tokens()->delete();
+        
+       $user->update([
+           'is_login' => 0,
+       ]);
+
+
+       return response()->json(['message' => 'Logged out successfully']);
+       
+
+    }
 }

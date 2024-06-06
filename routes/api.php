@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroyApi'])->name('logout');
     Route::post('update/password', [PasswordController::class, 'updateApi'])->name('update.password');
 
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
