@@ -174,7 +174,7 @@ class ProfileQeury extends GlobaleService {
             'profission' => $request->profission,
         ]);
 
-        return response()->json($user);
+        return $user;
     }
 
     public function updateClientAvatarApi(Request $request)
