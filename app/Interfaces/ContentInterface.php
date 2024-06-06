@@ -26,5 +26,6 @@ interface ContentInterface {
     public function checkFinished($content);
     public function createComment($request , $content);
     public function contentComment($content);
+    public function favoris();
 }
 

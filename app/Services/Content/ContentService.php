@@ -142,4 +142,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($comment);
     }
 
+    public function favoris(){
+        $contents = $this->getFavoris();
+        return response()->json($contents);
+    }
+
 }

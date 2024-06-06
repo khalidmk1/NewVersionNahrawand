@@ -61,4 +61,8 @@ class ContentController extends Controller
     public function contentComment(String $content){
         return $this->contentInterface->contentComment($content);
     }
+
+    public function favoris(){
+        return $this->contentInterface->favoris();
+    }
 }
