@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('favoris', [ContentController::class, 'favoris'])->name('favoris.index');
     Route::get('views', [ContentController::class, 'views'])->name('views.index');
+    Route::get('content/finished', [ContentController::class, 'finishedContent'])->name('content.finished');
 });
 
 

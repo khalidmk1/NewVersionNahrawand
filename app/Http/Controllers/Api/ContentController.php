@@ -68,4 +68,7 @@ class ContentController extends Controller
     public function views(){
         return $this->contentInterface->views();
     }
+    public function finishedContent(){
+        return $this->contentInterface->finishedContent();
+    }
 }
