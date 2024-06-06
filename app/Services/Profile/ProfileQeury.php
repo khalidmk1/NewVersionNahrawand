@@ -168,12 +168,11 @@ class ProfileQeury extends GlobaleService {
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
-            'dateBirt' => $request->dateBirt,
-            'status_matrimonial' => $request->status_matrimonial,
-            'numChild' => $request->numChild,
+            'dateBirt' => $request->date_birte,
+            'status_matrimonial' => $request->status,
+            'numChild' => $request->numchild,
             'profission' => $request->profission,
         ]);
-
         return $user;
     }
 
