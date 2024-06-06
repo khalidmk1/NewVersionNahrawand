@@ -12,6 +12,7 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EventUpdateRequest;
 use App\Http\Requests\VideoUpdateRequest;

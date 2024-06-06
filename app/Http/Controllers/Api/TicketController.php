@@ -17,6 +17,6 @@ class TicketController extends Controller
     }
 
     public function create(TicketRequest $request){
-        $this->TicketInterface->create(); 
+        $this->TicketInterface->create($request); 
     }
 }
