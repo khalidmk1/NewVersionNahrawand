@@ -25,7 +25,7 @@ class TicketQuery extends GlobaleService {
     }
 
     public function ticketIndex(){
-        $tickets = Ticket::where('clientId' , Auth::user()->id)->get(['TypeTicket' , 'status' , 'update_at']);
+        $tickets = Ticket::where('clientId' , Auth::user()->id)->get(['TypeTicket' , 'status' , 'updated_at']);
         return $tickets;
     }
 
