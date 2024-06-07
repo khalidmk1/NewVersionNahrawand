@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    Edit Profile Page
+    Show Client Page
 @endsection
 
 @section('page')

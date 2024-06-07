@@ -5,6 +5,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\GlobaleController;
 use App\Http\Controllers\ProfileController;
@@ -61,7 +62,7 @@ Route::middleware(['auth' , 'verified'])->prefix('/dashboard')->group(function (
     Route::resource('event', EventController::class);
     Route::resource('FAQ', FAQController::class);
     Route::resource('email', EmailController::class);
-    Route::resource('ticket', UserController::class);
+    Route::resource('ticket', TicketController::class);
 
    
    

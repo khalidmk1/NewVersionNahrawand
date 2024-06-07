@@ -39,7 +39,6 @@ class ContentQuery extends GlobaleService {
     }
 
     
-   
 
     public function storeContent(ContentRequest $request){
         $isComing = $request->isComing == 'on';

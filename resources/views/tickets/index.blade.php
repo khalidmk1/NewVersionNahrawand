@@ -14,31 +14,37 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
+
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>Type</th>
+                        <th>Created at</th>
+                        <th>Client</th>
+                        <th>Statu</th>
+                        <th>Update at</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
-                    </tr>
+                    @foreach ($tickets as $ticket)
+                        <tr>
+                            <td>{{ $ticket->TypeTicket }}</td>
+                            <td>{{ \Carbon\Carbon::parse($ticket->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ $ticket->client->firstName . ' ' . $ticket->client->lastName }}</td>
+                            <td><span class="tag tag-success">{{ $ticket->status == 1 ? 'Handled' : 'In Progress' }}
+                                    {{-- <a href="{{ Route('dashboard.tickets.edite', Crypt::encrypt($ticket->id)) }}">
+                                        <i class="fa fa-plus mt-1" aria-hidden="true"
+                                            style="cursor: pointer ; float: right;"></i>
+                                    </a> --}}
+                                </span></td>
+                            <td>{{ $ticket->manager->email }}</td>
+                            <td>{{ \Carbon\Carbon::parse($ticket->updated_at)->format('d/m/Y') }}</td>
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
