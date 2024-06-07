@@ -9,8 +9,8 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
 
     public function showClient($id){
         $client = $this->userId($id);
-
-        return view('client.show')->with('client' , $client , 'subCategoryDomain');
+        $groupedByDomain = $this->userSubCategoryByDomain($client);
+        return view('client.show')->with(['client' => $client , 'groupedByDomain' => $groupedByDomain]);
     }
 
     public function indexAdmin(){

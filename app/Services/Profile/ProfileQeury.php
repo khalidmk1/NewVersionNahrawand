@@ -25,6 +25,14 @@ class ProfileQeury extends GlobaleService {
         return $user;
     }
 
+    public function userSubCategoryByDomain($client){
+        $groupedByDomain = $client->subCategory->groupBy(function ($subcategory) {
+            return $subcategory->subCategory->category->domain->name;
+        });
+
+        return $groupedByDomain;
+    }
+
     public function allAdmins(){
         $adminRole = Role::where('name', 'admin')->first();
         $adminUsers = User::whereHas('roles', function($query) use ($adminRole) {

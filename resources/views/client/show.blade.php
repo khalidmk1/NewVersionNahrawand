@@ -90,12 +90,7 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            @php
-                                // Group subcategories by domain name
-                                $groupedByDomain = $client->subCategory->groupBy(function ($subcategory) {
-                                    return $subcategory->subCategory->category->domain->name;
-                                });
-                            @endphp
+
                             @foreach ($groupedByDomain as $domainName => $subcategories)
                                 <div class="row">
                                     <!-- Domain Column -->
@@ -113,7 +108,7 @@
                                         <div class="row align-items-center" style="gap: 2px">
                                             @foreach ($subcategories as $subcategory)
                                                 <h3><span
-                                                        class="badge badge-secondary">{{ $subcategory->subCategory->category->name }}</span>
+                                                        class="badge badge-secondary">{{ $subcategory->subCategory->name }}</span>
                                                 </h3>
                                             @endforeach
                                         </div>
