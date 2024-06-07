@@ -199,7 +199,7 @@
                 <li class="nav-header">Ticket Management</li>
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('ticket.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-ticket-alt" aria-hidden="true"></i>
 
                         <p>
