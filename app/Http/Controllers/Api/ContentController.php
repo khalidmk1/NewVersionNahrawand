@@ -79,6 +79,6 @@ class ContentController extends Controller
     }
 
     public function contentByProgram(String $programId){
-        return $this->contentInterface->contentByProgram();
+        return $this->contentInterface->contentByProgram($programId);
     }
 }
