@@ -19,4 +19,8 @@ class SubCategoryController extends Controller
     public function subCategoryByDomain(){
         return $this->SubCategoryInterface->subCategoryByDomain();
     }
+
+    public function allSubctegory(){
+        return $this->SubCategoryInterface->allSubctegory();
+    }
 }

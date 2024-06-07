@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -79,11 +80,15 @@ Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.
 
 Route::get('event', [EventController::class, 'eventIndex'])->name('event.index');
 
+Route::get('program', [ProgramController::class, 'allProgramApi'])->name('program.index');
+
+Route::get('subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subcategory.index');
+
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
 
 Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index');
 
-Route::get('subCategory', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategry.index');
+Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategry.domain');
 
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
 Route::post('login', [AuthenticatedSessionController::class, 'storeApi'])->name('user.login');

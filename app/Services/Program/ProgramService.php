@@ -38,5 +38,11 @@ class ProgramService extends ProgramQeury implements ProgramInterface {
         return redirect()->back()->with('status' , 'You deleted a Program');
     }
 
+    //api programs
+    public function allProgramApi(){
+        $programs = $this->allPrograms();
+        return response()->json($programs);
+    }
+
   
 }

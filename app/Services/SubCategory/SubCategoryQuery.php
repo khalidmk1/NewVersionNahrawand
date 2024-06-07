@@ -84,4 +84,14 @@ class SubCategoryQuery {
 
         return $subCategoryData;
     }
+
+    //subCategory api
+
+    public function allSubcatagoryApi(){
+        $subCategory = SubCategory::all(['id' , 'name']);
+        return $subCategory;
+    }
+
+
+    
 }

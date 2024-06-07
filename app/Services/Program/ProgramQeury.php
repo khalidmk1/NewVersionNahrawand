@@ -16,7 +16,7 @@ class ProgramQeury extends GlobaleService {
 
 
     public function allPrograms(){
-        $programs = Program::with('tags')->get();
+        $programs = Program::with('tags')->get(['id' , 'title' , 'description']);
         return $programs;
     }
  
@@ -84,7 +84,6 @@ class ProgramQeury extends GlobaleService {
         $program = Program::findOrFail(Crypt::decrypt($id));
 
         if (Hash::check($request->password, Auth::user()->password)) {
-            // Delete the program
             $program->delete();
         }
         return $program;

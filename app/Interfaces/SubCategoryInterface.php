@@ -13,5 +13,6 @@ interface SubCategoryInterface {
 
     //api subCategory
     public function subCategoryByDomain();
+    public function allSubctegory();
 
 }
