@@ -3,6 +3,8 @@
 namespace App\Interfaces;
 
 interface ProfileInterface {
+    public function showClient($id);
+
     public function indexAdmin();
     public function indexManager();
     public function indexSpeaker();

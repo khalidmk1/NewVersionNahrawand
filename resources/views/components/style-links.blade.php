@@ -44,6 +44,29 @@
 
     }
 
+    .image-with-text {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 10px;
+        /* Adjust as needed */
+    }
+
+    .image-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Semi-transparent background */
+        color: white;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .pagination {
+        display: flex !important;
+    }
+
     .bootstrap-tagsinput:first-child {
         border: none,
 

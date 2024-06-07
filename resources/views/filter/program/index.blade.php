@@ -13,11 +13,7 @@
 @endsection
 
 @section('content')
-    <style>
-        .pagination {
-            display: flex;
-        }
-    </style>
+
     <x-create-filter-modal :titleModel="'Create Program'" :modelRouteCreate="route('program.store')">
 
         <div class="form-group">

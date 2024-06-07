@@ -25,6 +25,11 @@ class ProfileController extends Controller
     }
 
 
+    public function show(String $id){
+        return $this->ProfileInterface->showClient($id);
+    }
+
+
     /**
      * Display the user's profile form.
      */

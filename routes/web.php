@@ -38,6 +38,7 @@ Route::middleware(['auth'  , 'verified'])->prefix('/dashboard')->group(function 
     Route::get('manager', [GlobaleController::class, 'indexManager'])->name('index.manager');
     Route::get('speaker', [GlobaleController::class, 'indexSpeaker'])->name('index.speaker');
     Route::get('client', [GlobaleController::class, 'indexClient'])->name('client.index');
+    Route::get('client/{id}', [ProfileController::class, 'show'])->name('client.show');
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('admin/create', [GlobaleController::class, 'createAdmin'])->name('create.admin');
     Route::get('manager/create', [GlobaleController::class, 'createManager'])->name('create.manager');

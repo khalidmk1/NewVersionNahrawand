@@ -34,13 +34,17 @@
                 <tbody>
                     @foreach ($clients as $client)
                         <tr>
-                            <td>{{$cl}}</td>
-                            <td>Internet
-                                Explorer 4.0
+                            <td>{{$client->email}}</td>
+                            <td>{{$client->firstName}}</td>
+                            <td>{{$client->lastName}}</td>
+                            <td>{{$client->status_matrimonial }}</td>
+                            <td>{{$client->created_at}}</td>
+                            <td>{{$client->updated_at}}</td>
+                            <td>
+                                <a class="btn btn-block btn-info"
+                                    href="{{ route('client.show', Crypt::encrypt($client->id)) }}"><i
+                                        class="fa fa-eye" aria-hidden="true"></i></a>
                             </td>
-                            <td>Win 95+</td>
-                            <td> 4</td>
-                            <td>X</td>
                         </tr>
                     @endforeach
 
@@ -54,4 +58,6 @@
         <!-- /.card-body -->
     </div>
     <!-- /.card -->
+    @include('components.jQuery')
+    @include('components.spicific-script')
 @endsection

@@ -7,6 +7,12 @@ use App\Services\Profile\ProfileQeury;
 
 class ProfileService extends ProfileQeury implements ProfileInterface {
 
+    public function showClient($id){
+        $client = $this->userId($id);
+        
+        return view('client.show')->with('client' , $client);
+    }
+
     public function indexAdmin(){
         $admins = $this->allAdmins();
         return view('guestProfile.admin.index')->with('admins' , $admins);

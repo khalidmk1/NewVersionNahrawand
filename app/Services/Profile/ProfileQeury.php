@@ -12,6 +12,7 @@ use App\Services\GlobaleService;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -21,7 +22,6 @@ class ProfileQeury extends GlobaleService {
 
     public function userId(String $id){
         $user = User::findOrFail(Crypt::decrypt($id));
-
         return $user;
     }
 
