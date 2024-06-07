@@ -52,6 +52,7 @@ class ContentQuery extends GlobaleService {
         $contentImage = $this->storeConteImage($request);
         $contentImageFlex = $this->storeConteImageFlex($request);
         $document = $this->storeConteDocument($request);
+        $videoUrl = $this->extractYoutubeId($request->videoUrl);
 
         $program = $request->programId == 0 ? null : $request->programId;
 
@@ -61,7 +62,7 @@ class ContentQuery extends GlobaleService {
             'programId' => $program,
             'image' => $contentImage,
             'imageFlex' => $contentImageFlex,
-            'video' => $request->videoUrl,
+            'video' => $videoUrl,
             'title' => $request->title,
             'bigDescription' => $request->bigDescription,
             'smallDescription' => $request->smallDescription,
@@ -107,6 +108,7 @@ class ContentQuery extends GlobaleService {
         $nameFlexImage = $content->imageFlex ?? '' ;
         $nameImage = $content->image ?? '' ;
 
+        $videoUrl = $this->extractYoutubeId($request->videoUrl);
         $flexImage = $this->updateConteImageFlex($request, $nameFlexImage);
         $contentImage = $this->updateConteImage($request, $nameImage);
         /* $contentDocument = $this->updateConteDocument($request, $nameDocument); */
@@ -121,7 +123,7 @@ class ContentQuery extends GlobaleService {
             'categoryId' => $request->cotegoryId,
             'hostId' => $request->contentHost,
             'programId' => $programId,
-            'video' => $request->videoUrl,
+            'video' => $videoUrl,
             'title' => $request->title,
             'bigDescription' => $request->bigDescription,
             'smallDescription' => $request->smallDescription,

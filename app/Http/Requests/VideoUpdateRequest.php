@@ -21,16 +21,16 @@ class VideoUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $roles = [
+        $rules = [
             'title' => ['required' , 'string' , 'max:255'],
             'description' => ['required' , 'string' ,'max:255'],
             'image' => ['nullable','file', 'mimes:jpeg,png,jpg,gif' , 'max:2000'],
             'guestIds' => ['nullable' , 'array'],
             'tags' => ['nullable' , 'array'],
-            'video' => ['required' , 'url'],
+            'video' => ['required', 'url', 'regex:/https:\/\/www\.youtube\.com\/watch\?v=/'],
             'duration' => ['nullable']
         ];
 
-        return $roles;
+        return $rules;
     }
 }

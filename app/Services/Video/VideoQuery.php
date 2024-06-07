@@ -30,12 +30,13 @@ class VideoQuery extends GlobaleService{
 
         $fileNameImage  = $this->storeVideoImage($request);
         $isComing = $request->isComing == 'on';
+        $videoUrl = $this->extractYoutubeId($request->video);
         $video = ContentVideo::create([
             'contentId' => $request->podcastId,
             'title' => $request->title,
             'description' => $request->description,
             'image' => $fileNameImage,
-            'video' => $request->video,
+            'video' => $videoUrl,
             'isComing' => $isComing,
             'duration' => $request->duration
         ]);
@@ -68,13 +69,13 @@ class VideoQuery extends GlobaleService{
         $isComing = $request->isComing == 'on';
         $imageName =  $video->image ?? '' ;
         $fileNameImage  = $this->updateVideoImage($request ,$imageName);
-
+        $videoUrl = $this->extractYoutubeId($request->video);
 
         $video->update([
             'title' => $request->title,
             'description' => $request->description, 
             'image' => $fileNameImage,
-            'video' => $request->video,
+            'video' => $videoUrl,
             'isComing' => $isComing,
             'isUpdated' => true,
             'duration' => $request->duration
@@ -98,7 +99,11 @@ class VideoQuery extends GlobaleService{
             $arrTags = array_map('trim', $tags);
             $video->syncTags($arrTags, 'video');
         }
+
+        return $video;
     }
+
+
 
 
     public function destroyVideo(DestroyRequest $request , String $id){

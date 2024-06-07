@@ -23,7 +23,18 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class GlobaleService  {
 
-
+    /**
+     * Extract YouTube video ID from URL.
+     *
+     * @param string $url
+     * @return string|null
+     */
+    public function extractYoutubeId($url): ?string
+    {
+        $queryParameters = parse_url($url, PHP_URL_QUERY);
+        parse_str($queryParameters, $queryParamsArray);
+        return 'https://www.youtube.com/embed/'.$queryParamsArray['v'] ?? null;
+    }
 
     public function storeAvatar(Request $request)
     {
