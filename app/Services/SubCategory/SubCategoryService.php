@@ -44,7 +44,7 @@ class SubCategoryService extends SubCategoryQuery implements SubCategoryInterfac
     }
 
     public function allSubctegory(){
-        $subCategories = $this->allSubcatagoryApi();
+        $subCategories = $this->allUserSubcatagoryApi();
         return response()->json($subCategories);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Domain;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\UserSubcategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -87,9 +88,9 @@ class SubCategoryQuery {
 
     //subCategory api
 
-    public function allSubcatagoryApi(){
-        $subCategory = SubCategory::all(['id' , 'name']);
-        return $subCategory;
+    public function allUserSubcatagoryApi(){
+        $userSubCategory = UserSubcategory::where('userId' , Auth::user()->id);
+        return $userSubCategory;
     }
 
 

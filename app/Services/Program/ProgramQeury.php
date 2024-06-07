@@ -38,11 +38,11 @@ class ProgramQeury extends GlobaleService {
             ]);
         }
 
-        if ($request->has('tags')) {
-            $tags = $validatedData['tags'];
-            foreach ($tags as $tag) {
-                $program->attachTag($tag, 'program'); // Attach with type 'program'
-            }
+        if ($request->has('tags') && $request->tags[0] !== null) {
+            $StringTag = $request->tags[0];
+            $tags = explode(',', $StringTag);
+            $arrTags = array_map('trim', $tags);
+            $program->syncTags($arrTags, 'program');
         }
 
         return $program;
@@ -70,10 +70,13 @@ class ProgramQeury extends GlobaleService {
                 'programId' => $program->id
             ]);
         }
-        
-        if ($request->has('tags')) {
-            $tags = $validatedData['tags'];
-            $program->syncTags($tags, 'program');
+    
+
+        if ($request->has('tags') && $request->tags[0] !== null) {
+            $StringTag = $request->tags[0];
+            $tags = explode(',', $StringTag);
+            $arrTags = array_map('trim', $tags);
+            $program->syncTags($arrTags, 'program');
         }
         
         return $program;
@@ -89,6 +92,28 @@ class ProgramQeury extends GlobaleService {
         return $program;
     }
 
+
+    //program api
+    public function allProgramsApi(){
+        $programs = Program::with(['tags', 'programcategory.category'])->get(['id', 'title', 'description']);
+
+        $filteredPrograms = $programs->map(function ($program) {
+            return [
+                'id' => $program->id,
+                'title' => $program->title,
+                'description' => $program->description,
+                'tags' => $program->tags->pluck('name'), 
+                'categories' => $program->programcategory->map(function ($programCategory) {
+                    return [
+                        'id' => $programCategory->category->id ,
+                        'name' => $programCategory->category->name,
+                    ];
+                }),
+            ];
+        });
+    
+        return $filteredPrograms;
+    }
 
 
 

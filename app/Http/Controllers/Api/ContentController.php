@@ -77,4 +77,8 @@ class ContentController extends Controller
     public function contentFormationBySubCategory(){
         return $this->contentInterface->contentFormationBySubCategory();
     }
+
+    public function contentByProgram(String $programId){
+        return $this->contentInterface->contentByProgram();
+    }
 }

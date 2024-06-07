@@ -40,7 +40,7 @@ class ProgramService extends ProgramQeury implements ProgramInterface {
 
     //api programs
     public function allProgramApi(){
-        $programs = $this->allPrograms();
+        $programs = $this->allProgramsApi();
         return response()->json($programs);
     }
 

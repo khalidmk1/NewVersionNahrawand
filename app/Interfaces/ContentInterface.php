@@ -31,5 +31,6 @@ interface ContentInterface {
     public function finishedContent();
     public function contentPodcastBySubCategory();
     public function contentFormationBySubCategory();
+    public function contentByProgram($programId);
 }
 

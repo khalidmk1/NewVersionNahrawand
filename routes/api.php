@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('update/profile', [ProfileController::class, 'updateApi'])->name('user.update');
 
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
+    Route::get('user/subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subcategory.index');
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
@@ -50,6 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('content/podcast/subcategory', [ContentController::class, 'contentPodcastBySubCategory'])->name('content.podcast.subcategory');
     Route::get('content/formation/subcategory', [ContentController::class, 'contentFormationBySubCategory'])->name('content.formation.subcategory');
+    Route::get('content/program', [ContentController::class, 'contentByProgram'])->name('content.program');
 
     Route::post('create/viewContent/{content}', [ContentController::class, 'createView'])->name('contentView.create');
 
@@ -82,7 +84,7 @@ Route::get('event', [EventController::class, 'eventIndex'])->name('event.index')
 
 Route::get('program', [ProgramController::class, 'allProgramApi'])->name('program.index');
 
-Route::get('subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subcategory.index');
+
 
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
 

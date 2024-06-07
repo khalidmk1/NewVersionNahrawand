@@ -167,4 +167,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
+    public function contentByProgram($programId){
+        $contents = $this->contentByProgramApi($programId);
+        return response()->json($contents);
+    }
+
 }
