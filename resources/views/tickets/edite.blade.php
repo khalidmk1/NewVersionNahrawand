@@ -54,6 +54,11 @@
                     </div>
                     <!-- /.col -->
 
+                    <div class="col-md-4 col-sm-12">
+                        <img src="{{ asset('storage/ticket/' . $ticket->file) }}" class="rounded float-right"
+                            alt="ticket">
+                    </div>
+
                     <div class="col-sm-12">
                         <!-- textarea -->
                         <div class="form-group">
@@ -63,7 +68,7 @@
                     </div>
 
 
-                 {{--    <div class="col-sm-12" id="Commentcontain">
+                    {{--    <div class="col-sm-12" id="Commentcontain">
                         <!-- textarea -->
                         <div class="form-group position-relative">
                             <input type="text" name="comment"
@@ -73,7 +78,7 @@
                         </div>
                     </div> --}}
 
-                 {{--    @foreach ($outhertickets as $outherticket)
+                    {{--    @foreach ($outhertickets as $outherticket)
                         <div class="col-12"> <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
