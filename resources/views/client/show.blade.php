@@ -90,23 +90,30 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            @foreach ($client->subCategory as $subcategory)
+                            @php
+                                // Group subcategories by domain name
+                                $groupedByDomain = $client->subCategory->groupBy(function ($subcategory) {
+                                    return $subcategory->subCategory->category->domain->name;
+                                });
+                            @endphp
+                            @foreach ($groupedByDomain as $domainName => $subcategories)
                                 <div class="row">
-                                    <!-- /.col -->
+                                    <!-- Domain Column -->
                                     <div class="col-md-4">
                                         <div class="card card-outline card-primary">
                                             <div class="card-header">
-                                                <h3 class="card-title">
-                                                    {{ $subcategory->subCategory->category->domain->name }}</h3>
+                                                <h3 class="card-title">{{ $domainName }}</h3>
                                             </div>
-
                                         </div>
                                         <!-- /.card -->
                                     </div>
                                     <!-- /.col -->
-                                    <div class="col-md-8 ">
-                                        <div class="row  align-items-center" style="gap: 2px">
-                                            {{ $subcategory->subCategory->category->name }}
+                                    <div class="col-md-8">
+                                        <!-- Subcategories Column -->
+                                        <div class="row align-items-center" style="gap: 2px">
+                                            @foreach ($subcategories as $subcategory)
+                                                <div>{{ $subcategory->subCategory->category->name }}</div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
