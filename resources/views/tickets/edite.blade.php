@@ -31,40 +31,40 @@
             <div class="card-body">
                 <div class="row">
 
-                    <div class="col-md-8 col-sm-12">
-                        <div class="form-group row">
-                            <label for="ticket" class="col-sm-2 col-form-label">Ticket Status</label>
-                            <div class="col-sm-10">
-                                <!-- select -->
-                                <select class="form-control" id="ticket" name="status" style="height: 40px;">
-                                    @if ($ticket->status == 1)
-                                        <option selected value="1">Handled</option>
-                                        <option value="0">In Progress</option>
-                                    @else
-                                        <option value="1">Handled</option>
-                                        <option selected value="0">In Progress</option>
-                                    @endif
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group row">
+                                    <label for="ticket" class="col-sm-2 col-form-label">Ticket Status</label>
+                                    <div class="col-sm-10">
+                                        <!-- select -->
+                                        <select class="form-control" id="ticket" name="status" style="height: 40px;">
+                                            @if ($ticket->status == 1)
+                                                <option selected value="1">Handled</option>
+                                                <option value="0">In Progress</option>
+                                            @else
+                                                <option value="1">Handled</option>
+                                                <option selected value="0">In Progress</option>
+                                            @endif
 
 
-                                </select>
+                                        </select>
+                                    </div>
+
+                                </div>
+
                             </div>
-
+                            <!-- /.col -->
+                            <div class="col-sm-12">
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Detail</label>
+                                    <textarea class="form-control" name="detail" rows="3" placeholder="Enter ...">{{ $ticket->detail }}</textarea>
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
-                    <!-- /.col -->
-
-                    <div class="col-md-4 col-sm-12">
-                        <img src="{{ asset('storage/ticket/' . $ticket->file) }}" class="rounded float-right"
-                            alt="ticket">
-                    </div>
-
-                    <div class="col-sm-12">
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Detail</label>
-                            <textarea class="form-control" name="detail" rows="3" placeholder="Enter ...">{{ $ticket->detail }}</textarea>
-                        </div>
+                        <div class="col-4"> <img src="{{ asset('storage/ticket/' . $ticket->file) }}"
+                                class="img-fluid" alt="ticket"></div>
                     </div>
 
 
