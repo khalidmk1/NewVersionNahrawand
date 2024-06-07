@@ -557,7 +557,7 @@ class ContentQuery extends GlobaleService {
 
     public function contentByProgramApi(String $programId){
         $program = Program::findOrFail($programId);
-        $content = Content::where('programId' , $program->id)->get();
+        $contents = Content::where('programId' , $program->id)->get();
         $contentFiltered = $contents->map(function($content) {
             return [
                 'id' => $content->id,
