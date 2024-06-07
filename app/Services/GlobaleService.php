@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Objective;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
+use App\Models\ContentVideo;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\EventRequest;
@@ -258,10 +259,13 @@ class GlobaleService  {
     public function allComingContentApi()
     {
         $contents = Content::where('isComing', 1)
-        ->with('category', 'tags')
-        ->get(['id', 'title', 'smallDescription', 'image', 'created_at', 'duration']);
+                ->with('category', 'tags')
+                ->get(['id', 'title', 'smallDescription', 'image', 'created_at', 'duration']);
 
-        return $contents;
+        $videos = ContentVideo::where('isComing', 1)
+                    ->get(['image']);
+
+        return ['contents' => $contents,'videos' => $videos];
     }
 
     public function formationContentApi()

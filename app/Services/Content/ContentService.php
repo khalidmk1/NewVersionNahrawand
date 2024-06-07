@@ -89,7 +89,7 @@ class ContentService extends ContentQuery implements ContentInterface {
     //Api React Native
     public function comingSoonContent(){
         $contents = $this->allComingContentApi();
-        return response()->json($contents);
+        return response()->json(['contents' => $contents['contents'] , 'vidoes' => $contents['videos']]);
     }
 
     public function contentFormation(){
