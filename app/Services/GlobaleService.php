@@ -385,7 +385,6 @@ class GlobaleService  {
     }
 
 
-
     public function allContentApi(){
         $contents = Content::all(['id' , 'image' , 'title']);
         return $contents;

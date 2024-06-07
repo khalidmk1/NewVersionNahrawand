@@ -28,7 +28,7 @@
                     <p class="text-muted text-center">{{ $client->email }}</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
-                      {{--   <li class="list-group-item">
+                        {{--   <li class="list-group-item">
                             <b>Nombre de Favoris</b> <a class="float-right">{{ $client->Favoris->count() }}</a>
                         </li> --}}
                         {{--  <li class="list-group-item">
@@ -89,99 +89,29 @@
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
-                        {{-- <div class="active tab-pane" id="activity">
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-md-4">
-                                    <div class="card card-outline card-primary">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Argent et Carrière</h3>
-                                        </div>
+                        <div class="active tab-pane" id="activity">
+                            @foreach ($client->subCategory as $subcategory)
+                                <div class="row">
+                                    <!-- /.col -->
+                                    <div class="col-md-4">
+                                        <div class="card card-outline card-primary">
+                                            <div class="card-header">
+                                                <h3 class="card-title">
+                                                    {{ $subcategory->subCategory->category->domain->name }}</h3>
+                                            </div>
 
+                                        </div>
+                                        <!-- /.card -->
                                     </div>
-                                    <!-- /.card -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-8 ">
-                                    <div class="row  align-items-center" style="gap: 2px">
-                                        @foreach ($doamin1 as $doamin)
-                                            <div class="col">
-                                                <h3><span class="badge badge-secondary">{{ $doamin->goals->goals }}</span>
-                                                </h3>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-md-4">
-                                    <div class="card card-outline card-success">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Santé et bien être</h3>
+                                    <!-- /.col -->
+                                    <div class="col-md-8 ">
+                                        <div class="row  align-items-center" style="gap: 2px">
+                                            {{ $subcategory->subCategory->category->name }}
                                         </div>
                                     </div>
-                                    <!-- /.card -->
                                 </div>
-                                <!-- /.col -->
-                                <div class="col-md-8 ">
-                                    <div class="row  align-items-center" style="gap: 2px">
-                                        @foreach ($doamin2 as $doamin)
-                                            <div class="col">
-                                                <h3><span class="badge badge-secondary">{{ $doamin->goals->goals }}</span>
-                                                </h3>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-md-4">
-                                    <div class="card card-outline card-warning">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Relations humaines</h3>
-                                        </div>
-
-                                    </div>
-                                    <!-- /.card -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-8 ">
-                                    <div class="row  align-items-center" style="gap: 2px">
-                                        @foreach ($doamin3 as $doamin)
-                                            <div class="col">
-                                                <h3><span class="badge badge-secondary">{{ $doamin->goals->goals }}</span>
-                                                </h3>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- /.col -->
-                                <div class="col-md-4">
-                                    <div class="card card-outline card-danger">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Epanouissement personnel</h3>
-                                        </div>
-
-                                    </div>
-                                    <!-- /.card -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-8 ">
-                                    <div class="row  align-items-center" style="gap: 10px">
-                                        @foreach ($doamin4 as $doamin)
-                                            <div class="col">
-                                                <h3><span class="badge badge-secondary">{{ $doamin->goals->goals }}</span>
-                                                </h3>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
+                            @endforeach
+                        </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="timeline">
                             <!-- The timeline -->

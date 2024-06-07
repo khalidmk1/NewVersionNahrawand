@@ -82,14 +82,9 @@ class SubCategoryQuery {
                 }),
             ];
         });
-
-        return $subCategoryData;
-    }
-
-    //subCategory api
-
-  
-
+    
+            return $subCategoryData;
+        }
 
     
 }

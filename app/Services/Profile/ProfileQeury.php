@@ -34,6 +34,8 @@ class ProfileQeury extends GlobaleService {
         return $adminUsers;
     }
 
+    
+
     public function allManagers(){
         
         $excludedRoles = ['Super Admin', 'client' , 'Admin', 'Formateur', 'Invité', 'Modérateur', 'Conférencier', 'Animateur'];
