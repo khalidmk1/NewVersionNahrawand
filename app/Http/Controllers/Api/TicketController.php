@@ -21,6 +21,6 @@ class TicketController extends Controller
     }
 
     public function index(){
-        return  $this->TicketInterface->index(); 
+        return  $this->TicketInterface->indexApi(); 
     }
 }

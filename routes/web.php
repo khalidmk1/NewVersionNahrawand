@@ -61,6 +61,7 @@ Route::middleware(['auth' , 'verified'])->prefix('/dashboard')->group(function (
     Route::resource('event', EventController::class);
     Route::resource('FAQ', FAQController::class);
     Route::resource('email', EmailController::class);
+    Route::resource('ticket', UserController::class);
 
    
    

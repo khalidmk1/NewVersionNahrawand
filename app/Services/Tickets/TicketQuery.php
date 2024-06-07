@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class TicketQuery extends GlobaleService {
 
+
+    public function ticketIndex(){
+        $tickets = Ticket::all();
+
+        return $tickets;
+    }
+
+
+    //api tickets
     public function CreateTicket(TicketRequest $request){
         
         $fileName = $this->storeFileTicket($request);
@@ -24,7 +33,7 @@ class TicketQuery extends GlobaleService {
         return $ticket;
     }
 
-    public function ticketIndex(){
+    public function ticketIndexApi(){
         $tickets = Ticket::where('clientId' , Auth::user()->id)->get(['TypeTicket' , 'status' , 'updated_at']);
         return $tickets;
     }

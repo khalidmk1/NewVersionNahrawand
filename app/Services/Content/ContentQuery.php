@@ -273,6 +273,10 @@ class ContentQuery extends GlobaleService {
     
             return $finishedContent;
         }
+
+        $viewExists = ContentView::where('contentId', $content->id)
+        ->where('userId', Auth::user()->id)
+        ->delete();
         
         return $finishedExists;
     }

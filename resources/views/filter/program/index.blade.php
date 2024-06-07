@@ -13,7 +13,6 @@
 @endsection
 
 @section('content')
-
     <x-create-filter-modal :titleModel="'Create Program'" :modelRouteCreate="route('program.store')">
 
         <div class="form-group">

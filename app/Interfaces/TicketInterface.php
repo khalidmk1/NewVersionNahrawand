@@ -4,7 +4,8 @@ namespace App\Interfaces;
 
 interface TicketInterface {
 
+    public function index();
     //api tickets
     public function create($request);
-    public function index();
+    public function indexApi();
 }

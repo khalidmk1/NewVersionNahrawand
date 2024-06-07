@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+
+    private $TicketInterface;
+
+    public function __construct(TicketInterface $TicketInterface) {
+        $this->TicketInterface = $TicketInterface;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->TicketInterface->index();
     }
 
     /**
