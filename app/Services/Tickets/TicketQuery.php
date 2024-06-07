@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use App\Services\GlobaleService;
 use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class TicketQuery extends GlobaleService {
 
