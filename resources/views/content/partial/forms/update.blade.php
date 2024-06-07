@@ -142,10 +142,10 @@
             <div class="form-group">
                 <label>Program</label>
                 <select class="form-control select2" name="programId" style="width: 100%;">
-                    @foreach ($programs as $program)
                     <option value="0">Select Program</option>
+                    @foreach ($programs as $program)
                         <option value="{{ $program->id }}"
-                            {{ $content->program && $content->program->contains('programId', $program->id) ? 'selected' : '' }}>
+                            {{ $content->programId == $program->id ? 'selected' : '' }}>
                             {{ $program->title }}
                         </option>
                     @endforeach

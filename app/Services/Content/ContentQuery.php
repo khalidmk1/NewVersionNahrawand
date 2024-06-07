@@ -113,14 +113,14 @@ class ContentQuery extends GlobaleService {
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
-        
+        $programId = $request->programId == 0 ? null : $request->programId;
 
 
 
         $content->update([
             'categoryId' => $request->cotegoryId,
             'hostId' => $request->contentHost,
-            'programId' => $request->programId,
+            'programId' => $programId,
             'video' => $request->videoUrl,
             'title' => $request->title,
             'bigDescription' => $request->bigDescription,
@@ -151,7 +151,7 @@ class ContentQuery extends GlobaleService {
             $content->syncTags([], 'content');
         }
 
-        if($request->has('objectivesId')){
+        /* if($request->has('objectivesId')){
             $objectives = array_map('intval', $request->objectivesId);
             foreach ($objectives as $objective) {
                 ContentObjective::create([
@@ -159,7 +159,7 @@ class ContentQuery extends GlobaleService {
                     'objectivelId' => $objective
                 ]);
             }
-        }
+        } */
 
 
         if($request->has('subCategoryId')){
