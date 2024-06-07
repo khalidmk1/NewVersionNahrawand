@@ -220,7 +220,7 @@
                                                     <img src="{{ asset('storage/content/' . $contentFinished->content->image) }}"
                                                         alt="..." style="height: 141px">
                                                     <div class="image-text">
-                                                        {{ $FineshedCour->Cours->title }}
+                                                        {{ $contentFinished->content->title }}
                                                     </div>
                                                 </div>
                                             @endforeach
