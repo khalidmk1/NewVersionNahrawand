@@ -51,7 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('content/podcast/subcategory', [ContentController::class, 'contentPodcastBySubCategory'])->name('content.podcast.subcategory');
     Route::get('content/formation/subcategory', [ContentController::class, 'contentFormationBySubCategory'])->name('content.formation.subcategory');
-    Route::get('content/program', [ContentController::class, 'contentByProgram'])->name('content.program');
+    Route::get('content/program/{programId}', [ContentController::class, 'contentByProgram'])->name('content.program');
 
     Route::post('create/viewContent/{content}', [ContentController::class, 'createView'])->name('contentView.create');
 
