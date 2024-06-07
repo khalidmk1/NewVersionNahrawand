@@ -113,6 +113,7 @@ class ContentQuery extends GlobaleService {
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
+        
 
 
 

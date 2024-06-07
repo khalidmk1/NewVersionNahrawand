@@ -238,10 +238,12 @@ class ProfileQeury extends GlobaleService {
             return $userSubCategory;
         }
 
-
-
-
     } 
+
+    public function allUserSubcatagoryApi(){
+        $userSubCategory = UserSubcategory::where('userId' , Auth::user()->id);
+        return $userSubCategory;
+    }
 
 }
 

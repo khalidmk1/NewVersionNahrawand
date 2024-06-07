@@ -80,4 +80,9 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return response()->json($subCategoryId);
     }
 
+    public function allUserSubctegory(){
+        $subCategories = $this->allUserSubcatagoryApi();
+        return response()->json($subCategories);
+    }
+
 }

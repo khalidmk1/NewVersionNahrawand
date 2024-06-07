@@ -23,4 +23,5 @@ interface ProfileInterface {
     public function populaire();
     public function updateApi($request);
     public function updateAvatar($request);
+    public function allUserSubctegory();
 }

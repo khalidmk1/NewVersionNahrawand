@@ -88,10 +88,7 @@ class SubCategoryQuery {
 
     //subCategory api
 
-    public function allUserSubcatagoryApi(){
-        $userSubCategory = UserSubcategory::where('userId' , Auth::user()->id);
-        return $userSubCategory;
-    }
+  
 
 
     

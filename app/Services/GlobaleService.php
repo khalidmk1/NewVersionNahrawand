@@ -253,6 +253,8 @@ class GlobaleService  {
         return $speakers;
     }
 
+    
+
     //all api cotent Query
 
 

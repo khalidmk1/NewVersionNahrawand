@@ -34,4 +34,8 @@ class ProfileController extends Controller
     public function createUserSubCategory(String $subCategoryId){
         return $this->ProfileInterface->createUserSubCategory($subCategoryId);
     }
+
+    public function allUserSubctegory(){
+        return $this->ProfileInterface->allUserSubctegory();
+    }
 }

@@ -37,10 +37,11 @@ class ContentService extends ContentQuery implements ContentInterface {
         $categories = $this->allCategories();
         $objectives = $this->allObjectives();
         $subCategories = $this->allSubCategories();
+        $programs = $this->allPrograms();
         return view('content.show')->with(['content' => $content , 'moderatorUsers' => $moderatorUsers , 
         'conferencerUsers' => $conferencerUsers ,'animatorUsers' => $animatorUsers , 
         'formateurUsers' => $formateurUsers , 'invertersUsers' => $invertersUsers ,'categories' => $categories , 
-        'objectives' => $objectives , 'subCategories' => $subCategories
+        'objectives' => $objectives , 'subCategories' => $subCategories , 'programs' => $programs
     ]);
     }
 

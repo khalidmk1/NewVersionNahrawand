@@ -39,7 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('update/profile', [ProfileController::class, 'updateApi'])->name('user.update');
 
     Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
-    Route::get('user/subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subcategory.index');
+    Route::get('user/subCategory', [ProfileController::class, 'allUserSubctegory'])->name('user.subcategory.index');
     
     Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
     Route::get('check/content/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
