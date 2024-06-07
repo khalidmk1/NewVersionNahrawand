@@ -12,8 +12,12 @@ class TicketQuery extends GlobaleService {
 
     public function ticketIndex(){
         $tickets = Ticket::all();
-
         return $tickets;
+    }
+
+    public function editeTicket(String $id){
+        $ticket = Ticket::findOrFail(Crypt::decrypt($id));
+        return $ticket;
     }
 
 

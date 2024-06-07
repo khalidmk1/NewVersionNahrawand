@@ -35,10 +35,10 @@
                             <td>{{ \Carbon\Carbon::parse($ticket->created_at)->format('d/m/Y') }}</td>
                             <td>{{ $ticket->client->firstName . ' ' . $ticket->client->lastName }}</td>
                             <td><span class="tag tag-success">{{ $ticket->status == 1 ? 'Handled' : 'In Progress' }}
-                                    {{-- <a href="{{ Route('dashboard.tickets.edite', Crypt::encrypt($ticket->id)) }}">
+                                    <a href="{{ route('ticket.edit', Crypt::encrypt($ticket->id)) }}">
                                         <i class="fa fa-plus mt-1" aria-hidden="true"
                                             style="cursor: pointer ; float: right;"></i>
-                                    </a> --}}
+                                    </a>
                                 </span></td>
                                 <td>{{ optional($ticket->manager)->email ?? 'empty' }}</td>
                             <td>{{ \Carbon\Carbon::parse($ticket->updated_at)->format('d/m/Y') }}</td>

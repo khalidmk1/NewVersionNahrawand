@@ -52,7 +52,7 @@ class TicketController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return $this->TicketInterface->edite($id);
     }
 
     /**
