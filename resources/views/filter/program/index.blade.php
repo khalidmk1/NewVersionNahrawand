@@ -171,7 +171,6 @@
 
 
     @include('components.jQuery')
-    @include('components.spicific-script')
 
     <script>
         $(function() {
