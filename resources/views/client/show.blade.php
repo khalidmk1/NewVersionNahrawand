@@ -112,7 +112,9 @@
                                         <!-- Subcategories Column -->
                                         <div class="row align-items-center" style="gap: 2px">
                                             @foreach ($subcategories as $subcategory)
-                                                <div>{{ $subcategory->subCategory->category->name }}</div>
+                                                <h3><span
+                                                        class="badge badge-secondary">{{ $subcategory->subCategory->category->name }}</span>
+                                                </h3>
                                             @endforeach
                                         </div>
                                     </div>
