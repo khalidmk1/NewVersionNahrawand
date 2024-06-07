@@ -40,7 +40,7 @@
                                             style="cursor: pointer ; float: right;"></i>
                                     </a> --}}
                                 </span></td>
-                                <td>{{ $ticket->manager->email ? $ticket->manager->email : 'empty' }}</td>
+                                <td>{{ optional($ticket->manager)->email ?? 'empty' }}</td>
                             <td>{{ \Carbon\Carbon::parse($ticket->updated_at)->format('d/m/Y') }}</td>
                         </tr>
                     @endforeach
