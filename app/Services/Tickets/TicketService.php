@@ -22,6 +22,11 @@ class TicketService extends TicketQuery implements TicketInterface {
         return redirect()->back()->with('status' , 'You have Updated the ticket');
     }
 
+    public function createComment($request , $id){
+        $comment = $this->createCommentTicket($request , $id);
+        return redirect()->back()->with('status' , 'You have created a Comment');
+    }
+
     //api tickets
     public function create($request){
         $ticket = $this->CreateTicket($request);

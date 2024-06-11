@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Interfaces\VideoInterface;
+use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
 use App\Interfaces\ProfileInterface;
 use App\Http\Requests\DestroyRequest;
@@ -12,11 +13,15 @@ class GlobaleController extends Controller
 {
     private $ContentInterface;
     private $ProfileInterface;
+    private $videoInterface;
+    private $TicketInterface;
 
-    public function __construct(ContentInterface $ContentInterface , ProfileInterface $ProfileInterface , VideoInterface $videoInterface) {
+    public function __construct(ContentInterface $ContentInterface , ProfileInterface $ProfileInterface , 
+    VideoInterface $videoInterface , TicketInterface $TicketInterface) {
         $this->ContentInterface = $ContentInterface;
         $this->ProfileInterface = $ProfileInterface;
         $this->videoInterface = $videoInterface;
+        $this->TicketInterface = $TicketInterface;
     }
     
     public function objectivesByCategory(String $id)
@@ -55,6 +60,10 @@ class GlobaleController extends Controller
 
     public function quicklyIndex(){
         return $this->ContentInterface->quicklyIndex();
+    }
+
+    public function createComment(Request $request ,String $id){
+        return  $this->TicketInterface->createComment($request , $id); 
     }
 
 

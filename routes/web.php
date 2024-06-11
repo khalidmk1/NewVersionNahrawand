@@ -45,6 +45,8 @@ Route::middleware(['auth'  , 'verified'])->prefix('/dashboard')->group(function 
     Route::get('manager/create', [GlobaleController::class, 'createManager'])->name('create.manager');
     Route::get('speaker/create', [GlobaleController::class, 'createSpeaker'])->name('create.speaker');
     Route::delete('delete/video/{id}', [GlobaleController::class, 'deletevideo'])->name('delete.video');
+
+    Route::post('ticket/comment/{id}', [GlobaleController::class, 'createComment'])->name('ticket.comment.create');
 });
 
 

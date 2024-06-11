@@ -4,6 +4,7 @@ namespace  App\Services\Tickets;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use App\Models\TicketComment;
 use App\Services\GlobaleService;
 use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,22 @@ class TicketQuery extends GlobaleService {
         ]);
 
         return $ticket;
+    }
+
+    public function createCommentTicket(Request $request , String $id){
+        $ticket = Ticket::findOrFail(Crypt::decrypt($id));
+
+        $request->validate([
+            'comment' => ['required' , 'string' , 'max:300']
+        ]);
+
+        $comment = TicketComment::create([
+            'ticketId' => $ticket->id,
+            'userId' => Auth::user()->id,
+            'comment' => $request->comment,
+        ]);
+
+        return $comment;
     }
 
 

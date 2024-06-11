@@ -135,9 +135,7 @@
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
 
-
-
-                        <form action="{{ route('ticket.update', Crypt::encrypt($ticket->id)) }}" method="post"
+                        <form action="{{ route('ticket.comment.create', Crypt::encrypt($ticket->id)) }}" method="post"
                             class="form-horizontal">
                             @csrf
                             <div class="input-group input-group-sm mb-0">
