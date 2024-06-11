@@ -51,7 +51,7 @@
 
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" id="search_category" name="category" class="form-control float-right"
+                            <input type="text" id="search_filter" name="category" class="form-control float-right"
                                 placeholder="Search">
 
                             <div class="input-group-append">
@@ -75,7 +75,7 @@
 
                             </tr>
                         </thead>
-                        <tbody class="text-center" id="resultcategory">
+                        <tbody class="text-center" id="result">
                             @foreach ($subCategories as $subCategory)
                                 <x-update-filter-modal :filterId="$subCategory->id" :titleModel="'Update SubCategory'" :modelRoute="route('subcategory.update', Crypt::encrypt($subCategory->id))">
                                     <div class="form-group">

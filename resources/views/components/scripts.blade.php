@@ -85,7 +85,7 @@
         $('.select2').select2();
         $('.select3').select2();
 
-       
+
 
         $('input[name="tags[]"]').tagsinput();
 
@@ -146,6 +146,19 @@
 
 
 
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#search_filter').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $('#result tr').filter(function() {
+                $(this).toggle(
+                    $(this).text().toLowerCase().indexOf(value) > -1
+                );
+            });
+        });
     });
 </script>
 
