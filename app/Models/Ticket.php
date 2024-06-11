@@ -38,4 +38,14 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'clientId');
     }
+
+    /**
+     * Get all of the comments for the Ticket
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(TicketComment::class, 'ticketId');
+    }
 }

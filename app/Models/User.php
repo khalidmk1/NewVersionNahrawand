@@ -171,4 +171,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSubcategory::class, 'userId');
     }
+    /**
+     * Get all of the ticketComments for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ticketComments(): HasMany
+    {
+        return $this->hasMany(TicketComment::class, 'userId');
+    }
 }
