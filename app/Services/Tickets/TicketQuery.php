@@ -3,6 +3,7 @@
 namespace  App\Services\Tickets;
 
 use App\Models\Ticket;
+use Illuminate\Http\Request;
 use App\Services\GlobaleService;
 use App\Http\Requests\TicketRequest;
 use Illuminate\Support\Facades\Auth;
