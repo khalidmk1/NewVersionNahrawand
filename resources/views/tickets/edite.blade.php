@@ -29,9 +29,6 @@
                             @method('patch')
                             <div class="card-header row justify-content-between">
                                 <div class="col-6">
-                                    <h3 class="card-title">Detail Ticket</h3>
-                                </div>
-                                <div class="col-6">
                                     <button type="submit" class="btn btn-block btn-warning w-25 "
                                         style="float: right">Modifier</button>
                                 </div>
