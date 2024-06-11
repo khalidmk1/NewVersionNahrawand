@@ -12,30 +12,31 @@
                 id="title" placeholder="Entrez Titre ...">
         </div>
 
-        <div class="row">
-            <div class="form-group clearfix col-6">
-                <div class="icheck-primary d-inline">
-                    <input type="checkbox" name="isComing" id="iscoming"
-                        {{ $content->isComing == 1 ? 'checked' : '' }}>
-                    <label for="iscoming">
-                        Coming Soon
-                    </label>
-                </div>
-
-            </div>
-            <div class="col-6">
-                <!-- Bootstrap Switch -->
-                <label for="boostrap-switch" class="mr-5">
-                    Display
-                </label>
-                <input type="checkbox" name="isActive" id="boostrap-switch" data-value="" data-bootstrap-switch
-                    data-off-color="danger" data-on-color="success" {{ $content->isActive == 1 ? 'checked' : '' }}>
-            </div>
-            <!-- /.card -->
-
-        </div>
-
         @if ($content->contentType != 'quickly')
+            <div class="row">
+                <div class="form-group clearfix col-6">
+                    <div class="icheck-primary d-inline">
+                        <input type="checkbox" name="isComing" id="iscoming"
+                            {{ $content->isComing == 1 ? 'checked' : '' }}>
+                        <label for="iscoming">
+                            Coming Soon
+                        </label>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <!-- Bootstrap Switch -->
+                    <label for="boostrap-switch" class="mr-5">
+                        Display
+                    </label>
+                    <input type="checkbox" name="isActive" id="boostrap-switch" data-value="" data-bootstrap-switch
+                        data-off-color="danger" data-on-color="success" {{ $content->isActive == 1 ? 'checked' : '' }}>
+                </div>
+                <!-- /.card -->
+
+            </div>
+
+
             <!-- textarea -->
             <div class="form-group">
                 <label>Small Description</label>
