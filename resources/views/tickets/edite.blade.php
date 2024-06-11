@@ -90,33 +90,6 @@
                                         </div>
                                     </div> --}}
 
-                                    {{--    @foreach ($outhertickets as $outherticket)
-                                        <div class="col-12"> <!-- Post -->
-                                            <div class="post">
-                                                <div class="user-block">
-                                                    <img class="img-circle img-bordered-sm"
-                                                        src="{{ asset('storage/avatars/' . $outherticket->user->avatar) }}"
-                                                        alt="user image">
-                                                    <span class="username">
-                                                        <a
-                                                            href="#">{{ $outherticket->user->firstName . ' ' . $outherticket->user->lastName }}</a>
-                
-                                                    </span>
-                                                    <span class="description">Shared publicly -
-                                                        {{ Carbon\Carbon::parse($outherticket->update_at)->isoFormat('D MMMM YYYY à HH[h]mm') }}</span>
-                                                </div>
-                                                <!-- /.user-block -->
-                                                <p>
-                                                    {{ $outherticket->comment }}
-                                                </p>
-                
-                
-                
-                                            </div>
-                                            <!-- /.post -->
-                                        </div>
-                                    @endforeach --}}
-
                                 </div>
                                 <!-- /.card-body -->
 
@@ -145,6 +118,30 @@
                                 </div>
                             </div>
                         </form>
+
+
+                        @foreach ($ticket->comments as $comment)
+                            <div class="col-12"> <!-- Post -->
+                                <div class="post">
+                                    <div class="user-block">
+                                        <img class="img-circle img-bordered-sm"
+                                            src="{{ asset('storage/avatars/' . $comment->user->avatar) }}" alt="user image">
+                                        <span class="username">
+                                            <a
+                                                href="#">{{ $comment->user->firstName . ' ' . $comment->user->lastName }}</a>
+
+                                        </span>
+                                        <span class="description">Shared publicly -
+                                            {{ Carbon\Carbon::parse($comment->update_at)->isoFormat('D MMMM YYYY à HH[h]mm') }}</span>
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        {{ $comment->comment }}
+                                    </p>
+                                </div>
+                                <!-- /.post -->
+                            </div>
+                        @endforeach
 
 
 
