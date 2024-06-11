@@ -46,7 +46,7 @@ class ContentQuery extends GlobaleService {
         $isCertify = $request->isCertify == 'on';
          
         /*  $objectives = array_map('intval', $request->objectivesId);  */
-        $subCategories = array_map('intval', $request->subCategoryId); 
+        $subCategories = array_map('intval', $request->subCategoryId ?? []);
 
         $contentImage = $this->storeConteImage($request);
         $contentImageFlex = $this->storeConteImageFlex($request);
