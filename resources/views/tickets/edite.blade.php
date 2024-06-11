@@ -119,7 +119,7 @@
 
                     @foreach ($ticket->comments as $comment)
                         <!-- Post -->
-                        <div class="post clearfix">
+                        <div class="post clearfix mt-4">
                             <div class="user-block">
                                 <img class="img-circle img-bordered-sm"
                                     src="{{ asset('storage/avatars/' . $comment->user->avatar) }}" alt="User Image">
