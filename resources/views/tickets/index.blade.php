@@ -24,7 +24,7 @@
                         <th>Created at</th>
                         <th>Client</th>
                         <th>Statu</th>
-                        <th>Update at</th>
+                        <th>Update By</th>
                         <th>Date</th>
                     </tr>
                 </thead>
