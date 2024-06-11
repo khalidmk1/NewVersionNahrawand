@@ -60,7 +60,7 @@ class TicketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->TicketInterface->update($request , $id);
     }
 
     /**

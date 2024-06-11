@@ -38,9 +38,27 @@ class TicketQuery extends GlobaleService {
         return $ticket;
     }
 
+    public function updateTicket(Request $request , String $id) {
+        $ticket = Ticket::findOrFail(Crypt::decrypt($id));
+
+        $status = $request->status == 0 ? false : true;
+
+        $ticket->update([
+            'managerId' => Auth::user()->id,
+            'status' => $status,
+            'detail' => $request->detail,
+        ]);
+
+        return $ticket;
+    }
+
+
+    //ticket api
     public function ticketIndexApi(){
         $tickets = Ticket::where('clientId' , Auth::user()->id)->get(['TypeTicket' , 'status' , 'updated_at']);
         return $tickets;
     }
+
+   
 
 }

@@ -17,6 +17,11 @@ class TicketService extends TicketQuery implements TicketInterface {
         return view('tickets.edite')->with('ticket' , $ticket);
     }
 
+    public function update($request , $id){
+        $ticket = $this->updateTicket($request , $id);
+        return redirect()->back()->with('status' , 'You have Updated the ticket');
+    }
+
     //api tickets
     public function create($request){
         $ticket = $this->CreateTicket($request);
