@@ -75,5 +75,9 @@ class ContentController extends Controller
         return $this->contentInterface->destroy($request , $id);
     }
 
+    public function restore(String $contentId){
+        return $this->contentInterface->restore($contentId);
+    }
+
    
 }

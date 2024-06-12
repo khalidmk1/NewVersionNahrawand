@@ -196,6 +196,8 @@ class ContentQuery extends GlobaleService {
 
     }
 
+    
+
     //api content
 
     public function contentFavoris(String $content){

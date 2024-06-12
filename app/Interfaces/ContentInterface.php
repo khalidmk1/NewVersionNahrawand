@@ -12,6 +12,7 @@ interface ContentInterface {
     public function update($request , $id);
     public function destroy($request ,$id);
     public function history();
+    public function restore($contentId);
 
     //api content
     public function comingSoonContent();

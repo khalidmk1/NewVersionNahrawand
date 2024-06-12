@@ -88,8 +88,12 @@ class ContentService extends ContentQuery implements ContentInterface {
 
     public function history(){
         $histories = $this->historyDeleted();
-      
         return view('history.index')->with(['contents' => $histories['contents'] , 'videos' => $histories['videos']  ]);
+    }
+
+    public function restore($contentId){
+        $content = $this->restoreContent($contentId);
+        return redirect()->back()->with('status' , 'You have restore content');
     }
 
     //Api React Native

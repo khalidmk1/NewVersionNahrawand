@@ -42,6 +42,7 @@ Route::middleware(['auth'  , 'verified'])->prefix('/dashboard')->group(function 
     Route::get('client/{id}', [ProfileController::class, 'show'])->name('client.show');
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('history', [GlobaleController::class, 'history'])->name('history');
+    Route::post('content/restore/{content}', [ContentController::class, 'restore'])->name('content.restore');
     Route::get('admin/create', [GlobaleController::class, 'createAdmin'])->name('create.admin');
     Route::get('manager/create', [GlobaleController::class, 'createManager'])->name('create.manager');
     Route::get('speaker/create', [GlobaleController::class, 'createSpeaker'])->name('create.speaker');

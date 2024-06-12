@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EventUpdateRequest;
 use App\Http\Requests\VideoUpdateRequest;
@@ -277,7 +278,11 @@ class GlobaleService  {
         'programs'=>$programs ,'events' => $events , 'users' =>  $users];
     }
 
-    
+    public function restoreContent(String $contentId){
+        $content = Content::withTrashed()->findOrFail(Crypt::decrypt($contentId));
+        $content->restore();
+        return $content;
+    }
 
     //all api cotent Query
 

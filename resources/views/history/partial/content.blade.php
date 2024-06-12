@@ -22,8 +22,13 @@
                         <td>{{ $content->deleted_at }}</td>
 
                         <td>
-                            <a class="btn btn-block btn-dark" href=""><i class="fa fa-undo"
-                                    aria-hidden="true"></i></a>
+                            <form action="{{ route('content.restore', Crypt::encrypt($content->id)) }}"
+                                method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-block btn-dark"><i class="fa fa-undo"
+                                        aria-hidden="true"></i></button>
+                            </form>
+
                         </td>
 
                     </tr>
