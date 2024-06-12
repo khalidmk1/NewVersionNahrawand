@@ -127,7 +127,7 @@
             </div>
         @endif
 
-        @if ($content->contentType == 'formation')
+        @if ($content->contentType == 'formation' $content->contentType == 'quickly' )
             <div class="form-group">
                 <label>Formateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">

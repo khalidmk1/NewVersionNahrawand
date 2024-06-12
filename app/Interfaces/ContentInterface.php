@@ -11,14 +11,13 @@ interface ContentInterface {
     public function show($content); 
     public function update($request , $id);
     public function destroy($request ,$id);
+    public function history();
 
     //api content
-
     public function comingSoonContent();
     public function allContent();
     public function contentFormation();
     public function contentPodcast();
-    
     public function createFavoris($content);
     public function favorisExists($content);
     public function createView($content);

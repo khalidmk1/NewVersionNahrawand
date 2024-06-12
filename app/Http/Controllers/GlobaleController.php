@@ -62,6 +62,10 @@ class GlobaleController extends Controller
         return $this->ContentInterface->quicklyIndex();
     }
 
+    public function history(){
+        return $this->contentInterface->history();
+    }
+
     public function createComment(Request $request ,String $id){
         return  $this->TicketInterface->createComment($request , $id); 
     }

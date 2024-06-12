@@ -83,8 +83,11 @@ class ContentService extends ContentQuery implements ContentInterface {
 
     public function destroy($request , $id){
         $distroyedContent = $this->destroyContent($request , $id);
-
         return redirect()->route('content.index')->with('status', 'You have deleted content');
+    }
+
+    public function history(){
+        return view('history.index');
     }
 
     //Api React Native

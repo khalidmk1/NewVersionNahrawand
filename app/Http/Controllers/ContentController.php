@@ -74,4 +74,6 @@ class ContentController extends Controller
     {
         return $this->contentInterface->destroy($request , $id);
     }
+
+   
 }
