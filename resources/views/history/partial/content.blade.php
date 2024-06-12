@@ -12,24 +12,23 @@
             </thead>
             <tbody>
                 @foreach ($contents as $content)
-                <tr>
-                    <td>{{$content->title}}</td>
-                    <td>{{$content->contentType}}</td>
-                    <td> <img src="{{ asset('storage/content/' . $content->image) }}"
-                        class="img-thumbnail" style="height: 173px" alt="Content" /></td>
-                    <td>{{$content->deleted_at}}</td>
-                    <td>
+                    <tr>
+                        <td>{{ $content->title }}</td>
+                        <td>{{ $content->contentType }}</td>
+                        <td>  <button class="btn btn-block btn-info" href=""><i class="fa fa-undo"
+                            aria-hidden="true"></i></button></td>
+                        <td>{{ $content->deleted_at }}</td>
+
                         <td>
-                            <a class="btn btn-block btn-info"
-                                href=""><i
-                                    class="fa fa-undo" aria-hidden="true"></i></a>
+                            <a class="btn btn-block btn-info" href=""><i class="fa fa-undo"
+                                    aria-hidden="true"></i></a>
                         </td>
-                    </td>
-                </tr>
+
+                    </tr>
                 @endforeach
-                
+
             </tbody>
-        
+
         </table>
     </div>
     <!-- /.card-body -->
