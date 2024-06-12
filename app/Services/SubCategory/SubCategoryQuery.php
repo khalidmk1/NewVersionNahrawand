@@ -7,13 +7,14 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\UserSubcategory;
+use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\SubCategoryRequest;
 
 
-class SubCategoryQuery {
+class SubCategoryQuery extends GlobaleService {
     
     public function allCategory(){
         $categories = Category::all();

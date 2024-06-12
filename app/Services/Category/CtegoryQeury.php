@@ -5,12 +5,13 @@ namespace  App\Services\Category;
 use App\Models\Domain;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\CategoryRequest;
 
-class CtegoryQeury {
+class CtegoryQeury extends GlobaleService {
 
     public function allDomains(){
         $domains = Domain::all();
@@ -59,6 +60,11 @@ class CtegoryQeury {
             $category->delete();
         }
         return $category;
+    }
+
+    public function restore($categoryId){
+        $category = $this->restoreCategory($categoryId);
+        return redirect()->back()->with('status' , 'You Have restored Category');
     }
     
 }

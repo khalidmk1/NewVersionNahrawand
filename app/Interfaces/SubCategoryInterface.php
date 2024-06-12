@@ -10,6 +10,7 @@ interface SubCategoryInterface {
     public function store($request);
     public function update($request , $id);
     public function destroy($request , $id);
+    public function restore($subCategoryId);
 
     //api subCategory
     public function subCategoryByDomain();

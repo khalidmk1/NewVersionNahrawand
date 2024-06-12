@@ -7,5 +7,6 @@ interface CategoryInterface {
     public function store($request);
     public function update($request, $id);
     public function destroy($request , $id);
+    public function restore($categoryId);
 }
 

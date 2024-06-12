@@ -36,6 +36,10 @@ class SubCategoryService extends SubCategoryQuery implements SubCategoryInterfac
         return redirect()->back()->with('status' , 'You Delete SubCategory');
     }
 
+    public function restore($subCategoryId){
+        $subcategory = $this->restoreSubCategory($subCategoryId);
+        return redirect()->back()->with('status' , 'You have restored subCategory');
+    }
 
     //api subCategory
     public function subCategoryByDomain(){

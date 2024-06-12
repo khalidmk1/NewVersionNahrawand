@@ -69,4 +69,8 @@ class SubCategoryController extends Controller
     {
         return $this->SubCategoryInterface->destroy($request , $id);
     }
+
+    public function restore(String $subCategoryId){
+        return $this->SubCategoryInterface->restore($subCategoryId); 
+    }
 }

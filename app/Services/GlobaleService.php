@@ -290,6 +290,18 @@ class GlobaleService  {
         return $video;
     }
 
+    public function restoreCategory(String $categoryId){
+        $category = Category::withTrashed()->findOrFail(Crypt::decrypt($categoryId));
+        $category->restore();
+        return $category;
+    }
+
+    public function restoreSubCategory(String $subCategoryId){
+        $subCategory = SubCategory::withTrashed()->findOrFail(Crypt::decrypt($subCategoryId));
+        $subCategory->restore();
+        return $subCategory;
+    }
+
     //all api cotent Query
 
 

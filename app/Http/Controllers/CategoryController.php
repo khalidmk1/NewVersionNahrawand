@@ -70,4 +70,8 @@ class CategoryController extends Controller
     {
         return $this->CategoryInterface->destroy($request , $id);
     }
+
+    public function restore(String $categoryId){
+        return $this->CategoryInterface->restore($categoryId);
+    }
 }

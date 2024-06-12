@@ -78,17 +78,14 @@
                                         aria-labelledby="custom-tabs-one-Video-tab">
                                         @include('history.partial.video')
                                     </div>
-                                    <div class="tab-pane fade" id="custom-tabs-one-Quicly" role="tabpanel"
-                                        aria-labelledby="custom-tabs-one-Quicly-tab">
-
-                                    </div>
+                                  
                                     <div class="tab-pane fade" id="custom-tabs-one-Categoty" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Categoty-tab">
-
+                                        @include('history.partial.category')
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-SubCategory" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-SubCategory-tab">
-
+                                        @include('history.partial.suCategory')
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-Program" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Program-tab">

@@ -88,7 +88,9 @@ class ContentService extends ContentQuery implements ContentInterface {
 
     public function history(){
         $histories = $this->historyDeleted();
-        return view('history.index')->with(['contents' => $histories['contents'] , 'videos' => $histories['videos']  ]);
+        return view('history.index')->with(['contents' => $histories['contents'] , 'videos' => $histories['videos'] , 
+        'categories' => $histories['categories'] , 'subCategories' => $histories['subCategories'] , 
+        'programs' => $histories['programs'] , 'events' => $histories['events'] , 'users' => $histories['users'] ]);
     }
 
     public function restore($contentId){

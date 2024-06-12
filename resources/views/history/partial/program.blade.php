@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 @foreach ($videos as $video)
-                    <x-card-image :itemId="$video->id" :imageUrl="asset('storage/video/' . $video->image)" />
+                   {{--  <x-card-image :itemId="$video->id" :imageUrl="asset('storage/video/' . $video->image)" /> --}}
                     <tr>
                         <td>{{ $video->title }}</td>
                         <td>{{ $video->description }}</td>
