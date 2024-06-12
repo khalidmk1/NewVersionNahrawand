@@ -14,6 +14,7 @@
 @endsection
 
 @section('content')
+    @include('components.single-generic-model')
     <div class="row">
 
 
@@ -29,7 +30,7 @@
                                         <a class="nav-link active" id="custom-tabs-one-Content-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Content" role="tab"
                                             aria-controls="custom-tabs-one-home" aria-selected="true">Content</a>
-                                        
+
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="custom-tabs-one-Categoty-tab" data-toggle="pill"

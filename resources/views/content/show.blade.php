@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+    <x-delete-modal :modelDeleteId="$content->id" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
 
@@ -334,9 +335,10 @@
                             @include('content.partial.forms.update')
                         </div>
 
-                        <x-delete-modal :modelDeleteId="$content->id" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
+
 
                         <div class="tab-pane" id="settings">
+
                             <div class="form-group">
                                 <button type="submit" data-toggle="modal" data-target="#delete_{{ $content->id }}"
                                     class="btn btn-danger w-50">Delete</button>
