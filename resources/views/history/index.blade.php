@@ -18,13 +18,6 @@
 
 
         <div class="card card-default col-12">
-            <div class="card-header row">
-                <div class="col-4">
-                    <h3 class="card-title">Voir les Contenu</h3>
-                </div>
-            </div>
-            <!-- /.card-header -->
-
             <div class="card-body" id="resultcours">
                 <!-- ./row -->
                 <div class="row">
@@ -36,11 +29,7 @@
                                         <a class="nav-link active" id="custom-tabs-one-Content-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Content" role="tab"
                                             aria-controls="custom-tabs-one-home" aria-selected="true">Content</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-one-Quicly-tab" data-toggle="pill"
-                                            href="#custom-tabs-one-Quicly" role="tab"
-                                            aria-controls="custom-tabs-one-Quicly" aria-selected="true">Quickly</a>
+                                        
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="custom-tabs-one-Categoty-tab" data-toggle="pill"
@@ -57,11 +46,6 @@
                                         <a class="nav-link" id="custom-tabs-one-Program-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Program" role="tab"
                                             aria-controls="custom-tabs-one-Program" aria-selected="false">Program</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-one-Objectives-tab" data-toggle="pill"
-                                            href="#custom-tabs-one-Objectives" role="tab"
-                                            aria-controls="custom-tabs-one-Objectives" aria-selected="false">Objectives</a>
                                     </li>
 
                                     {{-- <li class="nav-item">
@@ -83,7 +67,7 @@
                                 <div class="tab-content" id="custom-tabs-one-tabContent">
                                     <div class="tab-pane fade show active" id="custom-tabs-one-Content" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Content-tab">
-
+                                        @include('history.partial.content')
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-Quicly" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Quicly-tab">
@@ -122,4 +106,6 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+    @include('components.jQuery')
+    @include('components.spicific-script')
 @endsection

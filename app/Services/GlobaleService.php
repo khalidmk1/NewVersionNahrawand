@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Content;
 use App\Models\Program;
 use App\Models\Category;
@@ -262,6 +263,18 @@ class GlobaleService  {
         ->get();
 
         return $speakers;
+    }
+
+    public function historyDeleted(){
+        $contents = Content::onlyTrashed()->get();
+        $videos = ContentVideo::onlyTrashed()->get();
+        $categories = Category::onlyTrashed()->get();
+        $subCategories = SubCategory::onlyTrashed()->get();
+        $programs = Program::onlyTrashed()->get();
+        $events = Event::onlyTrashed()->get();
+        $users = User::onlyTrashed()->get();
+        return ['contents' => $contents ,'videos' => $videos , 'categories' => $categories , 'subCategories' => $subCategories ,
+        'programs'=>$programs ,'events' => $events , 'users' =>  $users];
     }
 
     
