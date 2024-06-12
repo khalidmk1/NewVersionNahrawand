@@ -63,7 +63,7 @@ class GlobaleController extends Controller
     }
 
     public function history(){
-        return $this->contentInterface->history();
+        return $this->ContentInterface->history();
     }
 
     public function createComment(Request $request ,String $id){
