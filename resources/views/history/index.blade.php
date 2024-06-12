@@ -30,7 +30,11 @@
                                         <a class="nav-link active" id="custom-tabs-one-Content-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Content" role="tab"
                                             aria-controls="custom-tabs-one-home" aria-selected="true">Content</a>
-
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-one-Video-tab" data-toggle="pill"
+                                            href="#custom-tabs-one-Video" role="tab"
+                                            aria-controls="custom-tabs-one-video" aria-selected="true">Video</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="custom-tabs-one-Categoty-tab" data-toggle="pill"
@@ -69,6 +73,10 @@
                                     <div class="tab-pane fade show active" id="custom-tabs-one-Content" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Content-tab">
                                         @include('history.partial.content')
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-tabs-one-Video" role="tabpanel"
+                                        aria-labelledby="custom-tabs-one-Video-tab">
+                                        @include('history.partial.video')
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-Quicly" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Quicly-tab">

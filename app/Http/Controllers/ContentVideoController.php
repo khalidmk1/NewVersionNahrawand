@@ -74,4 +74,8 @@ class ContentVideoController extends Controller
     {
         return $this->videoInterface->destroy($request , $id);
     }
+
+    public function restore(String $videoId){
+        return $this->videoInterface->restore($videoId);
+    }
 }

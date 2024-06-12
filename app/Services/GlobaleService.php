@@ -284,6 +284,12 @@ class GlobaleService  {
         return $content;
     }
 
+    public function restoreVideo(String $videoId){
+        $video = ContentVideo::withTrashed()->findOrFail(Crypt::decrypt($videoId));
+        $video->restore();
+        return $video;
+    }
+
     //all api cotent Query
 
 

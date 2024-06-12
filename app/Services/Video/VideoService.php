@@ -36,6 +36,11 @@ class VideoService extends VideoQuery implements VideoInterface {
         return redirect()->back()->with('status' , 'You have Delete Video');
     }
 
+    public function restore($videoId){
+        $video = $this->restoreVideo($videoId);
+        return redirect()->back()->with('status' , 'You have restore Video');
+    }
+
     //api videos
     public function showVideo($video){
         $videos = $this->getVideoByContent($video);
