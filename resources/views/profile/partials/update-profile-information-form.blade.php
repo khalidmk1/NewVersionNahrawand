@@ -122,7 +122,7 @@
                 <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
                     style="width: 100%;">
                     @foreach ($rolesAdmin as $roleAdmin)
-                        <option value="{{ $rolesAdmin->name }}"
+                        <option value="{{ $roleAdmin->name }}"
                             {{ $user->roles->contains('id', $roleAdmin->id) ? 'selected' : '' }}>
                             {{ $roleAdmin->name }}</option>
                     @endforeach
