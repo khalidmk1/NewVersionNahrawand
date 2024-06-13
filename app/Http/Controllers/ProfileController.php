@@ -51,34 +51,57 @@ class ProfileController extends Controller
     
         $rules = $request->rules();
         $rules['email'] = ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)];
-        $rules['avatar'] = ['nullable' , 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
-        $rules['cover'] = ['nullable' , 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
-        $rules['role'] = ['nullable'];
+        $rules['avatar'] = ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
+        $rules['cover'] = ['nullable', 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
+    
+        // Handle password validation if it's set
+        if ($request->filled('password')) {
+            $rules['password'] = ['nullable', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()];
+        }
+    
         $validatedData = $request->validate($rules);
     
-        $user->fill($validatedData);
+        $user->fill([
+            'firstName' => $validatedData['firstName'],
+            'lastName' => $validatedData['lastName'],
+            'biographie' => $validatedData['biographie'] ?? $user->biographie,
+            'facebook' => $validatedData['facebook'] ?? $user->facebook,
+            'linkedin' => $validatedData['linkedin'] ?? $user->linkedin,
+            'instagram' => $validatedData['instagram'] ?? $user->instagram,
+            'email' => $validatedData['email'],
+            'isPopular' => $request->boolean('isPopular', $user->isPopular),
+        ]);
     
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
         }
     
         if ($request->has('avatar')) {
-            $avatarName = $this->updateAvatar($request , $user->avatar);
+            $avatarName = $this->updateAvatar($request, $user->avatar);
             $user->avatar = $avatarName;
         }
+    
         if ($request->has('cover')) {
-            $coverName = $this->updateCover($request , $user->cover);
+            $coverName = $this->updateCover($request, $user->cover);
             $user->cover = $coverName;
         }
-
+    
         $user->isUpdated = true;
-
-        $user->syncRoles([$request->role]);
+    
+        // Sync roles
+        if ($request->has('role') && !empty($request->role)) {
+            $roles = Role::whereIn('name', $validatedData['role'])->get();
+            $user->syncRoles($roles);
+        } else {
+            $user->syncRoles($user->roles->pluck('name')->toArray());
+        }
     
         $user->save();
     
         return redirect()->back()->with('status', 'profile-updated');
     }
+    
 
     
 

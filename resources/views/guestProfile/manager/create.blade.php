@@ -54,14 +54,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Roles</label>
-                        <select name="role[]" class="form-control select2" style="width: 100%;">
-                            @foreach ($roleManagers as $roleManager)
-                                <option value="{{ $roleManager->name }}">{{ $roleManager->name }}</option>
+                        <label>Speaker Type</label>
+                        <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                            style="width: 100%;">
+                            @foreach ($roleManagers as $roleManagers)
+                                <option value="{{ $roleManagers->name }}">{{ $roleManagers->name }}</option>
                             @endforeach
 
                         </select>
                     </div>
+                    <!-- /.form-group -->
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
