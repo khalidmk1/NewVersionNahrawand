@@ -80,8 +80,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="tab-content" id="custom-tabs-one-tabContent">
-                                    <div class="tab-pane fade show active" id="custom-tabs-one-Content" role="tabpanel"
-                                        aria-labelledby="custom-tabs-one-Content-tab">
+                                    <div class="tab-pane fade show active" id="custom-tabs-one-user" role="tabpanel"
+                                        aria-labelledby="custom-tabs-one-user-tab">
                                         @include('history.partial.user')
                                     </div>
 
