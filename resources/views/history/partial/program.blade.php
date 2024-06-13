@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered table-striped example1">
             <thead>
                 <tr>
                     <th>Title</th>

@@ -28,6 +28,7 @@
             <!-- /.card-header -->
             <form action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="text" name="roleManager" hidden>
                 <div class="card-body">
                     <div class="form-group">
                         <label for="avatar">Avatar</label>
@@ -54,7 +55,7 @@
 
                     <div class="form-group">
                         <label>Roles</label>
-                        <select name="role" class="form-control select2" style="width: 100%;">
+                        <select name="role[]" class="form-control select2" style="width: 100%;">
                             @foreach ($roleManagers as $roleManager)
                                 <option value="{{ $roleManager->name }}">{{ $roleManager->name }}</option>
                             @endforeach

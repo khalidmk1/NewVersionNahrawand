@@ -16,7 +16,8 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+
+        $rules =  [
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
             'isLogin' => ['boolean'],
@@ -31,8 +32,10 @@ class ProfileUpdateRequest extends FormRequest
             'status_matrimonial' => [ 'string', 'max:255'],
             'numChild' => ['integer'],
             'profission' => [ 'string', 'max:255'],
-            'role' => ['required' , 'array']
+            'role' => ['sometimes' , 'array'],
         ];
+
+        return $rules;
     }
 
 }

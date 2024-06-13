@@ -97,9 +97,15 @@ class ProfileQeury extends GlobaleService {
         $rules['email'] = ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class];
         $rules['password'] = ['nullable', 'confirmed', Password::defaults()];
         $rules['avatar'] = ['required' , 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
-        if($request->has('roleSpeaker')){
+        if($request->has('roleSpeaker') ){
             $rules['cover'] = ['required' , 'file', 'mimes:jpeg,png,jpg,gif', 'max:2000'];
+            $rules['role'] = ['required' , 'array'];
         }  
+
+        if($request->has('roleManager')){
+            $rules['role'] = ['required' , 'array'];
+        }
+        
         $validatedData = $request->validate($rules);
         $avatarName =  $this->storeAvatar($request);
         $coverName = $this->storeCover($request);
@@ -125,8 +131,8 @@ class ProfileQeury extends GlobaleService {
             'password' => $hashedPassword
         ]);
 
-        if ($request->has('role')) {
-            $roles = Role::whereIn('name', $request->role)->get();
+        if ($request->has('role') && !empty($request->role)) {
+            $roles = Role::whereIn('name', $validatedData['role'])->get();
             $user->syncRoles($roles);
         } else {
             $role = Role::where('name', 'Admin')->firstOrFail();
