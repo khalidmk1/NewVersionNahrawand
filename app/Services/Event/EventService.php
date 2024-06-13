@@ -35,6 +35,17 @@ class EventService extends EventQuery implements EventInterface   {
         return redirect()->back()->with('status' , 'You Have updated event');
     }
 
+    public function destroy($request , $id){
+        $event = $this->destroyEvent($request , $id);
+        return redirect()->route('event.index')->with('status', 'You have deleted event');
+    }
+
+    public function restore($eventId){
+        $event = $this->restoreEvent($eventId);
+        return redirect()->back()->with('status' , 'You have restored event');
+
+    }
+
     //api event
     public function eventIndex(){
         $events = $this->getEventIndex();

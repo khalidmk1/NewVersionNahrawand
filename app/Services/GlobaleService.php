@@ -278,6 +278,13 @@ class GlobaleService  {
         'programs'=>$programs ,'events' => $events , 'users' =>  $users];
     }
 
+    public function restoreUser(String $userId){
+        $user = User::withTrashed()->findOrFail(Crypt::decrypt($userId));
+        $user->restore();
+        return $user;
+    }
+
+
     public function restoreContent(String $contentId){
         $content = Content::withTrashed()->findOrFail(Crypt::decrypt($contentId));
         $content->restore();
@@ -285,9 +292,16 @@ class GlobaleService  {
     }
 
     public function restoreVideo(String $videoId){
+        dd($eventId);
         $video = ContentVideo::withTrashed()->findOrFail(Crypt::decrypt($videoId));
         $video->restore();
         return $video;
+    }
+
+    public function restoreEvent(String $eventId){
+        $event = Event::withTrashed()->findOrFail(Crypt::decrypt($eventId));
+        $event->restore();
+        return $event;
     }
 
     public function restoreCategory(String $categoryId){
@@ -300,6 +314,12 @@ class GlobaleService  {
         $subCategory = SubCategory::withTrashed()->findOrFail(Crypt::decrypt($subCategoryId));
         $subCategory->restore();
         return $subCategory;
+    }
+
+    public function restoreProgram(String $programId){
+        $program = Program::withTrashed()->findOrFail(Crypt::decrypt($programId));
+        $program->restore();
+        return $program;
     }
 
     //all api cotent Query

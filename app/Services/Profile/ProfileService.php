@@ -60,6 +60,11 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return redirect()->back()->with('status' , 'You Created A user');
     }
 
+    public function restore($userId){
+        $user = $this->restoreUser($userId);
+        return redirect()->back()->with('status' , 'You Have restored User');
+    }
+
     //api profile user
     public function authUser(){
         $user = $this->authClient();

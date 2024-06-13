@@ -136,4 +136,8 @@ class ProfileController extends Controller
        
         return redirect()->back()->with('status' , 'You Delete Profile');
     }
+
+    public function restore(String $userId){
+        return $this->ProfileInterface->restore($userId);
+    }
 }

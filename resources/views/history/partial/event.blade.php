@@ -4,30 +4,33 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Description</th>
-                   {{--  <th>Image</th> --}}
+                    <th>Desctiption</th>
+                    <th>Image</th>
                     <th>Delete at</th>
                     <th>Restore</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($programs as $program)
-                    {{--  <x-card-image :itemId="$video->id" :imageUrl="asset('storage/video/' . $video->image)" /> --}}
+                @foreach ($events as $event)
+                    <x-card-image :itemId="$event->id" :imageUrl="asset('storage/event/' . $event->image)" />
                     <tr>
-                        <td>{{ $program->title }}</td>
-                        <td>{{ $program->description }}</td>
-                       {{--  <td> <button class="btn btn-block btn-info" data-toggle="modal"
-                                data-target="#element_{{ $video->id }}"><i class="fa fa-plus"
-                                    aria-hidden="true"></i></button></td> --}}
-                        <td>{{ $program->deleted_at }}</td>
+                        <td>{{ $event->title }}</td>
+                        <td>{{ $event->description }}</td>
+                        <td> <button class="btn btn-block btn-info" data-toggle="modal"
+                                data-target="#element_{{ $event->id }}"><i class="fa fa-plus"
+                                    aria-hidden="true"></i></button></td>
+                        <td>{{ $event->deleted_at }}</td>
+
                         <td>
-                            <form action="{{ route('program.restore', Crypt::encrypt($program->id)) }}" method="post">
+                            <form action="{{ route('event.restore', Crypt::encrypt($event->id)) }}"
+                                method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-block btn-dark"><i class="fa fa-undo"
                                         aria-hidden="true"></i></button>
                             </form>
 
                         </td>
+
                     </tr>
                 @endforeach
 

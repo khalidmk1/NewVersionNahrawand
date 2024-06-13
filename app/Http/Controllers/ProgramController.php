@@ -72,4 +72,8 @@ class ProgramController extends Controller
     {
         return  $this->ProgramInterface->destroy($request ,$id);
     }
+
+    public function restore(String $programId){
+        return $this->ProgramInterface->restore($programId);
+    }
 }

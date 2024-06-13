@@ -19,6 +19,7 @@ interface ProfileInterface {
     public function createSpeaker();
 
     public function store($request);
+    public function restore($userId);
 
     //api profile user
     public function authUser();

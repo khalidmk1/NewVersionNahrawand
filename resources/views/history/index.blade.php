@@ -27,7 +27,12 @@
                             <div class="card-header p-0 ">
                                 <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="custom-tabs-one-Content-tab" data-toggle="pill"
+                                        <a class="nav-link active" id="custom-tabs-one-user-tab" data-toggle="pill"
+                                            href="#custom-tabs-one-user" role="tab" aria-controls="custom-tabs-one-home"
+                                            aria-selected="true">User</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-one-Content-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Content" role="tab"
                                             aria-controls="custom-tabs-one-home" aria-selected="true">Content</a>
                                     </li>
@@ -35,6 +40,11 @@
                                         <a class="nav-link" id="custom-tabs-one-Video-tab" data-toggle="pill"
                                             href="#custom-tabs-one-Video" role="tab"
                                             aria-controls="custom-tabs-one-video" aria-selected="true">Video</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-one-event-tab" data-toggle="pill"
+                                            href="#custom-tabs-one-event" role="tab"
+                                            aria-controls="custom-tabs-one-event" aria-selected="true">Event</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="custom-tabs-one-Categoty-tab" data-toggle="pill"
@@ -72,13 +82,22 @@
                                 <div class="tab-content" id="custom-tabs-one-tabContent">
                                     <div class="tab-pane fade show active" id="custom-tabs-one-Content" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Content-tab">
+                                        @include('history.partial.user')
+                                    </div>
+
+                                    <div class="tab-pane fade" id="custom-tabs-one-Content" role="tabpanel"
+                                        aria-labelledby="custom-tabs-one-Content-tab">
                                         @include('history.partial.content')
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-Video" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Video-tab">
                                         @include('history.partial.video')
                                     </div>
-                                  
+                                    <div class="tab-pane fade" id="custom-tabs-one-event" role="tabpanel"
+                                        aria-labelledby="custom-tabs-one-event-tab">
+                                        @include('history.partial.event')
+                                    </div>
+
                                     <div class="tab-pane fade" id="custom-tabs-one-Categoty" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Categoty-tab">
                                         @include('history.partial.category')
@@ -89,11 +108,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-one-Program" role="tabpanel"
                                         aria-labelledby="custom-tabs-one-Program-tab">
-
-                                    </div>
-                                    <div class="tab-pane fade" id="custom-tabs-one-Objectives" role="tabpanel"
-                                        aria-labelledby="custom-tabs-one-Objectives-tab">
-
+                                        @include('history.partial.program')
                                     </div>
 
                                 </div>

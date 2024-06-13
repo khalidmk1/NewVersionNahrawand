@@ -7,6 +7,9 @@ use App\Models\Event;
 use App\Models\EventUser;
 use App\Services\GlobaleService;
 use App\Http\Requests\EventRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\EventUpdateRequest;
 
@@ -89,6 +92,16 @@ class EventQuery extends GlobaleService {
         }
 
 
+        return $event;
+    }
+
+    public function destroyEvent(DestroyRequest $request , String $id){
+        $event = Event::findOrFail(Crypt::decrypt($id));
+
+        if(Hash::check( $request->password, Auth::user()->password ))
+        {
+            $event->delete();
+        }
         return $event;
     }
 

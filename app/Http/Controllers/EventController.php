@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Interfaces\EventInterface;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\DestroyRequest;
 use App\Http\Requests\EventUpdateRequest;
 
 class EventController extends Controller
@@ -68,8 +69,12 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DestroyRequest $request, string $id)
     {
-        //
+        return $this->eventInterface->destroy($request , $id);
+    }
+
+    public function restore(String $eventId){
+        return $this->eventInterface->restore($eventId);
     }
 }
