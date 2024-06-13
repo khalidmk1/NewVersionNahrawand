@@ -129,7 +129,9 @@
 
             <div class="form-group">
                 <label>Type of Speaker</label>
-                <select name="role[]" class="custom-select">
+
+                <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                    style="width: 100%;">
                     @foreach ($rolesMangers as $rolesManger)
                         <option value="{{ $rolesManger->name }}"
                             {{ $user->roles->contains('id', $rolesManger->id) ? 'selected' : '' }}>
@@ -137,6 +139,10 @@
                     @endforeach
 
                 </select>
+
+
+
+
             </div>
         @endif
 
@@ -160,8 +166,8 @@
 
             <div class="form-group">
                 <label>Type of Speaker</label>
-                <select  class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
-                style="width: 100%;">
+                <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                    style="width: 100%;">
                     @foreach ($rolesSpeakers as $rolesSpeaker)
                         <option value="{{ $rolesSpeaker->name }}"
                             {{ $user->roles->contains('id', $rolesSpeaker->id) ? 'selected' : '' }}>
