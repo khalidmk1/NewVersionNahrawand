@@ -39,7 +39,7 @@ class ProfileController extends Controller
         $user = User::findOrFail(Crypt::decrypt($id));
         $rolesSpeakers = $this->ProfileInterface->speakersAllRole();
         $rolesMangers = $this->ProfileInterface->mangerAllRole();
-        $rolesAdmin = $this->ProfileInterface->adminAllAdmin();
+        $rolesAdmin = $this->ProfileInterface->adminAllRole();
         $rolesSuperAdmin = $this->ProfileInterface->superAdminRole();
         return view('profile.edit')->with(['user' => $user , 'rolesSpeakers' => $rolesSpeakers , 
         'rolesMangers' => $rolesMangers , 'rolesAdmin' => $rolesAdmin , 'rolesSuperAdmin' => $rolesSuperAdmin]);
