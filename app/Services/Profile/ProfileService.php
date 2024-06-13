@@ -41,8 +41,13 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return $roles;
     }
 
-    public function adminAllAdmin(){
+    public function adminAllRole(){
         $role = $this->allRoleAdmin();
+        return $role;
+    }
+
+    public function superAdminRole(){
+        $role = $this->allRoleSuperAdmin();
         return $role;
     }
 

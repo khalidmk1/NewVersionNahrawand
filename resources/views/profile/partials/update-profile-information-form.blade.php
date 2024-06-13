@@ -116,20 +116,39 @@
         </div>
 
         @if ($user->hasAnyRole('Admin'))
+            <div class="form-group">
+                <label>Role</label>
+
+                <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                    style="width: 100%;">
+                    @foreach ($rolesAdmin as $roleAdmin)
+                        <option value="{{ $rolesAdmin->name }}"
+                            {{ $user->roles->contains('id', $roleAdmin->id) ? 'selected' : '' }}>
+                            {{ $roleAdmin->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+        @endif
+
         <div class="form-group">
             <label>Role</label>
 
             <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
                 style="width: 100%;">
-                @foreach ($rolesAdmin as $rolesAdmin)
-                    <option value="{{ $rolesAdmin->name }}"
-                        {{ $user->roles->contains('id', $rolesAdmin->id) ? 'selected' : '' }}>
-                        {{ $rolesAdmin->name }}</option>
+                @foreach ($rolesSuperAdmin as $roleSuperAdmin)
+                    <option value="{{ $roleSuperAdmin->name }}"
+                        {{ $user->roles->contains('id', $roleSuperAdmin->id) ? 'selected' : '' }}>
+                        {{ $roleSuperAdmin->name }}</option>
                 @endforeach
 
             </select>
         </div>
-        @endif
+
+      {{--   @if ($user->hasAnyRole('Super Admin'))
+           
+        @endif --}}
+
 
         @if (
             !$user->hasAnyRole([

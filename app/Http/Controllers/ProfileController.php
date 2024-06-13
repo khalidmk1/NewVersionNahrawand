@@ -40,9 +40,9 @@ class ProfileController extends Controller
         $rolesSpeakers = $this->ProfileInterface->speakersAllRole();
         $rolesMangers = $this->ProfileInterface->mangerAllRole();
         $rolesAdmin = $this->ProfileInterface->adminAllAdmin();
-
+        $rolesSuperAdmin = $this->ProfileInterface->superAdminRole();
         return view('profile.edit')->with(['user' => $user , 'rolesSpeakers' => $rolesSpeakers , 
-        'rolesMangers' => $rolesMangers , 'rolesAdmin' => $rolesAdmin]);
+        'rolesMangers' => $rolesMangers , 'rolesAdmin' => $rolesAdmin , 'rolesSuperAdmin' => $rolesSuperAdmin]);
     }
 
     /**

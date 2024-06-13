@@ -93,6 +93,12 @@ class ProfileQeury extends GlobaleService {
 
         return $adminRole;
     }
+    public function allRoleSuperAdmin(){
+        $includedRoles = ['Super Admin'];
+        $superAdminRole = Role::whereIn('name', $includedRoles)->get();
+
+        return $superAdminRole;
+    }
 
    
 
