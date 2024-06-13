@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('header')
-    View Speakers Page
+    View Admin Page
 @endsection
 
 @section('page')
