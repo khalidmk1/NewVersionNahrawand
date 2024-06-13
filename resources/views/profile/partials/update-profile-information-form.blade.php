@@ -131,24 +131,22 @@
             </div>
         @endif
 
-        <div class="form-group">
-            <label>Role</label>
+        @if ($user->hasAnyRole('Super Admin'))
+            <div class="form-group">
+                <label>Role</label>
 
-            <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
-                style="width: 100%;">
-                @foreach ($rolesSuperAdmin as $roleSuperAdmin)
-                    <option value="{{ $roleSuperAdmin->name }}"
-                        {{ $user->roles->contains('id', $roleSuperAdmin->id) ? 'selected' : '' }}>
-                        {{ $roleSuperAdmin->name }}</option>
-                @endforeach
+                <select class="select2" name="role[]" multiple="multiple" data-placeholder="Select a State"
+                    style="width: 100%;">
+                    @foreach ($rolesSuperAdmin as $roleSuperAdmin)
+                        <option value="{{ $roleSuperAdmin->name }}"
+                            {{ $user->roles->contains('id', $roleSuperAdmin->id) ? 'selected' : '' }}>
+                            {{ $roleSuperAdmin->name }}</option>
+                    @endforeach
 
-            </select>
-        </div>
-
-      {{--   @if ($user->hasAnyRole('Super Admin'))
-           
-        @endif --}}
-
+                </select>
+            </div>
+        @endif
+        
 
         @if (
             !$user->hasAnyRole([
