@@ -41,6 +41,11 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return $roles;
     }
 
+    public function adminAllAdmin(){
+        $role = $this->allRoleAdmin();
+        return $role;
+    }
+
 
     public function createAdmin(){
         return view('guestProfile.admin.create');

@@ -12,6 +12,7 @@ interface ProfileInterface {
 
     public function speakersAllRole();
     public function mangerAllRole();
+    public function adminAllAdmin();
     
     
     public function createAdmin();

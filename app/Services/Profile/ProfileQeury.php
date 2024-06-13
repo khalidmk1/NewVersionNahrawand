@@ -87,6 +87,13 @@ class ProfileQeury extends GlobaleService {
         return $speakerRole;
     }
 
+    public function allRoleAdmin(){
+        $includedRoles = ['Admin'];
+        $adminRole = Role::whereIn('name', $includedRoles)->get();
+
+        return $adminRole;
+    }
+
    
 
 
@@ -105,7 +112,7 @@ class ProfileQeury extends GlobaleService {
         if($request->has('roleManager')){
             $rules['role'] = ['required' , 'array'];
         }
-        
+
         $validatedData = $request->validate($rules);
         $avatarName =  $this->storeAvatar($request);
         $coverName = $this->storeCover($request);
