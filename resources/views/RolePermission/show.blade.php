@@ -30,7 +30,7 @@
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" id="search_role" name="role" class="form-control float-right"
+                                <input type="text" id="search_filter" name="role" class="form-control float-right"
                                     placeholder="Search">
 
                                 <div class="input-group-append">
@@ -54,7 +54,7 @@
 
                                 </tr>
                             </thead>
-                            <tbody id="searchedRole">
+                            <tbody id="result">
                                 @foreach ($roles as $role)
                                     <tr class="text-center">
                                         <td>{{ $role->name }}</td>
