@@ -12,12 +12,12 @@
             </thead>
             <tbody>
                 @foreach ($events as $event)
-                    <x-card-image :itemId="$event->id" :imageUrl="asset('storage/event/' . $event->image)" />
+                    <x-card-image :itemId="'elementEvent'.$event->id" :imageUrl="asset('storage/event/' . $event->image)" />
                     <tr>
                         <td>{{ $event->title }}</td>
                         <td>{{ $event->description }}</td>
                         <td> <button class="btn btn-block btn-info" data-toggle="modal"
-                                data-target="#element_{{ $event->id }}"><i class="fa fa-plus"
+                                data-target="#elementEvent{{ $event->id }}"><i class="fa fa-plus"
                                     aria-hidden="true"></i></button></td>
                         <td>{{ $event->deleted_at }}</td>
 

@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 
@@ -36,4 +36,57 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+@extends('layouts.guest')
+
+@section('content')
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="/" class="h1"><b>N</b>Ahrawand</a>
+            </div>
+            <div class="card-body">
+
+                <form method="POST" action="{{ route('password.store') }}">
+                    @csrf
+                    <!-- Password Reset Token -->
+                    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" value="{{ old('email') }}" class="form-control"
+                            placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entre Password"
+                            name="password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="exampleInputPassword1"
+                            placeholder="Entre Confirm Password" name="password_confirmation">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Reset Password</button>
+                </form>
+
+
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+@endsection

@@ -30,7 +30,7 @@ use App\Http\Controllers\{
 |
 */
 
-Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function () {
     // Admin/Manager/Speaker/Client Dashboards
     Route::get('admin', [GlobaleController::class, 'indexAdmin'])->name('index.admin');
     Route::get('manager', [GlobaleController::class, 'indexManager'])->name('index.manager');
@@ -47,6 +47,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::post('program/restore/{program}', [ProgramController::class, 'restore'])->name('program.restore');
 
     // Additional Routes
+    Route::get('password/change', [GlobaleController::class, 'passwordChange'])->name('password.change');
     Route::get('objectives/{id}', [GlobaleController::class, 'objectivesByCategory'])->name('objective.category');
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('history', [GlobaleController::class, 'history'])->name('history');

@@ -46,18 +46,17 @@
         </div>
     </form>
 </section> --}}
-@include('components.single-generic-model')
+@extends('layouts.guest')
+
 @section('model-title')
     Update Pasword
 @endsection
 
 @section('model-content')
-    <form action="{{ Route('password.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('password.update') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('patch')
+        @method('put')
         <div class="modal-body">
-
-
 
             <div class="form-group">
                 <label for="current_password"> Current password</label>

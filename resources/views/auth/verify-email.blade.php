@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
     </div>
@@ -28,4 +28,40 @@
             </button>
         </form>
     </div>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+@extends('layouts.guest')
+
+@section('content')
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="../../index2.html" class="h1"><b>N</b>AHRAWAND</a>
+            </div>
+            <p class="login-box-msg">Thank you for registering! Before you begin, could you please verify your email address
+                by clicking on the link we just sent you via email?</p>
+            <div class="card-body row">
+
+                <form method="POST" class="col-8" action="{{ route('verification.send') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-primary">
+                        Send verification email
+                    </button>
+                </form>
+                <div class="col-4">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <button type="submit" class="btn btn-outline-danger">
+                            Log out
+                        </button>
+                    </form>
+                </div>
+                <!-- /.col -->
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+@endsection

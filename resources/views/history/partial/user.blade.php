@@ -13,12 +13,12 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <x-card-image :itemId="$user->id" :imageUrl="asset('storage/avatars/' . $user->avatar)" />
+                    <x-card-image :itemId="'elementUser'.$user->id" :imageUrl="asset('storage/avatars/' . $user->avatar)" />
                     <tr>
                         <td>{{ $user->firstName }}</td>
                         <td>{{ $user->lastName }}</td>
                         <td> <button class="btn btn-block btn-info" data-toggle="modal"
-                                data-target="#element_{{ $user->id }}"><i class="fa fa-plus"
+                                data-target="#elementUser{{ $user->id }}"><i class="fa fa-plus"
                                     aria-hidden="true"></i></button></td>
                         <td>
                             <h5>

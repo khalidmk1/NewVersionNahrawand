@@ -11,7 +11,7 @@
 </head>
 
 <body class="hold-transition login-page">
-    
+    @include('components.erreur-handle')
     @yield('content')
 
     @include('components.scripts')

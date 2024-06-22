@@ -33,6 +33,10 @@ class GlobaleController extends Controller
         return $this->ProfileInterface->indexAdmin();
     }
 
+    public function passwordChange(){
+        return $this->ProfileInterface->passwordChange();
+    }
+
     
     public function indexManager(){
         return $this->ProfileInterface->indexManager();

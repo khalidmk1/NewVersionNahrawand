@@ -12,12 +12,12 @@
             </thead>
             <tbody>
                 @foreach ($videos as $video)
-                    <x-card-image :itemId="$video->id" :imageUrl="asset('storage/video/' . $video->image)" />
+                    <x-card-image :itemId="'elementVideo'.$video->id" :imageUrl="asset('storage/video/' . $video->image)" />
                     <tr>
                         <td>{{ $video->title }}</td>
                         <td>{{ $video->description }}</td>
                         <td> <button class="btn btn-block btn-info" data-toggle="modal"
-                                data-target="#element_{{ $video->id }}"><i class="fa fa-plus"
+                                data-target="#elementVideo{{ $video->id }}"><i class="fa fa-plus"
                                     aria-hidden="true"></i></button></td>
                         <td>{{ $video->deleted_at }}</td>
 

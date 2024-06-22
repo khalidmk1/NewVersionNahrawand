@@ -13,6 +13,10 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return view('client.show')->with(['client' => $client , 'groupedByDomain' => $groupedByDomain]);
     }
 
+    public function passwordChange(){
+        return view('auth.change-password');
+    }
+
     public function indexAdmin(){
         $admins = $this->allAdmins();
         return view('guestProfile.admin.index')->with('admins' , $admins);

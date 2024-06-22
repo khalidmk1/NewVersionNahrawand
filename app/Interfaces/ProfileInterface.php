@@ -4,6 +4,7 @@ namespace App\Interfaces;
 
 interface ProfileInterface {
     public function showClient($id);
+    public function passwordChange();
 
     public function indexAdmin();
     public function indexManager();
