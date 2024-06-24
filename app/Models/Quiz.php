@@ -16,8 +16,6 @@ class Quiz extends Model
         'contentId',
         'videoId',
         'question',
-        'rate',
-        'count'
     ];
 
 
@@ -50,5 +48,15 @@ class Quiz extends Model
     {
         return $this->hasMany(QuizAnswer::class, 'quizId');
     }
+ 
+    /**
+     * Get all of the quizParameter for the Quiz
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quizParameter(): HasMany
+    {
+        return $this->hasMany(QuizPrameter::class, 'quizId');
+    } 
 
 }

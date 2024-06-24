@@ -18,5 +18,12 @@ class QuizService extends QuizQuery implements QuizIntreface {
     }
 
 
+    //api quiz
+    public function qsmIndexContent($contentId){
+        $qsmContents = $this->qsmContentIndex($contentId);
+        return response()->json($qsmContents);
+    }
+
+
 
 }

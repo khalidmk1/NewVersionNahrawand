@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FAQController;
+use App\Http\Controllers\Api\QuizController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\TicketController;
@@ -78,6 +79,7 @@ Route::get('content/formation', [ContentController::class, 'contentFormation'])-
 Route::get('content/podcast', [ContentController::class, 'contentPodcast'])->name('content.podcast');
 Route::get('content/quickly', [ContentController::class, 'contentQuicly'])->name('content.quickly');
 Route::get('content/program/{programId}', [ContentController::class, 'contentByProgram'])->name('content.program');
+Route::get('content/qsm/{contentId}', [QuizController::class, 'qsmIndexContent'])->name('content.qsm');
 
 Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index');
 
