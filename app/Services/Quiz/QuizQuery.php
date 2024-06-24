@@ -47,7 +47,7 @@ class QuizQuery extends GlobaleService{
             ]);
 
             $content->update([
-                'quizType' => false
+                'quizType' => 0
             ]);
 
             return $qsm;
