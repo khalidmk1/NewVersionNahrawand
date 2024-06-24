@@ -54,7 +54,18 @@ class QuizQuery extends GlobaleService{
             return $qsm;
         }else{
 
-            
+            foreach ($request->question as $key => $question) {
+                $question = Quiz::create([
+                    'contentId' => $content->id,
+                    'question' => $question,
+                ]);
+    
+                $content->update([
+                    'quizType' => true
+                ]);
+            }
+
+            return $question;
         }
     }
 
