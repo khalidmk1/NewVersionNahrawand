@@ -26,6 +26,10 @@ class QuizQuery extends GlobaleService{
                 'question' => $request->question,
             ]);
 
+            $content->update([
+                'quizType' => false
+            ]);
+
             $correctAnswer = QuizAnswer::create([
                 'quizId' => $qsm->id,
                 'Answer' => $request->rightAwnser,
@@ -46,10 +50,7 @@ class QuizQuery extends GlobaleService{
                 'count' => $request->count
             ]);
 
-            $content->quizType = 0;
-
-            $content->save();
-
+        
             return $qsm;
         }else{
 
