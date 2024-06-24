@@ -46,6 +46,10 @@ class QuizQuery extends GlobaleService{
                 'count' => $request->count
             ]);
 
+            $content->update([
+                'quizType' => false
+            ]);
+
             return $qsm;
         }else{
 
