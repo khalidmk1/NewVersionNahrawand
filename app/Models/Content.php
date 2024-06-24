@@ -137,5 +137,25 @@ class Content extends Model
         return $this->hasMany(ContentComment::class, 'contentId');
     }
 
+    /**
+     * Get all of the quizzes for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quizzes(): HasMany
+    {
+        return $this->hasMany(Quiz::class, 'contentId');
+    }
+
+    /**
+     * Get all of the answers for the Content
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function answersParametre(): HasMany
+    {
+        return $this->hasMany(QuizPrameter::class, 'contentId');
+    }
+
 }
  

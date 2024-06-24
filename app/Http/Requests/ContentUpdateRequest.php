@@ -32,7 +32,7 @@ class ContentUpdateRequest extends FormRequest
             'contentImage' => ['sometimes' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
             'contentImageFlex' => ['sometimes' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
             'condition' => ['nullable' , 'string'],
-            'isCertify' => ['nullable' , 'boolean'],
+            'isCertify' => ['nullable'],
             'programId' => ['nullable'],
             'document' => ['nullable' , 'file' ,'mimes:pdf' ,'max:2000'],
         ];

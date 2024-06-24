@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Interfaces\QuizIntreface;
+use App\Http\Requests\QuizRequest;
 use App\Interfaces\VideoInterface;
 use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
@@ -15,13 +17,15 @@ class GlobaleController extends Controller
     private $ProfileInterface;
     private $videoInterface;
     private $TicketInterface;
+    private $QuizInterface;
 
     public function __construct(ContentInterface $ContentInterface , ProfileInterface $ProfileInterface , 
-    VideoInterface $videoInterface , TicketInterface $TicketInterface) {
+    VideoInterface $videoInterface , TicketInterface $TicketInterface , QuizIntreface $QuizInterface) {
         $this->ContentInterface = $ContentInterface;
         $this->ProfileInterface = $ProfileInterface;
         $this->videoInterface = $videoInterface;
         $this->TicketInterface = $TicketInterface;
+        $this->QuizInterface = $QuizInterface;
     }
     
     public function objectivesByCategory(String $id)
@@ -78,4 +82,8 @@ class GlobaleController extends Controller
     public function deletevideo(DestroyRequest $request , String $id){
         return $this->videoInterface->delete($request , $id);
     }
+    public function storeContentQsm(QuizRequest $request , String $id){
+        return $this->QuizInterface->storeContentQsm($request , $id);
+    }
+  
 }

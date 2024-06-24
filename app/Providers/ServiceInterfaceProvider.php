@@ -7,8 +7,10 @@ namespace App\Providers;
 use App\Interfaces\FAQInterface;
 use App\Services\FAQ\FAQService;
 use App\Interfaces\EmailIterface;
+use App\Interfaces\QuizIntreface;
 use App\Interfaces\EventInterface;
 use App\Interfaces\VideoInterface;
+use App\Services\Quiz\QuizService;
 use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
 use App\Interfaces\ProfileInterface;
@@ -49,6 +51,7 @@ class ServiceInterfaceProvider extends ServiceProvider
         $this->app->bind(FAQInterface::class, FAQService::class);
         $this->app->bind(EmailIterface::class, EmailService::class);
         $this->app->bind(TicketInterface::class, TicketService::class);
+        $this->app->bind(QuizIntreface::class, QuizService::class);
     }
 
     /**

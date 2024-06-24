@@ -164,7 +164,7 @@
 
 <script>
     $(document).ready(function() {
-        /* $('#condition').hide();
+        $('#condition').hide();
 
         $('#certify').on('change', function() {
             console.log('hello');
@@ -173,7 +173,7 @@
             } else {
                 $('#condition').slideUp();
             }
-        }); */
+        });
 
         // Store the HTML content of the sections
         var conferenceHTML = $('#conference').html();
@@ -233,5 +233,88 @@
             // Show the selected section
             $('#' + typeCours).hide().slideDown();
         });
+
+
+
+
+        let index = $('.reponse').length;
+
+        function addAnswer() {
+            index++;
+            let newAnswer = `
+
+                <div class="form-group reponse">
+                    <label for="awnser_${index}" class="answer_label">The response ${index}</label>
+                <div class="position-relative">
+                    <input name="awnser[]" type="text" class="form-control response" required id="Awnser_${index}"
+                        aria-label="Text input with checkbox">
+
+                    <i class="fa fa-trash position-absolute removeBtn" 
+                    style="right: 12px; color: red; bottom: 12px; z-index: 1000;"
+                    aria-hidden="true"></i>
+                    </div>
+                </div>
+            `;
+            $('#addBtn').remove();
+
+            $('#container').append(newAnswer);
+        }
+
+        $(document).on('click', '#addBtn', function() {
+            addAnswer();
+            let addButton =
+                `  <button id="addBtn" type="button" class="btn btn-primary">Add Response</button>
+              `;
+            $('#container').append(addButton);
+        });
+
+        $(document).on('click', '.removeBtn', function() {
+            $(this).closest('.reponse').remove();
+            index--;
+
+            $('.reponse').each(function(index) {
+                $(this).find('.answer_label').text(`Réponse ${index + 1}`);
+            });
+        });
+
+
+        //Question type
+
+
+
+        let Question = $('.Question').length;
+
+        function addQuestion() {
+            Question++;
+            let newQuestion = `
+                <div class="form-group response">
+                <label for="Question_${Question}" class="Question_label">Question ${Question}</label>
+                <div class="position-relative">
+                    <input name="question[]" type="text" class="form-control Question" id="Question_${Question}" aria-label="Text input with checkbox" required>
+                    <i class="fa fa-trash position-absolute removeQuestion" style="right: 12px; color: red; bottom: 12px; z-index: 1000;" aria-hidden="true"></i>
+                </div>
+                </div>
+                `;
+            $('#addQuestion').remove();
+            $('#containerQuestion').append(newQuestion);
+        }
+
+        $(document).on('click', '#addQuestion', function() {
+            addQuestion();
+            let addButton =
+                `<button id="addQuestion" type="button" class="btn btn-primary">Add Question</button>`;
+            $('#containerQuestion').append(addButton);
+        });
+
+        $(document).on('click', '.removeQuestion', function() {
+            $(this).closest('.form-group').remove();
+            Question--;
+
+            $('.Question').each(function(index) {
+                $(this).closest('.form-group').find('.Question_label').text(
+                    `Question ${index + 1}`);
+            });
+        });
+
     });
 </script>

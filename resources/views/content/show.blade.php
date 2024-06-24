@@ -60,6 +60,8 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Setting</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
+                        </li>
 
                     </ul>
                 </div><!-- /.card-header -->
@@ -345,7 +347,19 @@
                             </div>
 
                         </div>
-                        <!-- /.tab-pane -->
+
+                        @if ($content->isCertify == 1)
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="quiz">
+
+                                <div class="form-group text-right">
+                                    <a href="{{ route('quiz.show', Crypt::encrypt($content->id)) }}"
+                                        class="btn btn-info w-25">Add Quiz</a>
+                                </div>
+
+                            </div>
+                            <!-- /.tab-pane -->
+                        @endif
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->

@@ -16,7 +16,8 @@ use App\Http\Controllers\{
     SubCategoryController,
     ContentVideoController,
     GuestProfileController,
-    RolePermissionController
+    RolePermissionController,
+    QuizController
 };
 
 /*
@@ -51,6 +52,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     Route::get('objectives/{id}', [GlobaleController::class, 'objectivesByCategory'])->name('objective.category');
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('history', [GlobaleController::class, 'history'])->name('history');
+    Route::post('qsm/content/store/{id}', [GlobaleController::class, 'storeContentQsm'])->name('quiz.content.store');
 
     // Creation Routes
     Route::get('admin/create', [GlobaleController::class, 'createAdmin'])->name('create.admin');
@@ -79,6 +81,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
         'FAQ' => FAQController::class,
         'email' => EmailController::class,
         'ticket' => TicketController::class,
+        'quiz' => QuizController::class,
     ]);
 
     // Custom Role-Permission Store

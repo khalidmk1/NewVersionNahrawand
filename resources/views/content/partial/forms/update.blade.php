@@ -127,7 +127,25 @@
             </div>
         @endif
 
-        @if ($content->contentType == 'formation' || $content->contentType == 'quickly' )
+        @if ($content->contentType == 'formation')
+            <div class="form-group clearfix">
+                <div class="icheck-primary d-inline">
+                    <input type="checkbox" name="isCertify" id="certify">
+                    <label for="certify">
+                        Certify
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- textarea -->
+            <div class="form-group" id="condition">
+                <label>Eligibility criteria</label>
+                <textarea class="form-control" name="condition" rows="3" placeholder="Enter ..."></textarea>
+            </div>
+        @endif
+
+        @if ($content->contentType == 'formation' || $content->contentType == 'quickly')
             <div class="form-group">
                 <label>Formateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">
@@ -139,6 +157,9 @@
                     @endforeach
                 </select>
             </div>
+
+
+
 
             <div class="form-group">
                 <label>Program</label>
@@ -155,6 +176,9 @@
             <!-- /.form-group -->
 
         @endif
+
+
+
         @if ($content->contentType == 'podcast')
             <div class="form-group">
                 <label>Animateur</label>
