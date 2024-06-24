@@ -164,17 +164,16 @@
 
 <script>
     $(document).ready(function() {
-        $('#condition').hide();
+        /* $('#condition').hide();
 
-        $('#certifier_formation').on('change', function() {
-            var certifier = $(this).val()
-            console.log(certifier);
+        $('#certify').on('change', function() {
+            console.log('hello');
             if ($(this).is(':checked')) {
                 $('#condition').slideDown();
             } else {
                 $('#condition').slideUp();
             }
-        });
+        }); */
 
         // Store the HTML content of the sections
         var conferenceHTML = $('#conference').html();

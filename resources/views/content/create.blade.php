@@ -57,7 +57,7 @@
                     </div>
 
 
-                   
+
 
 
                     <div class="form-group">
@@ -108,13 +108,6 @@
 
 
                     </div>
-
-                    {{-- <div class="col-12">
-
-
-
-                    </div>
- --}}
 
                     <!-- select -->
                     <div class="form-group">

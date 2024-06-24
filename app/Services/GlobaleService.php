@@ -34,8 +34,19 @@ class GlobaleService  {
     public function extractYoutubeId($url): ?string
     {
         $queryParameters = parse_url($url, PHP_URL_QUERY);
+        if (!$queryParameters) {
+            $path = parse_url($url, PHP_URL_PATH);
+            $pathComponents = explode('/', $path);
+            $videoId = end($pathComponents);
+
+            if ($videoId) {
+                return 'https://www.youtube.com/embed/' . $videoId;
+            }
+            
+            return null;
+        }
         parse_str($queryParameters, $queryParamsArray);
-        return 'https://www.youtube.com/embed/'.$queryParamsArray['v'] ?? null;
+        return isset($queryParamsArray['v']) ? 'https://www.youtube.com/embed/' . $queryParamsArray['v'] : null;
     }
 
     public function storeAvatar(Request $request)

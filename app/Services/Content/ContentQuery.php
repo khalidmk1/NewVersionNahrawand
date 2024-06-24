@@ -41,10 +41,11 @@ class ContentQuery extends GlobaleService {
     
 
     public function storeContent(ContentRequest $request){
+        
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
-         
+        
         /*  $objectives = array_map('intval', $request->objectivesId);  */
         $subCategories = array_map('intval', $request->subCategoryId ?? []);
 
@@ -103,6 +104,7 @@ class ContentQuery extends GlobaleService {
 
     public function updateContent(ContentUpdateRequest $request , String $id){
         $content = Content::findOrFail(Crypt::decrypt($id));
+      
         /* $nameDocument = $content->document; */
         $nameFlexImage = $content->imageFlex ?? '' ;
         $nameImage = $content->image ?? '' ;

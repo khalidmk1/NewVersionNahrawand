@@ -23,7 +23,6 @@ class ContentRequest extends FormRequest
     {
         $rules = [
             'title' => ['required' , 'string' , 'max:255'],
-           
             'tags' => ['array'],
             'cotegoryId' => ['required'],
             'objectivesId' => ['nullable' , 'array'],
@@ -33,7 +32,7 @@ class ContentRequest extends FormRequest
             'contentImage' => ['required' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
             'contentImageFlex' => ['required' , 'file' ,'mimes:jpeg,png,jpg,gif' ,'max:2000'],
             'condition' => ['nullable' , 'string'],
-            'isCertify' => ['nullable' , 'boolean'],
+            'isCertify' => ['nullable'],
             'programId' => ['nullable'],
             'document' => ['nullable' , 'file' ,'mimes:pdf' ,'max:2000'],
         ];

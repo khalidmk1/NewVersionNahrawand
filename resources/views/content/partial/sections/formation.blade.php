@@ -26,8 +26,8 @@
 
     <div class="form-group clearfix">
         <div class="icheck-primary d-inline">
-            <input type="checkbox" name="isCertify" id="certifier_formation">
-            <label for="certifier_formation">
+            <input type="checkbox" name="isCertify" id="certify">
+            <label for="certify">
                 Certify
             </label>
         </div>
