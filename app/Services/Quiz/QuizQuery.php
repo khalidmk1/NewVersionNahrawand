@@ -71,6 +71,10 @@ class QuizQuery extends GlobaleService{
         }
     }
 
+    public function updateQuiz(Request $request, string $id){
+
+    }
+
 
 
     //api quiz
@@ -89,7 +93,10 @@ class QuizQuery extends GlobaleService{
             $rightAnswerId = $qsm->quizParameter->first()->rightAnswer->id ?? null;
     
             return [
-                'question' => $qsm->question,
+                'question' => [
+                    'id' => $qsm->id,
+                    'question' => $qsm->question,
+                ],
                 'rightAnswer' => [
                     'id' => $rightAnswerId,
                 ],

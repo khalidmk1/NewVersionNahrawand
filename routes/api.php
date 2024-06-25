@@ -71,7 +71,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quie.store');
 
     Route::post('users/subcategory/create/{subCategoryId}', [ProfileController::class, 'createUserSubCategory'])->name('user.subcategory.create');
-
     
 });
 
