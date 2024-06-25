@@ -72,27 +72,32 @@ class QuizQuery extends GlobaleService{
 
 
     //api quiz
-
     public function qsmContentIndex(String $contentId){
         $content = Content::findOrFail($contentId);
         $qsmContent = Quiz::where('contentId', $content->id)->get();
     
         $filteredQsmContent = $qsmContent->map(function ($qsm) {
-            $answers = $qsm->answers->pluck('Answer')->toArray();
+            $answers = $qsm->answers->map(function ($answer) {
+                return [
+                    'id' => $answer->id,
+                    'answer' => $answer->Answer,
+                ];
+            });
+    
             $rightAnswerId = $qsm->quizParameter->first()->rightAnswer->id ?? null;
-            $rightAnswer = $qsm->quizParameter->first()->rightAnswer->Answer ?? null;
+    
             return [
                 'question' => $qsm->question,
                 'rightAnswer' => [
                     'id' => $rightAnswerId,
-                    'answer' => $rightAnswer,
                 ],
-                'answers' => $answers
+                'answers' => $answers->toArray()
             ];
         });
     
         return $filteredQsmContent;
     }
+    
     
     
 
