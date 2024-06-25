@@ -73,6 +73,9 @@ class QuizQuery extends GlobaleService{
 
     public function updateQuiz(Request $request, string $id){
 
+        $quiz = Quiz::update([
+            ''
+        ]);
     }
 
 
@@ -81,30 +84,49 @@ class QuizQuery extends GlobaleService{
     public function qsmContentIndex(String $contentId){
         $content = Content::findOrFail($contentId);
         $qsmContent = Quiz::where('contentId', $content->id)->get();
-    
-        $filteredQsmContent = $qsmContent->map(function ($qsm) {
-            $answers = $qsm->answers->map(function ($answer) {
+
+        if($content->quizType == 0){
+            $filteredQsmContent = $qsmContent->map(function ($qsm) {
+                $answers = $qsm->answers->map(function ($answer) {
+                    return [
+                        'id' => $answer->id,
+                        'answer' => $answer->Answer,
+                    ];
+                });
+        
+                $rightAnswerId = $qsm->quizParameter->first()->rightAnswer->id ?? null;
+        
                 return [
-                    'id' => $answer->id,
-                    'answer' => $answer->Answer,
+                    'question' => [
+                        'id' => $qsm->id,
+                        'question' => $qsm->question,
+                    ],
+                    'rightAnswer' => [
+                        'id' => $rightAnswerId,
+                    ],
+                    'answers' => $answers->toArray()
                 ];
             });
+        
+            return $filteredQsmContent;
+        }
+        if($content->quizType == 1){
+
+            $filteredQsmContent = $qsmContent->map(function ($qsm) {
+                return [
+                    'question' => [
+                        'id' => $qsm->id,
+                        'question' => $qsm->question,
+                    ],
+                ];
+            });
+        
+            return $filteredQsmContent;
+        }
+
+        return null;
     
-            $rightAnswerId = $qsm->quizParameter->first()->rightAnswer->id ?? null;
-    
-            return [
-                'question' => [
-                    'id' => $qsm->id,
-                    'question' => $qsm->question,
-                ],
-                'rightAnswer' => [
-                    'id' => $rightAnswerId,
-                ],
-                'answers' => $answers->toArray()
-            ];
-        });
-    
-        return $filteredQsmContent;
+       
     }
 
     public function qsmContentQuestionIndex(String $contentId){
