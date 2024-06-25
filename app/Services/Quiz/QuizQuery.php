@@ -78,15 +78,15 @@ class QuizQuery extends GlobaleService{
         $qsmContent = Quiz::where('contentId', $content->id)->get();
     
         $filteredQsmContent = $qsmContent->map(function ($qsm) {
-            // Retrieve all answers for the current quiz question
             $answers = $qsm->answers->pluck('Answer')->toArray();
-    
-            // Retrieve the correct answer from QuizParameter if it exists
+            $rightAnswerId = $qsm->quizParameter->first()->rightAnswer->id ?? null;
             $rightAnswer = $qsm->quizParameter->first()->rightAnswer->Answer ?? null;
-    
             return [
                 'question' => $qsm->question,
-                'rightAnswer' => $rightAnswer,
+                'rightAnswer' => [
+                    'id' => $rightAnswerId,
+                    'answer' => $rightAnswer,
+                ],
                 'answers' => $answers
             ];
         });
