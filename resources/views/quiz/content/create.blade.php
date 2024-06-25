@@ -40,7 +40,7 @@
                     @endif
                     @if ($content->quizType == 1 || $content->quizType == null)
                         <li class="nav-item">
-                            <a class="nav-link @if ($content->quizType == 1) active @endif" id="profile-tab"
+                            <a class="nav-link @if ($content->quizType == 1 ) active @endif" id="profile-tab"
                                 data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                                 aria-selected="false">Question</a>
                         </li>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade @if ($content->quizType == 1) show active @endif" id="profile"
+                    <div class="tab-pane fade @if ($content->quizType == 1 || $content->quizType == null) show active @endif" id="profile"
                         role="tabpanel" aria-labelledby="profile-tab">
                         @include('quiz.content.partial.question')
                         <div class="col-12">

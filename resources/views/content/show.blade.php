@@ -60,9 +60,10 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Setting</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
-                        </li>
-
+                        @if ($content->isCertify == 1)
+                            <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
+                            </li>
+                        @endif
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -116,20 +117,56 @@
                                 <!-- /.row -->
                             </div>
                             <!-- /.post -->
+                            @if ($content->contentType != 'formation')
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="d-flex">
+                                        <i class="fa fa-exclamation-circle" style="font-size: x-large"
+                                            aria-hidden="true"></i>
+                                        <div class="ml-2"><strong>Small Description.</strong></div>
 
-                            <!-- Post -->
-                            <div class="post">
-                                <div class="d-flex">
-                                    <i class="fa fa-exclamation-circle" style="font-size: x-large" aria-hidden="true"></i>
-                                    <div class="ml-2"><strong>Description.</strong></div>
-
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        {{ $content->smallDescription }}
+                                    </p>
                                 </div>
-                                <!-- /.user-block -->
-                                <p>
-                                    {{ $content->bigDescription }}
-                                </p>
-                            </div>
-                            <!-- /.post -->
+                                <!-- /.post -->
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="d-flex">
+                                        <i class="fa fa-exclamation-circle" style="font-size: x-large"
+                                            aria-hidden="true"></i>
+                                        <div class="ml-2"><strong>big Description.</strong></div>
+
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        {{ $content->bigDescription }}
+                                    </p>
+                                </div>
+                                <!-- /.post -->
+                            @endif
+
+
+                            @if ($content->contentType == 'formation')
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="d-flex">
+                                        <i class="fa fa-exclamation-circle" style="font-size: x-large"
+                                            aria-hidden="true"></i>
+                                        <div class="ml-2"><strong>Description.</strong></div>
+
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <p>
+                                        {{ $content->smallDescription }}
+                                    </p>
+                                </div>
+                                <!-- /.post -->
+                            @endif
+
+
 
 
                             <!-- Post -->
@@ -146,24 +183,6 @@
                                         {{ $tag->name }}
                                     </h2>
                                 @endforeach
-                            </div>
-                            <!-- /.post -->
-
-                            <!-- Post -->
-                            <div class="post">
-                                <div class="d-flex">
-
-                                    <i class="fa fa-bullseye" style="font-size: x-large" aria-hidden="true"></i>
-                                    <div class="ml-2"><strong>Objectives.</strong></div>
-
-                                </div>
-                                <!-- /.user-block -->
-                                @foreach ($content->contentObjectives as $objectives)
-                                    <h5 class="badge badge-info">
-                                        {{ $objectives->objective->name }}
-                                    </h5>
-                                @endforeach
-
                             </div>
                             <!-- /.post -->
 
@@ -211,7 +230,8 @@
                                         <x-delete-modal :modelDeleteId="$video->id" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
                                         <x-card-video :videoUrl="$video->video" :videoID="$video->id">
                                             <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'" :modelRoute="route('video.update', Crypt::encrypt($video->id))">
-                                                <input hidden type="text" name="podcastId" value="{{ $content->id }}">
+                                                <input hidden type="text" name="podcastId"
+                                                    value="{{ $content->id }}">
 
                                                 <div class="form-group">
                                                     <label for="titleVideo">Title</label>
@@ -348,18 +368,18 @@
 
                         </div>
 
-                        @if ($content->isCertify == 1)
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="quiz">
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="quiz">
 
-                                <div class="form-group text-right">
-                                    <a href="{{ route('quiz.show', Crypt::encrypt($content->id)) }}"
-                                        class="btn btn-info w-25">Add Quiz</a>
-                                </div>
-
+                            <div class="form-group text-right">
+                                <a href="{{ route('quiz.show', Crypt::encrypt($content->id)) }}"
+                                    class="btn btn-info w-25">Add Quiz</a>
                             </div>
-                            <!-- /.tab-pane -->
-                        @endif
+
+                            @include('content.partial.sections.quiz')
+
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->

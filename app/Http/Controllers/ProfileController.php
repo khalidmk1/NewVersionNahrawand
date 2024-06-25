@@ -109,7 +109,7 @@ class ProfileController extends Controller
     
 
 
-    private function updateAvatar(ProfileUpdateRequest $request , String $nameAvatar)
+    private function updateAvatar(ProfileUpdateRequest $request , $nameAvatar)
     {
         if ($request->hasFile('avatar')) {
             $imagePath = 'avatar/'.$nameAvatar;

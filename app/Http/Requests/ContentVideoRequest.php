@@ -28,7 +28,7 @@ class ContentVideoRequest extends FormRequest
             'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif' , 'max:2000'],
             'guestIds' => ['nullable' , 'array' ],
             'tags' => ['nullable' , 'array'],
-            'video' => ['required' , 'url' , 'regex:https://www.youtube.com/watch?v='],
+            'video' => ['required', 'url', 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/|v\/|.+\/)?([^&=%\?]{11})/i'],
             'duration' => ['nullable']
         ];
 

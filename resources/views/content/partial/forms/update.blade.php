@@ -130,7 +130,7 @@
         @if ($content->contentType == 'formation')
             <div class="form-group clearfix">
                 <div class="icheck-primary d-inline">
-                    <input type="checkbox" name="isCertify" id="certify">
+                    <input type="checkbox" name="isCertify" id="certify" {{ $content->isCertify == 1 ? 'checked' : '' }}>
                     <label for="certify">
                         Certify
                     </label>

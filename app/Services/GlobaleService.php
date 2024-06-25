@@ -296,6 +296,7 @@ class GlobaleService  {
     }
 
 
+    //restore 
     public function restoreContent(String $contentId){
         $content = Content::withTrashed()->findOrFail(Crypt::decrypt($contentId));
         $content->restore();
@@ -303,7 +304,6 @@ class GlobaleService  {
     }
 
     public function restoreVideo(String $videoId){
-        dd($eventId);
         $video = ContentVideo::withTrashed()->findOrFail(Crypt::decrypt($videoId));
         $video->restore();
         return $video;

@@ -20,6 +20,13 @@
                 <div class="col-6">
                     <h3 class="card-title">Create Video</h3>
                 </div>
+                @if ($content->contentType == 'formation' && ($content->quizType == 0 || $content->quizType == 1))
+                    <div class="col-6 text-right">
+                        <a href="{{ route('quiz.show', Crypt::encrypt($content->id)) }}" class="btn btn-info w-25">Add
+                            Quiz</a>
+                    </div>
+                @endif
+
             </div>
             <!-- /.card-header -->
             <form action="{{ route('video.store') }}" id="create_videos" method="post" enctype="multipart/form-data">
