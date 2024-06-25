@@ -107,6 +107,22 @@ class QuizQuery extends GlobaleService{
         return $filteredQsmContent;
     }
 
+    public function qsmContentQuestionIndex(String $contentId){
+        $content = Content::findOrFail($contentId);
+        $qsmContent = Quiz::where('contentId', $content->id)->get();
+    
+        $filteredQsmContent = $qsmContent->map(function ($qsm) {
+            return [
+                'question' => [
+                    'id' => $qsm->id,
+                    'question' => $qsm->question,
+                ],
+            ];
+        });
+    
+        return $filteredQsmContent;
+    }
+
 
     public function storeQuestionClient(Request $request , String $contentId , String $quizId){
         $content = Content::findOrFail($contentId);

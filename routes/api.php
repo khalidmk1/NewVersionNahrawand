@@ -82,6 +82,7 @@ Route::get('content/podcast', [ContentController::class, 'contentPodcast'])->nam
 Route::get('content/quickly', [ContentController::class, 'contentQuicly'])->name('content.quickly');
 Route::get('content/program/{programId}', [ContentController::class, 'contentByProgram'])->name('content.program');
 Route::get('content/qsm/{contentId}', [QuizController::class, 'qsmIndexContent'])->name('content.qsm');
+Route::get('content/qsm/question/{contentId}', [QuizController::class, 'qsmIndexContentQuestion'])->name('content.qsm.question');
 
 Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index');
 

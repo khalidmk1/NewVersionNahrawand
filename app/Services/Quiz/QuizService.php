@@ -23,6 +23,10 @@ class QuizService extends QuizQuery implements QuizIntreface {
         $qsmContents = $this->qsmContentIndex($contentId);
         return response()->json($qsmContents);
     }
+    public function qsmIndexContentQuestion($contentId){
+        $qsmContents = $this->qsmContentQuestionIndex($contentId);
+        return response()->json($qsmContents);
+    }
 
     public function storeQuestionAnswer($request , $contentId , $quizId){
         $answer = $this->storeQuestionClient($request , $contentId , $quizId);

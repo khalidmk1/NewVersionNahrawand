@@ -9,5 +9,6 @@ interface QuizIntreface {
 
     //api quiz
     public function qsmIndexContent($contentId);
+    public function qsmIndexContentQuestion($contentId);
     public function storeQuestionAnswer($request , $contentId , $quizId);
 }
