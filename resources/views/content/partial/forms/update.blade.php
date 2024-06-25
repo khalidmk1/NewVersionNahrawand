@@ -139,7 +139,7 @@
             </div>
 
             <!-- textarea -->
-            <div class="form-group" id="condition">
+            <div class="form-group"  id="condition">
                 <label>Eligibility criteria</label>
                 <textarea class="form-control" name="condition" rows="3" placeholder="Enter ..."></textarea>
             </div>

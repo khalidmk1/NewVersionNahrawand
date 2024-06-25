@@ -15,7 +15,7 @@
 @section('card-detail-content')
     <div class="row pb-3"style="row-gap: 10px;" id="resultUser">
         @foreach ($admins as $admin)
-            <x-delete-modal :modelDeleteId="$admin->id" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($admin->id))"  />
+            <x-delete-modal :modelDeleteId="$admin->id" :modelTitle="'Delete Admin'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($admin->id))"  />
             <div class="col-lg-4 col-md-6 col-sm-6 oldUser">
                 <div class="text-center card-box bg-light">
                     <div class="member-card pt-2 pb-2">

@@ -19,4 +19,8 @@ class QuizController extends Controller
     public function qsmIndexContent(String $contentId){
         return  $this->QuizInterface->qsmIndexContent($contentId);
     }
+
+    public function storeQuestionAnswer(Request $request , String $contentId , String $quizId){
+        return  $this->QuizInterface->storeQuestionAnswer($request , $contentId , $quizId);
+    }
 }

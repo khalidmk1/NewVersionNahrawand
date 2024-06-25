@@ -11,13 +11,15 @@ class DeleteModal extends Component
 
     public $modelDeleteId;
     public $modelRouteDelete;
+    public $modelTitle;
     /**
      * Create a new component instance.
      */
-    public function __construct($modelDeleteId, $modelRouteDelete)
+    public function __construct($modelDeleteId, $modelRouteDelete , $modelTitle)
     {
         $this->modelDeleteId = $modelDeleteId;
         $this->modelRouteDelete = $modelRouteDelete;
+        $this->modelTitle = $modelTitle;
     }
 
     /**

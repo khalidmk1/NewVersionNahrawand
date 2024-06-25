@@ -67,6 +67,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index');
     Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create');
 
+
+    Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quie.store');
+
     Route::post('users/subcategory/create/{subCategoryId}', [ProfileController::class, 'createUserSubCategory'])->name('user.subcategory.create');
 
     

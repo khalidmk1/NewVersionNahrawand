@@ -1,9 +1,9 @@
-<div class="modal fade" id="delete_{{ $modelDeleteId }}" tabindex="-1" role="dialog"
-    aria-labelledby="ModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_{{ $modelDeleteId }}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">Delete Admin</h5>
+                <h5 class="modal-title" id="ModalLabel">{{ $modelTitle }}</h5>
             </div>
             <form action="{{ $modelRouteDelete }}" method="post">
                 @csrf

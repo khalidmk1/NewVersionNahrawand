@@ -32,21 +32,27 @@
 
 
                 <ul class="nav nav-tabs mb-3 justify-content-between" id="myTab" role="tablist">
-                    @if ($content->quizType == 0 || $content->quizType == null)
+                    @if ($content->quizType === null)
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                 aria-controls="home" aria-selected="true">QSM</a>
                         </li>
-                    @endif
-                    @if ($content->quizType == 1 || $content->quizType == null)
                         <li class="nav-item">
-                            <a class="nav-link @if ($content->quizType == 1 ) active @endif" id="profile-tab"
-                                data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-                                aria-selected="false">Question</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Question</a>
+                        </li>
+                    @elseif ($content->quizType == 0)
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">QSM</a>
+                        </li>
+                    @elseif ($content->quizType == 1)
+                        <li class="nav-item">
+                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Question</a>
                         </li>
                     @endif
                 </ul>
-
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade @if ($content->quizType == 0 || $content->quizType == null) show active @endif" id="home"
                         role="tabpanel" aria-labelledby="home-tab">
@@ -57,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade @if ($content->quizType == 1 || $content->quizType == null) show active @endif" id="profile"
+                    <div class="tab-pane fade @if ($content->quizType == 1) show active @endif" id="profile"
                         role="tabpanel" aria-labelledby="profile-tab">
                         @include('quiz.content.partial.question')
                         <div class="col-12">

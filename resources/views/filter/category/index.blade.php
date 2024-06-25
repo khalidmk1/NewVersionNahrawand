@@ -100,7 +100,7 @@
                                             name="name">
                                     </div>
                                 </x-update-filter-modal>
-                                <x-delete-modal :modelDeleteId="$category->id" :modelRouteDelete="route('category.destroy', Crypt::encrypt($category->id))" />
+                                <x-delete-modal :modelDeleteId="$category->id" :modelTitle="'Delete Category'" :modelRouteDelete="route('category.destroy', Crypt::encrypt($category->id))" />
 
                                 <tr>
                                     <td>{{ $category->id }}</td>

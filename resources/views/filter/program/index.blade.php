@@ -76,7 +76,7 @@
                         </thead>
                         <tbody>
                             @foreach ($programs as $program)
-                                <x-delete-modal :modelDeleteId="$program->id" :modelRouteDelete="route('program.destroy', Crypt::encrypt($program->id))" />
+                                <x-delete-modal :modelDeleteId="$program->id" :modelTitle="'Delete Program'" :modelRouteDelete="route('program.destroy', Crypt::encrypt($program->id))" />
                                 <x-update-filter-modal :filterId="$program->id" :titleModel="'Update Program'" :modelRoute="route('program.update', Crypt::encrypt($program->id))">
                                     <div class="form-group">
                                         <label for="title_{{ $program->id }}"> Title</label>

@@ -164,7 +164,12 @@
 
 <script>
     $(document).ready(function() {
-        $('#condition').hide();
+        
+        if ($('#certify').is(':checked')) {
+                $('#condition').show();
+            } else {
+                $('#condition').hide();
+            }
 
         $('#certify').on('change', function() {
             console.log('hello');

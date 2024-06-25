@@ -137,7 +137,7 @@
                             @include('event.partial.update')
                         </div>
 
-                        <x-delete-modal :modelDeleteId="$event->id" :modelRouteDelete="route('event.destroy', Crypt::encrypt($event->id))" />
+                        <x-delete-modal :modelDeleteId="$event->id"  :modelTitle="'Delete Event'" :modelRouteDelete="route('event.destroy', Crypt::encrypt($event->id))" />
 
                         <div class="tab-pane" id="settings">
                             <div class="form-group">

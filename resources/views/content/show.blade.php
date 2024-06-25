@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <x-delete-modal :modelDeleteId="$content->id" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
+    <x-delete-modal :modelDeleteId="$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
 
@@ -227,7 +227,8 @@
 
                                 <div class="row">
                                     @foreach ($content->videos as $video)
-                                        <x-delete-modal :modelDeleteId="$video->id" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+                                        <x-delete-modal  :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+
                                         <x-card-video :videoUrl="$video->video" :videoID="$video->id">
                                             <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'" :modelRoute="route('video.update', Crypt::encrypt($video->id))">
                                                 <input hidden type="text" name="podcastId"

@@ -9,6 +9,8 @@ use App\Models\QuizPrameter;
 use Illuminate\Http\Request;
 use App\Services\GlobaleService;
 use App\Http\Requests\QuizRequest;
+use App\Models\QuizAnswerQuestion;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class QuizQuery extends GlobaleService{
@@ -96,6 +98,21 @@ class QuizQuery extends GlobaleService{
         });
     
         return $filteredQsmContent;
+    }
+
+
+    public function storeQuestionClient(Request $request , String $contentId , String $quizId){
+        $content = Content::findOrFail($contentId);
+        $quiz = Quiz::findOrFail($quizId);
+
+        $question = QuizAnswerQuestion::create([
+            'contentId' => $content->id,
+            'userId' => Auth::user()->id,
+            'quizId' => $quiz->id,
+            'answer' => $request->answer
+        ]);
+
+        return $question;
     }
     
     
