@@ -46,7 +46,7 @@
         <select class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($formateurUsers as $formateurUser)
                 <option value="{{ $formateurUser->id }}">
-                    {{ $formateurUser->email }}</option>
+                    {{ $formateurUser->firstName.' '.$formateurUser->lastName }}</option>
             @endforeach
 
         </select>

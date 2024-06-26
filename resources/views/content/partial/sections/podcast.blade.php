@@ -11,7 +11,7 @@
         <select class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($animatorUsers as $animatorUser)
                 <option value="{{ $animatorUser->id }}">
-                    {{ $animatorUser->email }}</option>
+                    {{ $animatorUser->firstName.' '.$animatorUser->lastName }}</option>
             @endforeach
 
         </select>

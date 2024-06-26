@@ -71,7 +71,7 @@
                             <select class="select3" name="guestIds[]" multiple="multiple" id="guestInvite"
                                 data-placeholder="Select a State" style="width: 100%;">
                                 @foreach ($inviteUsers as $inviteUser)
-                                    <option value="{{ $inviteUser->id }}">{{ $inviteUser->email }}</option>
+                                    <option value="{{ $inviteUser->id }}">{{ $inviteUser->firstName.' '.$inviteUser->lastName }}</option>
                                 @endforeach
 
                             </select>
@@ -83,7 +83,7 @@
                             <select class="select3" name="guestIds[]" multiple="multiple" id="guestConference"
                                 data-placeholder="Select a State" style="width: 100%;">
                                 @foreach ($conferencerUsers as $conferencerUser)
-                                    <option value="{{ $conferencerUser->id }}">{{ $conferencerUser->email }}</option>
+                                    <option value="{{ $conferencerUser->id }}">{{ $conferencerUser->firstName.' '.$conferencerUser->lastName }}</option>
                                 @endforeach
 
                             </select>

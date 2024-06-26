@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Content;
 use Illuminate\View\View;
+use App\Models\VideoGuest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
@@ -149,6 +151,13 @@ class ProfileController extends Controller
     {
 
         $user = User::findOrFail(Crypt::decrypt($id));
+
+        $hasContent = Content::where('hostId' , $user->id)->exists();
+        $hasVideo = VideoGuest::where('userId' , $user->id)->exists();
+
+        if($hasContent || $hasVideo){
+            return redirect()->back()->with('faild' , 'Cannot delete category. It is associated with content or Video.');
+        }
 
         $request->validate([
             'password' => ['required' ,  'current_password']

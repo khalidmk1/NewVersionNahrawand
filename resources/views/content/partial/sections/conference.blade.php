@@ -7,7 +7,7 @@
         <select data-placeholder="Choose a Modirateur..." name="contentHost" style="width: 100%;" class=" selectize">
             @foreach ($moderatorUsers as $moderatorUser)
                 <option value="{{ $moderatorUser->id }}">
-                    {{ $moderatorUser->email }}</option>
+                    {{ $moderatorUser->firstName .' '.$moderatorUser->lastName}}</option>
             @endforeach
 
         </select>

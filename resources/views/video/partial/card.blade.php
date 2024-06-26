@@ -1,6 +1,6 @@
 @foreach ($videos as $video)
     <div class="position-absolute">
-        <x-delete-modal :modelDeleteId="$video->id" :modelRouteDelete="route('delete.video', Crypt::encrypt($video->id))" />
+        <x-delete-modal :modelDeleteId="$video->id" :modelTitle="'Delete video'" :modelRouteDelete="route('delete.video', Crypt::encrypt($video->id))" />
     </div>
 
     <div class="col mb-4 ">

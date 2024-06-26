@@ -120,7 +120,7 @@
                     @foreach ($moderatorUsers as $moderatorUser)
                         <option {{ $moderatorUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $moderatorUser->id }}">
-                            {{ $moderatorUser->email }}
+                            {{ $moderatorUser->firstName.' '.$moderatorUser->lastName }}
                         </option>
                     @endforeach
                 </select>
@@ -152,7 +152,7 @@
                     @foreach ($formateurUsers as $formateurUser)
                         <option {{ $formateurUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $formateurUser->id }}">
-                            {{ $formateurUser->email }}
+                            {{ $formateurUser->firstName.' '.$formateurUser->lastName }}
                         </option>
                     @endforeach
                 </select>
@@ -186,7 +186,7 @@
                     @foreach ($animatorUsers as $animatorUser)
                         <option {{ $animatorUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $animatorUser->id }}">
-                            {{ $animatorUser->email }}
+                            {{ $animatorUser->firstName.' '.$animatorUser->lastName }}
                         </option>
                     @endforeach
                 </select>
