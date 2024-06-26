@@ -65,7 +65,7 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-header bg-light d-flex align-items-center justify-content-around">
 
-                    <p class="m-0">{{ $quiz->question }}</p>
+                    <p class="m-0" style="max-width: 243px;">{{ $quiz->question }}</p>
 
                     @if ($firstQuizParameter)
                         <h6 class="badge badge-secondary m-0">
