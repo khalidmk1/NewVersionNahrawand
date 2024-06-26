@@ -42,6 +42,6 @@ class ProgramCategory extends Model
      */
     public function program(): BelongsTo
     {
-        return $this->belongsTo(Program::class, 'programId');
+        return $this->belongsTo(Program::class, 'programId')->withTrashed();
     }
 }

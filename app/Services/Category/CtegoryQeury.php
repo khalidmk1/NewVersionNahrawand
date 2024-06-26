@@ -3,8 +3,10 @@
 namespace  App\Services\Category;
 
 use App\Models\Domain;
+use App\Models\Content;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\ProgramCategory;
 use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +69,7 @@ class CtegoryQeury extends GlobaleService {
 
         $category = Category::findOrFail(Crypt::decrypt($id));
 
-        $hasContent = $category->content()->exists();
+        $hasContent = Content::where('categoryId' , $category->id)->exists();
 
         if($hasContent){
             return redirect()->back()->with('faild' , 'Cannot delete category. It is associated with content.');
@@ -76,6 +78,7 @@ class CtegoryQeury extends GlobaleService {
         if(Hash::check($request->password, Auth::user()->password ))
         {
             $category->delete();
+            $programCategory = ProgramCategory::where('categoryId' , $category->id)->delete();
         }
 
         return redirect()->back()->with('status' , 'You Delete Category');

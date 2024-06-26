@@ -13,6 +13,7 @@ use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\ContentVideo;
 use Illuminate\Http\Request;
+use App\Models\ProgramCategory;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\TicketRequest;
@@ -317,6 +318,7 @@ class GlobaleService  {
 
     public function restoreCategory(String $categoryId){
         $category = Category::withTrashed()->findOrFail(Crypt::decrypt($categoryId));
+        $programCategory = ProgramCategory::where('categoryId' , $category->id)->restore();
         $category->restore();
         return $category;
     }
