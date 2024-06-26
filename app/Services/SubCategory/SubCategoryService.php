@@ -22,12 +22,12 @@ class SubCategoryService extends SubCategoryQuery implements SubCategoryInterfac
 
     public function update($request , $id){
         $subcategory = $this->updateSubCategory($request , $id);
-        return redirect()->back()->with('status' , 'You Updated SubCategory');
+        return $subcategory;
     }
 
     public function store($request){
         $subcategory = $this->storeSuCategory($request);
-        return redirect()->back()->with('status' , 'You Created SubCategory');
+        return $subcategory;
     }
 
     public function destroy($request , $id){

@@ -27,12 +27,17 @@ class CtegoryQeury extends GlobaleService {
     public function storeCategory(CategoryRequest $request){
         $validatedData = $request->validated();
 
+        $existingCategory = Category::where('name', $request->name)->first();
+
+        if($existingCategory){
+            return redirect()->back()->with('faild' , ' The name has already been taken.');
+        }
         $category = Category::create([
             'domainId' => $request->domainId,
             'name' => $request->name
         ]);
         
-        return $category;
+        return redirect()->back()->with('status' , 'You Create Category');
     }
 
     public function updateCategory(CategoryRequest $request, string $id)
@@ -41,11 +46,20 @@ class CtegoryQeury extends GlobaleService {
 
         $validatedData = $request->validated();
 
+        $existingCategory = Category::where('name', $request->name)
+        ->where('id', '!=', $category->id)
+        ->first();
+
+        if($existingCategory){
+            return redirect()->back()->with('faild' , ' The name has already been taken.');
+        }
+
         $category->domainId = $request->domainId;
         $category->name = $request->name;
 
         $category->save();
-
+        
+        return redirect()->back()->with('status' , 'You Update Category');
     }
 
     public function deleteCategory(Request $request , String $id){

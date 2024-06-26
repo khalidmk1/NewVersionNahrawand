@@ -17,12 +17,12 @@ class CategoryService  extends CtegoryQeury implements CategoryInterface{
     
     public function store($request){
         $category = $this->storeCategory($request);
-        return redirect()->back()->with('status' , 'You Create Category');
+        return $category;
     }
 
     public function update($request, $id){
         $category = $this->updateCategory($request , $id);
-        return redirect()->back()->with('status' , 'You Update Category');
+        return $category;
     }
 
     public function destroy($request , $id){

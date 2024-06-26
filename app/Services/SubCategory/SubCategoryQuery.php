@@ -31,12 +31,18 @@ class SubCategoryQuery extends GlobaleService {
     public function storeSuCategory(SubCategoryRequest $request){
         $validatedData = $request->validated();
 
+        $existingSubCategory = SubCategory::where('name', $request->name)->first();
+
+        if($existingSubCategory){
+            return redirect()->back()->with('faild' , ' The name has already been taken.');
+        }
+
         $subCategory = SubCategory::create([
             'categoryId' => $request->categoryId,
             'name' => $request->name
         ]);
 
-        return $subCategory;
+        return redirect()->back()->with('status' , 'You Created SubCategory');
     }
 
     public function updateSubCategory(SubCategoryRequest $request , String $id){
@@ -44,10 +50,21 @@ class SubCategoryQuery extends GlobaleService {
         $subCategory = SubCategory::findOrFail(Crypt::decrypt($id));
         $validatedData = $request->validated();
 
+        
+        $existingSubCategory = SubCategory::where('name', $request->name)
+        ->where('id', '!=', $subCategory->id)
+        ->first();
+
+        if($existingSubCategory){
+            return redirect()->back()->with('faild' , ' The name has already been taken.');
+        }
+
         $subCategory->categoryId = $request->categoryId;
         $subCategory->name = $request->name;
 
         $subCategory->save();
+
+        return redirect()->back()->with('status' , 'You Updated SubCategory');
     }
 
     public function destroySubCategory(Request $request , String $id){
