@@ -17,7 +17,7 @@
 
 
             @if ($content->quizType == 0)
-               {{--  <div class="d-flex justify-content-around align-items-center" style="gap: 35px" id="addsection">
+                {{--  <div class="d-flex justify-content-around align-items-center" style="gap: 35px" id="addsection">
                     <div class="form-group row">
                         <label for="Rate">Success Rate</label>
                         <input type="text"
@@ -50,13 +50,14 @@
                         </div>
                     </div>
                 @endforeach
+
+                <div id="container-{{ $quiz->id }}" data-index="{{ count($quiz->answers) }}">
+                    <button type="button" class="btn btn-primary addBtn" data-quiz-id="{{ $quiz->id }}"
+                        data-quiz-index="{{ $quizIndex }}">Add Response</button>
+                </div>
             @endif
 
 
-            <div id="container-{{ $quiz->id }}" data-index="{{ count($quiz->answers) }}">
-                <button type="button" class="btn btn-primary addBtn" data-quiz-id="{{ $quiz->id }}"
-                    data-quiz-index="{{ $quizIndex }}">Add Response</button>
-            </div>
 
         </x-update-filter-modal>
 
