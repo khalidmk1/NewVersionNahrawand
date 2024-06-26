@@ -33,7 +33,7 @@ class SubCategoryService extends SubCategoryQuery implements SubCategoryInterfac
     public function destroy($request , $id){
         $subcategory = $this->destroySubCategory($request , $id);
 
-        return redirect()->back()->with('status' , 'You Delete SubCategory');
+        return $subcategory;
     }
 
     public function restore($subCategoryId){

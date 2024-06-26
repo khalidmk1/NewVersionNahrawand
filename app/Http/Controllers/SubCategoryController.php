@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DestroyRequest;
 use App\Interfaces\SubCategoryInterface;
 use App\Http\Requests\SubCategoryRequest;
 
@@ -65,7 +66,7 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request , string $id)
+    public function destroy(DestroyRequest $request , string $id)
     {
         return $this->SubCategoryInterface->destroy($request , $id);
     }

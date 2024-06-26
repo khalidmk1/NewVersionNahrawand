@@ -10,6 +10,7 @@ use App\Models\UserSubcategory;
 use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\SubCategoryRequest;
 
@@ -67,19 +68,22 @@ class SubCategoryQuery extends GlobaleService {
         return redirect()->back()->with('status' , 'You Updated SubCategory');
     }
 
-    public function destroySubCategory(Request $request , String $id){
+    public function destroySubCategory(DestroyRequest $request , String $id){
 
         $subCategory = SubCategory::findOrFail(Crypt::decrypt($id));
 
-        $request->validate([
-            'password' => ['required' ,  'current_password']
-        ]);
+        $hasContent = $subCategory->contentSubCategories()->exists();
+
+        if($hasContent){
+            return redirect()->back()->with('faild' , 'Cannot delete subCategory. It is associated with content.');
+        }
 
         if(Hash::check( $request->password, Auth::user()->password ))
         {
             $subCategory->delete();
         }
-        return $subCategory;
+
+        return redirect()->back()->with('status' , 'You Delete SubCategory');
 
     }
 
