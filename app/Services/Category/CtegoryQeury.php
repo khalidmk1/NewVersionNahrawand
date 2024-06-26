@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\CategoryRequest;
 
@@ -62,18 +63,22 @@ class CtegoryQeury extends GlobaleService {
         return redirect()->back()->with('status' , 'You Update Category');
     }
 
-    public function deleteCategory(Request $request , String $id){
+    public function deleteCategory(DestroyRequest $request , String $id){
+
         $category = Category::findOrFail(Crypt::decrypt($id));
 
-        $request->validate([
-            'password' => ['required' ,  'current_password']
-        ]);
+        $hasContent = $category->content()->exists();
 
-        if(Hash::check( $request->password, Auth::user()->password ))
+        if($hasContent){
+            return redirect()->back()->with('faild' , 'Cannot delete category. It is associated with content.');
+        }
+
+        if(Hash::check($request->password, Auth::user()->password ))
         {
             $category->delete();
         }
-        return $category;
+
+        return redirect()->back()->with('status' , 'You Delete Category');
     }
 
     public function restore($categoryId){

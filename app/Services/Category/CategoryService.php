@@ -27,7 +27,7 @@ class CategoryService  extends CtegoryQeury implements CategoryInterface{
 
     public function destroy($request , $id){
         $category = $this->deleteCategory($request ,$id);
-        return redirect()->back()->with('status' , 'You Delete Category');
+        return $category;
     }
 
    

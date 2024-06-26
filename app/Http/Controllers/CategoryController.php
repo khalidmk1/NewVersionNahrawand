@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DestroyRequest;
 use App\Interfaces\CategoryInterface;
 use App\Http\Requests\CategoryRequest;
 
@@ -66,7 +67,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request ,string $id)
+    public function destroy(DestroyRequest $request ,string $id)
     {
         return $this->CategoryInterface->destroy($request , $id);
     }

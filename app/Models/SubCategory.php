@@ -26,7 +26,7 @@ class SubCategory extends Model
      */
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'categoryId');
+        return $this->belongsTo(Category::class, 'categoryId')->withTrashed();
     }
 
     /**
