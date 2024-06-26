@@ -74,14 +74,25 @@ class QuizQuery extends GlobaleService{
     }
 
     public function updateQuiz(Request $request, string $id) {
-        $request->validate([
-            'question' => 'required|string',
-            'answer' => ['required' , 'array' , 'min:1'],
-            'answer.0' => ['required' , 'string'],
-        ]);
+
+        $quiz = Quiz::findOrFail(Crypt::decrypt($id));
+
+        if($quiz->content->quizType == 0){
+            $request->validate([
+                'question' => ['required','string'],
+                'answer' => ['required' , 'array' , 'min:1'],
+                'answer.0' => ['required' , 'string'],
+            ]);
+        }else{
+            $request->validate([
+                'question' => ['required','string'],
+            ]); 
+        }
+
+       
 
   
-        $quiz = Quiz::findOrFail(Crypt::decrypt($id));
+       
     
         $quiz->update([
             'question' => $request->question,
