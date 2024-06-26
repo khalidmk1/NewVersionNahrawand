@@ -59,4 +59,16 @@ class Quiz extends Model
         return $this->hasMany(QuizPrameter::class, 'quizId');
     } 
 
+    public function rightAnswer()
+    {
+        return $this->hasOneThrough(
+            QuizAnswer::class,
+            QuizPrameter::class,
+            'quizId', // Foreign key on QuizPrameter
+            'id', // Foreign key on QuizAnswer
+            'id', // Local key on Quiz
+            'answerId' // Local key on QuizPrameter
+        );
+    }
+
 }

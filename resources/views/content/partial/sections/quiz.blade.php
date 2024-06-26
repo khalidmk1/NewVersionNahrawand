@@ -1,55 +1,62 @@
 <div class="row">
-    @foreach ($content->quizzes as $quiz)
+    @foreach ($content->quizzes as $quizIndex => $quiz)
+        <x-delete-modal :modelDeleteId="$quiz->id" :modelTitle="'Delete Quiz'" :modelRouteDelete="route('quiz.destroy', Crypt::encrypt($quiz->id))" />
         @php
             $firstQuizParameter = $quiz->quizParameter->first();
+
         @endphp
-        <x-update-filter-modal :filterId="$quiz->id" :titleModel="'Update quiz'" :modelRoute="route('category.update', Crypt::encrypt($quiz->id))">
+
+
+        <x-update-filter-modal :filterId="$quiz->id" :titleModel="'Update quiz'" :modelRoute="route('quiz.update', Crypt::encrypt($quiz->id))">
 
             <div class="form-group question">
                 <label for="Question">Question</label>
                 <input type="text" value="{{ old('question', $quiz->question) }}" class="form-control question_text "
-                    name="Question" id="Question" placeholder="Entrez Question ...">
+                    name="question" id="Question_{{ $quiz->id }}" placeholder="Entrez Question ...">
             </div>
 
+
             @if ($content->quizType == 0)
-                <div class="form-group">
-                    <label for="RightAwnser">The correct answer</label>
-                    <input type="text" value="{{ old('rightAwnser', $firstQuizParameter->rightAnswer->Answer) }}"
-                        class="form-control" required name="rightAwnser" id="RightAwnser"
-                        placeholder="Enter The correct answer ...">
-                </div>
-
-                <div class="d-flex justify-content-around  align-items-center" style="gap: 35px" id="addsection">
-
+               {{--  <div class="d-flex justify-content-around align-items-center" style="gap: 35px" id="addsection">
                     <div class="form-group row">
-                        <label for="Rate">Sccess Rate</label>
-                        <input type="text" value="{{ old('rate', $firstQuizParameter->rate) }}" class="form-control"
-                            required name="rate" id="Rate" placeholder="Entrez Rate ...">
+                        <label for="Rate">Success Rate</label>
+                        <input type="text"
+                            value="{{ old('rate.' . $quiz->id, optional($firstQuizParameter)->rate) }}"
+                            class="form-control" required name="rate" id="Rate_{{ $quiz->id }}"
+                            placeholder="Enter Rate ...">
                     </div>
                     <div class="form-group row">
                         <label for="count">How many to send?</label>
-                        <input type="text" value="{{ old('count', $firstQuizParameter->count) }}"
-                            class="form-control" required name="count" id="count"
-                            placeholder="Entrez la bonne réponse ...">
+                        <input type="text"
+                            value="{{ old('count.' . $quiz->id, optional($firstQuizParameter)->count) }}"
+                            class="form-control" required name="count" id="count_{{ $quiz->id }}"
+                            placeholder="Enter Count ...">
                     </div>
-                </div>
+                </div> --}}
 
 
                 @foreach ($quiz->answers as $index => $Answer)
                     <div class="form-group reponse">
-                        <label for="awnser_${index}" class="answer_label">Response {{ $index + 2 }}</label>
+                        @if ($index === 0)
+                            <label for="Awnser_{{ $Answer->id }}" class="answer_label">Correct Answer</label>
+                        @else
+                            <label for="Awnser_{{ $Answer->id }}" class="answer_label">Response
+                                {{ $index }}</label>
+                        @endif
                         <div class="position-relative">
-                            <input name="awnser[]" type="text" value="{{ old('Answer', $Answer) }}"
-                                class="form-control response" required id="Awnser_${index}"
+                            <input name="answer[]" type="text" value="{{ old('answer.' . $index, $Answer->Answer) }}"
+                                class="form-control response" id="Awnser_{{ $Answer->id }}"
                                 aria-label="Text input with checkbox">
-
                         </div>
                     </div>
                 @endforeach
             @endif
 
 
-
+            <div id="container-{{ $quiz->id }}" data-index="{{ count($quiz->answers) }}">
+                <button type="button" class="btn btn-primary addBtn" data-quiz-id="{{ $quiz->id }}"
+                    data-quiz-index="{{ $quizIndex }}">Add Response</button>
+            </div>
 
         </x-update-filter-modal>
 
@@ -78,7 +85,7 @@
                         </button>
 
 
-                        <button type="button" data-toggle="modal" data-target="#delete_Qsm_video_{{ $quiz->id }}"
+                        <button type="button" data-toggle="modal" data-target="#delete_{{ $quiz->id }}"
                             class="btn btn-sm btn-danger position-absolute" style="float: right">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>

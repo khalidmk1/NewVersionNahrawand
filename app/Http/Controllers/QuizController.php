@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Interfaces\QuizIntreface;
+use App\Http\Requests\DestroyRequest;
 
 class QuizController extends Controller
 {
@@ -59,14 +60,18 @@ class QuizController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->QuizInterface->update($request , $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DestroyRequest $request , string $id)
     {
-        //
+        return $this->QuizInterface->destroy($request , $id);
+    }
+
+    public function delete(String $id){
+        return $this->QuizInterface->delete($id);
     }
 }

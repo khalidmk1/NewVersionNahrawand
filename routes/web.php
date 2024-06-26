@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
 
     // Delete Operation
     Route::delete('delete/video/{id}', [GlobaleController::class, 'deletevideo'])->name('delete.video');
+    Route::delete('delete/quiz/{id}', [QuizController::class, 'delete'])->name('quiz.delete');
 
     // Ticket Comment
     Route::post('ticket/comment/{id}', [GlobaleController::class, 'createComment'])->name('ticket.comment.create');

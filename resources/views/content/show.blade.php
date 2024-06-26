@@ -56,10 +56,15 @@
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Detail</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Edite</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Setting</a>
-                        </li>
+                        @can('viewEditeContent')
+                            <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Edite</a>
+                            </li>
+                        @endcan
+                        @can('viewDeleteContent')
+                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Setting</a>
+                            </li>
+                        @endcan
+
                         @if ($content->isCertify == 1)
                             <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
                             </li>
@@ -227,7 +232,7 @@
 
                                 <div class="row">
                                     @foreach ($content->videos as $video)
-                                        <x-delete-modal  :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+                                        <x-delete-modal :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
 
                                         <x-card-video :videoUrl="$video->video" :videoID="$video->id">
                                             <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'" :modelRoute="route('video.update', Crypt::encrypt($video->id))">

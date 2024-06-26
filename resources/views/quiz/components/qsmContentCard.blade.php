@@ -4,9 +4,9 @@
             <div class="card-header">
                 {{ $Qsm->question }}
             </div>
-            <form action="" method="post">
+            <form action="{{route('quiz.delete', Crypt::encrypt($Qsm->id))}}" method="post">
                 @csrf
-              {{--   @method('Delete') --}}
+                @method('Delete')
                 <button type="submit" class="btn btn-sm btn-danger position-absolute" style="right: 6px; top: 4px;">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>

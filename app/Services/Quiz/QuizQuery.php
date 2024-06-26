@@ -11,6 +11,8 @@ use App\Services\GlobaleService;
 use App\Http\Requests\QuizRequest;
 use App\Models\QuizAnswerQuestion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
 
 class QuizQuery extends GlobaleService{
@@ -71,12 +73,70 @@ class QuizQuery extends GlobaleService{
         }
     }
 
-    public function updateQuiz(Request $request, string $id){
-
-        $quiz = Quiz::update([
-            ''
+    public function updateQuiz(Request $request, string $id) {
+        $request->validate([
+            'question' => 'required|string',
+            'answer' => ['required' , 'array' , 'min:1'],
+            'answer.0' => ['required' , 'string'],
         ]);
+
+  
+        $quiz = Quiz::findOrFail(Crypt::decrypt($id));
+    
+        $quiz->update([
+            'question' => $request->question,
+        ]);
+
+
+       /*  $quizParameters = QuizPrameter::whereIn('contentId', $quiz->pluck('contentId'))->update([
+            'rate' => $request->rate,
+            'count' => $request->count,
+        ]);
+ */
+        
+    
+       $quiz->answers()->forceDelete();
+       $answersData = array_filter($request->input('answer', []), fn($answer) => !is_null($answer) && $answer !== '');
+       foreach ($answersData as $answerText) {
+            $quiz->answers()->create([
+                'Answer' => $answerText,
+            ]);
+        }
+
+    
+        return $quiz;
     }
+
+
+    public function destroyQuiz(DestroyRequest $request , String $id){
+        
+        $quiz = Quiz::findOrFail(Crypt::decrypt($id));
+
+        if(Hash::check( $request->password, Auth::user()->password ))
+        {
+            $quiz->delete();
+
+            /* foreach ($quiz->answers as $key => $answer) {
+                $answer->delete();
+            } */
+           
+        }
+        return $quiz;
+    }
+
+    public function deleteQuiz(String $id){
+
+        $quiz = Quiz::findOrFail(Crypt::decrypt($id));
+        $quiz->forceDelete();
+        $parametere = QuizPrameter::where('quizId' , $quiz->id)->forceDelete();
+
+        foreach ($quiz->answers as $key => $answer) {
+            $answer->forceDelete();
+        }
+
+        return $quiz;
+    }
+    
 
 
 
@@ -129,7 +189,7 @@ class QuizQuery extends GlobaleService{
        
     }
 
-    public function qsmContentQuestionIndex(String $contentId){
+   /*  public function qsmContentQuestionIndex(String $contentId){
         $content = Content::findOrFail($contentId);
         $qsmContent = Quiz::where('contentId', $content->id)->get();
     
@@ -143,7 +203,7 @@ class QuizQuery extends GlobaleService{
         });
     
         return $filteredQsmContent;
-    }
+    } */
 
 
     public function storeQuestionClient(Request $request , String $contentId , String $quizId){

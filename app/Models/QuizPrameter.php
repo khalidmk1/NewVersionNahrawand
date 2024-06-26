@@ -31,6 +31,16 @@ class QuizPrameter extends Model
     }
 
     /**
+     * Get the content that owns the QuizPrameter
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function content(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'contentId');
+    }
+
+    /**
      * Get the answer that owns the QuizPrameter
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

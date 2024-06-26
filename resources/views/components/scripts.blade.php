@@ -26,8 +26,6 @@
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
-
-
 <!-- Select2 -->
 <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- Bootstrap4 Duallistbox -->
@@ -164,12 +162,12 @@
 
 <script>
     $(document).ready(function() {
-        
+
         if ($('#certify').is(':checked')) {
-                $('#condition').show();
-            } else {
-                $('#condition').hide();
-            }
+            $('#condition').show();
+        } else {
+            $('#condition').hide();
+        }
 
         $('#certify').on('change', function() {
             console.log('hello');
@@ -279,6 +277,55 @@
 
             $('.reponse').each(function(index) {
                 $(this).find('.answer_label').text(`Réponse ${index + 1}`);
+            });
+        });
+
+
+        //add response on loop
+
+        // Add response
+        $(document).ready(function() {
+            // Add response
+            $(document).on('click', '.addBtn', function() {
+                let quizId = $(this).data('quiz-id');
+                let quizIndex = $(this).data('quiz-index');
+                let container = $(`#container-${quizId}`);
+                let index = container.data('index');
+
+                index++;
+                container.data('index', index);
+
+                let newAnswer = `
+                    <div class="form-group reponse">
+                        <label for="answer_${quizId}_${index}" class="answer_label">Response ${index +1}</label>
+                        <div class="position-relative">
+                            <input name="answer[]" type="text" class="form-control response" id="answer_${quizId}_${index}" aria-label="Text input with checkbox">
+                            <i class="fa fa-trash position-absolute removeBtn" style="right: 12px; color: red; bottom: 12px; z-index: 1000;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                `;
+
+                // Append the new answer and move the button to the end
+                container.append(newAnswer);
+
+                // Move the "Add Response" button to the end
+                let addButton = $(this).detach();
+                container.append(addButton);
+            });
+
+            // Remove response
+            $(document).on('click', '.removeBtn', function() {
+                let quizId = $(this).closest('.quiz-container').data('quiz-id');
+                let container = $(`#container-${quizId}`);
+                let index = container.data('index');
+
+                $(this).closest('.reponse').remove();
+                container.data('index', --index);
+
+                // Update labels
+                container.find('.reponse').each(function(index) {
+                    $(this).find('.answer_label').text(`Response ${index + 1}`);
+                });
             });
         });
 

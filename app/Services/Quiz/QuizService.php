@@ -17,16 +17,32 @@ class QuizService extends QuizQuery implements QuizIntreface {
         return redirect()->back()->with('status' , 'You Have created Qsm');
     }
 
+    public function update($request, $id){
+        $quiz = $this->updateQuiz($request , $id);
+        return redirect()->back()->with('status', 'You have updated quiz');
+    }
+
+    public function destroy($request , $id){
+        $quiz = $this->destroyQuiz( $request ,  $id);
+        return redirect()->back()->with('status', 'You have deleted quiz');
+    }
+
+    public function delete($id){
+        $quiz = $this->deleteQuiz($id);
+        return redirect()->back()->with('status', 'You have deleted quiz');
+    }
+
 
     //api quiz
     public function qsmIndexContent($contentId){
         $qsmContents = $this->qsmContentIndex($contentId);
         return response()->json($qsmContents);
     }
-    public function qsmIndexContentQuestion($contentId){
+    
+  /*   public function qsmIndexContentQuestion($contentId){
         $qsmContents = $this->qsmContentQuestionIndex($contentId);
         return response()->json($qsmContents);
-    }
+    } */
 
     public function storeQuestionAnswer($request , $contentId , $quizId){
         $answer = $this->storeQuestionClient($request , $contentId , $quizId);

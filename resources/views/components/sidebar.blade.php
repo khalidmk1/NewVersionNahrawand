@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" style="background-image: url({{ asset('') }})" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
         <span class="brand-text font-weight-light">NAHRAWAND</span>
     </a>
 
@@ -33,12 +33,16 @@
                 <li class="nav-item menu-open">
 
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('report.index') }}" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Reporting</p>
-                            </a>
-                        </li>
+
+                        @can('viewReport')
+                            <li class="nav-item">
+                                <a href="{{ route('report.index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Reporting</p>
+                                </a>
+                            </li>
+                        @endcan
+
                     </ul>
 
 
@@ -48,7 +52,7 @@
 
 
                 <li class="nav-item">
-                    <a href="{{route('role.index')}}" class="nav-link">
+                    <a href="{{ route('role.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Roles
@@ -57,38 +61,49 @@
                     </a>
                 </li>
 
+                @if (auth()->user()->hasRole('Super Admin'))
+                    <li class="nav-item">
+                        <a href="{{ route('create.admin') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Admins
+
+                            </p>
+                        </a>
+                    </li>
+                @endif
+
+
+
+                @if (auth()->user()->hasRole(['Admin', 'Super Admin']))
+                    <li class="nav-item">
+                        <a href="{{ route('create.manager') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Managers
+
+                            </p>
+                        </a>
+                    </li>
+                @endif
+
+
+                @can('viewGestionActeur')
+                    <li class="nav-item">
+                        <a href="{{ route('create.speaker') }}" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Speakers
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
+
 
 
                 <li class="nav-item">
-                    <a href="{{route('create.admin')}}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Admins
-
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('create.manager')}}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Managers
-
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('create.speaker')}}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Speakers
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{route('client.index')}}" class="nav-link">
+                    <a href="{{ route('client.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             Clients
@@ -122,7 +137,7 @@
                 <li class="nav-header">Filter management</li>
 
                 <li class="nav-item">
-                    <a href="{{route('category.index')}}" class="nav-link">
+                    <a href="{{ route('category.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-book"></i>
                         <p>
                             Categorys
@@ -131,7 +146,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('subcategory.index')}}" class="nav-link">
+                    <a href="{{ route('subcategory.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-list"></i>
                         <p>
                             Subcategorys
@@ -140,7 +155,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('program.index')}}" class="nav-link">
+                    <a href="{{ route('program.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-tasks"></i>
                         <p>
                             Programs
@@ -148,7 +163,7 @@
                     </a>
                 </li>
 
-               {{--  <li class="nav-item">
+                {{--  <li class="nav-item">
                     <a href="{{route('objective.index')}}" class="nav-link">
                         <i class="nav-icon fa fa-bullseye" aria-hidden="true"></i>
                         <p>
@@ -160,18 +175,20 @@
 
                 <li class="nav-header">Content Management</li>
 
-                <li class="nav-item">
-                    <a href="{{route('content.create')}}" class="nav-link">
+                @can('viewCreateContent')
+                    <li class="nav-item">
+                        <a href="{{ route('content.create') }}" class="nav-link">
 
-                        <i class="nav-icon  fa fa-graduation-cap" aria-hidden="true"></i>
-                        <p>
-                            Contents
-                        </p>
-                    </a>
-                </li>
+                            <i class="nav-icon  fa fa-graduation-cap" aria-hidden="true"></i>
+                            <p>
+                                Contents
+                            </p>
+                        </a>
+                    </li>
+                @endcan
 
                 <li class="nav-item">
-                    <a href="{{route('content.index')}}" class="nav-link">
+                    <a href="{{ route('content.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-graduation-cap" aria-hidden="true"></i>
                         <p>
                             View Contents
@@ -179,7 +196,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('quickly.index')}}" class="nav-link">
+                    <a href="{{ route('quickly.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-graduation-cap" aria-hidden="true"></i>
                         <p>
                             View Quicly Contents
@@ -188,7 +205,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('event.create')}}" class="nav-link">
+                    <a href="{{ route('event.create') }}" class="nav-link">
                         <i class="nav-icon  fa fa-calendar" aria-hidden="true"></i>
                         <p>
                             Events
@@ -196,17 +213,20 @@
                     </a>
                 </li>
 
-                <li class="nav-header">Ticket Management</li>
+                @can('viewMangeTicket')
+                    <li class="nav-header">Ticket Management</li>
 
-                <li class="nav-item">
-                    <a href="{{route('ticket.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-ticket-alt" aria-hidden="true"></i>
+                    <li class="nav-item">
+                        <a href="{{ route('ticket.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-ticket-alt" aria-hidden="true"></i>
 
-                        <p>
-                            Tickets
-                        </p>
-                    </a>
-                </li>
+                            <p>
+                                Tickets
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
 
 
 
@@ -214,7 +234,7 @@
                 <li class="nav-header">Settings</li>
 
                 <li class="nav-item">
-                    <a href="{{route('FAQ.index')}}" class="nav-link">
+                    <a href="{{ route('FAQ.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-question-circle" aria-hidden="true"></i>
 
                         <p>
@@ -223,19 +243,21 @@
                     </a>
                 </li>
 
+                @can('viewManageEmail')
+                    <li class="nav-item">
+                        <a href="{{ route('email.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-envelope" aria-hidden="true"></i>
+
+                            <p>
+                                Emails
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+
+
                 <li class="nav-item">
-                    <a href="{{route('email.index')}}" class="nav-link">
-                        <i class="nav-icon fa fa-envelope" aria-hidden="true"></i>
-
-                        <p>
-                            Emails
-                        </p>
-                    </a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a href="{{route('history')}}" class="nav-link">
+                    <a href="{{ route('history') }}" class="nav-link">
                         <i class="nav-icon fa fa-history" aria-hidden="true"></i>
 
                         <p>

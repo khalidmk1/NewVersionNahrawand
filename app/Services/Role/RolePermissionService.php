@@ -3,6 +3,7 @@
 namespace App\Services\Role;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Interfaces\RolePermissionInterface;
 
 class RolePermissionService extends RolePermissionQeury implements RolePermissionInterface {
@@ -12,6 +13,7 @@ class RolePermissionService extends RolePermissionQeury implements RolePermissio
     */
     public function index()
     {
+       
         $permissions = $this->allPermission();
         $roles = $this->allRoles();
         $roleHasPermission = $this->roleHasPermission();
