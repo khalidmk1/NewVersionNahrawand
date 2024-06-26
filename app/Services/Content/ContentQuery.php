@@ -28,8 +28,8 @@ class ContentQuery extends GlobaleService {
     public function allContent()
     {
         $contentType = ['conference' , 'podcast' , 'formation']; 
-        $contents = Content::whereIn('contentType' , $contentType)->paginate(10);
-        $contentQuicly = Content::where('contentType' , 'quickly')->paginate(10); 
+        $contents = Content::whereIn('contentType' , $contentType)->paginate(9);
+        $contentQuicly = Content::where('contentType' , 'quickly')->paginate(9); 
         return ['contents'=>$contents , 'contentQuicly' => $contentQuicly];
     }
 

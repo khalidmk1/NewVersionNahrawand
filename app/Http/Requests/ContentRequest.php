@@ -40,7 +40,7 @@ class ContentRequest extends FormRequest
         if ($this->contentType === 'conference' || $this->contentType === 'podcast') {
             $rules['smallDescription'] = ['required' , 'string' , 'max:300'];
             $rules['bigDescription'] = ['required', 'string', 'max:600'];
-            $rules['videoUrl'] = ['required' , 'url'];
+            $rules['videoUrl'] = ['required' , 'url' , 'regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/|v\/|.+\/)?([^&=%\?]{11})/i'];
             $rules['duration'] = ['required'];
 
         }
