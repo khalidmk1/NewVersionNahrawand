@@ -29,6 +29,9 @@
                                 <h5 class="position-absolute badge {{ $content->isComing ? 'badge-warning' : '' }}"
                                     style="right: 0">
                                     {{ $content->isComing ? 'A Venir' : '' }}</h5>
+                                <h5 class="position-absolute m-0 badge badge-info"
+                                    style="bottom: 0 ; right: 0;">
+                                    {{ $content->contentType }}</h5>
 
                                 <img src="{{ asset('storage/content/' . $content->image) }}" class="card-img-top about_img"
                                     alt="Skyscrapers" />
