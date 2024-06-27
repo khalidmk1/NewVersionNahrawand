@@ -187,6 +187,31 @@ class ProfileQeury extends GlobaleService {
         return $filteredUsers;
     }
 
+    public function speakerApiUsers(){
+
+        $speakersRole = ['Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
+        $role = Role::whereIn('name' , $speakersRole)->get();
+        $speakers = User::role($role) 
+        ->whereNull('deleted_at')
+        ->get();
+
+        $filteredUsers = $speakers->map(function($user){
+            $roleNames = $user->roles->pluck('name')->toArray();
+            return [
+                'avatar' => $user->avatar,
+                'cover' => $user->cover,
+                'fullName' => $user->firstName . ' ' . $user->lastName,
+                'biographie' => $user->biographie,
+                'faceboock' => $user->faceboock,
+                'linkdin' => $user->linkdin,
+                'instagram' => $user->instagram,
+                'roles' => $roleNames,
+            ];
+        });
+
+        return $filteredUsers;
+    }
+
     public function updateClientApi(Request $request)
     {
         $user = $request->user();

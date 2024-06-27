@@ -91,7 +91,7 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
     }
 
     public function speakersAll(){
-        $user = $this->allSpeakers();
+        $user = $this->speakerApiUsers();
         return response()->json($user);
     }
 
