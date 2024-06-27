@@ -3,6 +3,8 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/js/standalone/selectize.min.js"></script>
 
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -369,4 +371,20 @@
         });
 
     });
+
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('b6f4f8c05b0cba5149e9', {
+        cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('Notify-action');
+    channel.bind('form-submit', function(data) {
+        alert(JSON.stringify(data));
+    });
+
+
+    
 </script>

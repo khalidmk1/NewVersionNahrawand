@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\NotifyProcessed;
 use App\Http\Controllers\{
     FAQController,
     EmailController,
@@ -17,7 +18,7 @@ use App\Http\Controllers\{
     ContentVideoController,
     GuestProfileController,
     RolePermissionController,
-    QuizController
+    QuizController,
 };
 
 /*
@@ -97,6 +98,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/profile/restore/{user}', [ProfileController::class, 'restore'])->name('profile.restore');
 });
+
 
 // Guest Routes
 Route::middleware('guest')->group(function () {

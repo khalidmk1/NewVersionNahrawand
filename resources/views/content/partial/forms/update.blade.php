@@ -1,3 +1,5 @@
+
+
 <!-- /.card-header -->
 <form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" method="post" enctype="multipart/form-data">
     @method('patch')

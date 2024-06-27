@@ -13,6 +13,9 @@
 @endsection
 
 @section('content')
+   
+   
+
     <x-delete-modal :modelDeleteId="$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
@@ -242,7 +245,8 @@
                                                 <div class="form-group">
                                                     <label for="titleVideo">Title</label>
                                                     <input type="text" value="{{ old('title', $video->title) }}"
-                                                        class="form-control" name="title" id="titleVideo"
+                                                        class="form-control" name="title"
+                                                        id="titleVideo_{{ $video->id }}"
                                                         placeholder="Entrez Title ...">
                                                 </div>
 

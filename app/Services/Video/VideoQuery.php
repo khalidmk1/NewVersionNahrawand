@@ -60,6 +60,8 @@ class VideoQuery extends GlobaleService{
             $video->syncTags($arrTags, 'video');
         }
 
+        
+
 
         return $video;
     }

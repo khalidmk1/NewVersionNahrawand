@@ -151,6 +151,7 @@
 
             var tagInputEle = $('#tags-input');
             tagInputEle.tagsinput();
+            
         });
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Services\Content;
 
+use App\Models\User;
 use Spatie\Tags\Tag;
 use App\Models\Content;
 use App\Models\Program;
@@ -10,6 +11,7 @@ use App\Models\ContentView;
 use Illuminate\Http\Request;
 use App\Models\ContentComment;
 use App\Models\ContentFavoris;
+use App\Events\NotifyProcessed;
 use App\Models\ContentFinished;
 use App\Models\UserSubcategory;
 use App\Models\ContentObjective;
@@ -21,6 +23,7 @@ use App\Http\Requests\ContentRequest;
 use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\ContentUpdateRequest;
+use App\Notifications\ContentCreatedNotification;
 
 class ContentQuery extends GlobaleService {
 
@@ -99,6 +102,9 @@ class ContentQuery extends GlobaleService {
             ]);
         }
 
+      
+        
+
         return $content;
     }
 
@@ -174,6 +180,8 @@ class ContentQuery extends GlobaleService {
                 ]);
             }
         }
+
+        event(new NotifyProcessed("Content with ID {$content->id} has been updated"));
         
 
         return $content;
