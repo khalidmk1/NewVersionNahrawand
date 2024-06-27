@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('create/commentContent/{content}', [ContentController::class, 'createComment'])->name('commentContent.create');
     Route::get('content/comment/{content}', [ContentController::class, 'contentComment'])->name('content.comment');
+
+    Route::post('note/create/{videoId}', [VideoController::class, 'noteCreate'])->name('note.create');
     
     Route::get('content/podcast/subcategory', [ContentController::class, 'contentPodcastBySubCategory'])->name('content.podcast.subcategory');
     Route::get('content/formation/subcategory', [ContentController::class, 'contentFormationBySubCategory'])->name('content.formation.subcategory');
@@ -93,6 +95,7 @@ Route::get('program', [ProgramController::class, 'allProgramApi'])->name('progra
 
 
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
+Route::get('speakers', [ProfileController::class, 'speakersAll'])->name('user.spaeakers');
 
 Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index');
 

@@ -23,6 +23,10 @@ class ProfileController extends Controller
         return $this->ProfileInterface->populaire();
     }
 
+    public function speakersAll(){
+        return $this->ProfileInterface->speakersAll();
+    }
+
     public function updateApi(Request $request){
         return $this->ProfileInterface->updateApi($request);
     }

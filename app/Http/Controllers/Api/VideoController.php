@@ -22,4 +22,8 @@ class VideoController extends Controller
         return $this->videoInterface->createView($video);
     }
 
+    public function noteCreate(Request $request , String $videoId){
+        return $this->videoInterface->noteCreate($request , $videoId);
+    }
+
 }

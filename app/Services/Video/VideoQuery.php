@@ -4,9 +4,11 @@ namespace  App\Services\Video;
 
 use Spatie\Tags\Tag;
 use App\Models\Content;
+use App\Models\VideoNote;
 use App\Models\VideoView;
 use App\Models\VideoGuest;
 use App\Models\ContentVideo;
+use Illuminate\Http\Request;
 use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -179,6 +181,18 @@ class VideoQuery extends GlobaleService{
         }
         
         return $viewExists;
+    }
+
+    public function createNote(Request $request , String $videoId){
+        $video = ContentVideo::findOrFail($videoId);
+
+        $note = VideoNote::create([
+            'videoId' => $video->id,
+            'userId' => Auth::user()->id,
+            'note' => $request->note
+        ]);
+
+        return $note;
     }
 
 }

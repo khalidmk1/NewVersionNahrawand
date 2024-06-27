@@ -26,7 +26,7 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return view('guestProfile.manager.index')->with('managers' , $managers);
     }
     public function indexSpeaker(){
-        $speakers = $this->allSpeakers();
+        $speakers = $this->allRoleSpeakers();
         return view('guestProfile.speaker.index')->with('speakers' , $speakers);
     }
 
@@ -88,6 +88,11 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
     public function populaire(){
         $users = $this->populaireUsers();
         return response()->json($users);
+    }
+
+    public function speakersAll(){
+        $user = $this->allSpeakers();
+        return response()->json($user);
     }
 
     public function updateApi($request){

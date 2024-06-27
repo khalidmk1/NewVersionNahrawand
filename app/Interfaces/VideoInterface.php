@@ -13,4 +13,5 @@ interface VideoInterface {
     //api videos
     public function showVideo($video);
     public function createView($video);
+    public function noteCreate($request , $videoId);
 }

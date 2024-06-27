@@ -61,7 +61,7 @@ class ProfileQeury extends GlobaleService {
     } 
 
 
-    public function allSpeakers(){
+    public function allRoleSpeakers(){
         
         $excludedRoles = ['Formateur', 'Invité', 'Modérateur', 'Conférencier', 'Animateur'];
         $speakerRoles = Role::whereIn('name', $excludedRoles)->get();

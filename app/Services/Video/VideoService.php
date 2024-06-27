@@ -52,4 +52,9 @@ class VideoService extends VideoQuery implements VideoInterface {
         return response()->json($video);
     }
 
+    public function noteCreate($request , $videoId){
+        $video = $this->createNote($request , $videoId);
+        return response()->json($video);
+    }
+
 }
