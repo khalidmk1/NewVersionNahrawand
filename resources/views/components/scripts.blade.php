@@ -545,7 +545,6 @@
     function deleteNotification(notificationId) {
         var notificationUrl = '{{ route('notification.delete', ['notificationId' => ':notificationId']) }}';
         notificationUrl = notificationUrl.replace(':notificationId', notificationId);
-        
         if (notificationUrl.startsWith('http://')) {
             notificationUrl = notificationUrl.replace('http://', 'https://');
         }
@@ -592,7 +591,9 @@
 
     // Fetch notifications on page load
     $(document).ready(function() {
+      
+        fetchNotifications();
         setInterval(fetchNotifications, 10000);
-        setInterval(fetchIndexNotifications, 10000);
+        fetchIndexNotifications();
     });
 </script>
