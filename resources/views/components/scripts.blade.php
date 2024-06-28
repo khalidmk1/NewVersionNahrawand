@@ -462,6 +462,9 @@
     function fetchIndexNotifications() {
         var notificationUrl = '{{ route('notification.all') }}';
         notificationUrl = notificationUrl.replace('http://', 'https://');
+        var notificationsContainer = $('#notifications-container');
+        notificationsContainer.empty();
+
         $.ajax({
             url: notificationUrl,
             method: 'GET',
@@ -495,7 +498,7 @@
                         </span>
                     </div>
                 `;
-                    $('#notifications-container').append(html); // Append each notification card
+                    notificationsContainer.append(html); 
                 });
             },
             error: function(error) {
@@ -591,7 +594,7 @@
 
     // Fetch notifications on page load
     $(document).ready(function() {
-      
+
         fetchNotifications();
         setInterval(fetchNotifications, 10000);
         fetchIndexNotifications();
