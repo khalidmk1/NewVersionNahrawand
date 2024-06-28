@@ -461,6 +461,7 @@
 
     function fetchIndexNotifications() {
         var notificationUrl = '{{ route('notification.all') }}';
+        notificationUrl = notificationUrl.replace('http://', 'https://');
         $.ajax({
             url: notificationUrl,
             method: 'GET',
