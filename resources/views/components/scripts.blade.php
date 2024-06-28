@@ -453,7 +453,7 @@
             },
 
             error: function(xhr, status, error) {
-                console.error('Error fetching notifications:', error);
+                console.log(error);
             }
         });
     }
@@ -508,7 +508,7 @@
                 });
             },
             error: function(error) {
-                console.error('Error fetching notifications:', error);
+                console.log(error);
             }
         });
     }
@@ -541,7 +541,7 @@
             },
             error: function(xhr, status, error) {
                 // Handle error
-                console.error('Error marking notification as read:', error);
+                console.log(error);
             }
         });
     }
@@ -564,7 +564,7 @@
             },
             error: function(xhr, status, error) {
                 // Handle error
-                console.error('Error deleting notification:', error);
+                console.log(error);
             }
         });
     }
