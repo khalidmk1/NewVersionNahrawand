@@ -498,7 +498,7 @@
                         </span>
                     </div>
                 `;
-                    notificationsContainer.append(html); 
+                    notificationsContainer.append(html);
                 });
             },
             error: function(error) {
@@ -591,13 +591,14 @@
             return `${daysDifference} days ago`;
         }
     }
-
+    
+    $(document).ready(function() {
+        fetchIndexNotifications();
+    });
+    
     // Fetch notifications on page load
     $(document).ready(function() {
-
         fetchNotifications();
         setInterval(fetchNotifications, 10000);
-
-        fetchIndexNotifications();
     });
 </script>
