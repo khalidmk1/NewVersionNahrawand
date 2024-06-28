@@ -597,6 +597,8 @@
 
         fetchNotifications();
         setInterval(fetchNotifications, 10000);
+        
         fetchIndexNotifications();
+        setInterval(fetchIndexNotifications, 10000);
     });
 </script>
