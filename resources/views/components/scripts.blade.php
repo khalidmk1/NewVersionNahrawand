@@ -519,6 +519,10 @@
         var notificationUrl = '{{ route('notification.read', ['notificationId' => ':notificationId']) }}';
         notificationUrl = notificationUrl.replace(':notificationId', notificationId);
 
+        if (notificationUrl.startsWith('http://')) {
+            notificationUrl = notificationUrl.replace('http://', 'https://');
+        }
+
         $.ajax({
             url: notificationUrl,
             type: 'POST',
@@ -541,7 +545,10 @@
     function deleteNotification(notificationId) {
         var notificationUrl = '{{ route('notification.delete', ['notificationId' => ':notificationId']) }}';
         notificationUrl = notificationUrl.replace(':notificationId', notificationId);
-
+        
+        if (notificationUrl.startsWith('http://')) {
+            notificationUrl = notificationUrl.replace('http://', 'https://');
+        }
         $.ajax({
             url: notificationUrl,
             type: 'DELETE',
