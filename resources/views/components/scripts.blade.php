@@ -463,12 +463,12 @@
         var notificationUrl = '{{ route('notification.all') }}';
         notificationUrl = notificationUrl.replace('http://', 'https://');
         var notificationsContainer = $('#notifications-container');
-        notificationsContainer.empty();
 
         $.ajax({
             url: notificationUrl,
             method: 'GET',
             success: function(response) {
+                notificationsContainer.empty();
                 response.forEach(function(notification) {
                     var isRead = notification.read_at !== null;
                     var bgClass = isRead ? '' : 'bg-white';
@@ -597,8 +597,7 @@
 
         fetchNotifications();
         setInterval(fetchNotifications, 10000);
-        
+
         fetchIndexNotifications();
-        setInterval(fetchIndexNotifications, 10000);
     });
 </script>
