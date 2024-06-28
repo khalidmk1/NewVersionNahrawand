@@ -2,7 +2,7 @@
 
 
 @section('header')
-    Manage History Page
+    Manage Notification Page
 @endsection
 
 @section('page')

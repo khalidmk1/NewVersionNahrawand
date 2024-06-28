@@ -592,9 +592,7 @@
 
     // Fetch notifications on page load
     $(document).ready(function() {
-
-        fetchNotifications();
-        fetchIndexNotifications();
         setInterval(fetchNotifications, 10000);
+        setInterval(fetchIndexNotifications, 10000);
     });
 </script>
