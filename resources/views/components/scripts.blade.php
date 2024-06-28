@@ -468,7 +468,6 @@
             url: notificationUrl,
             method: 'GET',
             success: function(response) {
-                notificationsContainer.empty();
                 response.forEach(function(notification) {
                     var isRead = notification.read_at !== null;
                     var bgClass = isRead ? '' : 'bg-white';
@@ -595,7 +594,7 @@
     $(document).ready(function() {
         fetchIndexNotifications();
     });
-    
+
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
