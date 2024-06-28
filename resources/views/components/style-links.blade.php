@@ -35,6 +35,10 @@
 
 
 <style>
+    .notification-icon {
+        z-index: 100000;
+    }
+
     .select2-container--default .select2-selection--single {
         height: 37px !important;
     }

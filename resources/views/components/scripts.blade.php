@@ -374,7 +374,7 @@
 
 
     // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    /* Pusher.logToConsole = true;
 
     var pusher = new Pusher('b6f4f8c05b0cba5149e9', {
         cluster: 'eu'
@@ -383,8 +383,220 @@
     var channel = pusher.subscribe('Notify-action');
     channel.bind('form-submit', function(data) {
         alert(JSON.stringify(data));
+    }); */
+
+    // Function to fetch notifications from user notification route
+    function fetchNotifications() {
+        var notificationUrl = '{{ route('user.notification') }}';
+        var allNotificationsUrl = '{{ route('notification.index') }}';
+
+        $.ajax({
+            url: notificationUrl,
+            method: 'GET',
+            success: function(data) {
+                var notificationsContainer = $('#dropdown-menu');
+                var notificationCount = $('#notification-count');
+                notificationsContainer.empty();
+
+
+                notificationsContainer.append('<span class="dropdown-item dropdown-header">' + data.length +
+                    ' Notifications</span>');
+                notificationCount.append('<span class="badge badge-warning navbar-badge">' + data.length +
+                    '</span>');
+
+                // Define the max number of notifications to show
+                var maxNotificationsToShow = 5;
+
+                // Loop through notifications
+                for (var i = 0; i < Math.min(data.length, maxNotificationsToShow); i++) {
+                    var notification = data[i];
+                    var itemTitle = notification.data.itemTitle
+                    var truncatedTitle = itemTitle.length > 20 ? itemTitle.slice(0, 20) + '…' : itemTitle;
+
+
+
+                    if (notification.data.itemType == 'content') {
+                        var url =
+                            '{{ route('content.show', ['content' => ':notification.data.itemId']) }}';
+                        url = url.replace(':notification.data.itemId', notification.data.itemId);
+                    }
+                    if (notification.data.itemType == 'user') {
+                        var url = '{{ route('profile.edit', ['id' => ':notification.data.itemId']) }}';
+                        url = url.replace(':notification.data.itemId', notification.data.itemId);
+                    }
+
+
+                    var notificationHtml = `
+                            <div class="dropdown-divider"></div>
+                            <div class="notification-item d-flex justify-content-between align-items-center p-2">
+                                <a href="${url}" class="dropdown-item flex-grow-1 text-decoration-none text-dark">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info-circle text-primary mr-2"></i> <!-- Optional icon -->
+                                        <div>
+                                            <div class="font-weight-bold text-truncate">${notification.data.itemMessage}</div>
+                                            <div class="small text-muted text-truncate">${truncatedTitle}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                           
+                            </div>
+                        `;
+                    notificationsContainer.append(notificationHtml);
+                }
+
+                // Add a footer (optional)
+                notificationsContainer.append(
+                    '<div class="dropdown-divider"></div><a href=' + allNotificationsUrl +
+                    ' class="dropdown-item dropdown-footer">See All Notifications</a>'
+                );
+
+            },
+
+            error: function(xhr, status, error) {
+                console.error('Error fetching notifications:', error);
+            }
+        });
+    }
+
+
+
+
+    // Helper function to format date
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        return date.toLocaleString();
+    }
+
+    //fetch all the notification
+
+    function fetchIndexNotifications() {
+        var notificationUrl = '{{ route('notification.all') }}';
+        $.ajax({
+            url: notificationUrl,
+            method: 'GET',
+            success: function(response) {
+                response.forEach(function(notification) {
+                    var isRead = notification.read_at !== null;
+                    var bgClass = isRead ? '' : 'bg-white';
+
+                    var html = `
+                    <div class="p-3 d-flex ${bgClass} align-items-center border-bottom osahan-post-header">
+                        <div class="font-weight-bold mr-3">
+                            <div class="text-truncate">${notification.data.itemMessage}</div>
+                            <div class="small">${notification.data.itemTitle}</div> 
+                        </div>
+                        <span class="ml-auto mb-auto text-right">
+                            <div class="btn-group ">
+                                <button type="button" class="btn btn-light  btn-sm rounded" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" style="">
+                                    <button class="dropdown-item notificationDelete"  data-id="${notification.id}" type="button"><i class="fas fa-trash"></i>
+                                        Delete</button>
+                                    <button class="dropdown-item markAsRead"  data-id="${notification.id}" type="button">
+                                        <i class="fa fa-times" aria-hidden="true"></i> TurnOff
+                                    </button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="text-right text-muted pt-1">${formatDate(notification.created_at)}</div> 
+                        </span>
+                    </div>
+                `;
+                    $('#notifications-container').append(html); // Append each notification card
+                });
+            },
+            error: function(error) {
+                console.error('Error fetching notifications:', error);
+            }
+        });
+    }
+
+    $(document).on('click', '.markAsRead', function() {
+        var notificationId = $(this).data('id');
+        markNotificationAsRead(notificationId);
     });
 
+    $(document).on('click', '.notificationDelete', function() {
+        var notificationId = $(this).data('id');
+        deleteNotification(notificationId);
+    });
 
-    
+    // Function to mark notification as read via AJAX
+    function markNotificationAsRead(notificationId) {
+        var notificationUrl = '{{ route('notification.read', ['notificationId' => ':notificationId']) }}';
+        notificationUrl = notificationUrl.replace(':notificationId', notificationId);
+
+        $.ajax({
+            url: notificationUrl,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                // Handle success, e.g., update UI
+                console.log('Notification marked as read successfully.');
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error('Error marking notification as read:', error);
+            }
+        });
+    }
+
+    // Function to delete notification  via AJAX
+    function deleteNotification(notificationId) {
+        var notificationUrl = '{{ route('notification.delete', ['notificationId' => ':notificationId']) }}';
+        notificationUrl = notificationUrl.replace(':notificationId', notificationId);
+
+        $.ajax({
+            url: notificationUrl,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Handle success, e.g., update UI
+                console.log('Notification deleted successfully.');
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error('Error deleting notification:', error);
+            }
+        });
+    }
+
+
+
+    // Function to format date to days
+    function formatDate(created_at) {
+        var createdAtDate = new Date(created_at);
+        var currentDate = new Date();
+
+        var timeDifference = currentDate.getTime() - createdAtDate.getTime();
+        var daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+
+        if (daysDifference === 0) {
+            var hoursDifference = Math.floor(timeDifference / (1000 * 3600));
+
+            if (hoursDifference > 0) {
+                return '1 day ago';
+            } else {
+                return 'just now';
+            }
+        } else {
+            return `${daysDifference} days ago`;
+        }
+    }
+
+    // Fetch notifications on page load
+    $(document).ready(function() {
+
+        fetchNotifications();
+        fetchIndexNotifications();
+        setInterval(fetchNotifications, 10000);
+    });
 </script>

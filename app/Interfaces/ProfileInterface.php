@@ -24,6 +24,13 @@ interface ProfileInterface {
     public function store($request);
     public function restore($userId);
 
+    //notification
+    public function allNotification();
+    public function notificationSend();
+    function notifyUsersWithPermission($permission, $contentId, $contentTitle, $message, $contentType);
+    public function notificationRead($notificationId);
+    public function notificationDelete($notificationId);
+
     //api profile user
     public function authUser();
     public function populaire();

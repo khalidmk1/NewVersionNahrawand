@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ContentRequest;
 use App\Http\Requests\DestroyRequest;
 use Illuminate\Support\Facades\Crypt;
+use App\Notifications\UserNotification;
 use App\Http\Requests\ContentUpdateRequest;
 use App\Notifications\ContentCreatedNotification;
 
@@ -102,7 +103,11 @@ class ContentQuery extends GlobaleService {
             ]);
         }
 
-      
+        $permission = 'Creation Contenu';
+        $message = 'content has been created';
+        $contentType = 'content';
+
+        $notify = $this->notifyUsersWithPermission( $permission , $content->id, $content->title , $message , $contentType );
         
 
         return $content;
@@ -181,8 +186,17 @@ class ContentQuery extends GlobaleService {
             }
         }
 
-        event(new NotifyProcessed("Content with ID {$content->id} has been updated"));
-        
+        $permission = 'Modifier Contenu';
+        $message = 'content has been updated';
+        $contentType = 'content';
+
+        $notify = $this->notifyUsersWithPermission( $permission , $content->id, $content->title , $message , $contentType );
+
+       
+
+       /*  foreach ($users as $key => $user) {
+            $user->notify(new UserNotification());
+        }  */
 
         return $content;
     }

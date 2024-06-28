@@ -101,6 +101,12 @@ class ProfileController extends Controller
         } else {
             $user->syncRoles($user->roles->pluck('name')->toArray());
         }
+
+        $permission = 'Manager Spearks';
+        $message = 'User has been updated';
+        $contentType = 'user';
+
+        $this->ProfileInterface->notifyUsersWithPermission($permission , $user->id, $user->firstName.' '.$user->lastName  , $message , $contentType);
     
         $user->save();
     

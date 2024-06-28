@@ -17,12 +17,17 @@ use App\Models\ProgramCategory;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\EventUpdateRequest;
 use App\Http\Requests\VideoUpdateRequest;
 use App\Http\Requests\ContentVideoRequest;
 use Intervention\Image\ImageManagerStatic as Image;
+
+use Illuminate\Notifications\DatabaseNotification;
+
 
 class GlobaleService  {
 
@@ -64,6 +69,58 @@ class GlobaleService  {
 
     }
 
+    
+    //notification
+
+    public function notificationIndex(){
+        $user = Auth::user();
+        $notifications = $user->notifications;
+        return $notifications;
+    }
+
+
+
+    function notifyUsersWithPermission($permission, $contentId, $contentTitle, $message, $contentType) {
+        $users = User::permission($permission)->get();
+        
+        foreach ($users as $user) {
+            $user->notify(new UserNotification($contentId, $contentTitle, $message, $contentType));
+        }
+    }
+
+    public function sendNotification(){
+        $user = Auth::user(); 
+        return response()->json($user->unreadNotifications);
+    }
+
+    public function markNotificationAsRead(String $notificationId)
+    {
+        $user = Auth::user();
+        
+        try {
+            $notification = $user->notifications()->findOrFail($notificationId);
+            $notification->markAsRead();
+            return $notification;
+        } catch (ModelNotFoundException $e) {
+            return 'Notification not found.';
+        }
+    }
+
+    public function deleteNotification(String $notificationId)
+    {
+        $user = Auth::user();
+        
+        try {
+            $notification = $user->notifications()->findOrFail($notificationId);
+            $notification->delete();
+            return response()->json(['message' => 'Notification deleted successfully.']);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Notification not found.'], 404);
+        }
+    }
+
+    /*notification*/
+
     public function storeCover(Request $request){
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
@@ -75,6 +132,8 @@ class GlobaleService  {
             return null;
         }
     }
+
+    
     public function storeConteImage(Request $request){
         if ($request->hasFile('contentImage')) {
             $file = $request->file('contentImage');
@@ -269,7 +328,7 @@ class GlobaleService  {
     
 
     public function allSpeakers(){
-        $speakersRole = ['Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
+        $speakersRole = ['Modérateur', 'Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
         $role = Role::whereIn('name' , $speakersRole)->get();
         $speakers = User::role($role) 
         ->whereNull('deleted_at')

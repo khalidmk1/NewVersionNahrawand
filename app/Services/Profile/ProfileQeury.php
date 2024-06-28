@@ -152,6 +152,12 @@ class ProfileQeury extends GlobaleService {
             $user->assignRole($role);
         }
 
+        $permission = 'Manager Spearks';
+        $message = 'User has been created';
+        $contentType = 'user';
+
+        $notify = $this->notifyUsersWithPermission( $permission , $user->id, $user->firstName.' '.$user->lastName  , $message , $contentType );
+
         return $user;
     }
 
@@ -189,7 +195,7 @@ class ProfileQeury extends GlobaleService {
 
     public function speakerApiUsers(){
 
-        $speakersRole = ['Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
+        $speakersRole = ['Modérateur' , 'Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
         $role = Role::whereIn('name' , $speakersRole)->get();
         $speakers = User::role($role) 
         ->whereNull('deleted_at')
