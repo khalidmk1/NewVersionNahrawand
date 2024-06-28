@@ -372,23 +372,13 @@
 
     });
 
-
-    // Enable pusher logging - don't include this in production
-    /* Pusher.logToConsole = true;
-
-    var pusher = new Pusher('b6f4f8c05b0cba5149e9', {
-        cluster: 'eu'
-    });
-
-    var channel = pusher.subscribe('Notify-action');
-    channel.bind('form-submit', function(data) {
-        alert(JSON.stringify(data));
-    }); */
-
     // Function to fetch notifications from user notification route
     function fetchNotifications() {
         var notificationUrl = '{{ route('user.notification') }}';
         var allNotificationsUrl = '{{ route('notification.index') }}';
+
+        notificationUrl = notificationUrl.replace('http://', 'https://');
+        allNotificationsUrl = allNotificationsUrl.replace('http://', 'https://');
 
         $.ajax({
             url: notificationUrl,
