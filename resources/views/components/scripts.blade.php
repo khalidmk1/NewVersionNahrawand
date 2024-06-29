@@ -377,6 +377,11 @@
         var notificationUrl = '{{ route('user.notification') }}';
         var allNotificationsUrl = '{{ route('notification.index') }}';
 
+        if (notificationUrl.startsWith('http://') || allNotificationsUrl.startsWith('http://')) {
+            notificationUrl = notificationUrl.replace('http://', 'https://');
+            allNotificationsUrl = allNotificationsUrl.replace('http://', 'https://');
+        }
+
         $.ajax({
             url: notificationUrl,
             method: 'GET',
@@ -438,14 +443,18 @@
         });
     }
 
+   
+
+    // Helper function to format date
     function formatDate(dateString) {
         var date = new Date(dateString);
         return date.toLocaleString();
     }
 
+   
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-        setInterval(fetchNotifications, 10000);
+        setInterval(fetchNotifications, 10000); // Refresh notifications every 10 seconds
     });
 </script>

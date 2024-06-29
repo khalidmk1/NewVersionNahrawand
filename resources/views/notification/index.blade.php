@@ -23,6 +23,9 @@
     <script>
         function fetchIndexNotifications() {
             var notificationUrl = '{{ route('notification.all') }}';
+            if (notificationUrl.startsWith('http://')) {
+                notificationUrl = notificationUrl.replace('http://', 'https://');
+            }
             $.ajax({
                 url: notificationUrl,
                 method: 'GET',
