@@ -19,6 +19,7 @@ use App\Http\Controllers\{
     GuestProfileController,
     RolePermissionController,
     QuizController,
+    NotificationController
 };
 
 /*
@@ -86,6 +87,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
         'email' => EmailController::class,
         'ticket' => TicketController::class,
         'quiz' => QuizController::class,
+        'notification' => NotificationController::class,
     ]);
 
     // Custom Role-Permission Store
@@ -95,12 +97,13 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
 // Profile Management
 Route::middleware('auth')->group(function () {
     // Notification Routes
-    Route::get('notification/all', [GlobaleController::class, 'allNotification'])->name('notification.all');
-    Route::get('notifaction/sent', [GlobaleController::class, 'notificationSend'])->name('user.notification');
-    Route::post('notification/read/{notificationId}', [GlobaleController::class, 'notificationRead'])->name('notification.read');
-    Route::delete('notification/delete/{notificationId}', [GlobaleController::class, 'notificationDelete'])->name('notification.delete');
+    Route::get('notifaction/sent', [GlobaleController::class, 'allSentNotification'])->name('notification.user');
+    Route::get('notification/all', [GlobaleController::class, 'allUserNotfication'])->name('notification.all');
 
-    
+    /* Route::post('notification/read/{notificationId}', [GlobaleController::class, 'notificationRead'])->name('notification.read');
+    Route::delete('notification/delete/{notificationId}', [GlobaleController::class, 'notificationDelete'])->name('notification.delete'); */
+
+
     Route::post('/profile/store', [GuestProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');

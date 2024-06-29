@@ -79,31 +79,6 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return redirect()->back()->with('status' , 'You Have restored User');
     }
 
-    //notification user
-
-    public function notification(){
-        return view('notification.index');
-    }
-
-    public function allNotification(){
-        return $notifications = $this->notificationIndex();
-    }
-
-    public function notificationSend(){
-        return $this->sendNotification();
-    }
-
-    public function notificationRead($notificationId){
-        $notification = $this->markNotificationAsRead($notificationId);
-        return redirect()->back()->with('status' ,'Notification updated successfully.');
-    }
-
-    public function notificationDelete($notificationId){
-        $notification = $this->deleteNotification($notificationId);
-        return redirect()->back()->with('status' ,'Notification deleted successfully.');
-        
-    }
-
     //api profile user
     public function authUser(){
         $user = $this->authClient();

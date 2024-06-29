@@ -10,6 +10,7 @@ use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
 use App\Interfaces\ProfileInterface;
 use App\Http\Requests\DestroyRequest;
+use App\Interfaces\NotificationInterface;
 
 class GlobaleController extends Controller
 {
@@ -18,19 +19,22 @@ class GlobaleController extends Controller
     private $videoInterface;
     private $TicketInterface;
     private $QuizInterface;
+    private $notificationInterface;
 
     public function __construct(
         ContentInterface $ContentInterface,
         ProfileInterface $ProfileInterface,
         VideoInterface $videoInterface,
         TicketInterface $TicketInterface,
-        QuizIntreface $QuizInterface
+        QuizIntreface $QuizInterface,
+        NotificationInterface $notificationInterface
     ) {
         $this->ContentInterface = $ContentInterface;
         $this->ProfileInterface = $ProfileInterface;
         $this->videoInterface = $videoInterface;
         $this->TicketInterface = $TicketInterface;
         $this->QuizInterface = $QuizInterface;
+        $this->notificationInterface = $notificationInterface;
     }
 
     // Content-related actions
@@ -92,26 +96,28 @@ class GlobaleController extends Controller
 
     //notification
 
-    public function notification(){
-        return $this->ProfileInterface->notification();
+    public function allSentNotification(){
+        return $this->notificationInterface->allSentNotification();
     }
 
-    public function allNotification(){
-        return $this->ProfileInterface->allNotification();
+    public function allUserNotfication(){
+        return $this->notificationInterface->allUserNotfication();
     }
 
-    public function notificationSend()
+  /*  
+
+    public function allNotification()
     {
-        return $this->ProfileInterface->notificationSend();
-    }
+        return $this->notificationInterface->allNotification();
+    } */
 
-    public function notificationRead(String $notificationId){
+    /* public function notificationRead(String $notificationId){
         return $this->ProfileInterface->notificationRead($notificationId);
     }
 
     public function notificationDelete(String $notificationId){
         return $this->ProfileInterface->notificationDelete($notificationId);
-    }
+    } */
 
     // Ticket-related actions
     public function createComment(Request $request, String $id)

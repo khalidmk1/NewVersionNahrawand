@@ -26,11 +26,14 @@ use App\Interfaces\SubCategoryInterface;
 use App\Services\Content\ContentService;
 use App\Services\Profile\ProfileService;
 use App\Services\Program\ProgramService;
+use App\Interfaces\NotificationInterface;
 use App\Services\Category\CategoryService;
 use App\Interfaces\RolePermissionInterface;
 use App\Services\Objective\ObjectiveService;
 use App\Services\Role\RolePermissionService;
 use App\Services\SubCategory\SubCategoryService;
+use App\Services\Notification\NotificationService;
+
 
 class ServiceInterfaceProvider extends ServiceProvider
 {
@@ -52,6 +55,7 @@ class ServiceInterfaceProvider extends ServiceProvider
         $this->app->bind(EmailIterface::class, EmailService::class);
         $this->app->bind(TicketInterface::class, TicketService::class);
         $this->app->bind(QuizIntreface::class, QuizService::class);
+        $this->app->bind(NotificationInterface::class, NotificationService::class);
     }
 
     /**

@@ -71,47 +71,14 @@ class GlobaleService  {
 
     
     //notification
-
-    public function notificationIndex(){
-        $user = Auth::user();
-        $notifications = $user->notifications;
-        $outputNotification = '';
-        $outputNotification = view('notification.partial.notificationCard')->with('notifications' , $notifications)->render();
-        return response()->json($outputNotification);
-    }
-
-
-
     function notifyUsersWithPermission($permission, $contentId, $contentTitle, $message, $contentType) {
         $users = User::permission($permission)->get();
         
         foreach ($users as $user) {
             $user->notify(new UserNotification($contentId, $contentTitle, $message, $contentType));
         }
-    }
+    } 
 
-    public function sendNotification(){
-        $user = Auth::user(); 
-        return response()->json($user->unreadNotifications);
-    }
-
-    public function markNotificationAsRead(String $notificationId)
-    {
-        $user = Auth::user();
-        $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
-        $notification->markAsRead();
-        return $notification;
-    }
-
-    public function deleteNotification(String $notificationId)
-    {
-        $user = Auth::user();
-        $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
-        $notification->delete();
-        return $notification;
-    }
-
-    /*notification*/
 
     public function storeCover(Request $request){
         if ($request->hasFile('cover')) {

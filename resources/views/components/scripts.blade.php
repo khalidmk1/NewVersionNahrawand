@@ -374,7 +374,7 @@
 
     // Function to fetch notifications from user notification route
     function fetchNotifications() {
-        var notificationUrl = '{{ route('user.notification') }}';
+        var notificationUrl = '{{ route('notification.user') }}';
         var allNotificationsUrl = '{{ route('notification.index') }}';
 
         if (notificationUrl.startsWith('http://') || allNotificationsUrl.startsWith('http://')) {
