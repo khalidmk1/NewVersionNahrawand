@@ -377,9 +377,6 @@
         var notificationUrl = '{{ route('user.notification') }}';
         var allNotificationsUrl = '{{ route('notification.index') }}';
 
-        notificationUrl = notificationUrl.replace('http://', 'https://');
-        allNotificationsUrl = allNotificationsUrl.replace('http://', 'https://');
-
         $.ajax({
             url: notificationUrl,
             method: 'GET',
@@ -387,7 +384,6 @@
                 var notificationsContainer = $('#dropdown-menu');
                 var notificationCount = $('#notification-count');
                 notificationsContainer.empty();
-
 
                 notificationsContainer.append('<span class="dropdown-item dropdown-header">' + data.length +
                     ' Notifications</span>');
@@ -402,35 +398,30 @@
                     var notification = data[i];
                     var itemTitle = notification.data.itemTitle
                     var truncatedTitle = itemTitle.length > 20 ? itemTitle.slice(0, 20) + '…' : itemTitle;
-
-
+                    var url = '';
 
                     if (notification.data.itemType == 'content') {
-                        var url =
-                            '{{ route('content.show', ['content' => ':notification.data.itemId']) }}';
+                        url = '{{ route('content.show', ['content' => ':notification.data.itemId']) }}';
+                        url = url.replace(':notification.data.itemId', notification.data.itemId);
+                    } else if (notification.data.itemType == 'user') {
+                        url = '{{ route('profile.edit', ['id' => ':notification.data.itemId']) }}';
                         url = url.replace(':notification.data.itemId', notification.data.itemId);
                     }
-                    if (notification.data.itemType == 'user') {
-                        var url = '{{ route('profile.edit', ['id' => ':notification.data.itemId']) }}';
-                        url = url.replace(':notification.data.itemId', notification.data.itemId);
-                    }
-
 
                     var notificationHtml = `
-                            <div class="dropdown-divider"></div>
-                            <div class="notification-item d-flex justify-content-between align-items-center p-2">
-                                <a href="${url}" class="dropdown-item flex-grow-1 text-decoration-none text-dark">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-info-circle text-primary mr-2"></i> <!-- Optional icon -->
-                                        <div>
-                                            <div class="font-weight-bold text-truncate">${notification.data.itemMessage}</div>
-                                            <div class="small text-muted text-truncate">${truncatedTitle}</div>
-                                        </div>
-                                    </div>
-                                </a>
-                           
+                    <div class="dropdown-divider"></div>
+                    <div class="notification-item d-flex justify-content-between align-items-center p-2">
+                        <a href="${url}" class="dropdown-item flex-grow-1 text-decoration-none text-dark">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-info-circle text-primary mr-2"></i> <!-- Optional icon -->
+                                <div>
+                                    <div class="font-weight-bold text-truncate">${notification.data.itemMessage}</div>
+                                    <div class="small text-muted text-truncate">${truncatedTitle}</div>
+                                </div>
                             </div>
-                        `;
+                        </a>
+                    </div>
+                `;
                     notificationsContainer.append(notificationHtml);
                 }
 
@@ -441,159 +432,16 @@
                 );
 
             },
-
             error: function(xhr, status, error) {
                 console.log(error);
             }
         });
     }
 
-
-
-
-    // Helper function to format date
     function formatDate(dateString) {
         var date = new Date(dateString);
         return date.toLocaleString();
     }
-
-    //fetch all the notification
-
-    function fetchIndexNotifications() {
-        var notificationUrl = '{{ route('notification.all') }}';
-        notificationUrl = notificationUrl.replace('http://', 'https://');
-        var notificationsContainer = $('#notifications-container');
-
-        $.ajax({
-            url: notificationUrl,
-            method: 'GET',
-            success: function(response) {
-                response.forEach(function(notification) {
-                    var isRead = notification.read_at !== null;
-                    var bgClass = isRead ? '' : 'bg-white';
-
-                    var html = `
-                    <div class="p-3 d-flex ${bgClass} align-items-center border-bottom osahan-post-header">
-                        <div class="font-weight-bold mr-3">
-                            <div class="text-truncate">${notification.data.itemMessage}</div>
-                            <div class="small">${notification.data.itemTitle}</div> 
-                        </div>
-                        <span class="ml-auto mb-auto text-right">
-                            <div class="btn-group ">
-                                <button type="button" class="btn btn-light  btn-sm rounded" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right" style="">
-                                    <button class="dropdown-item notificationDelete"  data-id="${notification.id}" type="button"><i class="fas fa-trash"></i>
-                                        Delete</button>
-                                    <button class="dropdown-item markAsRead"  data-id="${notification.id}" type="button">
-                                        <i class="fa fa-times" aria-hidden="true"></i> TurnOff
-                                    </button>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="text-right text-muted pt-1">${formatDate(notification.created_at)}</div> 
-                        </span>
-                    </div>
-                `;
-                    notificationsContainer.append(html);
-                });
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
-
-    $(document).on('click', '.markAsRead', function() {
-        var notificationId = $(this).data('id');
-        markNotificationAsRead(notificationId);
-    });
-
-    $(document).on('click', '.notificationDelete', function() {
-        var notificationId = $(this).data('id');
-        deleteNotification(notificationId);
-    });
-
-    // Function to mark notification as read via AJAX
-    function markNotificationAsRead(notificationId) {
-        var notificationUrl = '{{ route('notification.read', ['notificationId' => ':notificationId']) }}';
-        notificationUrl = notificationUrl.replace(':notificationId', notificationId);
-
-        if (notificationUrl.startsWith('http://')) {
-            notificationUrl = notificationUrl.replace('http://', 'https://');
-        }
-
-        $.ajax({
-            url: notificationUrl,
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-            },
-            success: function(response) {
-                // Handle success, e.g., update UI
-                console.log('Notification marked as read successfully.');
-                location.reload();
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.log(error);
-            }
-        });
-    }
-
-    // Function to delete notification  via AJAX
-    function deleteNotification(notificationId) {
-        var notificationUrl = '{{ route('notification.delete', ['notificationId' => ':notificationId']) }}';
-        notificationUrl = notificationUrl.replace(':notificationId', notificationId);
-        if (notificationUrl.startsWith('http://')) {
-            notificationUrl = notificationUrl.replace('http://', 'https://');
-        }
-        $.ajax({
-            url: notificationUrl,
-            type: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                // Handle success, e.g., update UI
-                console.log('Notification deleted successfully.');
-                location.reload();
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.log(error);
-            }
-        });
-    }
-
-
-
-    // Function to format date to days
-    function formatDate(created_at) {
-        var createdAtDate = new Date(created_at);
-        var currentDate = new Date();
-
-        var timeDifference = currentDate.getTime() - createdAtDate.getTime();
-        var daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
-
-        if (daysDifference === 0) {
-            var hoursDifference = Math.floor(timeDifference / (1000 * 3600));
-
-            if (hoursDifference > 0) {
-                return '1 day ago';
-            } else {
-                return 'just now';
-            }
-        } else {
-            return `${daysDifference} days ago`;
-        }
-    }
-    
-    $(document).ready(function() {
-        fetchIndexNotifications();
-    });
 
     // Fetch notifications on page load
     $(document).ready(function() {

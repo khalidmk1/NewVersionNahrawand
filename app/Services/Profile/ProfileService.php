@@ -86,8 +86,7 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
     }
 
     public function allNotification(){
-        $notifications = $this->notificationIndex();
-        return response()->json($notifications);
+        return $notifications = $this->notificationIndex();
     }
 
     public function notificationSend(){
@@ -96,7 +95,7 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
 
     public function notificationRead($notificationId){
         $notification = $this->markNotificationAsRead($notificationId);
-        return redirect()->back()->with('status' , 'you have updated the notification');
+        return redirect()->back();
     }
 
     public function notificationDelete($notificationId){

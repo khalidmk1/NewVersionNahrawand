@@ -75,7 +75,9 @@ class GlobaleService  {
     public function notificationIndex(){
         $user = Auth::user();
         $notifications = $user->notifications;
-        return $notifications;
+        $outputNotification = '';
+        $outputNotification = view('notification.partial.notificationCard')->with('notifications' , $notifications)->render();
+        return response()->json($outputNotification);
     }
 
 
@@ -110,13 +112,9 @@ class GlobaleService  {
     {
         $user = Auth::user();
         
-        try {
-            $notification = $user->notifications()->findOrFail($notificationId);
-            $notification->delete();
-            return response()->json(['message' => 'Notification deleted successfully.']);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Notification not found.'], 404);
-        }
+        $notification = $user->notifications()->findOrFail($notificationId);
+        $notification->delete();
+        return redirect()->back()->with('status' ,'Notification deleted successfully.');
     }
 
     /*notification*/
