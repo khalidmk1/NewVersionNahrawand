@@ -15,8 +15,7 @@
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <form
-                                    action="{{route('notification.delete', Crypt::encrypt($notification->id)) }}"
+                                <form action="{{ route('notification.delete', Crypt::encrypt($notification->id)) }}"
                                     method="post">
                                     @csrf
                                     @method('delete')
@@ -24,12 +23,11 @@
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
-                                <form
-                                    action="{{route('notification.read', Crypt::encrypt($notification->id)) }}"
+                                <form action="{{ route('notification.read', Crypt::encrypt($notification->id)) }}"
                                     method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
-                                        <i class="fa fa-times" aria-hidden="true"></i> TurnOff
+                                        <i class="fa fa-times" aria-hidden="true"></i> Mark as Read
                                     </button>
                                 </form>
                             </div>

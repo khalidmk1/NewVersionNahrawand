@@ -95,12 +95,13 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
 
     public function notificationRead($notificationId){
         $notification = $this->markNotificationAsRead($notificationId);
-        return redirect()->back();
+        return redirect()->back()->with('status' ,'Notification updated successfully.');
     }
 
     public function notificationDelete($notificationId){
         $notification = $this->deleteNotification($notificationId);
-        return $notification;
+        return redirect()->back()->with('status' ,'Notification deleted successfully.');
+        
     }
 
     //api profile user

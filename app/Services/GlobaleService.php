@@ -98,23 +98,17 @@ class GlobaleService  {
     public function markNotificationAsRead(String $notificationId)
     {
         $user = Auth::user();
-        
-        try {
-            $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
-            $notification->markAsRead();
-            return $notification;
-        } catch (ModelNotFoundException $e) {
-            return 'Notification not found.';
-        }
+        $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
+        $notification->markAsRead();
+        return $notification;
     }
 
     public function deleteNotification(String $notificationId)
     {
         $user = Auth::user();
-        
         $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
         $notification->delete();
-        return redirect()->back()->with('status' ,'Notification deleted successfully.');
+        return $notification;
     }
 
     /*notification*/

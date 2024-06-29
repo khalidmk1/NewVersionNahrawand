@@ -443,18 +443,9 @@
         });
     }
 
-   
-
-    // Helper function to format date
-    function formatDate(dateString) {
-        var date = new Date(dateString);
-        return date.toLocaleString();
-    }
-
-   
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-        setInterval(fetchNotifications, 10000); // Refresh notifications every 10 seconds
+        setInterval(fetchNotifications, 10000); 
     });
 </script>
