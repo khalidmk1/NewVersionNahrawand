@@ -4,7 +4,7 @@
             <div class="box-body p-0">
                 <div
                     class="p-3 d-flex @if ($notification->read_at == null) bg-white
-                @else' '@endif align-items-center border-bottom osahan-post-header">
+                @else' ' @endif align-items-center border-bottom osahan-post-header">
                     <div class="font-weight-bold mr-3">
                         <div class="text-truncate">{{ $notification->data['itemMessage'] }}</div>
                         <div class="small">{{ $notification->data['itemTitle'] }}</div>
@@ -16,14 +16,16 @@
                                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <form action="{{ route('notification.delete', $notification->id) }}" method="post">
+                                <form action="{{ route('notification.delete', Crypt::encrypt($notification->id)) }}"
+                                    method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="dropdown-item" type="submit">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
-                                <form action="{{ route('notification.read', $notification->id) }}" method="post">
+                                <form action="{{ route('notification.read', Crypt::encrypt($notification->id)) }}"
+                                    method="post">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
                                         <i class="fa fa-times" aria-hidden="true"></i> TurnOff

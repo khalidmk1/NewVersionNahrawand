@@ -100,7 +100,7 @@ class GlobaleService  {
         $user = Auth::user();
         
         try {
-            $notification = $user->notifications()->findOrFail($notificationId);
+            $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
             $notification->markAsRead();
             return $notification;
         } catch (ModelNotFoundException $e) {
@@ -112,7 +112,7 @@ class GlobaleService  {
     {
         $user = Auth::user();
         
-        $notification = $user->notifications()->findOrFail($notificationId);
+        $notification = $user->notifications()->findOrFail(Crypt::decrypt($notificationId));
         $notification->delete();
         return redirect()->back()->with('status' ,'Notification deleted successfully.');
     }
