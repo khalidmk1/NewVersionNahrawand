@@ -55,9 +55,12 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('history', [GlobaleController::class, 'history'])->name('history');
     Route::post('qsm/content/store/{id}', [GlobaleController::class, 'storeContentQsm'])->name('quiz.content.store');
-    Route::get('notification', [GlobaleController::class, 'notification'])->name('notification.index');
     
+    // Notification Routes
+    Route::get('notifaction/sent', [GlobaleController::class, 'allSentNotification'])->name('notification.user');
+    Route::get('notification/all', [GlobaleController::class, 'allUserNotfication'])->name('notification.all');
 
+        
     // Creation Routes
     Route::get('admin/create', [GlobaleController::class, 'createAdmin'])->name('create.admin');
     Route::get('manager/create', [GlobaleController::class, 'createManager'])->name('create.manager');
@@ -96,14 +99,6 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
 
 // Profile Management
 Route::middleware('auth')->group(function () {
-    // Notification Routes
-    Route::get('notifaction/sent', [GlobaleController::class, 'allSentNotification'])->name('notification.user');
-    Route::get('notification/all', [GlobaleController::class, 'allUserNotfication'])->name('notification.all');
-
-    /* Route::post('notification/read/{notificationId}', [GlobaleController::class, 'notificationRead'])->name('notification.read');
-    Route::delete('notification/delete/{notificationId}', [GlobaleController::class, 'notificationDelete'])->name('notification.delete'); */
-
-
     Route::post('/profile/store', [GuestProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
