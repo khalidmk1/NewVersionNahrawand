@@ -22,10 +22,7 @@
     @include('components.jQuery')
     <script>
         function fetchIndexNotifications() {
-            var notificationUrl = '{{ route('notification.all') }}';
-            if (notificationUrl.startsWith('http://')) {
-                notificationUrl = notificationUrl.replace('http://', 'https://');
-            }
+            var notificationUrl = '{{ route('notification.all', [], true) }}';
             $.ajax({
                 url: notificationUrl,
                 method: 'GET',
