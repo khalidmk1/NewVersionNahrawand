@@ -22,11 +22,11 @@ class NotificationService extends NotificationQuery implements NotificationInter
 
     public function update($notificationId){
         $this->markNotificationAsRead($notificationId);
-        return redirect()->back();
+        return response()->json('you have updated');
     }
 
     public function destoy($notificationId){
         $this->deleteNotification($notificationId);
-        return redirect()->back();
+        return response()->json('you have delete');
     }
 }

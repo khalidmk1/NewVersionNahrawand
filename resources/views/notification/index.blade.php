@@ -40,6 +40,54 @@
             });
         }
 
+
+        $('.deleteNotification').on('submit', function(e) {
+            e.preventDefault();
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN
+                },
+
+                success: function(response) {
+
+                    console.log(response);
+                },
+                error: function(error) {
+
+                    console.log(error);
+
+
+                }
+            });
+        })
+        $('.markAsRead').on('submit', function(e) {
+            e.preventDefault();
+
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN
+                },
+
+                success: function(response) {
+
+                    console.log(response);
+                },
+                error: function(error) {
+
+                    console.log(error);
+
+
+                }
+            });
+        })
+
         // Fetch notifications on page load
         $(document).ready(function() {
             fetchIndexNotifications();

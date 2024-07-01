@@ -60,7 +60,6 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     Route::get('notifaction/sent', [GlobaleController::class, 'allSentNotification'])->name('notification.user');
     Route::get('notification/all', [GlobaleController::class, 'allUserNotfication'])->name('notification.all');
 
-        
     // Creation Routes
     Route::get('admin/create', [GlobaleController::class, 'createAdmin'])->name('create.admin');
     Route::get('manager/create', [GlobaleController::class, 'createManager'])->name('create.manager');

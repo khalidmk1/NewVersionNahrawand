@@ -16,7 +16,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <form action="{{ route('notification.destroy', Crypt::encrypt($notification->id)) }}"
-                                    method="post">
+                                    method="post" class="deleteNotification">
                                     @method('delete')
                                     @csrf
                                     <button class="dropdown-item" type="submit">
@@ -24,7 +24,7 @@
                                     </button>
                                 </form>
                                 <form action="{{ route('notification.update', Crypt::encrypt($notification->id)) }}"
-                                    method="post">
+                                    method="post" class="markAsRead">
                                     @method('patch')
                                     @csrf
                                     <button class="dropdown-item" type="submit">
