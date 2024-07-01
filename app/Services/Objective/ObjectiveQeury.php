@@ -4,6 +4,7 @@ namespace App\Services\Objective;
 
 use App\Models\Objective;
 use App\Models\SubCategory;
+use App\Models\UserObjective;
 use App\Services\GlobaleService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ use App\Http\Requests\ObjectiveRequest;
 
 class ObjectiveQeury extends GlobaleService {
 
-    public function allSubCategory(){
+   /*  public function allSubCategory(){
         $subCategory = SubCategory::all();
 
         return $subCategory;
@@ -27,18 +28,18 @@ class ObjectiveQeury extends GlobaleService {
         return $objectives;
     }
 
-
-    public function storeObjective(ObjectiveRequest $request)
+ */
+    public function storeObjective(ObjectiveRequest $request , String $SubCategoryId)
     {
-        $createdObjectives = [];
-        $subCategoryIds = array_map('intval', $request->subCategoryIds);
-        foreach ($subCategoryIds as $subCategoryId) {
-            $createdObjective = Objective::create([
-                'subCategoryId' => $subCategoryId,
-                'name' => $request->name
-            ]);
-            $createdObjectives[] = $createdObjective;
-        }
+
+        $subCategory = SubCategory::findOrFail($SubCategoryId);
+
+        $createdObjective = UserObjective::create([
+            'userId' => Auth::user()->id,
+            'subCategoryId' => $subCategory->id,
+            'name' => $request->name,
+            'date' => $request->date
+        ]);
     
         return $createdObjectives;
        

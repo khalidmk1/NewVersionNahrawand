@@ -22,8 +22,9 @@ class ObjectiveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subCategoryIds' => ['required' , 'array'],
-            'name' => ['required' , 'string' , 'max:255']
+            'subCategoryIds' => ['required'],
+            'name' => ['required' , 'string' , 'max:255'],
+            'date' => ['required' , 'string' , 'max:255']
         ];
     }
 }
