@@ -40,37 +40,12 @@
             });
         }
 
-
-        $('.deleteNotification').on('submit', function(e) {
-            e.preventDefault();
-
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                headers: {
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                },
-
-                success: function(response) {
-
-                    console.log(response);
-                },
-                error: function(error) {
-
-                    console.log(error);
-
-
-                }
-            });
-        })
-
         $(document).on('submit', '.deleteNotification', function(e) {
             e.preventDefault();
 
             var $form = $(this);
             $.ajax({
-                url: $form.attr('action'),
+                url: $form.attr('action').replace('http://', 'https://'),,
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
@@ -89,7 +64,7 @@
 
             var $form = $(this);
             $.ajax({
-                url: $form.attr('action'),
+                url: $form.attr('action').replace('http://', 'https://'),,
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
