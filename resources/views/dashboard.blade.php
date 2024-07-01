@@ -434,12 +434,14 @@
                             <tbody>
                                 @foreach ($tickets as $ticket)
                                     <tr>
-                                        <td><a href="pages/examples/invoice.html">{{ $ticket->id }}</a></td>
+                                        <td><a
+                                                href="{{ route('ticket.edit', Crypt::encrypt($ticket->id)) }}">{{ $ticket->id }}</a>
+                                        </td>
                                         <td>{{ $ticket->TypeTicket }}</td>
                                         <td><span
                                                 class="badge @if ($ticket->status == 1) badge-success
                                         @else
-                                        badge-warning @endif ">{{ $ticket->status }}</span>
+                                        badge-warning @endif ">{{ $ticket->status == 1 ? 'Handled' : 'In Progress' }}</span>
                                         </td>
                                         <td>
                                             <div class="sparkbar" data-color="#00a65a" data-height="20">
