@@ -45,7 +45,7 @@
 
             var $form = $(this);
             $.ajax({
-                url: $form.attr('action').replace('http://', 'https://'),,
+                url: $form.attr('action').replace('http://', 'https://'),
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
@@ -64,7 +64,7 @@
 
             var $form = $(this);
             $.ajax({
-                url: $form.attr('action').replace('http://', 'https://'),,
+                url: $form.attr('action').replace('http://', 'https://'),
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
