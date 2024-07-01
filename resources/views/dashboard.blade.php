@@ -734,6 +734,7 @@
         /* report script */
         function fetchUserReport() {
             var reportUrl = '{{ route('report.user.status') }}';
+            reportUrl = reportUrl.replace('http://', 'https://');
             $.ajax({
                 url: reportUrl,
                 method: 'GET',
