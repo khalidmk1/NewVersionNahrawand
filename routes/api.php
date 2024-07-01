@@ -38,10 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', function (Request $request) {
             return $request->user();
         });
-        Route::post('logout', [AuthenticatedSessionController::class, 'destroyApi'])->name('logout');
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroyApi'])->name('logout.api');
         Route::post('update/password', [PasswordController::class, 'updateApi'])->name('update.password');
-        Route::post('profile/avatar/update', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
-        Route::post('update/profile', [ProfileController::class, 'updateApi'])->name('user.update');
+        Route::post('avatar/update', [ProfileController::class, 'updateAvatar'])->name('avatar.update');
+        Route::post('profile/update', [ProfileController::class, 'updateApi'])->name('user.update');
         Route::get('client', [ProfileController::class, 'authUser'])->name('user.index');
         Route::get('subCategory', [ProfileController::class, 'allUserSubctegory'])->name('user.subcategory.index');
         Route::post('subcategory/create/{subCategoryId}', [ProfileController::class, 'createUserSubCategory'])->name('user.subcategory.create');
@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Objective
     Route::prefix('objective')->group(function (){
-        Route::post('create/{subCategoryId}/{contentId}', [ObjectiveController::class, 'store'])->name('objective.store');
+        Route::post('create/{subCategoryId}/{contentId}', [ObjectiveController::class, 'store'])->name('objective.store.api');
     });
 
     // Video
@@ -73,9 +73,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('favoris', [ContentController::class, 'favoris'])->name('favoris.index');
     Route::get('views', [ContentController::class, 'views'])->name('views.index');
     Route::get('content/finished', [ContentController::class, 'finishedContent'])->name('content.finished');
-    Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index');
-    Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create');
-    Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quiz.store');
+    Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index.api');
+    Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create.api');
+    Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quiz.store.api');
 });
 
 // Public Routes
@@ -90,12 +90,12 @@ Route::prefix('content')->group(function () {
     Route::get('qsm/question/{contentId}', [QuizController::class, 'qsmIndexContentQuestion'])->name('content.qsm.question');
 });
 
-Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index');
-Route::get('event', [EventController::class, 'eventIndex'])->name('event.index');
-Route::get('program', [ProgramController::class, 'allProgramApi'])->name('program.index');
+Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index.api');
+Route::get('event', [EventController::class, 'eventIndex'])->name('event.index.api');
+Route::get('program', [ProgramController::class, 'allProgramApi'])->name('program.api');
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
 Route::get('speakers', [ProfileController::class, 'speakersAll'])->name('user.speakers');
-Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index');
+Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index.api');
 Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategory.domain');
 
 // Authentication

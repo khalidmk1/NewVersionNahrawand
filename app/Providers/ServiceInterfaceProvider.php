@@ -11,6 +11,7 @@ use App\Interfaces\QuizIntreface;
 use App\Interfaces\EventInterface;
 use App\Interfaces\VideoInterface;
 use App\Services\Quiz\QuizService;
+use App\Interfaces\ReportInterface;
 use App\Interfaces\TicketInterface;
 use App\Interfaces\ContentInterface;
 use App\Interfaces\ProfileInterface;
@@ -20,6 +21,7 @@ use App\Services\Event\EventService;
 use App\Services\Video\VideoService;
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ObjectiveInterface;
+use App\Services\Report\ReportService;
 use App\Services\Tickets\TicketService;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\SubCategoryInterface;
@@ -56,6 +58,7 @@ class ServiceInterfaceProvider extends ServiceProvider
         $this->app->bind(TicketInterface::class, TicketService::class);
         $this->app->bind(QuizIntreface::class, QuizService::class);
         $this->app->bind(NotificationInterface::class, NotificationService::class);
+        $this->app->bind(ReportInterface::class, ReportService::class);
     }
 
     /**
