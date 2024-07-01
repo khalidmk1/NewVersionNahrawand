@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('user_objectives', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('contentId');
             $table->unsignedBigInteger('subCategoryId');
             $table->text('name')->nullable();
             $table->string('date')->nullable();
             $table->foreign('subCategoryId')->references('id')->on('sub_categories')->onDelete('cascade');
+            $table->foreign('contentId')->references('id')->on('contents')->onDelete('cascade');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

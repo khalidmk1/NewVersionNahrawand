@@ -16,7 +16,7 @@ class ObjectiveController extends Controller
         $this->ObjectiveInterface = $ObjectiveInterface;
     }
     
-    public function store(ObjectiveRequest $request , String $subCategoryId){
-        return $this->ObjectiveInterface->store($request , $subCategoryId);
+    public function store(ObjectiveRequest $request , String $subCategoryId , String $contentId){
+        return $this->ObjectiveInterface->store($request , $subCategoryId , $contentId);
     }
 }

@@ -13,6 +13,7 @@ class UserObjective extends Model
     protected $fillable = [
         'userId',
         'subCategoryId',
+        'contentId',
         'name',
         'date'
     ];
@@ -35,5 +36,15 @@ class UserObjective extends Model
     public function subCategory(): BelongsTo
     {
         return $this->belongsTo(SubCategory::class, 'subCategoryId');
+    }
+
+    /**
+     * Get the content that owns the UserObjective
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function content(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'contentId');
     }
 }

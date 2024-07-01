@@ -181,4 +181,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(TicketComment::class, 'userId');
     }
+
+    /**
+     * Get all of the objectives for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function objectives(): HasMany
+    {
+        return $this->hasMany(UserObjective::class, 'userId');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\Objective;
 
+use App\Models\Content;
 use App\Models\Objective;
 use App\Models\SubCategory;
 use App\Models\UserObjective;
@@ -29,14 +30,16 @@ class ObjectiveQeury extends GlobaleService {
     }
 
  */
-    public function storeObjective(ObjectiveRequest $request , String $SubCategoryId)
+    public function storeObjective(ObjectiveRequest $request , String $SubCategoryId , String $contentId)
     {
 
         $subCategory = SubCategory::findOrFail($SubCategoryId);
+        $content = Content::findOrFail($contentId);
 
         $createdObjective = UserObjective::create([
             'userId' => Auth::user()->id,
             'subCategoryId' => $subCategory->id,
+            'contentId' => $content->id,
             'name' => $request->name,
             'date' => $request->date
         ]);
