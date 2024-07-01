@@ -8,7 +8,10 @@ use App\Services\Report\ReportQuery;
 class ReportService extends ReportQuery implements ReportInterface {
 
     public function index(){
-        return view('dashboard');
+        $recentClients = $this->latestClient();
+        $contents = $this->latestContent();
+        $tickets = $this->tickets();
+        return view('dashboard')->with(['recentClients' => $recentClients , 'contents' => $contents , 'tickets' => $tickets]);
     }
 
     public function clientStatus(){
@@ -16,8 +19,6 @@ class ReportService extends ReportQuery implements ReportInterface {
         return response()->json($user);
     }
 
-    public function clientLast(){
-        $user = $this->latestClient();
-        
-    }
+    
+
 }
