@@ -43,7 +43,7 @@ class ObjectiveQeury extends GlobaleService {
             'date' => $request->date
         ]);
     
-        return $createdObjectives;
+        return $createdObjective;
        
     }
 
