@@ -37,7 +37,7 @@ class ObjectiveQeury extends GlobaleService {
 
         $createdObjective = UserObjective::create([
             'userId' => Auth::user()->id,
-            'subCategoryId' => $request->categoryId,
+            'subCategoryId' => $request->subCategoryId,
             'contentId' => $content->id,
             'name' => $request->name,
             'date' => $request->date
