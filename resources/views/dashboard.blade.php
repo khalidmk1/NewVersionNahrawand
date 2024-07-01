@@ -45,7 +45,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Login</span>
-                    <span class="info-box-number">760</span>
+                    <span class="info-box-number" id="loginUser"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -59,7 +59,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Log out</span>
-                    <span class="info-box-number">2,000</span>
+                    <span class="info-box-number" id="logoutUser"></span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -733,17 +733,22 @@
     <script>
         /* report script */
         function fetchUserReport() {
-            var reportUrl = '{{ route('report.user.') }}';
+            var reportUrl = '{{ route('report.user.status') }}';
             $.ajax({
                 url: reportUrl,
                 method: 'GET',
                 success: function(response) {
-                    console.log(response);
+                    $('#loginUser').append(response.login)
+                    $('#logoutUser').append(response.logout)
                 },
                 error: function(error) {
                     console.log("Error deleting notification:", error);
                 }
             });
         }
+        $(document).ready(function() {
+            fetchUserReport();
+
+        });
     </script>
 @endsection

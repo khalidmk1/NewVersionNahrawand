@@ -262,20 +262,20 @@ class ContentQuery extends GlobaleService {
 
         $content = Content::findOrFail($content);
 
-        $viewExists = ContentView::where('contentId', $content->id)
-        ->where('userId', Auth::user()->id)
-        ->exists();
+        $existingView = ContentView::where('contentId', $content->id)
+        ->where('userId', Auth::id())
+        ->first();
 
-        if(!$viewExists){
-            $view = ContentView::create([
+        if ($existingView) {
+            return response()->json(['message' => 'View already exists, updated timestamp', 'view' => $existingView]);
+        } else {
+            $newView = ContentView::create([
                 'contentId' => $content->id,
-                'userId' => Auth::user()->id,
+                'userId' => Auth::id(),
             ]);
     
-            return $view;
+            return response()->json(['message' => 'New view created', 'view' => $newView]);
         }
-        
-        return $viewExists;
 
     }
 
