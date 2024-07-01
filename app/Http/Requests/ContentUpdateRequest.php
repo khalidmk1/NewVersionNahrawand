@@ -23,7 +23,6 @@ class ContentUpdateRequest extends FormRequest
     {
         $rules = [
             'title' => ['required' , 'string' , 'max:255'],
-            'smallDescription' => ['required' , 'string' , 'max:300'],
             'tags' => ['nullable' , 'array'],
             'cotegoryId' => ['required'],
             'objectivesId' => ['nullable' , 'array'],
@@ -42,6 +41,10 @@ class ContentUpdateRequest extends FormRequest
             $rules['videoUrl'] = ['required' , 'url'];
             $rules['duration'] = ['required'];
 
+        }
+
+        if($this->contentType === 'conference' || $this->contentType === 'podcast' || $this->contentType === 'formation'){
+            $rules['smallDescription'] = ['required' , 'string' , 'max:300'];
         }
 
         return $rules;
