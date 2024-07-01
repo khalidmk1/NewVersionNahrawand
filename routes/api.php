@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Objective
     Route::prefix('objective')->group(function (){
-        Route::post('create/{subCategoryId}/{contentId}', [ObjectiveController::class, 'store'])->name('objective.store.api');
+        Route::post('create/{contentId}', [ObjectiveController::class, 'store'])->name('objective.store.api');
     });
 
     // Video

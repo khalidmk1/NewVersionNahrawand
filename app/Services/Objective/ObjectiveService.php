@@ -14,8 +14,8 @@ class ObjectiveService extends ObjectiveQeury implements ObjectiveInterface {
         'objectives' => $objectives]);
     }
 
-    public function store($request , $subCategoryId , $contentId){
-        $objective = $this->storeObjective($request , $subCategoryId , $contentId);
+    public function store($request ,  $contentId){
+        $objective = $this->storeObjective($request , $contentId);
         return response()->json( 'You Created Objective');
     }
 

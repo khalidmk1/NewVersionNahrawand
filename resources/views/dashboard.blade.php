@@ -115,7 +115,7 @@
             <!-- MAP & BOX PANE -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">US-Visitors Report</h3>
+                    <h3 class="card-title">CA Formation/Abonnements</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -512,7 +512,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Browser Usage</h3>
+                    <h3 class="card-title">CA Formation/Abonnements</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -534,45 +534,17 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer p-0">
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="far fa-circle text-danger"></i> Argent et Carrière
-                            </span>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="far fa-circle text-success"></i> Santé et bien être
-                            </span>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="far fa-circle text-warning"></i> Epanouissement personnel
-                            </span>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-link">
-                                <i class="far fa-circle text-info"></i> Relations humaines
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.footer -->
             </div>
             <!-- /.card -->
 
             <!-- PRODUCT LIST -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Recently Added Products</h3>
+                    <h3 class="card-title">Recently Added Contents</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
                         </button>
                     </div>
                 </div>
@@ -590,7 +562,7 @@
                                         class="product-title">{{ $content->title }}
                                         <span class="badge badge-info float-right">{{ $content->contentType }}</span></a>
                                     <span class="product-description">
-                                        {{ $content->smallDescription }}.
+                                        {{ $content->smallDescription }}
                                     </span>
                                 </div>
                             </li>

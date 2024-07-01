@@ -30,15 +30,14 @@ class ObjectiveQeury extends GlobaleService {
     }
 
  */
-    public function storeObjective(ObjectiveRequest $request , String $SubCategoryId , String $contentId)
+    public function storeObjective(ObjectiveRequest $request ,String $contentId)
     {
 
-        $subCategory = SubCategory::findOrFail($SubCategoryId);
         $content = Content::findOrFail($contentId);
 
         $createdObjective = UserObjective::create([
             'userId' => Auth::user()->id,
-            'subCategoryId' => $subCategory->id,
+            'subCategoryId' => $request->categoryId,
             'contentId' => $content->id,
             'name' => $request->name,
             'date' => $request->date
