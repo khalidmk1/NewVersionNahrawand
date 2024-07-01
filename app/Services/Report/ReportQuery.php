@@ -14,9 +14,12 @@ class ReportQuery extends GlobaleService{
         return ['login' => $userLogin->count(), 'logout' => $userLogOut->count()];
     }
 
-   /*  public function latestClient(){
-        $user = User::role('client')->where('create_at' , )
-    } */
+    public function latestClient(){
+        $recentClients = User::role('client')
+        ->orderBy('created_at', 'desc')->take(10)->get(); 
+        
+        return $recentClients;
+    }
 
     public function contentByDomain(){
         
