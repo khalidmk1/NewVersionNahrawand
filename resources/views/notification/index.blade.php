@@ -23,9 +23,9 @@
     <script>
         function fetchIndexNotifications() {
             var notificationUrl = '{{ route('notification.all') }}';
-            if (notificationUrl.startsWith('http://')) {
-                notificationUrl = notificationUrl.replace('http://', 'https://');
-            }
+             if (notificationUrl.startsWith('http://')) {
+                 notificationUrl = notificationUrl.replace('http://', 'https://');
+             }
             $.ajax({
                 url: notificationUrl,
                 method: 'GET',
@@ -64,29 +64,43 @@
                 }
             });
         })
-        $('.markAsRead').on('submit', function(e) {
+
+        $(document).on('submit', '.deleteNotification', function(e) {
             e.preventDefault();
 
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var $form = $(this);
             $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                headers: {
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                },
-
+                url: $form.attr('action'),
+                method: $form.attr('method'),
+                data: $form.serialize(), 
                 success: function(response) {
-
                     console.log(response);
+                    fetchIndexNotifications();
                 },
                 error: function(error) {
-
-                    console.log(error);
-
-
+                    console.log("Error deleting notification:", error);
                 }
             });
-        })
+        });
+
+        // Handle Mark as Read Form Submission
+        $(document).on('submit', '.markAsRead', function(e) {
+            e.preventDefault();
+
+            var $form = $(this);
+            $.ajax({
+                url: $form.attr('action'),
+                method: $form.attr('method'),
+                data: $form.serialize(), 
+                success: function(response) {
+                    console.log(response);
+                    fetchIndexNotifications();
+                },
+                error: function(error) {
+                    console.log("Error marking notification as read:", error);
+                }
+            });
+        });
 
         // Fetch notifications on page load
         $(document).ready(function() {
