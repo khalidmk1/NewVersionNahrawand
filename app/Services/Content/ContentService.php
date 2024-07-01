@@ -114,7 +114,7 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
-    public function contentQuicly(){
+    public function contentQuickly(){
         $contents = $this->quicklyContentApi();
         return response()->json($contents);
     }

@@ -19,6 +19,7 @@ interface ContentInterface {
     public function allContent();
     public function contentFormation();
     public function contentPodcast();
+    public function contentQuickly();
     public function createFavoris($content);
     public function favorisExists($content);
     public function createView($content);
