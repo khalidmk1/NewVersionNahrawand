@@ -156,7 +156,7 @@
 
     });
 </script>
-
+{{-- search functions --}}
 <script>
     $(document).ready(function() {
         $('#search_filter').on('keyup', function() {
@@ -167,6 +167,21 @@
                 );
             });
         });
+        // Generic function for filtering table rows
+        function filterTableRows(searchInput, targetTableBody) {
+            var value = searchInput.val().toLowerCase();
+            targetTableBody.find('tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        }
+
+        // Apply the filter function to search inputs
+        $('.search-filter').on('keyup', function() {
+            var targetId = $(this).data('target'); // Get the target table body ID from data attribute
+            var targetTableBody = $(targetId);
+            filterTableRows($(this), targetTableBody);
+        });
+
     });
 </script>
 
@@ -454,8 +469,129 @@
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-        setInterval(fetchNotifications, 10000);
+        /*  setInterval(fetchNotifications, 10000); */
+    });
+
+    // report 
+
+    /* report script login and logout client */
+    function fetchUserReport() {
+        var reportUrl = '{{ route('report.user.status') }}';
+        reportUrl = reportUrl.replace('http://', 'https://');
+        $.ajax({
+            url: reportUrl,
+            method: 'GET',
+            success: function(response) {
+                $('#loginUser').append(response.login)
+                $('#logoutUser').append(response.logout)
+            },
+            error: function(error) {
+                console.log("Error deleting notification:", error);
+            }
+        });
+    }
+
+    /* report script content by category */
+
+    function fetchCategoryReport() {
+        var reportUrl = '{{ route('report.content.category') }}';
+        $.ajax({
+            url: reportUrl,
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
+                populateContentTable(response.data);
+                populateSpeakerTable(response.data);
+                setupPagination(response, 'content');
+                setupPagination(response, 'speaker');
+            },
+            error: function(error) {
+                console.log("Error fetching report:", error);
+            }
+        });
+    }
+
+    function populateContentTable(data) {
+        var tableContent = $("#reportTable tbody");
+        tableContent.empty();
+
+        data.forEach(function(item, index) {
+            var rowContent = `
+            <tr class="text-center">
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.content.length}</td>
+            </tr>`;
+            tableContent.append(rowContent);
+        });
+    }
+
+    function populateSpeakerTable(data) {
+        var tableSpeaker = $("#reportTableSpeaker tbody");
+        tableSpeaker.empty();
+
+        data.forEach(function(item, index) {
+            var rowSpeaker = `
+            <tr class="text-center">
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.content.length}</td>
+            </tr>`;
+            tableSpeaker.append(rowSpeaker);
+        });
+    }
+
+    function setupPagination(response, type) {
+        var pagination;
+        if (type === 'content') {
+            pagination = $("#paginationContent");
+        } else if (type === 'speaker') {
+            pagination = $("#paginationSpeaker");
+        }
+
+        if (!pagination) {
+            console.log(`Pagination element not found for type: ${type}`);
+            return;
+        }
+
+        pagination.empty();
+
+        response.links.forEach(function(link) {
+            if (link.url) {
+                var label = link.label;
+                if (label.includes("Previous")) {
+                    label = '&laquo;';
+                } else if (label.includes("Next")) {
+                    label = '&raquo;';
+                }
+
+                var pageItem = `<li class="page-item ${link.active ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="fetchPage('${link.url}', '${type}'); return false;">${label}</a>
+            </li>`;
+                pagination.append(pageItem);
+            }
+        });
+    }
+
+    function fetchPage(url, type) {
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(response) {
+                if (type === 'content') {
+                    populateContentTable(response.data);
+                } else if (type === 'speaker') {
+                    populateSpeakerTable(response.data);
+                }
+                setupPagination(response, type);
+            },
+            error: function(error) {
+                console.log("Error fetching page:", error);
+            }
+        });
+    }
+    $(document).ready(function() {
+        fetchUserReport();
+        fetchCategoryReport();
     });
 </script>
-
-

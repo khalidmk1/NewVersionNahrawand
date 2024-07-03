@@ -5,6 +5,7 @@ namespace App\Services\Report;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Content;
+use App\Models\Category;
 use App\Services\GlobaleService;
 
 class ReportQuery extends GlobaleService{
@@ -25,6 +26,11 @@ class ReportQuery extends GlobaleService{
 
     public function contentByDomain(){
 
+    }
+
+    public function contentByCategory(){
+        $category = Category::with('content.user')->paginate(4);
+        return response()->json($category);
     }
 
     public function latestContent(){

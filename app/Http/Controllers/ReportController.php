@@ -23,5 +23,9 @@ class ReportController extends Controller
         return $this->ReportInterface->clientStatus();
     }
 
+    public function CategoryContent(){
+        return $this->ReportInterface->CategoryContent();
+    }
+
 
 }

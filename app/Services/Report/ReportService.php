@@ -14,6 +14,11 @@ class ReportService extends ReportQuery implements ReportInterface {
         return view('dashboard')->with(['recentClients' => $recentClients , 'contents' => $contents , 'tickets' => $tickets]);
     }
 
+
+    public function CategoryContent(){
+        return $this->contentByCategory();
+    }
+
     public function clientStatus(){
         $user = $this->stateClient();
         return response()->json($user);

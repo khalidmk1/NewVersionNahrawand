@@ -467,48 +467,107 @@
         </div>
         <!-- /.col -->
 
-        <div class="col-md-4">
-            <!-- Info Boxes Style 2 -->
-            <div class="info-box mb-3 bg-warning">
-                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Inventory</span>
-                    <span class="info-box-number">5,200</span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-success">
-                <span class="info-box-icon"><i class="far fa-heart"></i></span>
+        <div class="col-md-4" id="accordion">
+            <!-- Content Card -->
+            <div class="card card-primary bg-info card-outline">
+                <a class="d-block w-100" data-toggle="collapse" href="#content">
+                    <div class="card-header">
+                        <h4 class="card-title w-100">
+                            Number Content
+                        </h4>
+                    </div>
+                </a>
+                <div id="content" class="collapse show" data-parent="#accordion">
+                    <div class="card-header">
+                        <ul id="paginationContent" class="pagination pagination-sm float-right">
+                        </ul>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Mentions</span>
-                    <span class="info-box-number">92,050</span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-danger">
-                <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" id="search_report_content" name="category"
+                                class="form-control float-right search-filter" placeholder="Search"
+                                data-target="#resultContent">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Downloads</span>
-                    <span class="info-box-number">114,381</span>
+                    <div class="card-body">
+                        <table id="reportTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Category</th>
+                                    <th>Number Content</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultContent"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-info">
-                <span class="info-box-icon"><i class="far fa-comment"></i></span>
 
-                <div class="info-box-content">
-                    <span class="info-box-text">Direct Messages</span>
-                    <span class="info-box-number">163,921</span>
+            <!-- Speaker Card -->
+            <div class="card card-danger bg-light card-outline">
+                <a class="d-block w-100" data-toggle="collapse" href="#speaker">
+                    <div class="card-header">
+                        <h4 class="card-title w-100 text-white">
+                            Number Speaker
+                        </h4>
+                    </div>
+                </a>
+                <div id="speaker" class="collapse" data-parent="#accordion">
+                    <div class="card-header">
+                        <ul id="paginationSpeaker" class="pagination pagination-sm float-right">
+                        </ul>
+
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" id="search_report_speaker" name="category"
+                                class="form-control float-right search-filter" placeholder="Search"
+                                data-target="#resultSpeaker">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <table id="reportTableSpeaker" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Category</th>
+                                    <th>Number Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultSpeaker"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
+
+
+            <div class="card card-success bg-success  card-outline">
+                <a class="d-block w-100" data-toggle="collapse" href="#visualisation">
+                    <div class="card-header">
+                        <h4 class="card-title w-100">
+                            Hours Visualisation
+                        </h4>
+                    </div>
+                </a>
+                <div id="visualisation" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        Coming
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class="card">
                 <div class="card-header">
@@ -583,26 +642,5 @@
     <!-- /.row -->
     @include('components.jQuery')
     @include('components.spicific-script')
-    <script>
-        /* report script */
-        function fetchUserReport() {
-            var reportUrl = '{{ route('report.user.status') }}';
-            reportUrl = reportUrl.replace('http://', 'https://');
-            $.ajax({
-                url: reportUrl,
-                method: 'GET',
-                success: function(response) {
-                    $('#loginUser').append(response.login)
-                    $('#logoutUser').append(response.logout)
-                },
-                error: function(error) {
-                    console.log("Error deleting notification:", error);
-                }
-            });
-        }
-        $(document).ready(function() {
-            fetchUserReport();
-
-        });
-    </script>
+    <script></script>
 @endsection

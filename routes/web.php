@@ -75,6 +75,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     // Reports
     Route::get('/', [ReportController::class, 'index'])->name('report.index');
     Route::get('users/status', [ReportController::class, 'clientStatus'])->name('report.user.status');
+    Route::get('category/content', [ReportController::class, 'CategoryContent'])->name('report.content.category');
 
 
     // Resources
