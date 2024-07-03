@@ -4,6 +4,7 @@ namespace App\Services\profile;
 
 
 use App\Models\User;
+use App\Mail\SendUserInfo;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use App\Services\GlobaleService;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
@@ -155,8 +157,23 @@ class ProfileQeury extends GlobaleService {
         $permission = 'Manager Spearks';
         $message = 'User has been created';
         $contentType = 'user';
+        $fullName = $user->firstName. ' '.$user->lastName;
+        
+        $excludedRoles = ['Super Admin', 'Formateur', 'Invité', 'Modérateur', 'Conférencier', 'Animateur', 'Client'];
+        $userRoles = $user->roles->pluck('name')->toArray();
 
-        $notify = $this->notifyUsersWithPermission( $permission , $user->id, $user->firstName.' '.$user->lastName  , $message , $contentType );
+        $hasExcludedRole = false;
+        foreach ($excludedRoles as $excludedRole) {
+            if (in_array($excludedRole, $userRoles)) {
+                $hasExcludedRole = true;
+                break;
+            }
+        }
+
+        if (!$hasExcludedRole) {
+            Mail::to($user->email)->send(new SendUserInfo($fullName, $user->email, $password));
+        }
+        $notify = $this->notifyUsersWithPermission( $permission , $user->id, $fullName  , $message , $contentType );
 
         return $user;
     }
