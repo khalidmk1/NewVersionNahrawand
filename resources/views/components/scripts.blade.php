@@ -575,6 +575,7 @@
     }
 
     function fetchPage(url, type) {
+        url = url.replace('http://', 'https://');
         $.ajax({
             url: url,
             method: 'GET',
