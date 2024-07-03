@@ -495,6 +495,7 @@
 
     function fetchCategoryReport() {
         var reportUrl = '{{ route('report.content.category') }}';
+        reportUrl = reportUrl.replace('http://', 'https://');
         $.ajax({
             url: reportUrl,
             method: 'GET',
