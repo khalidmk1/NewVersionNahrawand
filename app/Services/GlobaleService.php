@@ -474,8 +474,8 @@ class GlobaleService  {
 
     public function allContentApi(){
         $contentType = ['conference' , 'podcast' , 'formation']; 
-        $contents = Content::whereIn('contentType' , $contentType)->all();
-        $contentQuicly = Content::where('contentType' , 'quickly')->all(); 
+        $contents = Content::whereIn('contentType' , $contentType)->get();
+        $contentQuicly = Content::where('contentType' , 'quickly')->get(); 
         return ['contents'=>$contents , 'contentQuicly' => $contentQuicly];
     }
 
