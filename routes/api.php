@@ -86,6 +86,7 @@ Route::prefix('content')->group(function () {
     Route::get('podcast', [ContentController::class, 'contentPodcast'])->name('content.podcast');
     Route::get('quickly', [ContentController::class, 'contentQuickly'])->name('content.quickly');
     Route::get('program/{programId}', [ContentController::class, 'contentByProgram'])->name('content.program');
+    Route::get('all/comment/{content}', [ContentController::class, 'contentComment'])->name('comment.content');
     Route::get('qsm/{contentId}', [QuizController::class, 'qsmIndexContent'])->name('content.qsm');
     Route::get('qsm/question/{contentId}', [QuizController::class, 'qsmIndexContentQuestion'])->name('content.qsm.question');
 });
