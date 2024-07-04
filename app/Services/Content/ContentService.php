@@ -20,11 +20,7 @@ class ContentService extends ContentQuery implements ContentInterface {
         return view('content.quicklyIndex')->with(['Quicklys' => $contents['contentQuicly'] ]);
     }
 
-    /* public function allContent(){
-        $contents = $this->allContentApi();
-        return response()->json($contents);
-    } */
-
+   
     
 
     public function show($content){
@@ -99,6 +95,13 @@ class ContentService extends ContentQuery implements ContentInterface {
     }
 
     //Api React Native
+
+    public function allApiContent(){
+        $contents = $this->allContentApi();
+        return response()->json($contents);
+    } 
+
+
     public function comingSoonContent(){
         $contents = $this->allComingContentApi();
         return response()->json(['contents' => $contents['contents'] , 'vidoes' => $contents['videos']]);

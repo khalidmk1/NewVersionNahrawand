@@ -16,7 +16,7 @@ interface ContentInterface {
 
     //api content
     public function comingSoonContent();
-    public function allContent();
+    public function allApiContent();
     public function contentFormation();
     public function contentPodcast();
     public function contentQuickly();

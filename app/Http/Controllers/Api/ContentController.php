@@ -18,9 +18,9 @@ class ContentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function allContent()
+    public function allApiContent()
     {
-        return $this->contentInterface->allContent(); 
+        return $this->contentInterface->allApiContent(); 
     }
 
     public function comingSoonContent(){

@@ -37,6 +37,8 @@ class ContentQuery extends GlobaleService {
         return ['contents'=>$contents , 'contentQuicly' => $contentQuicly];
     }
 
+  
+
     public function getContentById(String $content){
         $content = Content::findOrFail(Crypt::decrypt($content));
         return $content;

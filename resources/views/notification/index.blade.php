@@ -30,7 +30,7 @@
                 url: notificationUrl,
                 method: 'GET',
                 success: function(response) {
-                    console.log(response);
+                   
                     $('#notifications_container').html(response);
                 },
                 error: function(error) {
@@ -49,7 +49,7 @@
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
-                    console.log(response);
+
                     fetchIndexNotifications();
                 },
                 error: function(error) {
@@ -68,7 +68,7 @@
                 method: $form.attr('method'),
                 data: $form.serialize(), 
                 success: function(response) {
-                    console.log(response);
+                   
                     fetchIndexNotifications();
                 },
                 error: function(error) {

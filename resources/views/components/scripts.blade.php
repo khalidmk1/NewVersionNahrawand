@@ -134,8 +134,6 @@
                     var objectiveSelect = $('#objective_option');
                     objectiveSelect.empty();
 
-                    console.log(response);
-
                     $.each(response, function(index, objective) {
                         objectiveSelect.append($('<option>', {
                             value: objective.id,
@@ -195,7 +193,6 @@
         }
 
         $('#certify').on('change', function() {
-            console.log('hello');
             if ($(this).is(':checked')) {
                 $('#condition').slideDown();
             } else {
@@ -500,7 +497,6 @@
             url: reportUrl,
             method: 'GET',
             success: function(response) {
-                console.log(response);
                 populateContentTable(response.data);
                 populateSpeakerTable(response.data);
                 setupPagination(response, 'content');

@@ -80,7 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Public Routes
 Route::prefix('content')->group(function () {
-    Route::get('/', [ContentController::class, 'allContent'])->name('content');
+    Route::get('/', [ContentController::class, 'allApiContent'])->name('content');
     Route::get('coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
     Route::get('formation', [ContentController::class, 'contentFormation'])->name('content.formation');
     Route::get('podcast', [ContentController::class, 'contentPodcast'])->name('content.podcast');
