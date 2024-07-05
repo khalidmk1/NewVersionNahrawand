@@ -21,6 +21,8 @@ class SubCategoryController extends Controller
     }
 
     public function allSubctegory(){
-        return $this->SubCategoryInterface->allSubctegory();
+        return $this->SubCategoryInterface->subCategoryApi();
     }
+
+    
 }

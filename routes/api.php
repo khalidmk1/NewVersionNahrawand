@@ -97,6 +97,7 @@ Route::get('program', [ProgramController::class, 'allProgramApi'])->name('progra
 Route::get('populaire', [ProfileController::class, 'populaire'])->name('user.populaire');
 Route::get('speakers', [ProfileController::class, 'speakersAll'])->name('user.speakers');
 Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index.api');
+Route::get('all/subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subCategory.all');
 Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategory.domain');
 
 // Authentication
