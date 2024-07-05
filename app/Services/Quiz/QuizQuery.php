@@ -219,29 +219,26 @@ class QuizQuery extends GlobaleService{
 
     public function storeQuestionClient(Request $request , String $contentId , String $quizId){
 
-        try {
-            $content = Content::findOrFail($contentId);
-            $quiz = Quiz::findOrFail($quizId);
-    
-            
-            $questionAnswerExists = QuizAnswerQuestion::where('quizId', $quiz->id)
-                                                      ->where('contentId', $content->id)
-                                                      ->exists();
-    
-            if ($questionAnswerExists) {
-                return response()->json(['message' => 'Question answer already exists'], 409);
-            }
+        $request->validate([
+            'answer' => 'required|string',
+        ]);
+
+
+        $content = Content::findOrFail($contentId);
+        $quiz = Quiz::findOrFail($quizId);
+
+        $questionAnswerExists = QuizAnswerQuestion::where('quizId' , $quiz->id)->exists();
+
+        if($questionAnswerExists){
+            return false;
+        }else{
             $question = QuizAnswerQuestion::create([
                 'contentId' => $content->id,
                 'userId' => Auth::user()->id,
                 'quizId' => $quiz->id,
-                'answer' => $request->input('answer'),
+                'answer' => $request->answer
             ]);
-    
-            return response()->json($question, 201);
-    
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'An error occurred', 'error' => $e->getMessage()], 500);
+            return $question;
         }
 
     }

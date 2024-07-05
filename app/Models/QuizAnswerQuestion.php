@@ -12,7 +12,7 @@ class QuizAnswerQuestion extends Model
     use HasFactory , SoftDeletes;
 
     protected $fillable = [
-        '   ',
+        'contentId',
         'userId',
         'quizId',
         'answer'
