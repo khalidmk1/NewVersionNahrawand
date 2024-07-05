@@ -162,7 +162,7 @@ class ProfileController extends Controller
         $hasVideo = VideoGuest::where('userId' , $user->id)->exists();
 
         if($hasContent || $hasVideo){
-            return redirect()->back()->with('faild' , 'Cannot delete category. It is associated with content or Video.');
+            return redirect()->back()->with('faild' , 'Cannot delete this User. It is associated with content or Video.');
         }
 
         $request->validate([

@@ -85,6 +85,8 @@
                                 Domain</a></li>
                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Statistic</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
+                        </li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -167,6 +169,11 @@
                             </div>
                         </div>
                         <!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="quiz">
+                            @include('client.partial.quiz')
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->
@@ -176,4 +183,26 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+
+    @include('components.jQuery')
+
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 @endsection
