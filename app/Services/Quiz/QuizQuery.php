@@ -221,14 +221,20 @@ class QuizQuery extends GlobaleService{
         $content = Content::findOrFail($contentId);
         $quiz = Quiz::findOrFail($quizId);
 
-        $question = QuizAnswerQuestion::create([
-            'contentId' => $content->id,
-            'userId' => Auth::user()->id,
-            'quizId' => $quiz->id,
-            'answer' => $request->answer
-        ]);
+        $questionAnswerExists = QuizAnswerQuestion::where('quizId' , $quiz->id)->exists();
 
-        return $question;
+        if($questionAnswerExists){
+            return false;
+        }else{
+            $question = QuizAnswerQuestion::create([
+                'contentId' => $content->id,
+                'userId' => Auth::user()->id,
+                'quizId' => $quiz->id,
+                'answer' => $request->answer
+            ]);
+            return $question;
+        }
+
     }
     
     
