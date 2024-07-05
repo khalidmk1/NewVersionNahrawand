@@ -17,11 +17,13 @@ return new class extends Migration
             $table->unsignedBigInteger('userId');
             $table->unsignedBigInteger('quizId');
             $table->longText('answer')->nullable();
+            $table->boolean('confirmed')->nullable();
             $table->softDeletes();
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('contentId')->references('id')->on('contents')->onDelete('cascade');
             $table->foreign('quizId')->references('id')->on('quizzes')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 

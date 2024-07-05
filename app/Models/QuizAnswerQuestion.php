@@ -15,7 +15,8 @@ class QuizAnswerQuestion extends Model
         'contentId',
         'userId',
         'quizId',
-        'answer'
+        'answer',
+        'confirmed'
     ];
 
     /**
