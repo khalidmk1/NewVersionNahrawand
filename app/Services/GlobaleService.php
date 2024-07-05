@@ -245,7 +245,7 @@ class GlobaleService  {
     }
 
     public function allSubCategories(){
-        $subCategories = SubCategory::all();
+        $subCategories = SubCategory::all('id' , 'name');
         return $subCategories;
     }
 
