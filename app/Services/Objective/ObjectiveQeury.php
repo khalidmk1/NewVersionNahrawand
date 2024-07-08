@@ -51,7 +51,7 @@ class ObjectiveQeury extends GlobaleService {
                         })->toArray()
                     ]
                 ];
-            })->values()->toArray();
+            });
 
         return response()->json($objectives);
     }
