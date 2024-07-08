@@ -31,8 +31,8 @@ class ObjectiveQeury extends GlobaleService {
 
     public function allObjectives() {
 
-        $userId = Auth::id();
-        
+        $userId = Auth::user()->id;
+
         $objectives = UserObjective::where('userId', $userId)
             ->with('subCategory')
             ->get()
