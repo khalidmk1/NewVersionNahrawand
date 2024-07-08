@@ -53,7 +53,7 @@ class ObjectiveQeury extends GlobaleService {
                 ];
             })->values(' ')->toArray(); // Convert to plain array
 
-        return response()->json($objectives);
+        return $objectives;
     }
 
     public function storeObjective(ObjectiveRequest $request ,String $contentId)

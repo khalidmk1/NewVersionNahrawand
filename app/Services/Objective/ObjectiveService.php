@@ -9,7 +9,7 @@ class ObjectiveService extends ObjectiveQeury implements ObjectiveInterface {
 
     public function index(){
         $objectives = $this->allObjectives();
-        return response()->json($objectives);
+        return response()->make(json_encode($objectives), 200, ['Content-Type' => 'application/json']);
     }
 
     public function store($request ,  $contentId){
