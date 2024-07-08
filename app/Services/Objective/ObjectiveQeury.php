@@ -30,20 +30,13 @@ class ObjectiveQeury extends GlobaleService {
  */
 
     public function allObjectives() {
-        $userId = Auth::user()->id;
-    
-        $subQuery = UserObjective::select(DB::raw('MIN(id) as min_id'))
-            ->where('userId', $userId)
-            ->groupBy('subCategoryId');
-        
-        $objectives = UserObjective::select('user_objectives.*')
-            ->joinSub($subQuery, 'min_ids', function ($join) {
-                $join->on('user_objectives.id', '=', 'min_ids.min_id');
-            })
-            ->where('userId', $userId)
-            ->get();
-        
-        return $objectives;
+
+        $objectives = UserObjective::where('userId' , Auth::user()->id)->get();
+        $groupedBySubCategory = $objectives->groupBy(function ($objective) {
+            return $objective->subcategory;
+        });
+
+        return $groupedBySubCategory;  
     }
 
     public function storeObjective(ObjectiveRequest $request ,String $contentId)
