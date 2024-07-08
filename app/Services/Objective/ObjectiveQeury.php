@@ -7,6 +7,7 @@ use App\Models\Objective;
 use App\Models\SubCategory;
 use App\Models\UserObjective;
 use App\Services\GlobaleService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\DestroyRequest;
@@ -28,10 +29,14 @@ class ObjectiveQeury extends GlobaleService {
 
  */
 
-    public function allObjectives(){
-        $objectives = UserObjective::where('userId' , Auth::user()->id)->get();
-        return $objectives;
-    }
+ public function allObjectives() {
+    $objectives = UserObjective::select('subCategoryId', DB::raw('MIN(id) as id'))
+        ->where('userId', Auth::user()->id)
+        ->groupBy('subCategoryId')
+        ->get();
+
+    return $objectives;
+}
 
     public function storeObjective(ObjectiveRequest $request ,String $contentId)
     {
