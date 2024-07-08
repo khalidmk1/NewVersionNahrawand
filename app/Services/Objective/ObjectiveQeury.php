@@ -31,12 +31,26 @@ class ObjectiveQeury extends GlobaleService {
 
     public function allObjectives() {
 
-        $objectives = UserObjective::where('userId' , Auth::user()->id)->get();
-        $groupedBySubCategory = $objectives->groupBy(function ($objective) {
-            return $objective->subcategory;
-        });
+        $userId = Auth::id();
+        
+        $objectives = UserObjective::where('userId', $userId)
+            ->with('subCategory')
+            ->get()
+            ->groupBy('subCategory.id')
+            ->map(function ($items) {
+                $subCategory = $items->first()->subCategory;
+                return [
+                    'subCategory' => [
+                        'id' => $subCategory->id,
+                        'name' => $subCategory->name,
+                        'objective' => $items->map(function ($item) {
+                            return ['name' => $item->name];
+                        })->toArray()
+                    ]
+                ];
+            })->values()->toArray();
 
-        return $groupedBySubCategory;  
+        return $objectives;
     }
 
     public function storeObjective(ObjectiveRequest $request ,String $contentId)
