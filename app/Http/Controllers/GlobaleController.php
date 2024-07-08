@@ -136,4 +136,8 @@ class GlobaleController extends Controller
     {
         return $this->QuizInterface->storeContentQsm($request, $id);
     }
+
+    public function storeNote(Request $request , String $id){
+        return $this->QuizInterface->storeNote($request, $id);
+    }
 }

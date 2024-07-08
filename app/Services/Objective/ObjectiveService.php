@@ -8,10 +8,8 @@ use App\Services\Objective\ObjectiveQeury;
 class ObjectiveService extends ObjectiveQeury implements ObjectiveInterface {
 
     public function index(){
-        $subCategories = $this->allSubCategory();
         $objectives = $this->allObjectives();
-        return view('filter.objective.index')->with(['subCategories' => $subCategories , 
-        'objectives' => $objectives]);
+        return response()->json($objectives);
     }
 
     public function store($request ,  $contentId){

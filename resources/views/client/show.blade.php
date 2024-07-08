@@ -205,4 +205,32 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $(".submitNote").change(function() {
+                var noteId = $(this).data("id");
+                var urlNote = '{{ route('note.store', ':noteId') }}'.replace(':noteId', noteId);
+                var noteAnswer = $(this).is(":checked") ? "on" : "off";
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: urlNote,
+                    type: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken 
+                    },
+                    data: {
+                        noteAnswer: noteAnswer,
+                        _method: 'PUT' 
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error: " + error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

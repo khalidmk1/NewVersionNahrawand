@@ -55,6 +55,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     Route::get('content/quickly', [GlobaleController::class, 'quicklyIndex'])->name('quickly.index');
     Route::get('history', [GlobaleController::class, 'history'])->name('history');
     Route::post('qsm/content/store/{id}', [GlobaleController::class, 'storeContentQsm'])->name('quiz.content.store');
+    Route::put('answer/note/{id}', [GlobaleController::class, 'storeNote'])->name('note.store');
     
     // Notification Routes
     Route::get('notifaction/sent', [GlobaleController::class, 'allSentNotification'])->name('notification.user');

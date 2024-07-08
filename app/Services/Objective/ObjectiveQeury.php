@@ -24,12 +24,15 @@ class ObjectiveQeury extends GlobaleService {
     }
 
 
+    
+
+ */
+
     public function allObjectives(){
-        $objectives = Objective::paginate(10);
+        $objectives = UserObjective::where('userId' , Auth::user()->id)->get();
         return $objectives;
     }
 
- */
     public function storeObjective(ObjectiveRequest $request ,String $contentId)
     {
 

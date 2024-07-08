@@ -7,7 +7,7 @@
             <!-- /.card-header -->
             <div class="card-body">
 
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped text-center">
                     <thead>
                         <tr>
                             <th>content</th>
@@ -19,11 +19,22 @@
                     <tbody>
                         @foreach ($client->quizAnswer as $answer)
                             <tr>
-                                <td>{{$answer->content->title}}</td>
-                                <td>{{$answer->quiz->question}}
+                                <td><a
+                                        href="{{ route('content.show', Crypt::encrypt($answer->content->id)) }}">{{ $answer->content->title }}</a>
                                 </td>
-                                <td>{{$answer->answer}}</td>
-                                <td> 4</td>
+                                <td>{{ $answer->quiz->question }}
+                                </td>
+                                <td>{{ $answer->answer }}</td>
+                                <td>
+                                    <!-- checkbox -->
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" class="submitNote" id="submitNote" {{ $answer->confirmed == 1 ? 'checked' : '' }} data-id="{{$answer->id}}" name="noteAnswer">
+                                          <label for="submitNote">
+                                          </label>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
 

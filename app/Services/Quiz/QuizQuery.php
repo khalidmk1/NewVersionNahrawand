@@ -242,6 +242,17 @@ class QuizQuery extends GlobaleService{
         }
 
     }
+
+    public function  storeNoteQuiz(Request $request , String $id){
+
+        $note = QuizAnswerQuestion::findOrFail($id);
+        $noteAnswer = $request->noteAnswer == 'on';
+        $note->update([
+            'confirmed' => $noteAnswer
+        ]);
+
+        return $note;
+    }
     
     
     

@@ -32,6 +32,11 @@ class QuizService extends QuizQuery implements QuizIntreface {
         return redirect()->back()->with('status', 'You have deleted quiz');
     }
 
+    public function storeNote($request , $id){
+        $note = $this->storeNoteQuiz($request , $id);
+        return response()->json($note);
+    }
+
 
     //api quiz
     public function qsmIndexContent($contentId){

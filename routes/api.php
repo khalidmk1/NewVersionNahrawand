@@ -60,6 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Objective
     Route::prefix('objective')->group(function (){
+        Route::get('/{id}', [ObjectiveController::class, 'index'])->name('objective.index');
         Route::post('create/{contentId}', [ObjectiveController::class, 'store'])->name('objective.store.api');
     });
 

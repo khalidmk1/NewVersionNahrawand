@@ -16,6 +16,10 @@ class ObjectiveController extends Controller
         $this->ObjectiveInterface = $ObjectiveInterface;
     }
     
+    public function index(){
+        return $this->ObjectiveInterface->index();
+    }
+
     public function store(ObjectiveRequest $request , String $contentId){
         return $this->ObjectiveInterface->store($request , $contentId);
     }
