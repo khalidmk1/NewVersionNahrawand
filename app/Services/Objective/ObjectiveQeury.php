@@ -47,11 +47,14 @@ class ObjectiveQeury extends GlobaleService {
                         'id' => $subCategory->id,
                         'name' => $subCategory->name,
                         'objective' => $items->map(function ($item) {
-                            return ['name' => $item->name];
+                            return [
+                                'id' => $item->id,
+                                'name' => $item->name
+                            ];
                         })->toArray()
                     ]
                 ];
-            })->values(' ')->toArray(); // Convert to plain array
+            })->values(' ')->toArray(); 
 
         return $objectives;
     }
