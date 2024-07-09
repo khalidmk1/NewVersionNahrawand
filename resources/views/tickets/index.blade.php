@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
 @section('header')
-    Manage Categories Page
+    Manage Tickets Page
 @endsection
 
 @section('page')
-    View Profile
+    View Tickets
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('ticket.index') }}
 @endsection
 
 @section('content')

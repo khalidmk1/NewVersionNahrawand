@@ -113,10 +113,7 @@ class ContentQuery extends GlobaleService {
         $permission = 'Creation Contenu';
         $message = 'content has been created';
         $contentType = 'content';
-
         $notify = $this->notifyUsersWithPermission( $permission , $content->id, $content->title , $message , $contentType );
-        
-
         return $content;
     }
 
@@ -631,6 +628,8 @@ class ContentQuery extends GlobaleService {
         return $contentFiltered;
 
     }
+
+    
 
 
 }

@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Content
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('content.show', Crypt::encrypt($content->id)) }}
 @endsection
 
 

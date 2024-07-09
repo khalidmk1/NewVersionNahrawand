@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profiles
+    View Speakers
 @endsection
 
 @section('link')
-    {{ Route('role.index') }}
+    {{ route('index.speaker') }}
 @endsection
 
 @section('content')
@@ -18,11 +18,6 @@
             <div class="card-header row">
                 <div class="col-6">
                     <h3 class="card-title">Create Sperkers</h3>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('index.speaker') }}" class="btn btn-block btn-default w-25">
-                        View Speakers
-                    </a>
                 </div>
             </div>
             <!-- /.card-header -->

@@ -9,7 +9,7 @@
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('event.index') }}
 @endsection
 
 @section('content')

@@ -74,6 +74,16 @@ class GlobaleService  {
     function notifyUsersWithPermission($permission, $contentId, $contentTitle, $message, $contentType) {
         $users = User::permission($permission)->get();
         
+       /*  $clients = User::whereHas('roles', function($query) {
+            $query->where('name', 'Client');
+        })->get();
+
+        if ($permission == 'Creation Contenu'){
+            foreach ($clients as $client) {
+                $client->notify(new UserNotification($contentId, $contentTitle, $message, $contentType));
+            }
+        } */
+        
         foreach ($users as $user) {
             $user->notify(new UserNotification($contentId, $contentTitle, $message, $contentType));
         }
@@ -371,7 +381,7 @@ class GlobaleService  {
     public function formationContentApi()
     {
         $contents = Content::where('contentType', 'formation')->where('isComing' , 0)
-            ->get(['id', 'image', 'quizType' , 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId']);
+            ->get(['id', 'image', 'quizType' , 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId' , 'created_at']);
 
         $contents->load('user', 'category');
         $formattedContents = $contents->map(function ($content) {
@@ -386,6 +396,7 @@ class GlobaleService  {
                 'document' => $content->document,
                 'categoryName' => $content->category->name,
                 'tags' => $content->tags->pluck('name')->toArray(),
+                'created_at' => $content->created_at,
                 'user' => [
                     'id' => $content->user->id,
                     'avatar' => $content->user->avatar,
@@ -495,6 +506,10 @@ class GlobaleService  {
 
            return $fileName;
         }
+    }
+
+    public function CreatenotifyApi($element){
+        return response()->json($element);
     }
 
 }

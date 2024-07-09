@@ -12,7 +12,8 @@ use App\Http\Controllers\Api\{
     SubCategoryController,
     TicketController,
     VideoController,
-    ObjectiveController
+    ObjectiveController,
+    NotificationController
 };
 use App\Http\Controllers\Auth\{
     AuthenticatedSessionController,
@@ -69,6 +70,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create/view/{video}', [VideoController::class, 'createView'])->name('videoView.create');
         Route::post('note/create/{videoId}', [VideoController::class, 'noteCreate'])->name('note.create');
     });
+
+    //notification
+    Route::get('notification', [NotificationController::class, 'index'])->name('notification.index');
 
     // Miscellaneous
     Route::get('favoris', [ContentController::class, 'favoris'])->name('favoris.index');

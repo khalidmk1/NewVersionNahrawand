@@ -6,11 +6,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Histories
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('history') }}
 @endsection
 
 @section('content')

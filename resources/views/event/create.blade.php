@@ -9,7 +9,7 @@
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('event.index') }}
 @endsection
 
 
@@ -19,12 +19,6 @@
             <div class="card-header row">
                 <div class="col-6">
                     <h3 class="card-title">Create Event.</h3>
-                </div>
-
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{route('event.index')}}" class="btn btn-block btn-default w-25">
-                        View Events
-                    </a>
                 </div>
 
             </div>

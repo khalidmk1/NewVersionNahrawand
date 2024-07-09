@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Contents
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('content.index') }}
 @endsection
 
 @section('content')
@@ -43,8 +43,6 @@
 
                         </div>
 
-
-
                         <div class="form-group col-4 text-center">
                             <!-- Bootstrap Switch -->
                             <label for="boostrap-switch" class="mr-5">
@@ -55,10 +53,6 @@
                         </div>
                         <!-- /.card -->
                     </div>
-
-
-
-
 
                     <div class="form-group">
                         <label for="tags">Tags</label>

@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profiles
+    View administrators
 @endsection
 
 @section('link')
-    {{ Route('role.index') }}
+    {{ route('index.admin') }}
 @endsection
 
 @section('content')
@@ -19,11 +19,7 @@
                 <div class="col-6">
                     <h3 class="card-title">Create an administrator</h3>
                 </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('index.admin') }}" class="btn btn-block btn-default w-25">
-                        View administrators
-                    </a>
-                </div>
+                
             </div>
             <!-- /.card-header -->
             <form action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">

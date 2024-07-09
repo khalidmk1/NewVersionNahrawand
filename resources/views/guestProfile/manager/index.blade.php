@@ -5,17 +5,17 @@
 @endsection
 
 @section('page')
-    View Profile
+    Create Managers
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('create.manager') }}
 @endsection
 
 @section('card-detail-content')
     <div class="row pb-3" style="row-gap: 10px;" id="resultUser">
         @foreach ($managers as $manager)
-            <x-delete-modal :modelDeleteId="$manager->id" :modelTitle="'Delete Manager'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($manager->id))"  />
+            <x-delete-modal :modelDeleteId="$manager->id" :modelTitle="'Delete Manager'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($manager->id))" />
             <div class="col-lg-4 col-md-6 col-sm-6 oldUser">
                 <div class="text-center card-box bg-light">
                     <div class="member-card pt-2 pb-2">
@@ -25,7 +25,9 @@
                         </div>
                         <div class="">
                             <h4>{{ $manager->firstName . ' ' . $manager->lastName }}</h4>
-                            <p class="text-muted">@ {{$manager->roles->first()->name}} <span>| </span><span><a href="#"
+                            <p class="text-muted">@ @foreach ($manager->roles as $role)
+                                    {{ $role->name }},
+                                @endforeach <span>| </span><span><a href="#"
                                         class="text-pink">{{ $manager->email }}</a></span></p>
                         </div>
                     </div>

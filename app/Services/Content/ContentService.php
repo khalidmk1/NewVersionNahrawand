@@ -181,4 +181,9 @@ class ContentService extends ContentQuery implements ContentInterface {
         return response()->json($contents);
     }
 
+    public function notifyContentApi($element){
+        $item = $this->notifyApi($element);
+        return $item;
+    }
+
 }

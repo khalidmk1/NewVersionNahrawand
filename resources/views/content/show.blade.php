@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Contents
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('content.index') }}
 @endsection
 
 @section('content')

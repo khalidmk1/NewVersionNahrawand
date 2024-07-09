@@ -1,21 +1,21 @@
 @extends('layouts.master')
 @section('header')
-    Content Page
+    Events Page
 @endsection
 
 @section('page')
-    View Profile
+    View Events
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('event.index') }}
 @endsection
 
 
 @section('content')
     <div class="card">
         <div class="card-header p-2">
-            <h3 class="card-title">View Content</h3>
+            <h3 class="card-title">View Events</h3>
         </div><!-- /.card-header -->
         <div class="card-body">
             <div class="row row-cols-1 row-cols-md-3  event_conatine " id="resultcours">

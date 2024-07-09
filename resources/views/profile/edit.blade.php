@@ -31,20 +31,31 @@
 @extends('layouts.master')
 
 @section('header')
-Edit Profile Page
+    Edit Profile Page
 @endsection
 
 @section('page')
-    View Profile
+    @if ($user->hasRole('Admin'))
+        View administrators
+    @elseif($user->hasRole(['Animateur', 'Formateur', 'Invité', 'Modérateur', 'Conférencier']))
+        View Speakers
+    @else
+        View Managers
+    @endif
 @endsection
 
 @section('link')
-    
+    @if ($user->hasRole('Admin'))
+        {{ route('index.admin') }}
+    @elseif($user->hasRole(['Animateur', 'Formateur', 'Invité', 'Modérateur', 'Conférencier']))
+        {{ route('index.speaker') }}
+    @else
+        {{ route('index.manager') }}
+    @endif
 @endsection
 
 @section('content')
-
-        @include('profile.partials.update-password-form')
+    @include('profile.partials.update-password-form')
 
     <!-- Main content -->
     <div class="row ">

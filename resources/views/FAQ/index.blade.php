@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View FAQ
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('FAQ.index') }}
 @endsection
 
 

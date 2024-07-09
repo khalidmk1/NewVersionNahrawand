@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Speakers
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('index.speaker') }}
 @endsection
 
 @section('card-detail-content')
@@ -18,16 +18,20 @@
             <x-delete-modal :modelDeleteId="$speaker->id" :modelTitle="'Delete Speaker'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($speaker->id))" />
             <div class="col-lg-4 col-md-6 col-sm-6 oldUser">
                 <div class="text-center card-box bg-light">
-                    <div class="member-card pb-4" >
-                        <div class="thumb-lg member-thumb mx-auto p-5"  style="background-image: url('{{ asset('storage/cover/' . $speaker->cover) }}'); opacity: 1;">
-                            <img src="{{ asset('storage/avatars/' . $speaker->avatar) }}" style="height: 89px;width: 89px; position: relative; top: 47px"
+                    <div class="member-card pb-4">
+                        <div class="thumb-lg member-thumb mx-auto p-5"
+                            style="background-image: url('{{ asset('storage/cover/' . $speaker->cover) }}'); opacity: 1;">
+                            <img src="{{ asset('storage/avatars/' . $speaker->avatar) }}"
+                                style="height: 89px;width: 89px; position: relative; top: 47px"
                                 class="rounded-circle img-thumbnail" alt="profile-image">
 
                         </div>
                         <div class="">
                             <h4>{{ $speaker->firstName . ' ' . $speaker->lastName }}</h4>
-                            <p class="text-muted">@ {{ $speaker->roles->first()->name }} <span>| </span><span><a
-                                        href="#" class="text-pink">{{ $speaker->email }}</a></span></p>
+                            <p class="text-muted">@ @foreach ($speaker->roles as $role)
+                                    {{ $role->name }} ,
+                                @endforeach <span>| </span><span><a href="#"
+                                        class="text-pink">{{ $speaker->email }}</a></span></p>
                             <p class="p-2">{{ $speaker->biographie }}</p>
                         </div>
                     </div>

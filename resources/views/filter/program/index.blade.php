@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Programs
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('program.index') }}
 @endsection
 
 @section('content')

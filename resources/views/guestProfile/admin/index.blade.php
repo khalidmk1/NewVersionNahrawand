@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    Create administrators
 @endsection
 
 @section('link')
-    {{ route('report.index') }}
+    {{ route('create.admin') }}
 @endsection
 
 @section('card-detail-content')

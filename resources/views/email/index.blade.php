@@ -5,7 +5,7 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Emails
 @endsection
 
 @section('link')

@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Profiles
+    View Mangers
 @endsection
 
 @section('link')
-    {{ Route('role.index') }}
+    {{ route('index.manager') }}
 @endsection
 
 @section('content')
@@ -18,11 +18,6 @@
             <div class="card-header row">
                 <div class="col-6">
                     <h3 class="card-title">Create an Managers</h3>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="{{ route('index.manager') }}" class="btn btn-block btn-default w-25">
-                        View Managers
-                    </a>
                 </div>
             </div>
             <!-- /.card-header -->
