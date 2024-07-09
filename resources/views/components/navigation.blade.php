@@ -57,7 +57,7 @@
                   <form action="{{ route('logout') }}" method="POST">
                       @csrf
                       <button type="submit" class="dropdown-item">
-                          <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        <i class="fa fa-sign-out-alt mr-2" ></i>
                           Log out
                       </button>
                   </form>
