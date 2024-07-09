@@ -13,8 +13,8 @@
 @endsection
 
 @section('content')
-   
-   
+
+
 
     <x-delete-modal :modelDeleteId="$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
@@ -125,7 +125,7 @@
                                 <!-- /.row -->
                             </div>
                             <!-- /.post -->
-                            @if ($content->contentType != 'formation')
+                            @if ($content->contentType != 'formation' || $content->contentType != 'quickly')
                                 <!-- Post -->
                                 <div class="post">
                                     <div class="d-flex">
@@ -212,152 +212,156 @@
                             </div>
                             <!-- /.post -->
 
+                            @if ($content->contentType != 'quickly')
+                                <!-- Post -->
+                                <div class="post clearfix">
+                                    <div class="row mb-2 justify-content-between align-items-center">
+                                        <div class="col-6">
+                                            <div class="d-flex">
+                                                <i class="fa fa-exclamation-circle" style="font-size: x-large"
+                                                    aria-hidden="true"></i>
+                                                <div class="ml-2 mb-2"><strong>Video.</strong></div>
 
-                            <!-- Post -->
-                            <div class="post clearfix">
-                                <div class="row mb-2 justify-content-between align-items-center">
-                                    <div class="col-6">
-                                        <div class="d-flex">
-                                            <i class="fa fa-exclamation-circle" style="font-size: x-large"
-                                                aria-hidden="true"></i>
-                                            <div class="ml-2 mb-2"><strong>Video.</strong></div>
-
+                                            </div>
                                         </div>
+                                        <div class="col-6">
+                                            <a href="{{ route('video.show', Crypt::encrypt($content->id)) }}"
+                                                class="btn btn-block btn-info w-50" style="float: right;">Add
+                                                video</a>
+                                        </div>
+
                                     </div>
-                                    <div class="col-6">
-                                        <a href="{{ route('video.show', Crypt::encrypt($content->id)) }}"
-                                            class="btn btn-block btn-info w-50" style="float: right;">Add
-                                            video</a>
+
+
+                                    <div class="row">
+                                        @foreach ($content->videos as $video)
+                                            <x-delete-modal :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+
+                                            <x-card-video :videoUrl="$video->video" :videoID="$video->id">
+                                                <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'"
+                                                    :modelRoute="route('video.update', Crypt::encrypt($video->id))">
+                                                    <input hidden type="text" name="podcastId"
+                                                        value="{{ $content->id }}">
+
+                                                    <div class="form-group">
+                                                        <label for="titleVideo">Title</label>
+                                                        <input type="text" value="{{ old('title', $video->title) }}"
+                                                            class="form-control" name="title"
+                                                            id="titleVideo_{{ $video->id }}"
+                                                            placeholder="Entrez Title ...">
+                                                    </div>
+
+                                                    <div class="form-group clearfix text-center col-4">
+                                                        <div class="icheck-primary d-inline">
+                                                            <input type="checkbox"
+                                                                {{ $video->isComing == 1 ? 'checked' : '' }}
+                                                                name="isComing" id="iscoming-{{ $video->id }}">
+                                                            <label for="iscoming-{{ $video->id }}">
+                                                                Coming Soon
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- textarea -->
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <textarea class="form-control" name="description" rows="3" placeholder="Enter ...">{{ $video->description }}</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="image2">Image</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input"
+                                                                name="image" id="image_{{ $video->id }}">
+                                                            <label class="custom-file-label"
+                                                                for="image_{{ $video->id }}">Upload</label>
+                                                        </div>
+                                                    </div>
+
+                                                    @if ($content->contentType == 'podcast')
+                                                        <div class="form-group">
+                                                            <label for="guestInvite">Invité(s)</label>
+                                                            <select class="select3" name="guestIds[]" multiple="multiple"
+                                                                id="guestInvite_{{ $video->id }}"
+                                                                data-placeholder="Select a State" style="width: 100%;">
+                                                                @foreach ($invertersUsers as $invertersUser)
+                                                                    <option
+                                                                        {{ $video->videoguest->contains('userId', $invertersUser->id) ? 'selected' : '' }}
+                                                                        value="{{ $invertersUser->id }}">
+                                                                        {{ $invertersUser->email }}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
+                                                        <!-- /.form-group -->
+                                                    @elseif($content->contentType == 'conference')
+                                                        <div class="form-group">
+                                                            <label for="guestConference">Conférencies</label>
+                                                            <select class="select3" name="guestIds[]" multiple="multiple"
+                                                                id="guestConference_{{ $video->id }}"
+                                                                data-placeholder="Select a State" style="width: 100%;">
+                                                                @foreach ($conferencerUsers as $conferencerUser)
+                                                                    <option value="{{ $conferencerUser->id }}"
+                                                                        {{ $video->videoguest->contains('userId', $conferencerUser->id) ? 'selected' : '' }}>
+                                                                        {{ $conferencerUser->email }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    @else
+                                                    @endif
+
+
+
+
+                                                    <div class="form-group">
+                                                        <label for="tags_video">Tags</label>
+                                                        <input type="text" class="form-control"
+                                                            value="@foreach ($video->tags as $tag){{ $tag->name }}@if (!$loop->last),@endif @endforeach"
+                                                            name="tags[]" data-id="{{ $video->id }}"
+                                                            class="videoTags" />
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label for="video">Video</label>
+                                                        <input type="url" value="{{ old('video', $video->video) }}"
+                                                            class="form-control" name="video" id="video"
+                                                            placeholder="Enter url video ...">
+                                                    </div>
+
+                                                    <!-- time Picker -->
+                                                    <div class="form-group">
+                                                        <label for="duration">Duration</label>
+                                                        <input type="time" class="form-control" id="duration"
+                                                            name="duration"
+                                                            value="{{ old('durtion', $video->duration) }}"
+                                                            step="1">
+                                                    </div>
+                                                </x-update-filter-modal>
+                                                <h3 class="pt-2">
+                                                    {{ $video->title }}
+                                                </h3>
+                                                <ul class="list-inline projects">
+                                                    @foreach ($video->videoguest as $guest)
+                                                        <li class="list-inline-item">
+                                                            <img alt="Avatar" class="table-avatar"
+                                                                style="height: 33px; width: 33px;"
+                                                                src="{{ asset('storage/avatars/' . $guest->user->avatar) }}">
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                                <p class="text">{{ $video->description }}.</p>
+                                                <h5 class="pink-text text-right">
+                                                    {{ $video->duration }}</h5>
+                                            </x-card-video>
+                                        @endforeach
+
                                     </div>
-
                                 </div>
+                                <!-- /.post -->
+                            @endif
 
-
-                                <div class="row">
-                                    @foreach ($content->videos as $video)
-                                        <x-delete-modal :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
-
-                                        <x-card-video :videoUrl="$video->video" :videoID="$video->id">
-                                            <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'" :modelRoute="route('video.update', Crypt::encrypt($video->id))">
-                                                <input hidden type="text" name="podcastId"
-                                                    value="{{ $content->id }}">
-
-                                                <div class="form-group">
-                                                    <label for="titleVideo">Title</label>
-                                                    <input type="text" value="{{ old('title', $video->title) }}"
-                                                        class="form-control" name="title"
-                                                        id="titleVideo_{{ $video->id }}"
-                                                        placeholder="Entrez Title ...">
-                                                </div>
-
-                                                <div class="form-group clearfix text-center col-4">
-                                                    <div class="icheck-primary d-inline">
-                                                        <input type="checkbox"
-                                                            {{ $video->isComing == 1 ? 'checked' : '' }} name="isComing"
-                                                            id="iscoming-{{ $video->id }}">
-                                                        <label for="iscoming-{{ $video->id }}">
-                                                            Coming Soon
-                                                        </label>
-                                                    </div>
-
-                                                </div>
-
-                                                <!-- textarea -->
-                                                <div class="form-group">
-                                                    <label>Description</label>
-                                                    <textarea class="form-control" name="description" rows="3" placeholder="Enter ...">{{ $video->description }}</textarea>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="image2">Image</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" name="image"
-                                                            id="image_{{ $video->id }}">
-                                                        <label class="custom-file-label"
-                                                            for="image_{{ $video->id }}">Upload</label>
-                                                    </div>
-                                                </div>
-
-                                                @if ($content->contentType == 'podcast')
-                                                    <div class="form-group">
-                                                        <label for="guestInvite">Invité(s)</label>
-                                                        <select class="select3" name="guestIds[]" multiple="multiple"
-                                                            id="guestInvite_{{ $video->id }}"
-                                                            data-placeholder="Select a State" style="width: 100%;">
-                                                            @foreach ($invertersUsers as $invertersUser)
-                                                                <option
-                                                                    {{ $video->videoguest->contains('userId', $invertersUser->id) ? 'selected' : '' }}
-                                                                    value="{{ $invertersUser->id }}">
-                                                                    {{ $invertersUser->email }}</option>
-                                                            @endforeach
-
-                                                        </select>
-                                                    </div>
-                                                    <!-- /.form-group -->
-                                                @elseif($content->contentType == 'conference')
-                                                    <div class="form-group">
-                                                        <label for="guestConference">Conférencies</label>
-                                                        <select class="select3" name="guestIds[]" multiple="multiple"
-                                                            id="guestConference_{{ $video->id }}"
-                                                            data-placeholder="Select a State" style="width: 100%;">
-                                                            @foreach ($conferencerUsers as $conferencerUser)
-                                                                <option value="{{ $conferencerUser->id }}"
-                                                                    {{ $video->videoguest->contains('userId', $conferencerUser->id) ? 'selected' : '' }}>
-                                                                    {{ $conferencerUser->email }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                @else
-                                                @endif
-
-
-
-
-                                                <div class="form-group">
-                                                    <label for="tags_video">Tags</label>
-                                                    <input type="text" class="form-control"
-                                                        value="@foreach ($video->tags as $tag){{ $tag->name }}@if (!$loop->last),@endif @endforeach"
-                                                        name="tags[]" data-id="{{ $video->id }}"
-                                                        class="videoTags" />
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <label for="video">Video</label>
-                                                    <input type="url" value="{{ old('video', $video->video) }}"
-                                                        class="form-control" name="video" id="video"
-                                                        placeholder="Enter url video ...">
-                                                </div>
-
-                                                <!-- time Picker -->
-                                                <div class="form-group">
-                                                    <label for="duration">Duration</label>
-                                                    <input type="time" class="form-control" id="duration"
-                                                        name="duration" value="{{ old('durtion', $video->duration) }}"
-                                                        step="1">
-                                                </div>
-                                            </x-update-filter-modal>
-                                            <h3 class="pt-2">
-                                                {{ $video->title }}
-                                            </h3>
-                                            <ul class="list-inline projects">
-                                                @foreach ($video->videoguest as $guest)
-                                                    <li class="list-inline-item">
-                                                        <img alt="Avatar" class="table-avatar"
-                                                            style="height: 33px; width: 33px;"
-                                                            src="{{ asset('storage/avatars/' . $guest->user->avatar) }}">
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                            <p class="text">{{ $video->description }}.</p>
-                                            <h5 class="pink-text text-right">
-                                                {{ $video->duration }}</h5>
-                                        </x-card-video>
-                                    @endforeach
-
-                                </div>
-                            </div>
-                            <!-- /.post -->
 
 
                         </div>
