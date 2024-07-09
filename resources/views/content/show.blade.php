@@ -125,7 +125,7 @@
                                 <!-- /.row -->
                             </div>
                             <!-- /.post -->
-                            @if ($content->contentType != 'formation' || $content->contentType != 'quickly')
+                            @if ($content->contentType != 'formation' && $content->contentType != 'quickly')
                                 <!-- Post -->
                                 <div class="post">
                                     <div class="d-flex">
