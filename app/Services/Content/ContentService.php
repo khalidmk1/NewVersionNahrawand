@@ -12,16 +12,10 @@ class ContentService extends ContentQuery implements ContentInterface {
     public function index()
     {
         $contents = $this->allContent();
-        return view('content.index')->with(['contents' => $contents['contents']]);
+        $contentQuickly = $this->allContentQuickly();
+        return view('content.index', compact('contents', 'contentQuickly'));
     }
 
-    public function quicklyIndex(){
-        $contents = $this->allContent();
-        return view('content.quicklyIndex')->with(['Quicklys' => $contents['contentQuicly'] ]);
-    }
-
-   
-    
 
     public function show($content){
         $content = $this->getContentById($content);

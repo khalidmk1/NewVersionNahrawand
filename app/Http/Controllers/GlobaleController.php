@@ -43,10 +43,6 @@ class GlobaleController extends Controller
         return $this->ContentInterface->objectivesByCategory($id);
     }
 
-    public function quicklyIndex()
-    {
-        return $this->ContentInterface->quicklyIndex();
-    }
 
     public function history()
     {

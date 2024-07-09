@@ -191,15 +191,7 @@
                     <a href="{{ route('content.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-graduation-cap" aria-hidden="true"></i>
                         <p>
-                            View Contents
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('quickly.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-graduation-cap" aria-hidden="true"></i>
-                        <p>
-                            View Quicly Contents
+                            View
                         </p>
                     </a>
                 </li>

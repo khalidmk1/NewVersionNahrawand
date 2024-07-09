@@ -488,6 +488,7 @@
         });
     }
 
+
     /* report script content by category */
 
     function fetchCategoryReport() {
@@ -593,3 +594,5 @@
         fetchCategoryReport();
     });
 </script>
+
+

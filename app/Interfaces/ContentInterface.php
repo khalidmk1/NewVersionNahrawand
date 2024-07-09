@@ -4,7 +4,6 @@ namespace App\Interfaces;
 
 interface ContentInterface {
     public function index();
-    public function quicklyIndex();
     public function create();
     public function objectivesByCategory($id);
     public function store($request); 
