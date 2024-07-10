@@ -32,7 +32,7 @@ class ContentQuery extends GlobaleService {
     public function allContent()
     {
         $contentType = ['conference', 'podcast', 'formation'];
-        $contents = Content::whereIn('contentType', $contentType)->paginate(9);
+        $contents = Content::whereIn('contentType', $contentType)->orderBy('deleted_at', 'desc')->paginate(9);
         return $contents;
     }
 
