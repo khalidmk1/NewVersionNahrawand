@@ -1,6 +1,6 @@
 <div class="row">
     @foreach ($content->quizzes as $quizIndex => $quiz)
-        <x-delete-modal :modelDeleteId="$quiz->id" :modelTitle="'Delete Quiz'" :modelRouteDelete="route('quiz.destroy', Crypt::encrypt($quiz->id))" />
+        <x-delete-modal :modelDeleteId="'quiz_'.$quiz->id" :modelTitle="'Delete Quiz'" :modelRouteDelete="route('quiz.destroy', Crypt::encrypt($quiz->id))" />
         @php
             $firstQuizParameter = $quiz->quizParameter->first();
 
@@ -86,7 +86,7 @@
                         </button>
 
 
-                        <button type="button" data-toggle="modal" data-target="#delete_{{ $quiz->id }}"
+                        <button type="button" data-toggle="modal" data-target="#delete_quiz_{{ $quiz->id }}"
                             class="btn btn-sm btn-danger position-absolute" style="float: right">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>

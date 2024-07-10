@@ -16,7 +16,7 @@
 
 
 
-    <x-delete-modal :modelDeleteId="$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
+    <x-delete-modal :modelDeleteId="'content_'.$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
 
@@ -235,7 +235,7 @@
 
                                     <div class="row">
                                         @foreach ($content->videos as $video)
-                                            <x-delete-modal :modelDeleteId="$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+                                            <x-delete-modal :modelDeleteId="'video_'.$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
 
                                             <x-card-video :videoUrl="$video->video" :videoID="$video->id">
                                                 <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'"
@@ -376,7 +376,7 @@
                         <div class="tab-pane" id="settings">
 
                             <div class="form-group">
-                                <button type="submit" data-toggle="modal" data-target="#delete_{{ $content->id }}"
+                                <button type="submit" data-toggle="modal" data-target="#delete_content_{{ $content->id }}"
                                     class="btn btn-danger w-50">Delete</button>
                             </div>
 

@@ -98,7 +98,7 @@
                                             name="name">
                                     </div>
                                 </x-update-filter-modal>
-                                <x-delete-modal :modelDeleteId="$subCategory->id"  :modelTitle="'Delete SubCategory'" :modelRouteDelete="route('subcategory.destroy', Crypt::encrypt($subCategory->id))" />
+                                <x-delete-modal :modelDeleteId="'subCategory_'.$subCategory->id"  :modelTitle="'Delete SubCategory'" :modelRouteDelete="route('subcategory.destroy', Crypt::encrypt($subCategory->id))" />
 
                                 <tr>
                                     <td>{{ $subCategory->id }}</td>
@@ -115,7 +115,7 @@
 
                                     <td>
                                         <button type="button" data-toggle="modal"
-                                            data-target="#delete_{{ $subCategory->id }}" class="btn btn-sm btn-danger">
+                                            data-target="#delete_subCategory_{{ $subCategory->id }}" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </td>

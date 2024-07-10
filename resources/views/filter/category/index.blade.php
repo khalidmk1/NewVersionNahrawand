@@ -100,7 +100,7 @@
                                             name="name">
                                     </div>
                                 </x-update-filter-modal>
-                                <x-delete-modal :modelDeleteId="$category->id" :modelTitle="'Delete Category'" :modelRouteDelete="route('category.destroy', Crypt::encrypt($category->id))" />
+                                <x-delete-modal :modelDeleteId="'category_'.$category->id" :modelTitle="'Delete Category'" :modelRouteDelete="route('category.destroy', Crypt::encrypt($category->id))" />
 
                                 <tr>
                                     <td>{{ $category->id }}</td>
@@ -117,7 +117,7 @@
 
                                     <td>
                                         <button type="button" data-toggle="modal"
-                                            data-target="#delete_{{ $category->id }}" class="btn btn-sm btn-danger">
+                                            data-target="#delete_category_{{ $category->id }}" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </td>

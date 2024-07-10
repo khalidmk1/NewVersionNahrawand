@@ -15,7 +15,7 @@
                             <i class="fas fa-edit" aria-hidden="true"></i>
                         </button>
                         
-                        <button type="button" data-toggle="modal" data-target="#delete_{{ $videoID }}"
+                        <button type="button" data-toggle="modal" data-target="#delete_video_{{ $videoID }}"
                             class="btn btn-sm btn-danger position-absolute" style="float: right">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>

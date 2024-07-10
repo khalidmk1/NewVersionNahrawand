@@ -15,7 +15,7 @@
 @section('card-detail-content')
     <div class="row pb-3" style="row-gap: 10px;" id="resultUser">
         @foreach ($speakers as $speaker)
-            <x-delete-modal :modelDeleteId="$speaker->id" :modelTitle="'Delete Speaker'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($speaker->id))" />
+            <x-delete-modal :modelDeleteId="'speaker_'.$speaker->id" :modelTitle="'Delete Speaker'" :modelRouteDelete="route('profile.destroy', Crypt::encrypt($speaker->id))" />
             <div class="col-lg-4 col-md-6 col-sm-6 oldUser">
                 <div class="text-center card-box bg-light">
                     <div class="member-card pb-4">
@@ -40,7 +40,7 @@
                             class="btn btn-sm mb-2 bg-warning">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                         </a>
-                        <button type="button" data-toggle="modal" data-target="#delete_{{ $speaker->id }}"
+                        <button type="button" data-toggle="modal" data-target="#delete_speaker_{{ $speaker->id }}"
                             class="btn btn-sm btn-danger mb-2 mr-2">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
