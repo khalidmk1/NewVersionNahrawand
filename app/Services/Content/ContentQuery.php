@@ -215,9 +215,9 @@ class ContentQuery extends GlobaleService {
         {
             $content->delete();
 
-            foreach ($content->videos as $key => $video) {
+           /*  foreach ($content->videos as $key => $video) {
                 $video->delete();
-            }
+            } */
            
         }
         return $content;
