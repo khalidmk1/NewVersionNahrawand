@@ -306,17 +306,21 @@ class GlobaleService  {
         return $speakers;
     }
 
-    public function historyDeleted(){
-        $contents = Content::onlyTrashed()->get();
-        $videos = ContentVideo::onlyTrashed()->get();
-        $categories = Category::onlyTrashed()->get();
-        $subCategories = SubCategory::onlyTrashed()->get();
-        $programs = Program::onlyTrashed()->get();
-        $events = Event::onlyTrashed()->get();
-        $users = User::onlyTrashed()->get();
-        return ['contents' => $contents ,'videos' => $videos , 'categories' => $categories , 'subCategories' => $subCategories ,
-        'programs'=>$programs ,'events' => $events , 'users' =>  $users];
+    public function historyDeleted() {
+        $contents = Content::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $videos = ContentVideo::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $categories = Category::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $subCategories = SubCategory::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $programs = Program::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $events = Event::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+        $users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->get();
+    
+        return [
+            'contents' => $contents, 'videos' => $videos, 'categories' => $categories, 'subCategories' => $subCategories,
+            'programs' => $programs,'events' => $events,'users' => $users
+        ];
     }
+
 
     public function restoreUser(String $userId){
         $user = User::withTrashed()->findOrFail(Crypt::decrypt($userId));

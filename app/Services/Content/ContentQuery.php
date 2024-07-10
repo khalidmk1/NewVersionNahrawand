@@ -196,12 +196,6 @@ class ContentQuery extends GlobaleService {
 
         $notify = $this->notifyUsersWithPermission( $permission , $content->id, $content->title , $message , $contentType );
 
-       
-
-       /*  foreach ($users as $key => $user) {
-            $user->notify(new UserNotification());
-        }  */
-
         return $content;
     }
 
@@ -214,10 +208,6 @@ class ContentQuery extends GlobaleService {
         if(Hash::check( $request->password, Auth::user()->password ))
         {
             $content->delete();
-
-           /*  foreach ($content->videos as $key => $video) {
-                $video->delete();
-            } */
            
         }
         return $content;
