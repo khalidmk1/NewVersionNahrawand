@@ -88,8 +88,8 @@
 
                             <div class="form-group">
                                 <label for="subCategory">SubCategories</label>
-                                <select class="select3" name="subCategoryId[]" multiple="multiple" id="subCategory"
-                                    data-placeholder="Select a State" style="width: 100%;">
+                                <select class="select3 text-dark" name="subCategoryId[]" multiple="multiple"
+                                    id="subCategory" data-placeholder="Select a State" style="width: 100%;">
                                     @foreach ($subCategories as $subCategory)
                                         <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
                                     @endforeach
@@ -145,7 +145,7 @@
 
             var tagInputEle = $('#tags-input');
             tagInputEle.tagsinput();
-            
+
         });
     </script>
 @endsection

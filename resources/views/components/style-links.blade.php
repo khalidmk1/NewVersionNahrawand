@@ -36,7 +36,16 @@
 
 
 <style>
-    
+    .select2-container--default .select2-selection--multiple 
+    .select2-selection__rendered li:first-child.select2-search.select2-search--inline .select2-search__field {
+        color: black !important;
+    }
+
+    .dark-mode .select2-container .select2-search--inline .select2-search__field{
+        color: black !important;
+    }
+
+
     .notification-icon {
         z-index: 100000;
     }

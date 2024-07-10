@@ -125,12 +125,7 @@ class QuizQuery extends GlobaleService{
 
         if(Hash::check( $request->password, Auth::user()->password ))
         {
-            $quiz->delete();
-
-            /* foreach ($quiz->answers as $key => $answer) {
-                $answer->delete();
-            } */
-           
+            $quiz->delete();   
         }
         return $quiz;
     }
