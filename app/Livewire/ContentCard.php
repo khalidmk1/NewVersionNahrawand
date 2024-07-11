@@ -14,7 +14,8 @@ class ContentCard extends Component
     public function render()
     {
         $contentType = ['conference', 'podcast', 'formation'];
-        $contents = Content::whereIn('contentType', $contentType)->paginate(9);
+        $contents = Content::orderBy('created_at', 'desc')
+        ->whereIn('contentType', $contentType)->paginate(9);
         return view('livewire.content-card', compact('contents'));
     }
 }

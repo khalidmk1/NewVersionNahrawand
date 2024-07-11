@@ -12,7 +12,8 @@ class QuicklyCard extends Component
     
     public function render()
     {
-        $contentQuickly = Content::where('contentType', 'quickly')->paginate(9);
+        $contentQuickly = Content::orderBy('created_at', 'desc')
+        ->where('contentType', 'quickly')->paginate(9);
         return view('livewire.quickly-card')->with('contentQuickly' , $contentQuickly);
     }
 }

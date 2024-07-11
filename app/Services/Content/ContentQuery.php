@@ -29,7 +29,7 @@ use App\Notifications\ContentCreatedNotification;
 class ContentQuery extends GlobaleService {
 
 
-    public function allContent()
+    /* public function allContent()
     {
         $contentType = ['conference', 'podcast', 'formation'];
         $contents = Content::orderBy('created_at', 'asc')
@@ -40,11 +40,11 @@ class ContentQuery extends GlobaleService {
 
     public function allContentQuickly()
     {
-        $contentQuickly = Content::where('contentType', 'quickly')
-        ->orderBy('created_at', 'desc')
+        $contentQuickly = Content::orderBy('created_at', 'desc')
+        ->where('contentType', 'quickly')
         ->paginate(9);
         return $contentQuickly;
-    }
+    } */
 
   
 

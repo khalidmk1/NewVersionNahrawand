@@ -454,8 +454,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New
-                        Ticket</a>
+                   {{--  <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New
+                        Ticket</a> --}}
                     <a href="{{ route('ticket.index') }}" class="btn btn-sm btn-secondary float-right">View All
                         Tickets</a>
                 </div>

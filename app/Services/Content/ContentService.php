@@ -11,9 +11,7 @@ class ContentService extends ContentQuery implements ContentInterface {
 
     public function index()
     {
-        $contents = $this->allContent();
-        $contentQuickly = $this->allContentQuickly();
-        return view('content.index', compact('contents', 'contentQuickly'));
+        return view('content.index');
     }
 
 
