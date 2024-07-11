@@ -14,9 +14,7 @@
 
 @section('content')
 
-
-
-    <x-delete-modal :modelDeleteId="'content_'.$content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
+    <x-delete-modal :modelDeleteId="'content_' . $content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
 
@@ -72,6 +70,7 @@
                             <li class="nav-item"><a class="nav-link" href="#quiz" data-toggle="tab">Quiz</a>
                             </li>
                         @endif
+
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -79,13 +78,27 @@
                         <div class="active tab-pane" id="activity">
                             <!-- Post -->
                             <div class="post">
-                                <div class="d-flex align-items-center">
-                                    <h1 class="username">
-                                        <div>{{ $content->title }}</div>
+                                <div class="row align-items-center text-center justify-content-center">
+                                    <div class="col-md-9 col-sm-12">
+                                        <h1 class="username ">
+                                            <div>{{ $content->title }}</div>
+                                        </h1>
+                                    </div>
+                                    <div class="col-md col-sm-4">
+                                        <h5 class="text-start badge badge-success">{{ $content->isActive ? 'Active' : '' }}
+                                        </h5>
+                                    </div>
+                                    <div class="col-md .col-sm-4">
+                                        <h5 class="text-start badge badge-warning ">
+                                            {{ $content->isComing ? 'A Venir' : '' }}</h5>
+                                    </div>
 
-                                    </h1>
-                                    <h5 class="ml-4 badge badge-success">{{ $content->isActive ? 'Active' : '' }}</h5>
-                                    <h5 class="ml-4 badge badge-warning">{{ $content->isComing ? 'A Venir' : '' }}</h5>
+                                    {{--  <div class="col-md col-sm-4">
+                                        <a target="blank"
+                                            href="https://drive.google.com/file/d/1M47Rpkk-Qe7VdA66i3-tzKwJX7BUMJWh/view">
+                                            <i class='fab fa-google-drive' style='font-size:30px'></i>
+                                        </a>
+                                    </div> --}}
                                 </div>
                                 <!-- /.user-block -->
 
@@ -156,7 +169,6 @@
                                 <!-- /.post -->
                             @endif
 
-
                             @if ($content->contentType == 'formation')
                                 <!-- Post -->
                                 <div class="post">
@@ -172,18 +184,24 @@
                                     </p>
                                 </div>
                                 <!-- /.post -->
+
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="d-flex">
+                                        <i class="fab fa-google-drive" style="font-size: x-large" aria-hidden="true"></i>
+                                        <div class="ml-2"><strong>Document.</strong></div>
+                                    </div>
+                                    <!-- /.user-block -->
+                                    <a target="blank" href="{{ $content->document }}">{{ $content->document }}/view</a>
+                                </div>
+                                <!-- /.post -->
                             @endif
-
-
-
 
                             <!-- Post -->
                             <div class="post">
                                 <div class="d-flex">
                                     <i class="fa fa-tags" style="font-size: x-large" aria-hidden="true"></i>
-
                                     <div class="ml-2"><strong>Tags.</strong></div>
-
                                 </div>
                                 <!-- /.user-block -->
                                 @foreach ($content->tags as $tag)
@@ -235,7 +253,7 @@
 
                                     <div class="row">
                                         @foreach ($content->videos as $video)
-                                            <x-delete-modal :modelDeleteId="'video_'.$video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
+                                            <x-delete-modal :modelDeleteId="'video_' . $video->id" :modelTitle="'Delete Video'" :modelRouteDelete="route('video.destroy', Crypt::encrypt($video->id))" />
 
                                             <x-card-video :videoUrl="$video->video" :videoID="$video->id">
                                                 <x-update-filter-modal :filterId="$video->id" :titleModel="'Update Video'"
@@ -376,7 +394,8 @@
                         <div class="tab-pane" id="settings">
 
                             <div class="form-group">
-                                <button type="submit" data-toggle="modal" data-target="#delete_content_{{ $content->id }}"
+                                <button type="submit" data-toggle="modal"
+                                    data-target="#delete_content_{{ $content->id }}"
                                     class="btn btn-danger w-50">Delete</button>
                             </div>
 
@@ -394,6 +413,7 @@
 
                         </div>
                         <!-- /.tab-pane -->
+
                     </div>
                     <!-- /.tab-content -->
                 </div><!-- /.card-body -->

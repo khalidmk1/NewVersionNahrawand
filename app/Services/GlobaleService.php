@@ -155,17 +155,7 @@ class GlobaleService  {
             return $nameFlexImage;
         }
     }
-    public function storeConteDocument(Request $request){
-        if ($request->hasFile('document')) {
-            $file = $request->file('document');
-            $directory = '/document';
-            $fileNameConetentDocument = uniqid() . '_' . $file->getClientOriginalName();
-            $file->storeAs($directory, $fileNameConetentDocument, 'public');
-            return $fileNameConetentDocument;
-        }else{
-            return null;
-        }
-    }
+   
     public function updateConteDocument(Request $request , String $contentDocument){
         if ($request->hasFile('document')) {
             $imagePath = 'document/'.$contentDocument;

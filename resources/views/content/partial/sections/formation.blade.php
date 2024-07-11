@@ -68,13 +68,9 @@
     <!-- /.form-group -->
 
 
-
-
     <div class="form-group">
-        <label for="DocumentFomation">Documents</label>
-        <div class="custom-file">
-            <input type="file" name="document" class="custom-file-input" id="DocumentFomation" multiple>
-            <label class="custom-file-label" for="DocumentFomation">Choose Documents</label>
-        </div>
+        <label for="DocumentFomation">Document</label>
+        <input type="url" value="{{ old('document') }}" class="form-control" name="document"
+            id="DocumentFomation" placeholder="Entrez url document ...">
     </div>
 </section>

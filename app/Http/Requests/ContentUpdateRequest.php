@@ -14,6 +14,23 @@ class ContentUpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->has('document')) {
+            $this->merge([
+                'document' => $this->cleanGoogleDriveUrl($this->document),
+            ]);
+        }
+    }
+
+    protected function cleanGoogleDriveUrl($url)
+    {
+        if (preg_match('/^(https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+)\/?.*$/', $url, $matches)) {
+            return $matches[1];
+        }
+        return $url;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -33,7 +50,7 @@ class ContentUpdateRequest extends FormRequest
             'condition' => ['nullable' , 'string'],
             'isCertify' => ['nullable'],
             'programId' => ['nullable'],
-            'document' => ['nullable' , 'file' ,'mimes:pdf' ,'max:2000'],
+            'document' => ['nullable', 'url', 'regex:/^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+$/'],
         ];
 
         if ($this->contentType === 'conference' || $this->contentType === 'podcast') {

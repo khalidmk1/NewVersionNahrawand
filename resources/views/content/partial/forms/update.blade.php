@@ -1,5 +1,3 @@
-
-
 <!-- /.card-header -->
 <form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" method="post" enctype="multipart/form-data">
     @method('patch')
@@ -122,7 +120,7 @@
                     @foreach ($moderatorUsers as $moderatorUser)
                         <option {{ $moderatorUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $moderatorUser->id }}">
-                            {{ $moderatorUser->firstName.' '.$moderatorUser->lastName }}
+                            {{ $moderatorUser->firstName . ' ' . $moderatorUser->lastName }}
                         </option>
                     @endforeach
                 </select>
@@ -132,7 +130,8 @@
         @if ($content->contentType == 'formation')
             <div class="form-group clearfix">
                 <div class="icheck-primary d-inline">
-                    <input type="checkbox" name="isCertify" id="certify" {{ $content->isCertify == 1 ? 'checked' : '' }}>
+                    <input type="checkbox" name="isCertify" id="certify"
+                        {{ $content->isCertify == 1 ? 'checked' : '' }}>
                     <label for="certify">
                         Certify
                     </label>
@@ -141,7 +140,7 @@
             </div>
 
             <!-- textarea -->
-            <div class="form-group"  id="condition">
+            <div class="form-group" id="condition">
                 <label>Eligibility criteria</label>
                 <textarea class="form-control" name="condition" rows="3" placeholder="Enter ..."></textarea>
             </div>
@@ -154,7 +153,7 @@
                     @foreach ($formateurUsers as $formateurUser)
                         <option {{ $formateurUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $formateurUser->id }}">
-                            {{ $formateurUser->firstName.' '.$formateurUser->lastName }}
+                            {{ $formateurUser->firstName . ' ' . $formateurUser->lastName }}
                         </option>
                     @endforeach
                 </select>
@@ -188,7 +187,7 @@
                     @foreach ($animatorUsers as $animatorUser)
                         <option {{ $animatorUser->id == $content->hostId ? 'selected' : '' }}
                             value="{{ $animatorUser->id }}">
-                            {{ $animatorUser->firstName.' '.$animatorUser->lastName }}
+                            {{ $animatorUser->firstName . ' ' . $animatorUser->lastName }}
                         </option>
                     @endforeach
                 </select>
@@ -221,6 +220,14 @@
                 <label class="custom-file-label" for="flexImagePodcast">Choose image</label>
             </div>
         </div>
+
+        @if ($content->contentType == 'formation')
+            <div class="form-group">
+                <label for="DocumentFomation">Document</label>
+                <input type="url" value="{{ old('document' , $content->document) }}" class="form-control" name="document"
+                    id="DocumentFomation" placeholder="Entrez url document ...">
+            </div>
+        @endif
 
         @if ($content->contentType != 'formation')
             <div class="row">

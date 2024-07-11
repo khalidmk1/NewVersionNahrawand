@@ -32,13 +32,17 @@ class ContentQuery extends GlobaleService {
     public function allContent()
     {
         $contentType = ['conference', 'podcast', 'formation'];
-        $contents = Content::whereIn('contentType', $contentType)->orderBy('created_at', 'desc')->paginate(9);
+        $contents = Content::orderBy('created_at', 'asc')
+        ->whereIn('contentType', $contentType)
+        ->paginate(9);
         return $contents;
     }
 
     public function allContentQuickly()
     {
-        $contentQuickly = Content::where('contentType', 'quickly')->orderBy('created_at', 'desc')->paginate(9);
+        $contentQuickly = Content::where('contentType', 'quickly')
+        ->orderBy('created_at', 'desc')
+        ->paginate(9);
         return $contentQuickly;
     }
 
@@ -57,12 +61,10 @@ class ContentQuery extends GlobaleService {
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
         
-        /*  $objectives = array_map('intval', $request->objectivesId);  */
         $subCategories = array_map('intval', $request->subCategoryId ?? []);
 
         $contentImage = $this->storeConteImage($request);
         $contentImageFlex = $this->storeConteImageFlex($request);
-        $document = $this->storeConteDocument($request);
         $videoUrl = $this->extractYoutubeId($request->videoUrl);
 
         $program = $request->programId == 0 ? null : $request->programId;
@@ -81,7 +83,7 @@ class ContentQuery extends GlobaleService {
             'isActive' => $isActive,
             'isComing' => $isComing,
             'isCertify' => $isCertify,
-            'document' => $document,
+            'document' => $request->document,
             'condition' => $request->condition,
             'duration' => $request->duration
         ]);
@@ -93,15 +95,6 @@ class ContentQuery extends GlobaleService {
             $arrTags = array_map('trim', $tags);
             $content->syncTags($arrTags, 'content');
         }
-
-        
-
-      /*   foreach ($objectives as $key => $objective) {
-            $objectiveContent = ContentObjective::create([
-                'contentId' => $content->id,
-                'objectivelId' => $objective
-            ]);
-        } */
 
         foreach ($subCategories as $key => $subCategorie) {
             $subCategorieContent = ContentSubCategory::create([
@@ -127,7 +120,6 @@ class ContentQuery extends GlobaleService {
         $videoUrl = $this->extractYoutubeId($request->videoUrl);
         $flexImage = $this->updateConteImageFlex($request, $nameFlexImage);
         $contentImage = $this->updateConteImage($request, $nameImage);
-        /* $contentDocument = $this->updateConteDocument($request, $nameDocument); */
         $isComing = $request->isComing == 'on';
         $isActive = $request->isActive == 'on';
         $isCertify = $request->isCertify == 'on';
@@ -147,7 +139,7 @@ class ContentQuery extends GlobaleService {
             'isComing' => $isComing,
             'isCertify' => $isCertify,
             'isUpdated' => true,
-            /* 'document' => $contentDocument, */
+            'document' => $request->document, 
             'imageFlex' => $flexImage,
             'image' => $contentImage,
             'condition' => $request->condition,

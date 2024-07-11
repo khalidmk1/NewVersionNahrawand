@@ -81,6 +81,7 @@
 
 <!-- Include the necessary library/plugin for "tags input" functionality -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
 
 <script>
@@ -596,3 +597,90 @@
 </script>
 
 
+<script>
+    // pdf-viewer.js
+
+    $(document).ready(function() {
+        // URL of the PDF
+        const url = 'https://drive.google.com/file/d/1M47Rpkk-Qe7VdA66i3-tzKwJX7BUMJWh/view';
+
+        // Initialize the PDF.js library
+        let pdfDoc = null,
+            pageNum = 1,
+            pageIsRendering = false,
+            pageNumIsPending = null;
+
+        const scale = 1.5,
+            canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d');
+
+        $('#pdf-render').append(canvas);
+
+        // Render the page
+        const renderPage = num => {
+            pageIsRendering = true;
+
+            // Get the page
+            pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({
+                    scale
+                });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderCtx = {
+                    canvasContext: ctx,
+                    viewport
+                };
+
+                page.render(renderCtx).promise.then(() => {
+                    pageIsRendering = false;
+
+                    if (pageNumIsPending !== null) {
+                        renderPage(pageNumIsPending);
+                        pageNumIsPending = null;
+                    }
+                });
+
+                // Output current page
+                $('#page-num').text(num);
+            });
+        };
+
+        // Check for pages rendering
+        const queueRenderPage = num => {
+            if (pageIsRendering) {
+                pageNumIsPending = num;
+            } else {
+                renderPage(num);
+            }
+        };
+
+        // Show prev page
+        $('#prev-page').on('click', function() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        });
+
+        // Show next page
+        $('#next-page').on('click', function() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        });
+
+        // Get the document
+        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+
+            $('#page-count').text(pdfDoc.numPages);
+
+            renderPage(pageNum);
+        });
+    });
+</script>
