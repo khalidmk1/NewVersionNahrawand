@@ -386,7 +386,7 @@
                                     <li>
                                         <img src="{{ asset('storage/avatars/' . $user->avatar) }}" alt="User Image">
                                         <a class="users-list-name"
-                                            href="#">{{ $user->firstName . ' ' . $user->lastName }}</a>
+                                            href="{{ route('client.show', Crypt::encrypt($user->id)) }}">{{ $user->firstName . ' ' . $user->lastName }}</a>
                                         <span class="users-list-date">{{ $user->created_at->diffForHumans() }}</span>
                                     </li>
                                 @endforeach
