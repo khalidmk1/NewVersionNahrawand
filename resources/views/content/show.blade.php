@@ -184,17 +184,20 @@
                                     </p>
                                 </div>
                                 <!-- /.post -->
-
-                                <!-- Post -->
-                                <div class="post">
-                                    <div class="d-flex">
-                                        <i class="fab fa-google-drive" style="font-size: x-large" aria-hidden="true"></i>
-                                        <div class="ml-2"><strong>Document.</strong></div>
+                                @if ($content->document)
+                                    <!-- Post -->
+                                    <div class="post">
+                                        <div class="d-flex">
+                                            <i class="fab fa-google-drive" style="font-size: x-large"
+                                                aria-hidden="true"></i>
+                                            <div class="ml-2"><strong>Document.</strong></div>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <a target="blank"
+                                            href="{{ $content->document }}">{{ $content->document }}/view</a>
                                     </div>
-                                    <!-- /.user-block -->
-                                    <a target="blank" href="{{ $content->document }}">{{ $content->document }}/view</a>
-                                </div>
-                                <!-- /.post -->
+                                    <!-- /.post -->
+                                @endif
                             @endif
 
                             <!-- Post -->
