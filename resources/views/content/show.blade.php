@@ -84,14 +84,21 @@
                                             <div>{{ $content->title }}</div>
                                         </h1>
                                     </div>
-                                    <div class="col-md col-sm-4">
-                                        <h5 class="text-start badge badge-success">{{ $content->isActive ? 'Active' : '' }}
-                                        </h5>
-                                    </div>
-                                    <div class="col-md .col-sm-4">
-                                        <h5 class="text-start badge badge-warning ">
-                                            {{ $content->isComing ? 'A Venir' : '' }}</h5>
-                                    </div>
+                                    @if ($content->isActive)
+                                        <div class="col-md col-sm-4">
+                                            <h5 class="text-start badge badge-success">
+                                                {{ $content->isActive ? 'Active' : '' }}
+                                            </h5>
+                                        </div>
+                                    @endif
+
+                                    @if ($content->isComing)
+                                        <div class="col-md .col-sm-4">
+                                            <h5 class="text-start badge badge-warning ">
+                                                {{ $content->isComing ? 'A Venir' : '' }}</h5>
+                                        </div>
+                                    @endif
+
 
                                     {{--  <div class="col-md col-sm-4">
                                         <a target="blank"
