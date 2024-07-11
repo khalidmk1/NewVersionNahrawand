@@ -31,4 +31,17 @@
             </div>
         </div><!-- /.card-body -->
     </div><!-- /.card -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUrl = window.location.href;
+            const targetUrl = "http://127.0.0.1:8000/dashboard/content";
+    
+            // Check if the current URL is not the target URL (ignoring query parameters)
+            if (currentUrl.startsWith(targetUrl) && currentUrl !== targetUrl) {
+                window.location.href = targetUrl;
+            }
+        });
+    </script>
+    
 @endsection
