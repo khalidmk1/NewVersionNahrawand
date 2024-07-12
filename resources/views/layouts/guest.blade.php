@@ -10,7 +10,7 @@
     @include('components.style-links')
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page ">
     @include('components.erreur-handle')
     @yield('content')
 
