@@ -98,14 +98,6 @@
                                                 {{ $content->isComing ? 'A Venir' : '' }}</h5>
                                         </div>
                                     @endif
-
-
-                                    {{--  <div class="col-md col-sm-4">
-                                        <a target="blank"
-                                            href="https://drive.google.com/file/d/1M47Rpkk-Qe7VdA66i3-tzKwJX7BUMJWh/view">
-                                            <i class='fab fa-google-drive' style='font-size:30px'></i>
-                                        </a>
-                                    </div> --}}
                                 </div>
                                 <!-- /.user-block -->
 
