@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Sentry\Laravel\Integration;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -25,6 +30,8 @@ $app = new Illuminate\Foundation\Application(
 | incoming requests to this application from both the web and CLI.
 |
 */
+
+
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,

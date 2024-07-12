@@ -74,15 +74,10 @@
 <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 
-
-
-
-
-
 <!-- Include the necessary library/plugin for "tags input" functionality -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
+<script src="https://js-de.sentry-cdn.com/213bf7ea2cded0943567d1fdcf84def5.min.js" crossorigin="anonymous"></script>
 
 <script>
     $(function() {
