@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Main content -->
-    <section class="content h-0">
+    <section class="content" style="position: relative; top: 251px ; max-width: 338px;">
         <div class="error-page">
             <h2 class="headline text-danger">500</h2>
 

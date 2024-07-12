@@ -46,7 +46,7 @@
         <select class=" selectize" name="contentHost" style="width: 100%;">
             @foreach ($formateurUsers as $formateurUser)
                 <option value="{{ $formateurUser->id }}">
-                    {{ $formateurUser->firstName.' '.$formateurUser->lastName }}</option>
+                    {{ $formateurUser->firstName . ' ' . $formateurUser->lastName }}</option>
             @endforeach
 
         </select>
@@ -70,7 +70,7 @@
 
     <div class="form-group">
         <label for="DocumentFomation">Document</label>
-        <input type="url" value="{{ old('document') }}" class="form-control" name="document"
-            id="DocumentFomation" placeholder="Entrez url document ...">
+        <input type="url" value="{{ old('document') }}" class="form-control" name="document" id="DocumentFomation"
+            placeholder="Entrez url document ...">
     </div>
 </section>

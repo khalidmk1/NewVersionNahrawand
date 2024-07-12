@@ -78,14 +78,6 @@
                         </div>
                         <div class="col-6">
 
-                            {{-- <div class="form-group">
-                                <label for="objective_option">Objectives</label>
-                                <select class="select3" name="objectivesId[]" multiple="multiple" id="objective_option"
-                                    data-placeholder="Select a State" style="width: 100%;">
-
-                                </select>
-                            </div> --}}
-
                             <div class="form-group">
                                 <label for="subCategory">SubCategories</label>
                                 <select class="select3 text-dark" name="subCategoryId[]" multiple="multiple"
