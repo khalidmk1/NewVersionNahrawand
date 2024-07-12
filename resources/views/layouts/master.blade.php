@@ -29,7 +29,6 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @include('components.header-page')
-dd
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
