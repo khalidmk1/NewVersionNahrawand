@@ -146,7 +146,9 @@
             </div>
         @endif
 
+
         @if ($content->contentType == 'formation' || $content->contentType == 'quickly')
+
             <div class="form-group">
                 <label>Formateur</label>
                 <select class="form-control select2" name="contentHost" style="width: 100%;">
@@ -159,8 +161,9 @@
                 </select>
             </div>
 
+        @endif
 
-
+        @if ($content->contentType == 'formation')
 
             <div class="form-group">
                 <label>Program</label>
@@ -224,8 +227,8 @@
         @if ($content->contentType == 'formation')
             <div class="form-group">
                 <label for="DocumentFomation">Document</label>
-                <input type="url" value="{{ old('document' , $content->document) }}" class="form-control" name="document"
-                    id="DocumentFomation" placeholder="Entrez url document ...">
+                <input type="url" value="{{ old('document', $content->document) }}" class="form-control"
+                    name="document" id="DocumentFomation" placeholder="Entrez url document ...">
             </div>
         @endif
 

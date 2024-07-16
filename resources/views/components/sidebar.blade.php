@@ -204,7 +204,15 @@
                         </p>
                     </a>
                 </li>
-               
+                <li class="nav-item">
+                    <a href="{{ route('map.create') }}" class="nav-link">
+                        <i class="nav-icon  fa fa-calendar" aria-hidden="true"></i>
+                        <p>
+                            Map
+                        </p>
+                    </a>
+                </li>
+
 
                 @can('viewMangeTicket')
                     <li class="nav-header">Ticket Management</li>

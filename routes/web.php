@@ -19,7 +19,8 @@ use App\Http\Controllers\{
     GuestProfileController,
     RolePermissionController,
     QuizController,
-    NotificationController
+    NotificationController,
+    MapController
 };
 
 /*
@@ -68,6 +69,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
     // Delete Operation
     Route::delete('delete/video/{id}', [GlobaleController::class, 'deletevideo'])->name('delete.video');
     Route::delete('delete/quiz/{id}', [QuizController::class, 'delete'])->name('quiz.delete');
+    Route::delete('delete/image/{id}', [MapController::class, 'delete'])->name('image.delete');
 
     // Ticket Comment
     Route::post('ticket/comment/{id}', [GlobaleController::class, 'createComment'])->name('ticket.comment.create');
@@ -93,6 +95,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
         'ticket' => TicketController::class,
         'quiz' => QuizController::class,
         'notification' => NotificationController::class,
+        'map' => MapController::class
     ]);
 
     // Custom Role-Permission Store

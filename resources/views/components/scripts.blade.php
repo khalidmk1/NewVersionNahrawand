@@ -74,10 +74,11 @@
 <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 
-<!-- Include the necessary library/plugin for "tags input" functionality -->
+<!-- Include the necessary library/plugin functionality -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 <script src="https://js-de.sentry-cdn.com/213bf7ea2cded0943567d1fdcf84def5.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 
 <script>
     $(function() {
@@ -110,6 +111,22 @@
             }
         });
 
+
+        //Date picker
+        $('#reservationdate').datetimepicker({
+            format: 'L'
+        });
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            }
+        })
+
     })
 
     //Add text editor
@@ -118,6 +135,8 @@
 
 
     $(document).ready(function() {
+
+
 
         //search live for goals
 
@@ -591,91 +610,261 @@
     });
 </script>
 
-
+{{-- images script --}}
 <script>
-    // pdf-viewer.js
-
     $(document).ready(function() {
-        // URL of the PDF
-        const url = 'https://drive.google.com/file/d/1M47Rpkk-Qe7VdA66i3-tzKwJX7BUMJWh/view';
+        $('#imagesInputFile').on('change', function(event) {
+            const fileInput = event.target;
+            const imageContainer = $('#imagesNormale-container');
+            imageContainer.empty();
 
-        // Initialize the PDF.js library
-        let pdfDoc = null,
-            pageNum = 1,
-            pageIsRendering = false,
-            pageNumIsPending = null;
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
 
-        const scale = 1.5,
-            canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d');
+                reader.onload = function(e) {
+                    const imageWrapper = $('<div>').addClass('image-wrapper-images');
 
-        $('#pdf-render').append(canvas);
+                    const img = $('<img>').attr('src', e.target.result);
+                    imageWrapper.append(img);
 
-        // Render the page
-        const renderPage = num => {
-            pageIsRendering = true;
+                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
+                    trashIcon.on('click', function() {
+                        imageWrapper.remove();
+                        updateFileInput(file);
+                    });
+                    imageWrapper.append(trashIcon);
 
-            // Get the page
-            pdfDoc.getPage(num).then(page => {
-                const viewport = page.getViewport({
-                    scale
-                });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderCtx = {
-                    canvasContext: ctx,
-                    viewport
+                    imageContainer.append(imageWrapper);
                 };
 
-                page.render(renderCtx).promise.then(() => {
-                    pageIsRendering = false;
+                reader.readAsDataURL(file);
+            });
 
-                    if (pageNumIsPending !== null) {
-                        renderPage(pageNumIsPending);
-                        pageNumIsPending = null;
+            function updateFileInput(fileToRemove) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(fileInput.files).forEach(file => {
+                    if (file !== fileToRemove) {
+                        dataTransfer.items.add(file);
                     }
                 });
 
-                // Output current page
-                $('#page-num').text(num);
+                fileInput.files = dataTransfer.files;
+            }
+        });
+    });
+</script>
+
+
+
+{{-- plate scripte --}}
+<script>
+    $(document).ready(function() {
+        $('#imagesPlateInputFile').on('change', function(event) {
+            const fileInput = event.target;
+            const imageContainer = $('#image-container');
+            imageContainer.empty();
+
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imageWrapper = $('<div>').addClass('image-wrapper');
+
+                    const img = $('<img>').attr('src', e.target.result);
+                    imageWrapper.append(img);
+
+                    const textInput = $('<input>').attr({
+                        type: 'text',
+                        class: 'form-control',
+                        name: 'textPlate[]',
+                        placeholder: 'Enter description'
+                    });
+                    imageWrapper.append(textInput);
+
+                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
+                    trashIcon.on('click', function() {
+                        imageWrapper.remove();
+                        updateFileInput(file);
+                    });
+                    imageWrapper.append(trashIcon);
+
+                    imageContainer.append(imageWrapper);
+                };
+
+                reader.readAsDataURL(file);
             });
-        };
 
-        // Check for pages rendering
-        const queueRenderPage = num => {
-            if (pageIsRendering) {
-                pageNumIsPending = num;
-            } else {
-                renderPage(num);
-            }
-        };
+            function updateFileInput(fileToRemove) {
+                const dataTransfer = new DataTransfer();
 
-        // Show prev page
-        $('#prev-page').on('click', function() {
-            if (pageNum <= 1) {
-                return;
+                Array.from(fileInput.files).forEach(file => {
+                    if (file !== fileToRemove) {
+                        dataTransfer.items.add(file);
+                    }
+                });
+
+                fileInput.files = dataTransfer.files;
             }
-            pageNum--;
-            queueRenderPage(pageNum);
+        });
+    });
+</script>
+
+{{-- clothes scripte --}}
+<script>
+    $(document).ready(function() {
+        $('#imagesclotheInputFile').on('change', function(event) {
+            const fileInput = event.target;
+            const imageContainer = $('#image-container-clothes');
+            imageContainer.empty();
+
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imageWrapper = $('<div>').addClass('image-wrapper');
+
+                    const img = $('<img>').attr('src', e.target.result);
+                    imageWrapper.append(img);
+
+                    const textInput = $('<input>').attr({
+                        type: 'text',
+                        class: 'form-control',
+                        name: 'textClothes[]',
+                        placeholder: 'Enter text'
+                    });
+                    imageWrapper.append(textInput);
+
+                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
+                    trashIcon.on('click', function() {
+                        imageWrapper.remove();
+                        updateFileInput(file);
+                    });
+                    imageWrapper.append(trashIcon);
+
+                    imageContainer.append(imageWrapper);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            function updateFileInput(fileToRemove) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(fileInput.files).forEach(file => {
+                    if (file !== fileToRemove) {
+                        dataTransfer.items.add(file);
+                    }
+                });
+
+                fileInput.files = dataTransfer.files;
+            }
+        });
+    });
+</script>
+
+<script>
+    // slider 
+    var screenWidth = window.innerWidth;
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: screenWidth < 576 ? 1 : (screenWidth <= 768 ? 2 : 2),
+        spaceBetween: 30,
+        slidesPerGroup: 2,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+{{-- fetch lang and att of country --}}
+
+<script>
+    const populateCountries = (countries) => {
+        const countrySelect = $('#countrySelect');
+        countrySelect.empty();
+
+        // Add an initial default option
+        countrySelect.append($('<option>', {
+            value: 'select',
+            text: 'Select a country...'
+        }));
+
+        // Add options based on fetched data
+        countries.forEach(country => {
+            const value = `${country.lng},${country.lat}`;
+            countrySelect.append($('<option>', {
+                value: value,
+                text: country.name
+            }));
         });
 
-        // Show next page
-        $('#next-page').on('click', function() {
-            if (pageNum >= pdfDoc.numPages) {
-                return;
-            }
-            pageNum++;
-            queueRenderPage(pageNum);
+        // Initialize Select2 after populating options
+        countrySelect.select2({
+            theme: 'bootstrap4', // Adjust theme if needed
+            width: '100%'
         });
+    };
 
-        // Get the document
-        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-            pdfDoc = pdfDoc_;
+    const fetchCountries = () => {
+        $.ajax({
+            url: 'http://api.geonames.org/searchJSON',
+            method: 'GET',
+            data: {
+                country: 'MA',
+                featureClass: 'P',
+                maxRows: 1000,
+                username: 'hassan'
+            },
+            success: function(response) {
+                populateCountries(response.geonames);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching data:', error);
+                $('#countrySelect').empty().append($('<option>', {
+                    value: '',
+                    text: 'Failed to load countries'
+                }));
+            }
+        });
+    };
 
-            $('#page-count').text(pdfDoc.numPages);
+    $(document).ready(function() {
+        fetchCountries();
+    });
+</script>
+<script>
+    // delete image map
+    $(document).ready(function() {
+        $('.delete-image-form').on('click', function(e) {
+            e.preventDefault();
 
-            renderPage(pageNum);
+            var icon = $(this);
+            var imageId = icon.data('id');
+            var url = '{{ route("image.delete", ":id") }}'.replace(':id', imageId);
+
+            $.ajax({
+                url: url,
+                method: 'DELETE', 
+                data: {
+                    _token: '{{ csrf_token() }}' 
+                },
+                success: function(result) {
+                    console.log("Image deleted successfully:", result);
+                    icon.closest('.image-wrapper-images')
+                    icon.closest('.image-wrapper')
+                .remove(); // Remove the image container
+                },
+                error: function(request, msg, error) {
+                    console.error("Error deleting image:", error);
+                }
+            });
         });
     });
 </script>

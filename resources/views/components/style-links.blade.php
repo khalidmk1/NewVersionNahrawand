@@ -1,5 +1,7 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.default.css">
 
@@ -35,13 +37,87 @@
 
 
 
+
 <style>
-    .select2-container--default .select2-selection--multiple 
-    .select2-selection__rendered li:first-child.select2-search.select2-search--inline .select2-search__field {
+    /* slider */
+    .swiper {
+        width: 100%;
+    }
+
+    .card-event {
+        background: #fff;
+        border-radius: 20px;
+        margin: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .slider-image {
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        position: relative !important;
+        width: 272px;
+        margin-right: 30px;
+        height: 275px !important;
+    }
+
+    .text-slider {
+        background: #0006;
+        text-align: center;
+        padding: 5px;
+        border-bottom-left-radius: 19px;
+        bottom: -241px;
+        position: relative;
+        border-bottom-right-radius: 19px;
+    }
+
+    .image-wrapper {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .image-wrapper-images {
+        position: relative;
+        margin-left: 6px;
+    }
+
+    .image-wrapper-images img {
+        max-width: 100%;
+        max-height: 100px;
+        margin-right: 10px;
+    }
+
+    .image-wrapper img {
+        max-width: 70px;
+        max-height: 100px;
+        margin-right: 10px;
+    }
+
+    .image-wrapper input[type="text"] {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .image-wrapper .trash-icon {
+        cursor: pointer;
+        color: red;
+    }
+
+    .image-wrapper-images .trash-icon {
+        position: absolute;
+        cursor: pointer;
+        color: red;
+        right: 0px;
+        top: -10px;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__rendered li:first-child.select2-search.select2-search--inline .select2-search__field {
         color: black !important;
     }
 
-    .dark-mode .select2-container .select2-search--inline .select2-search__field{
+    .dark-mode .select2-container .select2-search--inline .select2-search__field {
         color: black !important;
     }
 
