@@ -812,31 +812,35 @@
         });
     };
 
-    const fetchCountries = () => {
+
+
+
+    const fetchCitiesCoordinates = () => {
+        const apiKey = 'bb112ca6-4386-11ef-968a-0242ac130004-bb112d3c-4386-11ef-968a-0242ac130004';
+        const countryCode = 'MA';
+
+        const endpoint = `https://api.openweathermap.org/data/2.5/find?q=${countryCode}`;
+
         $.ajax({
-            url: 'http://api.geonames.org/searchJSON?country=MA&featureClass=P&maxRows=1000&username=hassan',
+            url: endpoint,
             method: 'GET',
-            data: {
-                country: 'MA',
-                featureClass: 'P',
-                maxRows: 1000,
-                username: 'hassan'
+            headers: {
+                'Authorization': apiKey
             },
             success: function(response) {
-                populateCountries(response.geonames);
+                console.log(response);
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching data:', error);
-                $('#countrySelect').empty().append($('<option>', {
-                    value: '',
-                    text: 'Failed to load countries'
-                }));
             }
         });
     };
 
+
+
+
     $(document).ready(function() {
-        fetchCountries();
+        fetchCitiesCoordinates();
     });
 </script>
 <script>
@@ -847,19 +851,19 @@
 
             var icon = $(this);
             var imageId = icon.data('id');
-            var url = '{{ route("image.delete", ":id") }}'.replace(':id', imageId);
+            var url = '{{ route('image.delete', ':id') }}'.replace(':id', imageId);
 
             $.ajax({
                 url: url,
-                method: 'DELETE', 
+                method: 'DELETE',
                 data: {
-                    _token: '{{ csrf_token() }}' 
+                    _token: '{{ csrf_token() }}'
                 },
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
                     icon.closest('.image-wrapper-images')
                     icon.closest('.image-wrapper')
-                .remove(); // Remove the image container
+                        .remove(); // Remove the image container
                 },
                 error: function(request, msg, error) {
                     console.error("Error deleting image:", error);
