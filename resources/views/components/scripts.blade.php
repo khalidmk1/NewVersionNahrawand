@@ -783,66 +783,7 @@
         },
     });
 </script>
-{{-- fetch lang and att of country --}}
 
-<script>
-    const populateCountries = (countries) => {
-        const countrySelect = $('#countrySelect');
-        countrySelect.empty();
-
-        // Add an initial default option
-        countrySelect.append($('<option>', {
-            value: 'select',
-            text: 'Select a country...'
-        }));
-
-        // Add options based on fetched data
-        countries.forEach(country => {
-            const value = `${country.lng},${country.lat}`;
-            countrySelect.append($('<option>', {
-                value: value,
-                text: country.name
-            }));
-        });
-
-        // Initialize Select2 after populating options
-        countrySelect.select2({
-            theme: 'bootstrap4', // Adjust theme if needed
-            width: '100%'
-        });
-    };
-
-
-
-
-    const fetchCitiesCoordinates = () => {
-        const apiKey = 'bb112ca6-4386-11ef-968a-0242ac130004-bb112d3c-4386-11ef-968a-0242ac130004';
-        const countryCode = 'MA';
-
-        const endpoint = `https://api.openweathermap.org/data/2.5/find?q=${countryCode}`;
-
-        $.ajax({
-            url: endpoint,
-            method: 'GET',
-            headers: {
-                'Authorization': apiKey
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    };
-
-
-
-
-    $(document).ready(function() {
-        fetchCitiesCoordinates();
-    });
-</script>
 <script>
     // delete image map
     $(document).ready(function() {
@@ -851,19 +792,19 @@
 
             var icon = $(this);
             var imageId = icon.data('id');
-            var url = '{{ route('image.delete', ':id') }}'.replace(':id', imageId);
+            var url = '{{ route("image.delete", ":id") }}'.replace(':id', imageId);
 
             $.ajax({
                 url: url,
-                method: 'DELETE',
+                method: 'DELETE', 
                 data: {
-                    _token: '{{ csrf_token() }}'
+                    _token: '{{ csrf_token() }}' 
                 },
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
-                    icon.closest('.image-wrapper-images')
+                    
                     icon.closest('.image-wrapper')
-                        .remove(); // Remove the image container
+                .remove(); // Remove the image container
                 },
                 error: function(request, msg, error) {
                     console.error("Error deleting image:", error);

@@ -9,11 +9,14 @@ class MapsService extends MapsQuery implements MapsInterface {
 
     public function index(){
         $maps = $this->paginateMap();
+       
         return view('maps.index')->with('maps' , $maps);
     }
 
     public function create(){
-        return view('maps.create');
+        $cities = $this->allCities();
+       
+        return view('maps.create')->with('cities' , $cities);
     }
 
     public function store($request){

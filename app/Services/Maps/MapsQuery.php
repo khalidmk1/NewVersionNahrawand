@@ -3,6 +3,7 @@
 namespace App\Services\Maps;
 
 use App\Models\Maps;
+use App\Models\MapCities;
 use App\Models\MapImages;
 use Illuminate\Http\Request;
 use App\Services\GlobaleService;
@@ -20,6 +21,11 @@ class MapsQuery extends GlobaleService {
     public function paginateMap(){
         $maps = Maps::paginate(9);
         return $maps;
+    }
+
+    public function allCities(){
+        $cities = MapCities::all();
+        return $cities;
     }
 
     public function storeMaps(MapRequest $request){

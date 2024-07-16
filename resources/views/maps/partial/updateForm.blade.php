@@ -6,7 +6,7 @@
         <div class="mapouter">
             <div class="gmap_canvas">
                 <iframe width="100%" height="560" id="gmap_canvas"
-                    src="https://maps.google.com/maps?q={{ $map->att }},{{ $map->lang }}&t=k&z=13&ie=UTF8&iwloc=&output=embed"
+                    src="https://maps.google.com/maps?q={{$map->att }},{{ $map->lang }}&t=k&z=13&ie=UTF8&iwloc=&output=embed"
                     frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                 <a href="https://online.stopwatch-timer.net/pomodoro-timer">tomato timer</a><br>
                 <a href="https://textcaseconvert.com"></a><br>
@@ -32,10 +32,6 @@
     </div>
 
 
-
-
-
-
     <!-- /.form-group -->
     <div class="form-group">
         <label>Title</label>
@@ -44,7 +40,7 @@
     </div>
 
     <div class="form-group">
-        <label>Country</label>
+        <label>Country {{$map->att . ' '. $map->lang}}</label>
         <select id="countrySelect" name="country" class="form-control select2bs4" style="width: 100%;">
             <option value="" selected="selected">Loading countries...</option>
         </select>

@@ -25,22 +25,26 @@
                 @csrf
                 <div class="card-body">
 
-                     <!-- /.form-group -->
-                     <div class="form-group">
+                    <!-- /.form-group -->
+                    <div class="form-group">
                         <label>Title</label>
-                        <input type="text" value="{{old('title')}}" name="title" class="form-control" placeholder="Enter ...">
+                        <input type="text" value="{{ old('title') }}" name="title" class="form-control"
+                            placeholder="Enter ...">
                     </div>
 
                     <div class="form-group">
-                        <label>Country</label>
-                        <select id="countrySelect" name="country" class="form-control select2bs4" style="width: 100%;">
-                            <option selected="selected">Loading countries...</option>
+                        <label>City</label>
+                        <select class="form-control select2" name="country" style="width: 100%;">
+                            @foreach ($cities as $city)
+                                <option value="{{ $city->lng . ',' . $city->lat }}">{{ $city->city }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>Slogan</label>
-                        <input type="text" value="{{old('slogan')}}" name="slogan" class="form-control" placeholder="Enter ...">
+                        <input type="text" value="{{ old('slogan') }}" name="slogan" class="form-control"
+                            placeholder="Enter ...">
                     </div>
 
                     <div class="form-group">
@@ -77,8 +81,8 @@
                     <div class="form-group">
                         <label> Date of Establishment</label>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" value="{{old('dateEstablishe')}}" name="dateEstablishe" class="form-control datetimepicker-input"
-                                data-target="#reservationdate" />
+                            <input type="text" value="{{ old('dateEstablishe') }}" name="dateEstablishe"
+                                class="form-control datetimepicker-input" data-target="#reservationdate" />
                             <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -89,13 +93,14 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <label>founder</label>
-                        <input type="text" value="{{old('founder')}}" name="founder" class="form-control" placeholder="Enter ...">
+                        <input type="text" value="{{ old('founder') }}" name="founder" class="form-control"
+                            placeholder="Enter ...">
                     </div>
 
                     <div class="form-group">
                         <label>Textarea</label>
                         <textarea class="form-control" rows="3" name="description" placeholder="Enter ..."></textarea>
-                      </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="imagesPlateInputFile">Main dishes</label>
@@ -143,6 +148,4 @@
 
     </div>
     @include('components.jQuery')
-
-    
 @endsection
