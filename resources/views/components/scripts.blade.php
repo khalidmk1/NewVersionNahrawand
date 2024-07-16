@@ -814,7 +814,7 @@
 
     const fetchCountries = () => {
         $.ajax({
-            url: 'http://api.geonames.org/searchJSON',
+            url: 'http://api.geonames.org/searchJSON?country=MA&featureClass=P&maxRows=1000&username=hassan',
             method: 'GET',
             data: {
                 country: 'MA',
