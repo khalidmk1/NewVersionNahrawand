@@ -29,7 +29,7 @@
                                     <!-- checkbox -->
                                     <div class="form-group clearfix m-0">
                                         <div class="icheck-primary d-inline">
-                                            <input type="checkbox" class="submitNote" id="submitNote" {{ $answer->confirmed == 1 ? 'checked' : '' }} data-id="{{$answer->id}}" name="noteAnswer">
+                                            <input type="checkbox" class="submitNote" id="submitNote_{{$answer->id}}" {{ $answer->confirmed == 1 ? 'checked' : '' }} data-id="{{$answer->id}}" name="noteAnswer">
                                           <label for="submitNote">
                                           </label>
                                         </div>
