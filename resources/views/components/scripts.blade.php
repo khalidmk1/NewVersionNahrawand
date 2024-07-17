@@ -481,7 +481,7 @@
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-        /*  setInterval(fetchNotifications, 10000); */
+         setInterval(fetchNotifications, 10000);
     });
 
     // report 
@@ -803,9 +803,9 @@
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
                     icon.closest('.image-wrapper-images')
-                    .remove();
+                        .remove();
                     icon.closest('.image-wrapper')
-                        .remove(); 
+                        .remove();
                 },
                 error: function(request, msg, error) {
                     console.error("Error deleting image:", error);
