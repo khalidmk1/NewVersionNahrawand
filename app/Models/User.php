@@ -110,7 +110,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function contentViews(): HasMany
     {
-        return $this->hasMany(ContentView::class, 'userId')->whereNull('deleted_at');;
+        return $this->hasMany(ContentView::class, 'userId')
+        ->whereHas('content', function ($query) {
+            $query->whereNull('deleted_at');
+        });
     }
 
     /**
