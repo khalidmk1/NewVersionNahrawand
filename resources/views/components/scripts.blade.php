@@ -481,7 +481,7 @@
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-         setInterval(fetchNotifications, 10000);
+         setInterval(fetchNotifications, 5000);
     });
 
     // report 
