@@ -2,11 +2,15 @@
 <form action="{{ route('map.update', Crypt::encrypt($map->id)) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
+
+
+
+
     <div class="form-group col-12">
         <div class="mapouter">
             <div class="gmap_canvas">
                 <iframe width="100%" height="560" id="gmap_canvas"
-                    src="https://maps.google.com/maps?q={{$map->att }},{{ $map->lang }}&t=k&z=13&ie=UTF8&iwloc=&output=embed"
+                    src="https://maps.google.com/maps?q={{ $map->att }},{{ $map->lang }}&t=k&z=13&ie=UTF8&iwloc=&output=embed"
                     frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                 <a href="https://online.stopwatch-timer.net/pomodoro-timer">tomato timer</a><br>
                 <a href="https://textcaseconvert.com"></a><br>
@@ -40,11 +44,18 @@
     </div>
 
     <div class="form-group">
-        <label>Country {{$map->att . ' '. $map->lang}}</label>
-        <select id="countrySelect" name="country" class="form-control select2bs4" style="width: 100%;">
-            <option value="" selected="selected">Loading countries...</option>
+        <label>City</label>
+        <select class="form-control select2" name="country" style="width: 100%;">
+            @foreach ($cities as $city)
+                <option value="{{ $city->lng . ',' . $city->lat }}"
+                    {{ $map->att == $city->lat && $map->lang == $city->lng ? 'selected=selected' : '' }}>
+                    {{ $city->city }}
+                </option>
+            @endforeach
         </select>
     </div>
+
+
     <!-- /.form-group -->
     <div class="form-group">
         <label>Slogan</label>
@@ -123,8 +134,7 @@
         <label for="imagesPlateInputFile">Main dishes</label>
         <div class="input-group">
             <div class="custom-file">
-                <input type="file" name="plateImages[]" class="custom-file-input" id="imagesPlateInputFile"
-                    multiple>
+                <input type="file" name="plateImages[]" class="custom-file-input" id="imagesPlateInputFile" multiple>
                 <label class="custom-file-label" for="imagesPlateInputFile">Choose file</label>
             </div>
             <div class="input-group-append">
@@ -181,10 +191,6 @@
         <div id="image-container-clothes" class="mt-3"></div>
     </div>
 
-
-
-
     <button type="submit" class="btn btn-block btn-info w-25 mb-3 ml-3 form-update"
         style="float: right">Update</button>
-
 </form>

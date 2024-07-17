@@ -215,6 +215,29 @@ class MapsQuery extends GlobaleService {
 
     //map api 
     public function indexApi(){
+        $maps = Maps::with('images')->get();
 
+        $mapFiltred =  $maps->map(function ($map) {
+            $imageFilterd = $map->images->map(function ($image){
+                return [
+                    'type' => $image->type,
+                    'image' => $image->image,
+                    'description' => $image->description,
+                ];
+            });
+            return [
+                'name' => $map->title,
+                'latitude' => $map->att,
+                'longitude' => $map->lang,
+                'description' => $map->description,
+                'image' => $map->image,
+                'date' => $map->date,
+                'founder' => $map->founder,
+                'slogan' => $map->slogan,
+                'images' =>$imageFilterd
+            ];
+        });
+
+        return $mapFiltred;
     }
 }

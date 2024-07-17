@@ -13,7 +13,8 @@ use App\Http\Controllers\Api\{
     TicketController,
     VideoController,
     ObjectiveController,
-    NotificationController
+    NotificationController,
+    MapController
 };
 use App\Http\Controllers\Auth\{
     AuthenticatedSessionController,
@@ -83,7 +84,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quiz.store.api');
 });
 
+
+
 // Public Routes
+
+//content
 Route::prefix('content')->group(function () {
     Route::get('/', [ContentController::class, 'allApiContent'])->name('content');
     Route::get('coming', [ContentController::class, 'comingSoonContent'])->name('content.coming');
@@ -96,6 +101,7 @@ Route::prefix('content')->group(function () {
     Route::get('qsm/question/{contentId}', [QuizController::class, 'qsmIndexContentQuestion'])->name('content.qsm.question');
 });
 
+
 Route::get('video/{video}', [VideoController::class, 'showVideo'])->name('video.index.api');
 Route::get('event', [EventController::class, 'eventIndex'])->name('event.index.api');
 Route::get('program', [ProgramController::class, 'allProgramApi'])->name('program.api');
@@ -104,6 +110,7 @@ Route::get('speakers', [ProfileController::class, 'speakersAll'])->name('user.sp
 Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index.api');
 Route::get('all/subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subCategory.all');
 Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategory.domain');
+Route::get('map', [MapController::class, 'index'])->name('map.index');
 
 // Authentication
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');

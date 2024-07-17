@@ -9,13 +9,11 @@ class MapsService extends MapsQuery implements MapsInterface {
 
     public function index(){
         $maps = $this->paginateMap();
-       
         return view('maps.index')->with('maps' , $maps);
     }
 
     public function create(){
         $cities = $this->allCities();
-       
         return view('maps.create')->with('cities' , $cities);
     }
 
@@ -25,7 +23,8 @@ class MapsService extends MapsQuery implements MapsInterface {
 
     public function show($id){
         $map = $this->showMap($id);
-        return view('maps.show')->with('map' , $map);
+        $cities = $this->allCities();
+        return view('maps.show')->with(['map' => $map , 'cities' => $cities]);
     }
 
     public function update($request , $id){
@@ -40,5 +39,12 @@ class MapsService extends MapsQuery implements MapsInterface {
 
     public function delete($id){
         return $this->deleteMap($id);
+    }
+
+    //api map
+
+    public function mapAll(){
+        $maps = $this->indexApi();
+        return response()->json($maps); 
     }
 }

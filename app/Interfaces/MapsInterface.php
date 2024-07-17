@@ -11,4 +11,6 @@ interface MapsInterface {
     public function update($request , $id);
     public function destroy($request , $id);
     public function delete($id);
+    //api map
+    public function mapAll();
 }
