@@ -792,19 +792,19 @@
 
             var icon = $(this);
             var imageId = icon.data('id');
-            var url = '{{ route("image.delete", ":id") }}'.replace(':id', imageId);
-
+            var url = '{{ route('image.delete', ':id') }}'.replace(':id', imageId);
+            url = url.replace('http://', 'https://');
             $.ajax({
                 url: url,
-                method: 'DELETE', 
+                method: 'DELETE',
                 data: {
-                    _token: '{{ csrf_token() }}' 
+                    _token: '{{ csrf_token() }}'
                 },
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
-                    
+
                     icon.closest('.image-wrapper')
-                .remove(); // Remove the image container
+                        .remove(); // Remove the image container
                 },
                 error: function(request, msg, error) {
                     console.error("Error deleting image:", error);
