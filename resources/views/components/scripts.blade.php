@@ -802,9 +802,10 @@
                 },
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
-
+                    icon.closest('.image-wrapper-images')
+                    .remove();
                     icon.closest('.image-wrapper')
-                        .remove(); // Remove the image container
+                        .remove(); 
                 },
                 error: function(request, msg, error) {
                     console.error("Error deleting image:", error);
