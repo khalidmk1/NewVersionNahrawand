@@ -14,6 +14,8 @@
 
 @section('content')
 
+  
+
     <x-delete-modal :modelDeleteId="'content_' . $content->id" :modelTitle="'Delete content'" :modelRouteDelete="route('content.destroy', Crypt::encrypt($content->id))" />
     <div class="row">
         <div class="col-md-3">
@@ -23,8 +25,8 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                            src="{{ asset('storage/avatars/' . $content->user->avatar) }}" style="height: 100px; width: 100px"
-                            alt="User profile picture">
+                            src="{{ asset('storage/avatars/' . $content->user->avatar) }}"
+                            style="height: 100px; width: 100px" alt="User profile picture">
                     </div>
 
                     <h3 class="profile-username text-center">
@@ -425,4 +427,5 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+   
 @endsection

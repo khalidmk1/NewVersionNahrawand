@@ -103,7 +103,7 @@ Route::middleware(['auth', 'verified' ])->prefix('dashboard')->group(function ()
 });
 
 // Profile Management
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('/profile/store', [GuestProfileController::class, 'store'])->name('profile.store');
     Route::get('/profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');

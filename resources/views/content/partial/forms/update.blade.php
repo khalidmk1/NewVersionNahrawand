@@ -1,5 +1,5 @@
 <!-- /.card-header -->
-<form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" id="content-form" method="post" enctype="multipart/form-data">
     @method('patch')
     @csrf
 
@@ -270,3 +270,4 @@
         tagInputEle.tagsinput();
     });
 </script>
+
