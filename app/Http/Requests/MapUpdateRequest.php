@@ -27,13 +27,19 @@ class MapUpdateRequest extends FormRequest
             'slogan' => ['required' , 'string' , 'max:255'],
             'imagePrincipale' => ['sometimes', 'file', 'mimes:jpeg,png,jpg,gif' , 'max:2000'],
             'images' => ['nullable' , 'array'],
+            'imagesPlaces' => ['nullable' , 'array'],
             'dateEstablishe' => ['required' , 'string' , 'date'],
             'founder' => ['required' , 'string' , 'max:255'],
             'description' => ['required' , 'string' , 'max:300'],
             'plateImages' => ['nullable' , 'array'],
             'clotheImages' => ['nullable' , 'array'],
+            'textClothes' => ['array'],
+            'placeImages' => ['nullable' , 'array'],
             'textPlate' => ['nullable' , 'array'],
-            'textClothes' => ['array']
+            'titlePlace' => ['nullable' , 'array'],
+            'descriptionPlace' => ['nullable' , 'array'],
+            'adressePlace' => ['nullable' , 'array'],
+            'linkPlace' => ['nullable' , 'array'],
         ];
 
         return $rules;

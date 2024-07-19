@@ -191,6 +191,68 @@
                             </div>
                             <!-- /.post -->
 
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="d-flex">
+                                    <i class="fa fa-exclamation-circle" style="font-size: x-large" aria-hidden="true"></i>
+                                    <div class="ml-2"><strong>places .</strong></div>
+                                </div>
+                                <!-- /.user-block -->
+                                <section class="slid-containe container">
+                                    <div class="swiper mySwiper">
+                                        <div class="swiper-wrapper content">
+                                            @foreach ($map->images as $picture)
+                                                @if ($picture->type == 'place')
+                                                    <div class="swiper-slide card-event slider-image"
+                                                        style="background-image: url('{{ asset('storage/' . $picture->image) }}'); ">
+                                                        <a href="{{ $picture->link }}" class="color-white">
+                                                            <p class="text-slider ">{{ $picture->description }} -></p>
+                                                        </a>
+
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <!-- Add Navigation -->
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                        <!-- Add Pagination -->
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </section>
+
+                            </div>
+                            <!-- /.post -->
+
+                               <!-- Post -->
+                               <div class="post">
+                                <div class="d-flex">
+                                    <i class="fa fa-exclamation-circle" style="font-size: x-large" aria-hidden="true"></i>
+                                    <div class="ml-2"><strong>Places Images .</strong></div>
+                                </div>
+                                <!-- /.user-block -->
+                                <section class="slid-containe container">
+                                    <div class="swiper mySwiper">
+                                        <div class="swiper-wrapper content">
+                                            @foreach ($map->images as $picture)
+                                                @if ($picture->type == 'palceImage')
+                                                    <div class="swiper-slide card-event slider-image"
+                                                        style="background-image: url('{{ asset('storage/' . $picture->image) }}'); ">
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <!-- Add Navigation -->
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                        <!-- Add Pagination -->
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </section>
+
+                            </div>
+                            <!-- /.post -->
+
 
                         </div>
                         <!-- /.tab-pane -->
@@ -202,8 +264,7 @@
 
                         <div class="tab-pane" id="settings">
                             <div class="form-group">
-                                <button type="submit" data-toggle="modal"
-                                    data-target="#delete_map_{{ $map->id }}"
+                                <button type="submit" data-toggle="modal" data-target="#delete_map_{{ $map->id }}"
                                     class="btn btn-danger w-50">Delete</button>
                             </div>
 

@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('map_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mapId');
+            $table->text('title')->nullable();
             $table->text('type')->nullable();
             $table->longText('image')->nullable();
             $table->text('description')->nullable();
+            $table->text('adresse')->nullable();
+            $table->text('link')->nullable();
             $table->foreign('mapId')->references('id')->on('maps')->onDelete('cascade');
             $table->timestamps();
         });

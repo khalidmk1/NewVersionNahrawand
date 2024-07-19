@@ -133,6 +133,38 @@
                         <div id="image-container-clothes" class="mt-3"></div>
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="imagespalceInputFile">Places</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="placeImages[]" class="custom-file-input"
+                                    id="imagespalceInputFile" multiple>
+                                <label class="custom-file-label" for="imagespalceInputFile">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                        </div>
+                        <div id="image-container-places" class="mt-3"></div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="placesImagesInputFile">Images Place</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="imagesPlaces[]" class="custom-file-input"
+                                    id="placesImagesInputFile" multiple>
+                                <label class="custom-file-label" for="placesImagesInputFile">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                        </div>
+                        <div id="image-container-places-images" class="mt-3 d-flex"></div>
+                    </div>
+
                 </div>
 
 

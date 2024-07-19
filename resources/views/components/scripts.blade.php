@@ -610,158 +610,85 @@
     });
 </script>
 
-{{-- images script --}}
+{{-- Common Image Upload Script --}}
 <script>
     $(document).ready(function() {
+        function handleFileInputChange(event, imageContainerId, additionalElements = []) {
+            const fileInput = event.target;
+            const imageContainer = $(imageContainerId);
+            imageContainer.empty();
+
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const imageWrapper = $('<div>').addClass('image-wrapper');
+                    const img = $('<img>').attr('src', e.target.result);
+                    imageWrapper.append(img);
+
+                    additionalElements.forEach(element => {
+                        const input = $('<input>').attr(element);
+                        imageWrapper.append(input);
+                    });
+
+                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
+                    trashIcon.on('click', function() {
+                        imageWrapper.remove();
+                        updateFileInput(file);
+                    });
+                    imageWrapper.append(trashIcon);
+
+                    imageContainer.append(imageWrapper);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            function updateFileInput(fileToRemove) {
+                const dataTransfer = new DataTransfer();
+
+                Array.from(fileInput.files).forEach(file => {
+                    if (file !== fileToRemove) {
+                        dataTransfer.items.add(file);
+                    }
+                });
+
+                fileInput.files = dataTransfer.files;
+            }
+        }
+
         $('#imagesInputFile').on('change', function(event) {
-            const fileInput = event.target;
-            const imageContainer = $('#imagesNormale-container');
-            imageContainer.empty();
-
-            Array.from(fileInput.files).forEach(file => {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const imageWrapper = $('<div>').addClass('image-wrapper-images');
-
-                    const img = $('<img>').attr('src', e.target.result);
-                    imageWrapper.append(img);
-
-                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
-                    trashIcon.on('click', function() {
-                        imageWrapper.remove();
-                        updateFileInput(file);
-                    });
-                    imageWrapper.append(trashIcon);
-
-                    imageContainer.append(imageWrapper);
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-            function updateFileInput(fileToRemove) {
-                const dataTransfer = new DataTransfer();
-
-                Array.from(fileInput.files).forEach(file => {
-                    if (file !== fileToRemove) {
-                        dataTransfer.items.add(file);
-                    }
-                });
-
-                fileInput.files = dataTransfer.files;
-            }
+            handleFileInputChange(event, '#imagesNormale-container');
         });
-    });
-</script>
 
-
-
-{{-- plate scripte --}}
-<script>
-    $(document).ready(function() {
         $('#imagesPlateInputFile').on('change', function(event) {
-            const fileInput = event.target;
-            const imageContainer = $('#image-container');
-            imageContainer.empty();
-
-            Array.from(fileInput.files).forEach(file => {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const imageWrapper = $('<div>').addClass('image-wrapper');
-
-                    const img = $('<img>').attr('src', e.target.result);
-                    imageWrapper.append(img);
-
-                    const textInput = $('<input>').attr({
-                        type: 'text',
-                        class: 'form-control',
-                        name: 'textPlate[]',
-                        placeholder: 'Enter description'
-                    });
-                    imageWrapper.append(textInput);
-
-                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
-                    trashIcon.on('click', function() {
-                        imageWrapper.remove();
-                        updateFileInput(file);
-                    });
-                    imageWrapper.append(trashIcon);
-
-                    imageContainer.append(imageWrapper);
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-            function updateFileInput(fileToRemove) {
-                const dataTransfer = new DataTransfer();
-
-                Array.from(fileInput.files).forEach(file => {
-                    if (file !== fileToRemove) {
-                        dataTransfer.items.add(file);
-                    }
-                });
-
-                fileInput.files = dataTransfer.files;
-            }
+            handleFileInputChange(event, '#image-container', [
+                { type: 'text', class: 'form-control', name: 'textPlate[]', placeholder: 'Enter description' }
+            ]);
         });
-    });
-</script>
 
-{{-- clothes scripte --}}
-<script>
-    $(document).ready(function() {
         $('#imagesclotheInputFile').on('change', function(event) {
-            const fileInput = event.target;
-            const imageContainer = $('#image-container-clothes');
-            imageContainer.empty();
-
-            Array.from(fileInput.files).forEach(file => {
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    const imageWrapper = $('<div>').addClass('image-wrapper');
-
-                    const img = $('<img>').attr('src', e.target.result);
-                    imageWrapper.append(img);
-
-                    const textInput = $('<input>').attr({
-                        type: 'text',
-                        class: 'form-control',
-                        name: 'textClothes[]',
-                        placeholder: 'Enter text'
-                    });
-                    imageWrapper.append(textInput);
-
-                    const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
-                    trashIcon.on('click', function() {
-                        imageWrapper.remove();
-                        updateFileInput(file);
-                    });
-                    imageWrapper.append(trashIcon);
-
-                    imageContainer.append(imageWrapper);
-                };
-
-                reader.readAsDataURL(file);
-            });
-
-            function updateFileInput(fileToRemove) {
-                const dataTransfer = new DataTransfer();
-
-                Array.from(fileInput.files).forEach(file => {
-                    if (file !== fileToRemove) {
-                        dataTransfer.items.add(file);
-                    }
-                });
-
-                fileInput.files = dataTransfer.files;
-            }
+            handleFileInputChange(event, '#image-container-clothes', [
+                { type: 'text', class: 'form-control', name: 'textClothes[]', placeholder: 'Enter text' }
+            ]);
         });
+
+        $('#imagespalceInputFile').on('change', function(event) {
+            handleFileInputChange(event, '#image-container-places', [
+                { type: 'text', class: 'form-control ', name: 'titlePlace[]', placeholder: 'Enter title' },
+                { type: 'text', class: 'form-control ', name: 'descriptionPlace[]', placeholder: 'Enter description' },
+                { type: 'text', class: 'form-control ', name: 'adressePlace[]', placeholder: 'Enter adresse' },
+                { type: 'link', class: 'form-control mt-1', name: 'linkPlace[]', placeholder: 'Enter Link' } ,
+            ]);
+        });
+
+        $('#placesImagesInputFile').on('change', function(event) {
+            handleFileInputChange(event, '#image-container-places-images');
+        });
+
     });
 </script>
+
 
 <script>
     // slider 
@@ -793,7 +720,7 @@
             var icon = $(this);
             var imageId = icon.data('id');
             var url = '{{ route('image.delete', ':id') }}'.replace(':id', imageId);
-            url = url.replace('http://', 'https://');
+            /* url = url.replace('http://', 'https://'); */
             $.ajax({
                 url: url,
                 method: 'DELETE',

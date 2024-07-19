@@ -14,7 +14,10 @@ class MapImages extends Model
         'mapId',
         'type',
         'image',
-        'description'
+        'description',
+        'title',
+        'adresse',
+        'link'
     ];
 
     /**

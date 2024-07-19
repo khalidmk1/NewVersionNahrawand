@@ -18,6 +18,30 @@ use Illuminate\Support\Facades\Storage;
 
 class MapsQuery extends GlobaleService {
 
+    protected function handleFileUploads($request, $map, $fieldName, $type, $descriptions = [], $titles = [], $addresses = [], $links = [])
+    {
+        if ($request->hasFile($fieldName) && is_array($request->file($fieldName))) {
+            foreach ($request->file($fieldName) as $index => $file) {
+                $imagePath = $file->store($type, 'public');
+                $description = $descriptions[$index] ?? '';
+                $title = $titles[$index] ?? '';
+                $address = $addresses[$index] ?? '';
+                $link = $links[$index] ?? '';
+
+                MapImages::create([
+                    'mapId' => $map->id,
+                    'type' => $type,
+                    'image' => $imagePath,
+                    'description' => $description,
+                    'title' => $title,
+                    'adresse' => $address,
+                    'link' => $link
+                ]);
+            }
+        }
+    }
+
+
     public function paginateMap(){
         $maps = Maps::paginate(9);
         return $maps;
@@ -28,17 +52,14 @@ class MapsQuery extends GlobaleService {
         return $cities;
     }
 
-    public function storeMaps(MapRequest $request){
-        $country = $request->input('country'); 
-        
+    public function storeMaps(MapRequest $request)
+    {
         list($longitude, $latitude) = explode(',', $request->country);
-
-        $imagePath = null;
-
-        if ($request->hasFile('imagePrincipale')) {
-            $imagePath = $request->file('imagePrincipale')->store('map', 'public');
-        }
-
+    
+        $imagePath = $request->hasFile('imagePrincipale') ? 
+            $request->file('imagePrincipale')->store('map', 'public') : 
+            null;
+    
         $map = Maps::create([
             'att' => $latitude,
             'lang' => $longitude,
@@ -49,51 +70,16 @@ class MapsQuery extends GlobaleService {
             'founder' => $request->founder,
             'description' => $request->description
         ]);
+    
+        $this->handleFileUploads($request, $map, 'images', 'image');
+        $this->handleFileUploads($request, $map, 'plateImages', 'plate', $request->textPlate ?? []);
+        $this->handleFileUploads($request, $map, 'clotheImages', 'clothe', $request->textClothes ?? []);
+        $this->handleFileUploads($request, $map, 'placeImages', 'place', $request->descriptionPlace ?? [], $request->titlePlace ?? [], $request->adressePlace ?? [], $request->linkPlace ?? []);
+        $this->handleFileUploads($request, $map, 'imagesPlaces', 'palceImage');
 
-        if($request->hasFile('images') && is_array($request->file('images'))){
-            foreach ($request->file('images') as $index => $image) {
-                $imagePath = $image->store('images', 'public');
-                $images = MapImages::create([
-                    'mapId' => $map->id,
-                    'type' => 'image',
-                    'image' => $imagePath,
-                ]);
-            }
-        
-        }
+        return redirect()->back()->with('status', 'You have created a map');
+    }    
 
-        if ($request->hasFile('plateImages') && is_array($request->file('plateImages'))) {
-            foreach ($request->file('plateImages') as $index => $plate) {
-                $imagePath = $plate->store('plate', 'public');
-                $text = $request->textPlate[$index] ?? '';
-
-                $plateImages = MapImages::create([
-                    'mapId' => $map->id,
-                    'type' => 'plate',
-                    'image' => $imagePath,
-                    'description' => $text
-                ]);
-            }
-        }
-
-        if ($request->hasFile('clotheImages') && is_array($request->file('clotheImages'))) {
-            foreach ($request->file('clotheImages') as $index => $clothe) {
-                $imagePath = $plate->store('clothe', 'public');
-                $text = $request->textClothes[$index] ?? '';
-
-                $clotheImages = MapImages::create([
-                    'mapId' => $map->id,
-                    'type' => 'clothe',
-                    'image' => $imagePath,
-                    'description' => $text
-                ]);
-            }
-        }
-
-        
-
-        return redirect()->back()->with('status' , 'You have created a map');
-    }
 
     public function showMap(String $id){
         $map = Maps::findOrFail(Crypt::decrypt($id));
@@ -102,96 +88,59 @@ class MapsQuery extends GlobaleService {
 
     
     public function updateMap(MapUpdateRequest $request, String $id)
-{
-    $map = Maps::findOrFail(Crypt::decrypt($id));
+    {
+        $map = Maps::findOrFail(Crypt::decrypt($id));
 
-    if ($request->country == 'select') {
-        $longitude = $map->lang;
-        $latitude = $map->att;
-    } else {
-        list($longitude, $latitude) = explode(',', $request->country);
-    }
-
-    $imagePath = $map->image;
-
-    if ($request->hasFile('imagePrincipale')) {
-        if ($map->image && Storage::disk('public')->exists($map->image)) {
-            Storage::disk('public')->delete($map->image);
+        if ($request->country == 'select') {
+            $longitude = $map->lang;
+            $latitude = $map->att;
+        } else {
+            list($longitude, $latitude) = explode(',', $request->country);
         }
-        $imagePath = $request->file('imagePrincipale')->store('map', 'public');
-    }
 
-    $map->update([
-        'att' => $latitude,
-        'lang' => $longitude,
-        'title' => $request->title,
-        'slogan' => $request->slogan,
-        'image' => $imagePath,
-        'date' => $request->dateEstablishe,
-        'founder' => $request->founder,
-        'description' => $request->description
-    ]);
+        $imagePath = $map->image;
 
-    if ($request->hasFile('images') && is_array($request->file('images'))) {
-        foreach ($request->file('images') as $index => $image) {
-            $imagePath = $image->store('images', 'public');
-            MapImages::create([
-                'mapId' => $map->id,
-                'type' => 'image',
-                'image' => $imagePath,
-            ]);
+        if ($request->hasFile('imagePrincipale')) {
+            if (Storage::disk('public')->exists($map->image)) {
+                Storage::disk('public')->delete($map->image);
+            }
+            $imagePath = $request->file('imagePrincipale')->store('map', 'public');
         }
-    }
 
-    if ($request->hasFile('plateImages') && is_array($request->file('plateImages'))) {
-        foreach ($request->file('plateImages') as $index => $plate) {
-            $imagePath = $plate->store('plate', 'public');
-            $text = $request->textPlate[$index] ?? '';
+        $map->update([
+            'att' => $latitude,
+            'lang' => $longitude,
+            'title' => $request->title,
+            'slogan' => $request->slogan,
+            'image' => $imagePath,
+            'date' => $request->dateEstablishe,
+            'founder' => $request->founder,
+            'description' => $request->description
+        ]);
 
-            MapImages::create([
-                'mapId' => $map->id,
-                'type' => 'plate',
-                'image' => $imagePath,
-                'description' => $text
-            ]);
-        }
-    }
-
-    if ($request->hasFile('clotheImages') && is_array($request->file('clotheImages'))) {
-        foreach ($request->file('clotheImages') as $index => $clothe) {
-            $imagePath = $clothe->store('clothe', 'public');
-            $text = $request->textClothes[$index] ?? '';
-
-            MapImages::create([
-                'mapId' => $map->id,
-                'type' => 'clothe',
-                'image' => $imagePath,
-                'description' => $text
-            ]);
-        }
-    }
-
-    if ($request->has('textClothes')) {
-        foreach ($request->textClothes as $imageId => $description) {
-            $image = MapImages::find($imageId);
-            if ($image && $image->type == 'clothe') {
-                $image->update(['description' => $description]);
+        if ($request->has('titlePlace') && $request->has('descriptionPlace') 
+            && $request->has('adressePlace') && $request->has('linkPlace')) {
+            foreach ($request->titlePlace as $imageId => $title) {
+                $image = MapImages::find($imageId);
+                if ($image && $image->type == 'place') {
+                    $image->update([
+                        'title' => $title,
+                        'description' => $request->descriptionPlace[$imageId],
+                        'adresse' => $request->adressePlace[$imageId],
+                        'link' => $request->linkPlace[$imageId]
+                    ]);
+                }
             }
         }
+
+        $this->handleFileUploads($request, $map, 'images', 'image');
+        $this->handleFileUploads($request, $map, 'plateImages', 'plate', $request->textPlate ?? []);
+        $this->handleFileUploads($request, $map, 'clotheImages', 'clothe', $request->textClothes ?? []);
+        $this->handleFileUploads($request, $map, 'placeImages', 'place', $request->descriptionPlace ?? [], $request->titlePlace ?? [], $request->adressePlace ?? [], $request->linkPlace ?? []);
+        $this->handleFileUploads($request, $map, 'imagesPlaces', 'palceImage');
+
+        return $map;
     }
-
-    if ($request->has('textPlate')) {
-        foreach ($request->textPlate as $imageId => $description) {
-            $image = MapImages::find($imageId);
-            if ($image && $image->type == 'plate') {
-                $image->update(['description' => $description]);
-            }
-        }
-    }
-
-    return $map;
-}
-
 
     public function deleteMap(string $id){
         $image = MapImages::findOrFail(Crypt::decrypt($id));

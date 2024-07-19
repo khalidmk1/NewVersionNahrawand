@@ -191,6 +191,86 @@
         <div id="image-container-clothes" class="mt-3"></div>
     </div>
 
+    <div class="form-group">
+        <label for="imagespalceInputFile">Places</label>
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" name="placeImages[]" class="custom-file-input" id="imagespalceInputFile"
+                    multiple>
+                <label class="custom-file-label" for="imagespalceInputFile">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text">Upload</span>
+            </div>
+        </div>
+        <div class="mt-3">
+            @foreach ($map->images as $picture)
+                @if ($picture->type == 'place')
+                    <div class="image-wrapper">
+                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
+                        <div class="form-group ml-2">
+                            <label>title</label>
+                            <input type="text" class="form-control" value="{{ old('title', $picture->title) }}"
+                                name="titlePlace[{{ $picture->id }}]" placeholder="Enter title">
+                        </div>
+                        <div class="form-group ml-2">
+                            <label>description</label>
+                            <input type="text" class="form-control"
+                                value="{{ old('description', $picture->description) }}"
+                                name="descriptionPlace[{{ $picture->id }}]" placeholder="Enter description">
+                        </div>
+                        <div class="form-group ml-2">
+                            <label>Adresse</label>
+                            <input type="text" class="form-control"
+                                value="{{ old('adresse', $picture->adresse) }}"
+                                name="adressePlace[{{ $picture->id }}]" placeholder="Enter Adresse">
+                        </div>
+                        <div class="form-group ml-2">
+                            <label>Link</label>
+                            <input type="text" class="form-control" value="{{ old('link', $picture->link) }}"
+                                name="linkPlace[{{ $picture->id }}]" placeholder="Enter Link">
+                        </div>
+                        <i class="fa fa-trash trash-icon delete-image-form"
+                            data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+
+        <div id="image-container-places" class="mt-3"></div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="placesImagesInputFile">Place Images</label>
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" name="imagesPlaces[]" class="custom-file-input" id="placesImagesInputFile" multiple>
+                <label class="custom-file-label" for="placesImagesInputFile">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text">Upload</span>
+            </div>
+        </div>
+        <div class="mt-3 d-flex">
+            @foreach ($map->images as $picture)
+                @if ($picture->type == 'palceImage')
+                    <div class="image-wrapper-images">
+                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
+                        <i class="fa fa-trash trash-icon delete-image-form" data-id="{{ Crypt::encrypt($picture->id) }}"
+                            aria-hidden="true"></i>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+
+        <div id="image-container-places-images" class="mt-3 d-flex">
+
+        </div>
+    </div>
+
+
+
     <button type="submit" class="btn btn-block btn-info w-25 mb-3 ml-3 form-update"
         style="float: right">Update</button>
 </form>

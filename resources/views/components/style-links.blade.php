@@ -1,6 +1,6 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  
+
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/selectize@0.12.6/dist/css/selectize.default.css">
@@ -75,6 +75,7 @@
     .image-wrapper {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         margin-bottom: 10px;
     }
 
@@ -96,13 +97,17 @@
     }
 
     .image-wrapper input[type="text"] {
-        flex: 1;
-        margin-right: 10px;
+        flex: 1 1 28%;
+        margin-right: 1%;
+        margin-bottom: 10px;
+        box-sizing: border-box;
     }
 
     .image-wrapper .trash-icon {
         cursor: pointer;
         color: red;
+        order: -1;
+        margin-right: 10px;
     }
 
     .image-wrapper-images .trash-icon {
