@@ -241,34 +241,6 @@
     </div>
 
 
-    <div class="form-group">
-        <label for="placesImagesInputFile">Place Images</label>
-        <div class="input-group">
-            <div class="custom-file">
-                <input type="file" name="imagesPlaces[]" class="custom-file-input" id="placesImagesInputFile" multiple>
-                <label class="custom-file-label" for="placesImagesInputFile">Choose file</label>
-            </div>
-            <div class="input-group-append">
-                <span class="input-group-text">Upload</span>
-            </div>
-        </div>
-        <div class="mt-3 d-flex">
-            @foreach ($map->images as $picture)
-                @if ($picture->type == 'palceImage')
-                    <div class="image-wrapper-images">
-                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
-                        <i class="fa fa-trash trash-icon delete-image-form" data-id="{{ Crypt::encrypt($picture->id) }}"
-                            aria-hidden="true"></i>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-
-        <div id="image-container-places-images" class="mt-3 d-flex">
-
-        </div>
-    </div>
-
 
 
     <button type="submit" class="btn btn-block btn-info w-25 mb-3 ml-3 form-update"

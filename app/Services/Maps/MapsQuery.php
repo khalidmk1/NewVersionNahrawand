@@ -75,7 +75,6 @@ class MapsQuery extends GlobaleService {
         $this->handleFileUploads($request, $map, 'plateImages', 'plate', $request->textPlate ?? []);
         $this->handleFileUploads($request, $map, 'clotheImages', 'clothe', $request->textClothes ?? []);
         $this->handleFileUploads($request, $map, 'placeImages', 'place', $request->descriptionPlace ?? [], $request->titlePlace ?? [], $request->adressePlace ?? [], $request->linkPlace ?? []);
-        $this->handleFileUploads($request, $map, 'imagesPlaces', 'palceImage');
 
         return redirect()->back()->with('status', 'You have created a map');
     }    
@@ -137,7 +136,6 @@ class MapsQuery extends GlobaleService {
         $this->handleFileUploads($request, $map, 'plateImages', 'plate', $request->textPlate ?? []);
         $this->handleFileUploads($request, $map, 'clotheImages', 'clothe', $request->textClothes ?? []);
         $this->handleFileUploads($request, $map, 'placeImages', 'place', $request->descriptionPlace ?? [], $request->titlePlace ?? [], $request->adressePlace ?? [], $request->linkPlace ?? []);
-        $this->handleFileUploads($request, $map, 'imagesPlaces', 'palceImage');
 
         return $map;
     }

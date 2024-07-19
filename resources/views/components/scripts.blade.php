@@ -682,10 +682,6 @@
             ]);
         });
 
-        $('#placesImagesInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container-places-images');
-        });
-
     });
 </script>
 
