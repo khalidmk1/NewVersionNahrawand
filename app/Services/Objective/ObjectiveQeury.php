@@ -49,7 +49,8 @@ class ObjectiveQeury extends GlobaleService {
                         'objective' => $items->map(function ($item) {
                             return [
                                 'id' => $item->id,
-                                'name' => $item->name
+                                'name' => $item->name,
+                                'date' => $item->date
                             ];
                         })->toArray()
                     ]

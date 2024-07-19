@@ -170,8 +170,12 @@ class MapsQuery extends GlobaleService {
             $imageFilterd = $map->images->map(function ($image){
                 return [
                     'type' => $image->type,
+                    'title' => $image->title,
+                    'adresse' => $image->adresse,
+                    'link' => $image->link,
                     'image' => $image->image,
                     'description' => $image->description,
+
                 ];
             });
             return [
