@@ -720,7 +720,7 @@
             var icon = $(this);
             var imageId = icon.data('id');
             var url = '{{ route('image.delete', ':id') }}'.replace(':id', imageId);
-            /* url = url.replace('http://', 'https://'); */
+            url = url.replace('http://', 'https://');
             $.ajax({
                 url: url,
                 method: 'DELETE',
