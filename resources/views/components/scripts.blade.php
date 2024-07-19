@@ -481,7 +481,7 @@
     // Fetch notifications on page load
     $(document).ready(function() {
         fetchNotifications();
-         setInterval(fetchNotifications, 5000);
+        setInterval(fetchNotifications, 5000);
     });
 
     // report 
@@ -662,23 +662,48 @@
         });
 
         $('#imagesPlateInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container', [
-                { type: 'text', class: 'form-control', name: 'textPlate[]', placeholder: 'Enter description' }
-            ]);
+            handleFileInputChange(event, '#image-container', [{
+                type: 'text',
+                class: 'form-control',
+                name: 'textPlate[]',
+                placeholder: 'Enter description'
+            }]);
         });
 
         $('#imagesclotheInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container-clothes', [
-                { type: 'text', class: 'form-control', name: 'textClothes[]', placeholder: 'Enter text' }
-            ]);
+            handleFileInputChange(event, '#image-container-clothes', [{
+                type: 'text',
+                class: 'form-control',
+                name: 'textClothes[]',
+                placeholder: 'Enter text'
+            }]);
         });
 
         $('#imagespalceInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container-places', [
-                { type: 'text', class: 'form-control ', name: 'titlePlace[]', placeholder: 'Enter title' },
-                { type: 'text', class: 'form-control ', name: 'descriptionPlace[]', placeholder: 'Enter description' },
-                { type: 'text', class: 'form-control ', name: 'adressePlace[]', placeholder: 'Enter adresse' },
-                { type: 'link', class: 'form-control mt-1', name: 'linkPlace[]', placeholder: 'Enter Link' } ,
+            handleFileInputChange(event, '#image-container-places', [{
+                    type: 'text',
+                    class: 'form-control ',
+                    name: 'titlePlace[]',
+                    placeholder: 'Enter title'
+                },
+                {
+                    type: 'text',
+                    class: 'form-control ',
+                    name: 'descriptionPlace[]',
+                    placeholder: 'Enter description'
+                },
+                {
+                    type: 'text',
+                    class: 'form-control ',
+                    name: 'adressePlace[]',
+                    placeholder: 'Enter adresse'
+                },
+                {
+                    type: 'link',
+                    class: 'form-control mt-1',
+                    name: 'linkPlace[]',
+                    placeholder: 'Enter Link'
+                },
             ]);
         });
 

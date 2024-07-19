@@ -203,41 +203,49 @@
                 <span class="input-group-text">Upload</span>
             </div>
         </div>
+        <div id="image-container-places" class="mt-3"></div>
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'place')
-                    <div class="image-wrapper">
-                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
-                        <div class="form-group ml-2">
-                            <label>title</label>
-                            <input type="text" class="form-control" value="{{ old('title', $picture->title) }}"
-                                name="titlePlace[{{ $picture->id }}]" placeholder="Enter title">
+                    <div class="image-wrapper-palce row">
+                        <div class="col-4">
+                            <img src="{{ asset('storage/' . $picture->image) }}" alt="">
                         </div>
-                        <div class="form-group ml-2">
-                            <label>description</label>
-                            <input type="text" class="form-control"
-                                value="{{ old('description', $picture->description) }}"
-                                name="descriptionPlace[{{ $picture->id }}]" placeholder="Enter description">
+                        <div class="col-8">
+                            <div class="form-group ml-2">
+                                <label>title</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('title', $picture->title) }}"
+                                    name="titlePlace[{{ $picture->id }}]" placeholder="Enter title">
+                            </div>
+                            <div class="form-group ml-2">
+                                <label>description</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('description', $picture->description) }}"
+                                    name="descriptionPlace[{{ $picture->id }}]" placeholder="Enter description">
+                            </div>
+                            <div class="form-group ml-2">
+                                <label>Adresse</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('adresse', $picture->adresse) }}"
+                                    name="adressePlace[{{ $picture->id }}]" placeholder="Enter Adresse">
+                            </div>
+                            <div class="form-group ml-2">
+                                <label>Link</label>
+                                <input type="text" class="form-control" value="{{ old('link', $picture->link) }}"
+                                    name="linkPlace[{{ $picture->id }}]" placeholder="Enter Link">
+                            </div>
+                            <i class="fa fa-trash trash-icon delete-image-form"
+                                data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
                         </div>
-                        <div class="form-group ml-2">
-                            <label>Adresse</label>
-                            <input type="text" class="form-control"
-                                value="{{ old('adresse', $picture->adresse) }}"
-                                name="adressePlace[{{ $picture->id }}]" placeholder="Enter Adresse">
-                        </div>
-                        <div class="form-group ml-2">
-                            <label>Link</label>
-                            <input type="text" class="form-control" value="{{ old('link', $picture->link) }}"
-                                name="linkPlace[{{ $picture->id }}]" placeholder="Enter Link">
-                        </div>
-                        <i class="fa fa-trash trash-icon delete-image-form"
-                            data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
+
+
                     </div>
                 @endif
             @endforeach
         </div>
 
-        <div id="image-container-places" class="mt-3"></div>
+
     </div>
 
 

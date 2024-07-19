@@ -90,6 +90,12 @@
         margin-right: 10px;
     }
 
+    .image-wrapper-palce img {
+        width: 100%;
+        height: 81%;
+        margin-right: 10px;
+    }
+
     .image-wrapper img {
         max-width: 70px;
         max-height: 100px;
@@ -101,6 +107,14 @@
         margin-right: 1%;
         margin-bottom: 10px;
         box-sizing: border-box;
+    }
+
+    .image-wrapper-palce .trash-icon {
+        cursor: pointer;
+        color: red;
+        position: absolute;
+        top: 0;
+        left: -11px;
     }
 
     .image-wrapper .trash-icon {
