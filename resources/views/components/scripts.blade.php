@@ -709,9 +709,29 @@
             fileInput.files = dataTransfer.files;
         }
 
+
         $('#imagesInputFile').on('change', function(event) {
             handleFileInputChange(event, '#imagesNormale-container');
         });
+
+        $('#imagesPlateInputFile').on('change', function(event) {
+            handleFileInputChange(event, '#image-container', [{
+                type: 'text',
+                class: 'form-control',
+                name: 'textPlate[]',
+                placeholder: 'Enter description'
+            }]);
+        });
+
+        $('#imagesclotheInputFile').on('change', function(event) {
+            handleFileInputChange(event, '#image-container-clothes', [{
+                type: 'text',
+                class: 'form-control',
+                name: 'textClothes[]',
+                placeholder: 'Enter text'
+            }]);
+        });
+
 
         $('#imagespalceInputFile').on('change', function(event) {
             handleFileInputChange(event, '#image-container-places', [{
