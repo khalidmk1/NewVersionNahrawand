@@ -622,23 +622,35 @@
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
+                    const row = $('<div>').addClass('row mb-3');
+                    const colImg = $('<div>').addClass('col-md-2');
+                    const colInput = $('<div>').addClass('col-md-8 input-containe ');
+
                     const imageWrapper = $('<div>').addClass('image-wrapper');
                     const img = $('<img>').attr('src', e.target.result);
                     imageWrapper.append(img);
 
                     additionalElements.forEach(element => {
                         const input = $('<input>').attr(element);
-                        imageWrapper.append(input);
+                        colInput.append(input);
+
+                        if (element.type === 'file' && element.multiple) {
+                            input.on('change', function(event) {
+                                handleAdditionalFileInputChange(event, colInput);
+                            });
+                        }
                     });
 
                     const trashIcon = $('<span>').html('🗑️').addClass('trash-icon');
                     trashIcon.on('click', function() {
-                        imageWrapper.remove();
+                        row.remove();
                         updateFileInput(file);
                     });
                     imageWrapper.append(trashIcon);
 
-                    imageContainer.append(imageWrapper);
+                    colImg.append(imageWrapper);
+                    row.append(colImg).append(colInput);
+                    imageContainer.append(row);
                 };
 
                 reader.readAsDataURL(file);
@@ -657,56 +669,83 @@
             }
         }
 
+        function handleAdditionalFileInputChange(event, container) {
+            const fileInput = event.target;
+            const additionalImagesWrapper = $('<div>').addClass('additional-images-wrapper');
+
+            Array.from(fileInput.files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const additionalImageWrapper = $('<div>').addClass(
+                        'additional-image-wrapper d-inline-block');
+                    const img = $('<img>').attr('src', e.target.result);
+                    const trashIcon = $('<span>').html('🗑️').addClass('additional-trash-icon').on(
+                        'click',
+                        function() {
+                            additionalImageWrapper.remove();
+                            updateAdditionalFileInput(fileInput, file);
+                        });
+
+                    additionalImageWrapper.append(img).append(trashIcon);
+                    additionalImagesWrapper.append(additionalImageWrapper);
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            container.append(additionalImagesWrapper);
+        }
+
+        function updateAdditionalFileInput(fileInput, fileToRemove) {
+            const dataTransfer = new DataTransfer();
+
+            Array.from(fileInput.files).forEach(file => {
+                if (file !== fileToRemove) {
+                    dataTransfer.items.add(file);
+                }
+            });
+
+            fileInput.files = dataTransfer.files;
+        }
+
         $('#imagesInputFile').on('change', function(event) {
             handleFileInputChange(event, '#imagesNormale-container');
-        });
-
-        $('#imagesPlateInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container', [{
-                type: 'text',
-                class: 'form-control',
-                name: 'textPlate[]',
-                placeholder: 'Enter description'
-            }]);
-        });
-
-        $('#imagesclotheInputFile').on('change', function(event) {
-            handleFileInputChange(event, '#image-container-clothes', [{
-                type: 'text',
-                class: 'form-control',
-                name: 'textClothes[]',
-                placeholder: 'Enter text'
-            }]);
         });
 
         $('#imagespalceInputFile').on('change', function(event) {
             handleFileInputChange(event, '#image-container-places', [{
                     type: 'text',
-                    class: 'form-control ',
+                    class: 'form-control',
                     name: 'titlePlace[]',
                     placeholder: 'Enter title'
                 },
                 {
                     type: 'text',
-                    class: 'form-control ',
+                    class: 'form-control',
                     name: 'descriptionPlace[]',
                     placeholder: 'Enter description'
                 },
                 {
                     type: 'text',
-                    class: 'form-control ',
+                    class: 'form-control',
                     name: 'adressePlace[]',
-                    placeholder: 'Enter adresse'
+                    placeholder: 'Enter address'
                 },
                 {
-                    type: 'link',
+                    type: 'text',
                     class: 'form-control mt-1',
                     name: 'linkPlace[]',
                     placeholder: 'Enter Link'
                 },
+                {
+                    type: 'file',
+                    class: 'form-control mt-1',
+                    name: 'imagePlaces[]',
+                    multiple: true 
+                }
             ]);
         });
-
     });
 </script>
 

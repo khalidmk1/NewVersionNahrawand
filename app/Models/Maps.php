@@ -29,6 +29,6 @@ class Maps extends Model
      */
     public function images(): HasMany
     {
-        return $this->hasMany(MapImages::class, 'mapId');
+        return $this->hasMany(MapImages::class, 'mapId')->with('imagePlace');
     }
 }

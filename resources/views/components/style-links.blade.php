@@ -72,41 +72,31 @@
         border-bottom-right-radius: 19px;
     }
 
-    .image-wrapper {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
     }
 
-    .image-wrapper-images {
-        position: relative;
-        margin-left: 6px;
+    .input-containe .form-control {
+        margin-top: 10px
     }
 
-    .image-wrapper-images img {
-        max-width: 100%;
-        max-height: 100px;
-        margin-right: 10px;
+    .image-wrapper .trash-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 50%;
+        padding: 5px;
     }
+
 
     .image-wrapper-palce img {
         width: 100%;
         height: 81%;
         margin-right: 10px;
-    }
-
-    .image-wrapper img {
-        max-width: 70px;
-        max-height: 100px;
-        margin-right: 10px;
-    }
-
-    .image-wrapper input[type="text"] {
-        flex: 1 1 28%;
-        margin-right: 1%;
-        margin-bottom: 10px;
-        box-sizing: border-box;
     }
 
     .image-wrapper-palce .trash-icon {
@@ -117,12 +107,7 @@
         left: -11px;
     }
 
-    .image-wrapper .trash-icon {
-        cursor: pointer;
-        color: red;
-        order: -1;
-        margin-right: 10px;
-    }
+
 
     .image-wrapper-images .trash-icon {
         position: absolute;
@@ -130,6 +115,25 @@
         color: red;
         right: 0px;
         top: -10px;
+    }
+
+    .additional-images-wrapper {
+        margin-top: 10px;
+    }
+
+    .additional-image-wrapper img {
+        width: 100px;
+        height: auto;
+    }
+
+    .additional-trash-icon {
+        position: relative;
+        top: -35px;
+        right: 10px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 50%;
+        padding: 5px;
     }
 
     .select2-container--default .select2-selection--multiple .select2-selection__rendered li:first-child.select2-search.select2-search--inline .select2-search__field {

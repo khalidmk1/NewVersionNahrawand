@@ -40,8 +40,7 @@ class MapRequest extends FormRequest
             'descriptionPlace' => ['nullable' , 'array'],
             'adressePlace' => ['nullable' , 'array'],
             'linkPlace' => ['nullable' , 'array'],
-            
-
+            'imagePlaces' => ['nullable' , 'array'],
         ];
         
         return $rules;

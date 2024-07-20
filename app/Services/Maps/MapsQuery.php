@@ -6,6 +6,7 @@ use App\Models\Maps;
 use App\Models\MapCities;
 use App\Models\MapImages;
 use Illuminate\Http\Request;
+use App\Models\PlaceMapImage;
 use App\Services\GlobaleService;
 use App\Http\Requests\MapRequest;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class MapsQuery extends GlobaleService {
                 $address = $addresses[$index] ?? '';
                 $link = $links[$index] ?? '';
 
-                MapImages::create([
+                $mapImage =  MapImages::create([
                     'mapId' => $map->id,
                     'type' => $type,
                     'image' => $imagePath,
@@ -36,6 +37,25 @@ class MapsQuery extends GlobaleService {
                     'title' => $title,
                     'adresse' => $address,
                     'link' => $link
+                ]);
+            }
+        }
+
+        if ($type === 'place') {
+            $this->handleFileMapImages($request, $mapImage, 'imagePlaces');
+        }
+
+    }
+
+
+    protected function handleFileMapImages(Request $request, $mapImage, $fieldName)
+    {
+        if ($request->hasFile($fieldName) && is_array($request->file($fieldName))) {
+            foreach ($request->file($fieldName) as $file) {
+                $imagePath = $file->store('imagePlace', 'public');
+                PlaceMapImage::create([
+                    'imageId' => $mapImage->id,
+                    'image' => $imagePath,
                 ]);
             }
         }
@@ -161,11 +181,18 @@ class MapsQuery extends GlobaleService {
     }
 
     //map api 
-    public function indexApi(){
-        $maps = Maps::with('images')->get();
+    public function indexApi()
+    {
+        $maps = Maps::with('images.imagePlace')->get();
 
-        $mapFiltred =  $maps->map(function ($map) {
-            $imageFilterd = $map->images->map(function ($image){
+        $mapFiltred = $maps->map(function ($map) {
+            $imageFilterd = $map->images->map(function ($image) {
+                $placeImages = $image->imagePlace->map(function ($placeImage) {
+                    return [
+                        'image' => $placeImage->image,
+                    ];
+                });
+
                 return [
                     'type' => $image->type,
                     'title' => $image->title,
@@ -173,9 +200,10 @@ class MapsQuery extends GlobaleService {
                     'link' => $image->link,
                     'image' => $image->image,
                     'description' => $image->description,
-
+                    'placeImages' => $placeImages
                 ];
             });
+
             return [
                 'name' => $map->title,
                 'latitude' => $map->att,
@@ -185,7 +213,7 @@ class MapsQuery extends GlobaleService {
                 'date' => $map->date,
                 'founder' => $map->founder,
                 'slogan' => $map->slogan,
-                'images' =>$imageFilterd
+                'images' => $imageFilterd
             ];
         });
 
