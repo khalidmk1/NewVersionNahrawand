@@ -256,14 +256,14 @@
                             </div>
 
                             <div class="row">
-                                @foreach ($picture->imagePlace a $index =>  $place)
+                                @foreach ($picture->imagePlace as $place)
                                     <div class="col-4 mt-2">
                                         <img src="{{ asset('storage/' . $place->image) }}" class="h-100"
                                             alt="">
                                     </div>
                                 @endforeach
                             </div>
-
+                            
                             <div id="additional-images-wrapper"></div>
 
                             <i class="fa fa-trash trash-icon delete-image-form"
