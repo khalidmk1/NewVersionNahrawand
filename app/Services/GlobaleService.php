@@ -407,13 +407,15 @@ class GlobaleService  {
             ];
         });
 
-        return response()->json([
-            'data' => $formattedContents,
+        return response()->json($contents);
+
+        /* return response()->json([
+            'data' => $contents,
             'current_page' => $contents->currentPage(),
             'last_page' => $contents->lastPage(),
             'per_page' => $contents->perPage(),
             'total' => $contents->total(),
-        ]);
+        ]); */
     }
 
 

@@ -145,7 +145,7 @@
         <div class="row mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'plate')
-                    <div class="col-12 mt-2">
+                    <div class="col-12 mt-2 image-wrapper">
                         <div class="align-items-center row">
                             <div class="col-4">
                                 <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
@@ -182,7 +182,7 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'clothe')
-                    <div class="mt-2 align-items-center row">
+                    <div class="mt-2 align-items-center row image-wrapper">
                         <div class="col-4">
                             <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
                         </div>
@@ -217,7 +217,7 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'place')
-                    <div class="image-wrapper-palce mt-2  row">
+                    <div class="image-wrapper-palce image-wrapper mt-2  row">
                         <div class="col-4">
                             <img src="{{ asset('storage/' . $picture->image) }}" alt="">
                         </div>
