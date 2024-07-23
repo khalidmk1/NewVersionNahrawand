@@ -377,9 +377,11 @@ class GlobaleService  {
         $contents = Content::where('contentType', 'formation')
             ->where('isComing', 0)
             ->paginate(3, ['id', 'image', 'quizType', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId', 'document', 'created_at']);
-
-        $contents->load('user', 'category');
-
+    
+        // Load relationships
+        $contents->load('user', 'category', 'tags');
+    
+        // Format contents
         $formattedContents = $contents->getCollection()->map(function ($content) {
             return [
                 'id' => $content->id,
@@ -406,17 +408,34 @@ class GlobaleService  {
                 ],
             ];
         });
-
-        return response()->json($contents);
-
-        /* return response()->json([
-            'data' => $contents,
+    
+        // Manually build pagination links
+        $links = collect([
+            'previous' => $contents->previousPageUrl(),
+            'next' => $contents->nextPageUrl(),
+            'current' => $contents->url($contents->currentPage()),
+            'first' => $contents->url(1),
+            'last' => $contents->url($contents->lastPage())
+        ]);
+    
+        return response()->json([
             'current_page' => $contents->currentPage(),
+            'data' => $formattedContents,
+            'first_page_url' => $links['first'],
+            'from' => $contents->firstItem(),
             'last_page' => $contents->lastPage(),
+            'last_page_url' => $links['last'],
+            'links' => $links,
+            'next_page_url' => $links['next'],
+            'path' => $contents->path(),
             'per_page' => $contents->perPage(),
+            'prev_page_url' => $links['previous'],
+            'to' => $contents->lastItem(),
             'total' => $contents->total(),
-        ]); */
+        ]);
     }
+    
+
 
 
     public function podcastContentApi(){
