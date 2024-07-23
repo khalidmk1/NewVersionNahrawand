@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Content
     Route::prefix('content')->group(function () {
-        Route::get('formation/subcategory', [ContentController::class, 'ContentController'])->name('content.subcategory');
+        Route::get('formation/subcategory', [ContentController::class, 'contentFormationBySubCategory'])->name('content.subcategory');
         Route::post('create/favoris/{content}', [ContentController::class, 'createFavoris'])->name('favoris.create');
         Route::get('check/{content}', [ContentController::class, 'favorisExists'])->name('content.check');
         Route::post('create/finishedContent/{content}', [ContentController::class, 'createFinished'])->name('contentFinished.create');
