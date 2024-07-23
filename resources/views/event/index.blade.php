@@ -4,11 +4,11 @@
 @endsection
 
 @section('page')
-    View Events
+    Create Event
 @endsection
 
 @section('link')
-    {{ route('event.index') }}
+    {{ route('event.create') }}
 @endsection
 
 

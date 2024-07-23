@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Speakers
+    Create Speakers
 @endsection
 
 @section('link')
-    {{ route('index.speaker') }}
+    {{ route('create.speaker') }}
 @endsection
 
 @section('card-detail-content')

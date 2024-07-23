@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View Maps
+    Create Maps
 @endsection
 
 @section('link')
-    {{ route('map.index') }}
+    {{ route('map.create') }}
 @endsection
 
 @section('content')

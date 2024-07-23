@@ -5,10 +5,11 @@
 @endsection
 
 @section('page')
-    View Profile
+    View Clients
 @endsection
 
 @section('link')
+    {{ route('client.index') }}
 @endsection
 
 @section('content')
@@ -217,11 +218,11 @@
                     url: urlNote,
                     type: 'PUT',
                     headers: {
-                        'X-CSRF-TOKEN': csrfToken 
+                        'X-CSRF-TOKEN': csrfToken
                     },
                     data: {
                         noteAnswer: noteAnswer,
-                        _method: 'PUT' 
+                        _method: 'PUT'
                     },
                     success: function(response) {
                         console.log(response);

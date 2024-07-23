@@ -5,11 +5,11 @@
 @endsection
 
 @section('page')
-    View contents
+    Create Content
 @endsection
 
 @section('link')
-    {{ route('content.index') }}
+    {{ route('content.create') }}
 @endsection
 
 @section('content')
