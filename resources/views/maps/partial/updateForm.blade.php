@@ -245,7 +245,7 @@
                                 <input type="text" class="form-control" value="{{ old('link', $picture->link) }}"
                                     name="linkPlace[{{ $picture->id }}]" placeholder="Enter Link">
                             </div>
-                            <div class="form-group ml-2">
+                          {{--   <div class="form-group ml-2">
                                 <label>Image Place</label>
 
                                 <div class="custom-file">
@@ -253,7 +253,7 @@
                                         id="palceimagesInputFile_{{$picture->id}}">
                                     <label class="custom-file-label" for="palceimagesInputFile_{{$picture->id}}">Choose file</label>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row">
                                 @foreach ($picture->imagePlace as $place)

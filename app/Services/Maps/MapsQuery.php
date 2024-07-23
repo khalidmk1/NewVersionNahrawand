@@ -59,9 +59,7 @@ protected function handleFileMapImages(Request $request, $mapImage, $fieldName, 
                 'image' => $imagePath,
             ]);
         }
-    } else {
-        Log::error("No nested files found for parent index $parentIndex.");
-    }
+    } 
 }
 
     
