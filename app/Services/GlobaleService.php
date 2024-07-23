@@ -374,9 +374,8 @@ class GlobaleService  {
 
     public function formationContentApi()
     {
-        $contents = Content::where('contentType', 'formation')->where('isComing' , 0)
-            ->get(['id', 'image', 'quizType' , 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId' , 
-            'document' , 'created_at']);
+        $contents = Content::where('contentType', 'formation')
+        ->where('isComing', 0)->paginate(3);
 
         $contents->load('user', 'category');
         $formattedContents = $contents->map(function ($content) {

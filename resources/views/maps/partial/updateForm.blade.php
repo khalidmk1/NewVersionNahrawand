@@ -249,7 +249,7 @@
                                 <label>Image Place</label>
 
                                 <div class="custom-file">
-                                    <input type ="file" name="imagePlaces[{{ $picture->id }}]" multiple
+                                    <input type ="file" name="imagePlaces[{{ $picture->id }}][]" multiple
                                         id="palceimagesInputFile">
                                     <label class="custom-file-label" for="palceimagesInputFile">Choose file</label>
                                 </div>

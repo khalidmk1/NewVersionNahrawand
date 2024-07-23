@@ -1,5 +1,6 @@
 <!-- /.card-header -->
-<form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" id="content-form" method="post" enctype="multipart/form-data">
+<form action="{{ route('content.update', Crypt::encrypt($content->id)) }}" id="content-form" method="post"
+    enctype="multipart/form-data">
     @method('patch')
     @csrf
 
@@ -201,7 +202,7 @@
 
         <!-- /.form-group -->
         <!-- textarea -->
-        @if ($content->contentType == 'podcast' || $content->contentType == 'conference')
+        @if ($content->contentType != 'quickly')
             <div class="form-group">
                 <label>Big Description</label>
                 <textarea class="form-control" name="bigDescription" rows="6" placeholder="Enter ...">{{ $content->bigDescription }}</textarea>
@@ -270,4 +271,3 @@
         tagInputEle.tagsinput();
     });
 </script>
-
