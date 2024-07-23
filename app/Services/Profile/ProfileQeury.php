@@ -211,16 +211,32 @@ class ProfileQeury extends GlobaleService {
         return $filteredUsers;
     }
 
-    public function speakerApiUsers(){
+    public function speakerApiUsers()
+    {
+        $speakersRole = ['Modérateur', 'Animateur', 'Invité', 'Conférencier', 'Formateur'];
+        $roles = Role::whereIn('name', $speakersRole)->pluck('id')->toArray();
+        $speakers = User::whereHas('roles', function ($query) use ($roles) {
+            $query->whereIn('roles.id', $roles);
+        })->with('content')->whereNull('deleted_at')->get();
 
-        $speakersRole = ['Modérateur' , 'Animateur' , 'Invité' , 'Conférencier' , 'Formateur'];
-        $role = Role::whereIn('name' , $speakersRole)->get();
-        $speakers = User::role($role) 
-        ->whereNull('deleted_at')
-        ->get();
-
-        $filteredUsers = $speakers->map(function($user){
+        $filteredUsers = $speakers->map(function ($user) {
             $roleNames = $user->roles->pluck('name')->toArray();
+            $content = $user->content->map(function ($content) {
+                return [
+                    'image' => $content->image,
+                    'imageFlex' => $content->imageFlex,
+                    'title' => $content->title,
+                    'smallDescription' => $content->smallDescription,
+                    'bigDescription' => $content->bigDescription,
+                    'contentType' => $content->contentType,
+                    'quizType' => $content->quizType,
+                    'isCertify' => $content->isCertify,
+                    'document' => $content->document,
+                    'condition' => $content->condition,
+                    'video' => $content->video
+                ];
+            });
+
             return [
                 'avatar' => $user->avatar,
                 'cover' => $user->cover,
@@ -230,11 +246,14 @@ class ProfileQeury extends GlobaleService {
                 'linkdin' => $user->linkdin,
                 'instagram' => $user->instagram,
                 'roles' => $roleNames,
+                'content' => $content,
             ];
         });
 
         return $filteredUsers;
     }
+
+
 
     public function updateClientApi(Request $request)
     {

@@ -375,10 +375,12 @@ class GlobaleService  {
     public function formationContentApi()
     {
         $contents = Content::where('contentType', 'formation')
-        ->where('isComing', 0)->paginate(3);
+            ->where('isComing', 0)
+            ->paginate(3, ['id', 'image', 'quizType', 'imageFlex', 'title', 'smallDescription', 'categoryId', 'hostId', 'document', 'created_at']);
 
         $contents->load('user', 'category');
-        $formattedContents = $contents->map(function ($content) {
+
+        $formattedContents = $contents->getCollection()->map(function ($content) {
             return [
                 'id' => $content->id,
                 'image' => $content->image,
@@ -405,8 +407,15 @@ class GlobaleService  {
             ];
         });
 
-        return $formattedContents;
+        return response()->json([
+            'data' => $formattedContents,
+            'current_page' => $contents->currentPage(),
+            'last_page' => $contents->lastPage(),
+            'per_page' => $contents->perPage(),
+            'total' => $contents->total(),
+        ]);
     }
+
 
     public function podcastContentApi(){
         $contents = Content::where('contentType', 'podcast')->where('isComing' , 0)

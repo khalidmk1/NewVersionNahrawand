@@ -125,8 +125,6 @@ class ContentQuery extends GlobaleService {
         $isCertify = $request->isCertify == 'on';
         $programId = $request->programId == 0 ? null : $request->programId;
 
-
-
         $content->update([
             'categoryId' => $request->cotegoryId,
             'hostId' => $request->contentHost,

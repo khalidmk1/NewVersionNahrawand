@@ -100,8 +100,7 @@ class ContentService extends ContentQuery implements ContentInterface {
     }
 
     public function contentFormation(){
-        $contents = $this->formationContentApi();
-        return response()->json($contents);
+        return $this->formationContentApi();
     }
 
     public function contentPodcast(){
