@@ -34,7 +34,7 @@ use App\Http\Controllers\Auth\{
 */
 
 // User Routes (Authenticated)
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum' , 'CheckSession'])->group(function () {
     // Authentication and Profile
     Route::prefix('user')->group(function () {
         Route::get('/', function (Request $request) {
