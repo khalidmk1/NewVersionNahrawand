@@ -72,9 +72,21 @@
         border-bottom-right-radius: 19px;
     }
 
+    .image-wrapper{
+        margin-bottom: 6px;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .image-wrapper .trash-icon{
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+    }
+
 
     .image-wrapper img {
-        width: 100%;
+        width: 25%;
         height: auto;
     }
 
@@ -82,20 +94,23 @@
         margin-top: 10px
     }
 
-    .image-wrapper .trash-icon {
+    .trash-icon-update{
         position: absolute;
-        top: 10px;
-        right: 10px;
         cursor: pointer;
-        background-color: white;
-        border-radius: 50%;
-        padding: 5px;
+        color: red;
+        right: 13px;
+        top: 9px;
+    }
+
+    #additional-images-wrapper img{
+        width: 29%;
+        display: flex
     }
 
 
     .image-wrapper-palce img {
         width: 100%;
-        height: 81%;
+        height: 49%;
         margin-right: 10px;
     }
 
@@ -107,7 +122,7 @@
         left: -11px;
     }
 
-
+    
 
     .image-wrapper-images .trash-icon {
         position: absolute;

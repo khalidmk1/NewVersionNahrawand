@@ -2,6 +2,7 @@
 
 namespace App\Services\Maps;
 
+
 use App\Models\Maps;
 use App\Models\MapCities;
 use App\Models\MapImages;
@@ -20,46 +21,50 @@ use Illuminate\Support\Facades\Storage;
 class MapsQuery extends GlobaleService {
 
     protected function handleFileUploads($request, $map, $fieldName, $type, $descriptions = [], $titles = [], $addresses = [], $links = [])
-    {
-        if ($request->hasFile($fieldName) && is_array($request->file($fieldName))) {
-            foreach ($request->file($fieldName) as $index => $file) {
-                $imagePath = $file->store($type, 'public');
-                $description = $descriptions[$index] ?? '';
-                $title = $titles[$index] ?? '';
-                $address = $addresses[$index] ?? '';
-                $link = $links[$index] ?? '';
+{
+    if ($request->hasFile($fieldName) && is_array($request->file($fieldName))) {
+        foreach ($request->file($fieldName) as $index => $file) {
+            $imagePath = $file->store($type, 'public');
+            $description = $descriptions[$index] ?? '';
+            $title = $titles[$index] ?? '';
+            $address = $addresses[$index] ?? '';
+            $link = $links[$index] ?? '';
 
-                $mapImage =  MapImages::create([
-                    'mapId' => $map->id,
-                    'type' => $type,
-                    'image' => $imagePath,
-                    'description' => $description,
-                    'title' => $title,
-                    'adresse' => $address,
-                    'link' => $link
-                ]);
-            }
-        }
+            $mapImage = MapImages::create([
+                'mapId' => $map->id,
+                'type' => $type,
+                'image' => $imagePath,
+                'description' => $description,
+                'title' => $title,
+                'adresse' => $address,
+                'link' => $link
+            ]);
 
-        if ($type === 'place') {
-            $this->handleFileMapImages($request, $mapImage, 'imagePlaces');
-        }
-
-    }
-
-
-    protected function handleFileMapImages(Request $request, $mapImage, $fieldName)
-    {
-        if ($request->hasFile($fieldName) && is_array($request->file($fieldName))) {
-            foreach ($request->file($fieldName) as $file) {
-                $imagePath = $file->store('imagePlace', 'public');
-                PlaceMapImage::create([
-                    'imageId' => $mapImage->id,
-                    'image' => $imagePath,
-                ]);
+            if ($type === 'place') {
+                $this->handleFileMapImages($request, $mapImage, 'imagePlaces', $index);
             }
         }
     }
+}
+
+protected function handleFileMapImages(Request $request, $mapImage, $fieldName, $parentIndex)
+{
+    $nestedFiles = $request->file($fieldName);
+
+    if (isset($nestedFiles[$parentIndex]) && is_array($nestedFiles[$parentIndex])) {
+        foreach ($nestedFiles[$parentIndex] as $file) {
+            $imagePath = $file->store('imagePlace', 'public');
+            PlaceMapImage::create([
+                'imageId' => $mapImage->id,
+                'image' => $imagePath,
+            ]);
+        }
+    } else {
+        Log::error("No nested files found for parent index $parentIndex.");
+    }
+}
+
+    
 
 
     public function paginateMap(){
@@ -90,6 +95,8 @@ class MapsQuery extends GlobaleService {
             'founder' => $request->founder,
             'description' => $request->description
         ]);
+
+        
     
         $this->handleFileUploads($request, $map, 'images', 'image');
         $this->handleFileUploads($request, $map, 'plateImages', 'plate', $request->textPlate ?? []);
@@ -136,6 +143,24 @@ class MapsQuery extends GlobaleService {
             'founder' => $request->founder,
             'description' => $request->description
         ]);
+
+        if ($request->has('textClothes')) {
+            foreach ($request->textClothes as $imageId => $description) {
+                $image = MapImages::find($imageId);
+                if ($image && $image->type == 'clothe') {
+                    $image->update(['description' => $description]);
+                }
+            }
+        }
+        if ($request->has('textPlate')) {
+            foreach ($request->textPlate as $imageId => $description) {
+                $image = MapImages::find($imageId);
+                if ($image && $image->type == 'plate') {
+                    $image->update(['description' => $description]);
+                }
+            }
+        }
+    
 
         if ($request->has('titlePlace') && $request->has('descriptionPlace') 
             && $request->has('adressePlace') && $request->has('linkPlace')) {

@@ -138,8 +138,7 @@
                         <label for="imagespalceInputFile">Places</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" name="placeImages[]" class="custom-file-input"
-                                    id="imagespalceInputFile" multiple>
+                                <input type="file" name="placeImages[]" class="custom-file-input" id="imagespalceInputFile" multiple>
                                 <label class="custom-file-label" for="imagespalceInputFile">Choose file</label>
                             </div>
                             <div class="input-group-append">
@@ -148,6 +147,7 @@
                         </div>
                         <div id="image-container-places" class="mt-3"></div>
                     </div>
+                    
 
                 </div>
 

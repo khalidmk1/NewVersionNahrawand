@@ -87,13 +87,13 @@
                 <span class="input-group-text">Upload</span>
             </div>
         </div>
-        <div class="mt-3 d-flex">
+        <div class="mt-3 row">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'image')
-                    <div class="image-wrapper-images">
-                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
-                        <i class="fa fa-trash trash-icon delete-image-form" data-id="{{ Crypt::encrypt($picture->id) }}"
-                            aria-hidden="true"></i>
+                    <div class="col-4">
+                        <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
+                        <i class="fa fa-trash trash-icon-update delete-image-form"
+                            data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
                     </div>
                 @endif
             @endforeach
@@ -126,7 +126,7 @@
     </div>
 
     <div class="form-group">
-        <label>Textarea</label>
+        <label>Description</label>
         <textarea class="form-control" rows="3" name="description" placeholder="Enter ...">{{ $map->description }}</textarea>
     </div>
 
@@ -134,24 +134,30 @@
         <label for="imagesPlateInputFile">Main dishes</label>
         <div class="input-group">
             <div class="custom-file">
-                <input type="file" name="plateImages[]" class="custom-file-input" id="imagesPlateInputFile" multiple>
+                <input type="file" name="plateImages[]" class="custom-file-input" id="imagesPlateInputFile"
+                    multiple>
                 <label class="custom-file-label" for="imagesPlateInputFile">Choose file</label>
             </div>
             <div class="input-group-append">
                 <span class="input-group-text">Upload</span>
             </div>
         </div>
-        <div class="mt-3">
+        <div class="row mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'plate')
-                    <div class="image-wrapper ">
-                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
-                        <input type="text" class="form-control"
-                            value="{{ old('description', $picture->description) }}"
-                            name="textPlate[{{ $picture->id }}]" placeholder="Enter description">
-                        <i class="fa fa-trash trash-icon delete-image-form"
-                            data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
-
+                    <div class="col-12 mt-2">
+                        <div class="align-items-center row">
+                            <div class="col-4">
+                                <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
+                            </div>
+                            <div class="col-8">
+                                <input type="text" class="form-control"
+                                    value="{{ old('description', $picture->description) }}"
+                                    name="textPlate[{{ $picture->id }}]" placeholder="Enter description">
+                                <i class="fa fa-trash trash-icon-update delete-image-form"
+                                    data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
                 @endif
             @endforeach
@@ -176,13 +182,17 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'clothe')
-                    <div class="image-wrapper ">
-                        <img src="{{ asset('storage/' . $picture->image) }}" alt="">
-                        <input type="text" class="form-control"
-                            value="{{ old('description', $picture->description) }}"
-                            name="textClothes[{{ $picture->id }}]" placeholder="Enter description">
-                        <i class="fa fa-trash trash-icon delete-image-form"
-                            data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
+                    <div class="mt-2 align-items-center row">
+                        <div class="col-4">
+                            <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control"
+                                value="{{ old('description', $picture->description) }}"
+                                name="textClothes[{{ $picture->id }}]" placeholder="Enter description">
+                            <i class="fa fa-trash trash-icon-update delete-image-form"
+                                data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
+                        </div>
                     </div>
                 @endif
             @endforeach
@@ -207,7 +217,7 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'place')
-                    <div class="image-wrapper-palce row">
+                    <div class="image-wrapper-palce mt-2  row">
                         <div class="col-4">
                             <img src="{{ asset('storage/' . $picture->image) }}" alt="">
                         </div>
@@ -235,6 +245,27 @@
                                 <input type="text" class="form-control" value="{{ old('link', $picture->link) }}"
                                     name="linkPlace[{{ $picture->id }}]" placeholder="Enter Link">
                             </div>
+                            <div class="form-group ml-2">
+                                <label>Image Place</label>
+
+                                <div class="custom-file">
+                                    <input type ="file" name="imagePlaces[{{ $picture->id }}]" multiple
+                                        id="palceimagesInputFile">
+                                    <label class="custom-file-label" for="palceimagesInputFile">Choose file</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                @foreach ($picture->imagePlace a $index =>  $place)
+                                    <div class="col-4 mt-2">
+                                        <img src="{{ asset('storage/' . $place->image) }}" class="h-100"
+                                            alt="">
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div id="additional-images-wrapper"></div>
+
                             <i class="fa fa-trash trash-icon delete-image-form"
                                 data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
                         </div>
