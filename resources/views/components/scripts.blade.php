@@ -833,7 +833,7 @@
                 },
                 success: function(result) {
                     console.log("Image deleted successfully:", result);
-                    icon.closest('.image-wrapper-images')
+                    icon.closest('.containe-element')
                         .remove();
                     icon.closest('.image-wrapper')
                         .remove();

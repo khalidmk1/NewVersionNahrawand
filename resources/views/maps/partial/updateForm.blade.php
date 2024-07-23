@@ -87,10 +87,10 @@
                 <span class="input-group-text">Upload</span>
             </div>
         </div>
-        <div class="mt-3 row">
+        <div class="mt-3 row ">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'image')
-                    <div class="col-4">
+                    <div class="col-4 containe-element">
                         <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
                         <i class="fa fa-trash trash-icon-update delete-image-form"
                             data-id="{{ Crypt::encrypt($picture->id) }}" aria-hidden="true"></i>
@@ -145,8 +145,8 @@
         <div class="row mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'plate')
-                    <div class="col-12 mt-2 image-wrapper">
-                        <div class="align-items-center row">
+                    <div class="col-12 mt-2 ">
+                        <div class="align-items-center row containe-element">
                             <div class="col-4">
                                 <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
                             </div>
@@ -182,7 +182,7 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'clothe')
-                    <div class="mt-2 align-items-center row image-wrapper">
+                    <div class="mt-2 align-items-center row containe-element">
                         <div class="col-4">
                             <img src="{{ asset('storage/' . $picture->image) }}" class="w-100" alt="">
                         </div>
@@ -217,7 +217,7 @@
         <div class="mt-3">
             @foreach ($map->images as $picture)
                 @if ($picture->type == 'place')
-                    <div class="image-wrapper-palce image-wrapper mt-2  row">
+                    <div class="image-wrapper-palce mt-2 containe-element row">
                         <div class="col-4">
                             <img src="{{ asset('storage/' . $picture->image) }}" alt="">
                         </div>
@@ -250,8 +250,8 @@
 
                                 <div class="custom-file">
                                     <input type ="file" name="imagePlaces[{{ $picture->id }}][]" multiple
-                                        id="palceimagesInputFile">
-                                    <label class="custom-file-label" for="palceimagesInputFile">Choose file</label>
+                                        id="palceimagesInputFile_{{$picture->id}}">
+                                    <label class="custom-file-label" for="palceimagesInputFile_{{$picture->id}}">Choose file</label>
                                 </div>
                             </div>
 

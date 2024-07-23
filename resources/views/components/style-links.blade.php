@@ -72,7 +72,7 @@
         border-bottom-right-radius: 19px;
     }
 
-    /* .image-wrapper{
+    .image-wrapper{
         margin-bottom: 6px;
         align-items: center;
         gap: 2px;
@@ -88,7 +88,7 @@
     .image-wrapper img {
         width: 25%;
         height: auto;
-    } */
+    }
 
     .input-containe .form-control {
         margin-top: 10px
