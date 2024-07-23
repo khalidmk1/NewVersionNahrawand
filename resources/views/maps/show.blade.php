@@ -206,7 +206,7 @@
                                                     <div class="swiper-slide card-event slider-image"
                                                         style="background-image: url('{{ asset('storage/' . $picture->image) }}'); ">
                                                         <a href="{{ $picture->link }}" class="color-white">
-                                                            <p class="text-slider ">{{ $picture->description }} -></p>
+                                                            <p class="text-slider ">{{ $picture->link }} -></p>
                                                         </a>
 
                                                     </div>
