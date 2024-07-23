@@ -196,6 +196,21 @@ class ProfileQeury extends GlobaleService {
         ->get();
         $filteredUsers = $users->map(function($user){
             $roleNames = $user->roles->pluck('name')->toArray();
+            $content = $user->content->map(function ($content) {
+                return [
+                    'image' => $content->image,
+                    'imageFlex' => $content->imageFlex,
+                    'title' => $content->title,
+                    'smallDescription' => $content->smallDescription,
+                    'bigDescription' => $content->bigDescription,
+                    'contentType' => $content->contentType,
+                    'quizType' => $content->quizType,
+                    'isCertify' => $content->isCertify,
+                    'document' => $content->document,
+                    'condition' => $content->condition,
+                    'video' => $content->video
+                ];
+            });
             return [
                 'avatar' => $user->avatar,
                 'cover' => $user->cover,
@@ -205,6 +220,7 @@ class ProfileQeury extends GlobaleService {
                 'linkdin' => $user->linkdin,
                 'instagram' => $user->instagram,
                 'roles' => $roleNames,
+                'content' => $content
             ];
         });
 
