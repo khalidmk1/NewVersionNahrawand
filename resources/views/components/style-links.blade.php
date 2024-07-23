@@ -66,10 +66,9 @@
         background: #0006;
         text-align: center;
         padding: 5px;
-        border-bottom-left-radius: 19px;
+        border-top-left-radius: 19px;
         bottom: -241px;
-        position: relative;
-        border-bottom-right-radius: 19px;
+        border-top-right-radius: 19px;
     }
 
     .image-wrapper{
