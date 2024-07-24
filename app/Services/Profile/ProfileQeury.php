@@ -206,6 +206,7 @@ class ProfileQeury extends GlobaleService {
                     'smallDescription' => $content->smallDescription,
                     'bigDescription' => $content->bigDescription,
                     'contentType' => $content->contentType,
+                    'isComing' => $content->isComing,
                     'quizType' => $content->quizType,
                     'isCertify' => $content->isCertify,
                     'document' => $content->document,
@@ -261,6 +262,7 @@ class ProfileQeury extends GlobaleService {
                     'smallDescription' => $content->smallDescription,
                     'bigDescription' => $content->bigDescription,
                     'contentType' => $content->contentType,
+                    'isComing' => $content->isComing,
                     'quizType' => $content->quizType,
                     'isCertify' => $content->isCertify,
                     'document' => $content->document,
@@ -275,6 +277,7 @@ class ProfileQeury extends GlobaleService {
                         'faceboock' => $content->user->faceboock,
                         'linkdin' => $content->user->linkdin,
                         'instagram' => $content->user->instagram,
+                        
                         'roles' => $roleNames,
                     ]
                 ];
