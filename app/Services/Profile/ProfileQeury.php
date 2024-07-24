@@ -197,6 +197,7 @@ class ProfileQeury extends GlobaleService {
         $filteredUsers = $users->map(function($user){
             $roleNames = $user->roles->pluck('name')->toArray();
             $content = $user->content->map(function ($content) {
+                $roleNames = $content->user->roles->pluck('name')->toArray();
                 return [
                     'id' => $content->id,
                     'image' => $content->image,
@@ -213,6 +214,13 @@ class ProfileQeury extends GlobaleService {
                     'user' => [
                         'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
                         'avatar' => $content->user->avatar,
+                        'cover' => $content->user->cover,
+                        'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                        'biographie' => $content->user->biographie,
+                        'faceboock' => $content->user->faceboock,
+                        'linkdin' => $content->user->linkdin,
+                        'instagram' => $content->user->instagram,
+                        'roles' => $roleNames,
                     ]
                 ];
             });
@@ -244,6 +252,7 @@ class ProfileQeury extends GlobaleService {
         $filteredUsers = $speakers->map(function ($user) {
             $roleNames = $user->roles->pluck('name')->toArray();
             $content = $user->content->map(function ($content) {
+                $roleNames = $content->user->roles->pluck('name')->toArray();
                 return [
                     'id' => $content->id,
                     'image' => $content->image,
@@ -260,6 +269,13 @@ class ProfileQeury extends GlobaleService {
                     'user' => [
                         'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
                         'avatar' => $content->user->avatar,
+                        'cover' => $content->user->cover,
+                        'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                        'biographie' => $content->user->biographie,
+                        'faceboock' => $content->user->faceboock,
+                        'linkdin' => $content->user->linkdin,
+                        'instagram' => $content->user->instagram,
+                        'roles' => $roleNames,
                     ]
                 ];
             });
