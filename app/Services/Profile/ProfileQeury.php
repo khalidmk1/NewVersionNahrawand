@@ -209,7 +209,11 @@ class ProfileQeury extends GlobaleService {
                     'isCertify' => $content->isCertify,
                     'document' => $content->document,
                     'condition' => $content->condition,
-                    'video' => $content->video
+                    'video' => $content->video,
+                    'user' => [
+                        'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                        'avatar' => $content->user->avatar,
+                    ]
                 ];
             });
             return [
@@ -252,7 +256,11 @@ class ProfileQeury extends GlobaleService {
                     'isCertify' => $content->isCertify,
                     'document' => $content->document,
                     'condition' => $content->condition,
-                    'video' => $content->video
+                    'video' => $content->video,
+                    'user' => [
+                        'fullName' => $content->user->firstName . ' ' . $content->user->lastName,
+                        'avatar' => $content->user->avatar,
+                    ]
                 ];
             });
 
