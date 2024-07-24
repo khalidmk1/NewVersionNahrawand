@@ -84,11 +84,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('ticket', [TicketController::class, 'index'])->name('ticket.index.api');
     Route::post('ticket/create', [TicketController::class, 'create'])->name('ticket.create.api');
     Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quiz.store.api');
-});
 
-
-
-// Public Routes
+    // Public Routes
 
 //content
 Route::prefix('content')->group(function () {
@@ -113,6 +110,11 @@ Route::get('FAQ', [FAQController::class, 'FAQIndex'])->name('FAQ.index.api');
 Route::get('all/subCategory', [SubCategoryController::class, 'allSubctegory'])->name('subCategory.all');
 Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDomain'])->name('subCategory.domain');
 Route::get('map', [MapController::class, 'index'])->name('map.index');
+});
+
+
+
+
 
 // Authentication
 Route::post('create/user', [RegisteredUserController::class, 'storeClient'])->name('user.create');
