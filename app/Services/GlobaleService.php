@@ -376,7 +376,7 @@ class GlobaleService  {
     {
         $contents = Content::where('contentType', 'formation')
             ->where('isComing', 0)
-            ->paginate(3, ['id', 'image', 'quizType', 'imageFlex', 'title', 'smallDescription', 'bigDescription' ,'categoryId', 'hostId', 'document', 'created_at']);
+            ->paginate(3, ['id', 'image', 'quizType', 'imageFlex', 'title', 'bigDescription' ,'smallDescription' ,'categoryId', 'hostId', 'document', 'created_at']);
     
         // Load relationships
         $contents->load('user', 'category', 'tags');
