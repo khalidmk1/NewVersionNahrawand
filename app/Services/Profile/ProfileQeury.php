@@ -198,6 +198,7 @@ class ProfileQeury extends GlobaleService {
             $roleNames = $user->roles->pluck('name')->toArray();
             $content = $user->content->map(function ($content) {
                 return [
+                    'id' => $content->id,
                     'image' => $content->image,
                     'imageFlex' => $content->imageFlex,
                     'title' => $content->title,
@@ -212,6 +213,7 @@ class ProfileQeury extends GlobaleService {
                 ];
             });
             return [
+                'id' => $user->id,
                 'avatar' => $user->avatar,
                 'cover' => $user->cover,
                 'fullName' => $user->firstName . ' ' . $user->lastName,
@@ -239,6 +241,7 @@ class ProfileQeury extends GlobaleService {
             $roleNames = $user->roles->pluck('name')->toArray();
             $content = $user->content->map(function ($content) {
                 return [
+                    'id' => $content->id,
                     'image' => $content->image,
                     'imageFlex' => $content->imageFlex,
                     'title' => $content->title,
@@ -254,6 +257,7 @@ class ProfileQeury extends GlobaleService {
             });
 
             return [
+                'id' => $user->id,
                 'avatar' => $user->avatar,
                 'cover' => $user->cover,
                 'fullName' => $user->firstName . ' ' . $user->lastName,
