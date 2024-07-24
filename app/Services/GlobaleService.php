@@ -389,7 +389,7 @@ class GlobaleService  {
                 'imageFlex' => $content->imageFlex,
                 'title' => $content->title,
                 'quizType' => $content->quizType,
-                'bigDescription' => $request->bigDescription,
+                'bigDescription' => $content->bigDescription,
                 'smallDescription' => $content->smallDescription,
                 'condition' => $content->condition,
                 'document' => $content->document,
