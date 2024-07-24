@@ -23,7 +23,7 @@ class VideoUpdateRequest extends FormRequest
     {
         $rules = [
             'title' => ['required' , 'string' , 'max:255'],
-            'description' => ['required' , 'string' ,'max:600'],
+            'description' => ['required' , 'string' ,'max:1000'],
             'image' => ['nullable','file', 'mimes:jpeg,png,jpg,gif' , 'max:2000'],
             'guestIds' => ['nullable' , 'array'],
             'tags' => ['nullable' , 'array'],

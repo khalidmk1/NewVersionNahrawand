@@ -71,13 +71,13 @@
         border-top-right-radius: 19px;
     }
 
-    .image-wrapper{
+    .image-wrapper {
         margin-bottom: 6px;
         align-items: center;
         gap: 2px;
     }
 
-    .image-wrapper .trash-icon{
+    .image-wrapper .trash-icon {
         cursor: pointer;
         position: absolute;
         top: 0;
@@ -93,7 +93,7 @@
         margin-top: 10px
     }
 
-    .trash-icon-update{
+    .trash-icon-update {
         position: absolute;
         cursor: pointer;
         color: red;
@@ -101,7 +101,7 @@
         top: 9px;
     }
 
-    #additional-images-wrapper img{
+    #additional-images-wrapper img {
         width: 29%;
         display: flex
     }
@@ -121,7 +121,7 @@
         left: -11px;
     }
 
-    
+
 
     .image-wrapper-images .trash-icon {
         position: absolute;
