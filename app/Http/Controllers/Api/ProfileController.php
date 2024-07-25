@@ -42,4 +42,8 @@ class ProfileController extends Controller
     public function allUserSubctegory(){
         return $this->ProfileInterface->allUserSubctegory();
     }
+
+    public function checkSession(){
+        return $this->ProfileInterface->checkSession();
+    }
 }

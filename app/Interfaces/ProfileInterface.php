@@ -34,4 +34,5 @@ interface ProfileInterface {
     public function updateApi($request);
     public function updateAvatar($request);
     public function allUserSubctegory();
+    public function checkSession();
 }

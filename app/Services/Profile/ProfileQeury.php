@@ -389,5 +389,14 @@ class ProfileQeury extends GlobaleService {
         return $userSubCategory;
     }
 
+    public function checkToken()
+{
+    if (Auth::check()) {
+        return response()->json(['status' => 'active'], 200);
+    } else {
+        return response()->json(['status' => 'expired'], 401);
+    }
+}
+
 }
 

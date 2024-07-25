@@ -115,4 +115,8 @@ class ProfileService extends ProfileQeury implements ProfileInterface {
         return response()->json($subCategories);
     }
 
+    public function checkSession(){
+        return $this->checkToken();
+    }
+
 }
