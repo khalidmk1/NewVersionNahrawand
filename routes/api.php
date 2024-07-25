@@ -86,7 +86,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('quiz/store/{contentId}/{quizId}', [QuizController::class, 'storeQuestionAnswer'])->name('quiz.store.api');
 
     
-
+    Route::get('session', [ProfileController::class, 'checkSession'])->name('check.session');
 
 });
 
@@ -117,7 +117,7 @@ Route::get('subCategory/domain', [SubCategoryController::class, 'subCategoryByDo
 Route::get('map', [MapController::class, 'index'])->name('map.index');
 
 
-Route::get('session', [ProfileController::class, 'checkSession'])->name('check.session');
+
 
 
 // Authentication
