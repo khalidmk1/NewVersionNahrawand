@@ -29,7 +29,7 @@
                                         class="text-pink">{{ $admin->email }}</a></span></p>
                         </div>
                     </div>
-                    <div class="text-right">
+                    <div class="text-right gap-2">
                         <a style="float: top;" href="{{ route('profile.edit', Crypt::encrypt($admin->id)) }}"
                             class="btn btn-sm mb-2 bg-warning">
                             <i class="fas fa-edit" aria-hidden="true"></i>
